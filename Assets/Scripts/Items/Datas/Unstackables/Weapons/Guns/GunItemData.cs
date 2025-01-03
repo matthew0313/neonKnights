@@ -199,7 +199,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                 Projectile bul = fireInfo.bullet.Instantiate() as Projectile;
                 bul.transform.position = fireInfo.startPos;
                 bul.transform.forward = Quaternion.Euler(UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread)) * fireInfo.dir;
-                bul.Set(fireInfo.bulletSpeed, fireInfo.range, whatToHit, (HitInfo hit) =>
+                bul.Set(fireInfo.bulletSpeed, fireInfo.range, whatToHit, (GunHitInfo hit) =>
                 {
                     onFireObjectHit?.Invoke(fire);
                     if (hit.hitObject.TryGetComponent(out IDamagable target))
@@ -265,7 +265,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                     hits.Sort((a, b) => a.distance.CompareTo(b.distance));
                     for (int k = 0; k < hits.Count; k++)
                     {
-                        HitInfo hit = new()
+                        GunHitInfo hit = new()
                         {
                             hitObject = hits[k].transform.gameObject,
                             distance = hits[k].distance,
@@ -361,7 +361,7 @@ public class GunFireInfo
 public class GunGiveDamageInfo
 {
     public float damage;
-    public HitInfo hit;
+    public GunHitInfo hit;
 }
 public class GunFire
 {
