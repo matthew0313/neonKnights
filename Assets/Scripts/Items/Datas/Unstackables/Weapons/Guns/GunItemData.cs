@@ -297,6 +297,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                         }
                         else
                         {
+                            dist = hit.distance;
                             onShotEnd?.Invoke(new()
                             {
                                 endedViaObjectHit = true,

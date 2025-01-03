@@ -7,14 +7,16 @@ using UnityEngine.InputSystem;
 public abstract class ItemData : ScriptableObject
 {
     [Header("Item")]
+    [SerializeField] LangText m_itemName;
+    [SerializeField] LangText m_description;
     [SerializeField] Sprite m_icon;
     [SerializeField] ItemModel m_model;
     [SerializeField] ItemCategory m_category;
-    [SerializeField] LangText m_description;
+    public LangText itemName => m_itemName;
+    public LangText description => m_description;
     public Sprite icon => m_icon;
     public ItemModel model => m_model;
     public ItemCategory category => m_category;
-    public LangText description => m_description;
     public abstract Item Create();
     public abstract int maxStack { get; }
     public virtual string unit => "x";
@@ -43,6 +45,28 @@ public abstract class Item
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }
+    public static LangText CategoryToLangText(ItemCategory category)
+    {
+        switch (category)
+        {
+            case ItemCategory.Weapon: return new LangText()
+            {
+                en = "Weapon",
+                kr = "무기"
+            };
+            case ItemCategory.Gun: return new LangText()
+            {
+                en = "Gun",
+                kr = "총"
+            };
+            case ItemCategory.Pistol: return new LangText()
+            {
+                en = "Pistol",
+                kr = "권총"
+            };
+            default: return new LangText();
+        }
+    }
 }
 [System.Serializable]
 public struct ItemDataIntPair

@@ -13,7 +13,7 @@ public class Projectile : Bullet
     LayerMask whatToHit;
 
     float counter = 0.0f;
-    Action<HitInfo> onHit;
+    Action<GunHitInfo> onHit;
 
     public Action onDespawn;
     public Action<Vector3, Vector3> onTimeout;
@@ -22,7 +22,7 @@ public class Projectile : Bullet
     {
         onDespawn = null;
     }
-    public void Set(float speed, float range, LayerMask whatToHit, Action<HitInfo> onHit)
+    public void Set(float speed, float range, LayerMask whatToHit, Action<GunHitInfo> onHit)
     {
         counter = 0.0f;
         this.speed = speed;
@@ -48,7 +48,7 @@ public class Projectile : Bullet
     private void OnTriggerEnter(Collider other)
     {
         if ((other.gameObject.layer & whatToHit) == 0) return;
-        onHit?.Invoke(new HitInfo()
+        onHit?.Invoke(new GunHitInfo()
         {
             hitObject = other.gameObject,
             distance = counter,
@@ -57,13 +57,13 @@ public class Projectile : Bullet
         });
     }
 }
-public struct HitInfo
+public struct GunHitInfo
 {
     public GameObject hitObject;
     public float distance;
     public Vector3 hitPos, hitDir;
 
-    public static implicit operator bool(HitInfo self)
+    public static implicit operator bool(GunHitInfo self)
     {
         return self.hitObject != null;
     }

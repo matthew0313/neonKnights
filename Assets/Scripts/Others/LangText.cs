@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,17 @@ using UnityEngine;
 [System.Serializable]
 public struct LangText
 {
-    public static Language language = Language.English;
+    static Language m_language;
+    public static Language language
+    {
+        get { return m_language; }
+        set
+        {
+            m_language = value;
+            onLanguageChange?.Invoke();
+        }
+    }
+    public static Action onLanguageChange;
     public string en, kr;
     public string text
     {

@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Debugger : MonoBehaviour
 {
+    [SerializeField] Language startLanguage = Language.English;
     [SerializeField] QuirkData addingQuirk;
     Player player;
     private void Awake()
     {
+        LangText.language = startLanguage;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     public void AddQuirk()

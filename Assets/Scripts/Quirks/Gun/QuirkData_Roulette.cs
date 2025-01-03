@@ -65,8 +65,8 @@ public class Quirk_Roulette : Quirk
     public override void SetRandom()
     {
         base.SetRandom();
-        rouletteRange = UnityEngine.Random.Range(data.minRouletteRange, data.maxRouletteRange);
-        rouletteInterval = UnityEngine.Random.Range(data.minRouletteInterval, data.maxRouletteInterval);
+        rouletteRange = Mathf.Round(UnityEngine.Random.Range(data.minRouletteRange, data.maxRouletteRange));
+        rouletteInterval = Mathf.Round(UnityEngine.Random.Range(data.minRouletteInterval, data.maxRouletteInterval) * 10.0f) / 10.0f;
     }
     public override LangText quirkName => new()
     {
@@ -82,7 +82,7 @@ public class Quirk_Roulette : Quirk
     {
         return new LangText()
         {
-            en = $"-{rouletteRange}%~+{rouletteRange}% damage, {rouletteInterval}sec interval",
+            en = $"-{rouletteRange}%~+{rouletteRange}% damage, {rouletteInterval}s interval",
             kr = $"-{rouletteRange}%~+{rouletteRange}% 대미지, {rouletteInterval}초 주기"
         };
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_Piercing", menuName = "Scriptables/Quirks/Guns/Piercing", order = 0)]
 public class QuirkData_Piercing : QuirkData
 {
-    [Header("Strong")]
+    [Header("Piercing")]
     [SerializeField] float m_minPierceChance;
     [SerializeField] float m_maxPierceChance;
     public float minPierceChance => m_minPierceChance;

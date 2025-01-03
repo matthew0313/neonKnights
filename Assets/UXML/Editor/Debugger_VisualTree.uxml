@@ -1,6 +1,10 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/UXML/StyleSheet/Editor.uss?fileID=7433441132597879392&amp;guid=ea9f58a809fac4e45ba5a9a3dd3ea0fc&amp;type=3#Editor" />
     <engine:VisualElement class="Area" style="flex-grow: 1;">
+        <engine:Label text="Settings" class="Title" />
+        <editor:PropertyField label="Start Language" binding-path="startLanguage" />
+    </engine:VisualElement>
+    <engine:VisualElement class="Area" style="flex-grow: 1;">
         <engine:Label text="Add Quirk" class="Title" style="font-size: 24px;" />
         <editor:PropertyField label="Adding Quirk" binding-path="addingQuirk" />
         <engine:Button text="Add Quirk To Equipped" name="AddQuirkButton" />

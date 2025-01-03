@@ -16,7 +16,9 @@ public class InventorySlotUIHandler : MonoBehaviour
 
     [Header("Description")]
     [SerializeField] GameObject describer;
-    [SerializeField] TMP_Text itemName, itemCategory, itemDesc;
+    [SerializeField] TMP_Text itemName;
+    [SerializeField] GameObject itemCategory;
+    [SerializeField] TMP_Text itemCategoryText, itemDesc;
 
     [SerializeField] Transform itemStatAnchor;
     [SerializeField] TMP_Text itemStatPrefab;
@@ -133,21 +135,21 @@ public class InventorySlotUIHandler : MonoBehaviour
 
         }
         describing = item;
+        itemName.text = item.data.itemName.text;
         if (item.data.category != 0)
         {
             StringBuilder sb = new();
-            sb.Append("Category: ");
             bool first = true;
-            foreach(Enum i in Enum.GetValues(typeof(ItemCategory)))
+            foreach(ItemCategory i in Enum.GetValues(typeof(ItemCategory)))
             {
                 if (item.data.category.HasFlag(i))
                 {
                     if (!first) sb.Append(", ");
                     first = false;
-                    sb.Append(i);
+                    sb.Append(Item.CategoryToLangText(i).text);
                 }
             }
-            itemCategory.text = sb.ToString();
+            itemCategoryText.text = sb.ToString();
             itemCategory.gameObject.SetActive(true);
         }
         else itemCategory.gameObject.SetActive(false);
