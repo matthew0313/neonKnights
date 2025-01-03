@@ -1,0 +1,12 @@
+.Area {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: rgba(0, 0, 0, 0.59);
+}
+
+.Title {
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+}

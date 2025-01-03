@@ -44,10 +44,10 @@ public class InputManager : MonoBehaviour
         }
         return SlotChangeInput.Stay;
     }
-    public static Vector2 GetMousePosition()
+    public static bool GetReloadInput()
     {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.mousePosition;
-        return Vector2.zero;
+        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetKeyDown(KeyCode.R);
+        return false;
     }
 }
 public enum SlotChangeInput

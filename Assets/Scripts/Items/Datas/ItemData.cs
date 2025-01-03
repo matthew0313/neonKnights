@@ -9,8 +9,12 @@ public abstract class ItemData : ScriptableObject
     [Header("Item")]
     [SerializeField] Sprite m_icon;
     [SerializeField] ItemModel m_model;
+    [SerializeField] ItemCategory m_category;
+    [SerializeField] LangText m_description;
     public Sprite icon => m_icon;
     public ItemModel model => m_model;
+    public ItemCategory category => m_category;
+    public LangText description => m_description;
     public abstract Item Create();
     public abstract int maxStack { get; }
     public virtual string unit => "x";
@@ -27,9 +31,7 @@ public abstract class Item
 
     public InventorySlot containedSlot = null;
     public Player wielder { get; private set; }
-    public virtual void OnInventoryEnter() { }
     public virtual void OnInventoryUpdate() { }
-    public virtual void OnInventoryExit() { }
     public virtual void OnWield(Player wielder)
     {
         this.wielder = wielder;
@@ -53,4 +55,12 @@ public struct ItemIntPair
 {
     public Item item;
     public int count;
+}
+[System.Serializable]
+[Flags]
+public enum ItemCategory
+{
+    Weapon = 1<<0,
+    Gun = 1<<1,
+    Pistol = 1<<2
 }

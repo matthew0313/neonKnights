@@ -5,10 +5,10 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HitscanBeam : Bullet
+public class HitscanBeam : HitscanEffect
 {
-    [SerializeField] float disappearTime = 1.0f;
-    public void Set(float range)
+    [SerializeField] float disappearTime = 0.3f;
+    public override void Set(float range)
     {
         counter = 0.0f;
         transform.localScale = new Vector3(1, 1, range);

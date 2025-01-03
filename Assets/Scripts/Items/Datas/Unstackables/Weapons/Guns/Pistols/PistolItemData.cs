@@ -16,4 +16,5 @@ public abstract class PistolItem : GunItem
         this.data = data;
         weapon = base.weapon as Pistol;
     }
+    public override HeldWeapon animationType => HeldWeapon.Pistol;
 }

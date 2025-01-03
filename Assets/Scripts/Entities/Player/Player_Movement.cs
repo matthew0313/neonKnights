@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditorInternal;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player_Movement : MonoBehaviour
+public class Player_Movement : MonoBehaviour, ISpeedAdjustable
 {
     [Header("Movement")]
     [SerializeField] internal float moveSpeed;
@@ -39,6 +40,12 @@ public class Player_Movement : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] string FSMPath;
+
+    public float speed
+    {
+        get => moveSpeed;
+        set => moveSpeed = value;
+    }
 
     float m_stamina = 2.0f;
     internal float stamina
@@ -96,19 +103,21 @@ public class Player_Movement : MonoBehaviour
     void Rotate()
     {
         Vector2 rot = Vector2.zero;
-        if(rotateMode == RotateMode.MouseLocked)
+        if (rotateMode == RotateMode.MouseLocked)
         {
-            RaycastHit hit;
-            Physics.Raycast(Camera.main.ScreenPointToRay(InputManager.GetMouseInput()), out hit, 30.0f);
+            Ray ray = Camera.main.ScreenPointToRay(InputManager.GetMouseInput());
+            float height = transform.position.y - ray.origin.y;
+            Vector3 end = ray.origin + ray.direction * (height / ray.direction.y);
             Vector2 pos1 = new Vector2(transform.position.x, transform.position.z);
-            Vector2 pos2 = new Vector2(hit.point.x, hit.point.z);
+            Vector2 pos2 = new Vector2(end.x, end.z);
             rot = pos2 - pos1;
+            lastMovedDir = new Vector3(rot.x, 0.0f, rot.y);
         }
-        else if(rotateMode == RotateMode.Free)
+        else if (rotateMode == RotateMode.Free)
         {
-            rot = lastMovedDir;
+            rot = new Vector2(lastMovedDir.x, lastMovedDir.z);
         }
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg, 0), rotateSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg + 90.0f, 0), rotateSpeed * Time.deltaTime);
     }
     public void Dash(Vector3 dir, float distance, float speed, float endLag)
     {

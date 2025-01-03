@@ -11,16 +11,25 @@ public class Projectile : Bullet
     float speed = 20.0f;
     float range;
     LayerMask whatToHit;
-    
-    public Action<Projectile, HitInfo> onHit;
-    public void Set(float speed, float range, LayerMask whatToHit)
+
+    float counter = 0.0f;
+    Action<HitInfo> onHit;
+
+    public Action onDespawn;
+    public Action<Vector3, Vector3> onTimeout;
+
+    private void OnEnable()
+    {
+        onDespawn = null;
+    }
+    public void Set(float speed, float range, LayerMask whatToHit, Action<HitInfo> onHit)
     {
         counter = 0.0f;
         this.speed = speed;
         this.range = range;
         this.whatToHit = whatToHit;
+        this.onHit = onHit;
     }
-    float counter = 0.0f;
     private void Update()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime);
@@ -28,12 +37,18 @@ public class Projectile : Bullet
         if (counter >= range)
         {
             Release();
+            onTimeout?.Invoke(transform.position, transform.forward);
         }
+    }
+    protected override void OnRelease()
+    {
+        base.OnRelease();
+        onDespawn?.Invoke();
     }
     private void OnTriggerEnter(Collider other)
     {
         if ((other.gameObject.layer & whatToHit) == 0) return;
-        onHit?.Invoke(this, new HitInfo()
+        onHit?.Invoke(new HitInfo()
         {
             hitObject = other.gameObject,
             distance = counter,

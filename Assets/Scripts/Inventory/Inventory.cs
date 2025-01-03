@@ -29,6 +29,13 @@ public class Inventory : MonoBehaviour
     {
         slotCount = defaultSlotCount;
     }
+    private void Update()
+    {
+        foreach(var i in slots)
+        {
+            if (i.item != null) i.item.OnInventoryUpdate();
+        }
+    }
     public int Insert(Item item, int count)
     {
         foreach(var i in slots)

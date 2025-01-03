@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player_Inventory : MonoBehaviour
 {
     Player origin;
-    [SerializeField] InventorySlotUIGrabber grabber;
+    [SerializeField] InventorySlotUIHandler grabber;
     [SerializeField] Transform m_equipAnchor;
     public Transform equipAnchor => m_equipAnchor;
 
@@ -39,6 +39,7 @@ public class Player_Inventory : MonoBehaviour
     public void OnUpdate()
     {
         SlotChangeCheckUpdate();
+        if (equipped != null) equipped.OnWieldUpdate();
     }
 
     const float rapidSlotChangePressTime = 0.5f;

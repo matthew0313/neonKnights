@@ -10,7 +10,7 @@ public abstract class WeaponItemData : UnstackableItemData
     [SerializeField] Weapon m_prefab;
     public Weapon prefab => m_prefab;
 }
-public abstract class WeaponItem : UnstackableItem
+public abstract class WeaponItem : UnstackableItem, IQuirkDisplayed
 {
     public abstract HeldWeapon animationType { get; }
     public readonly Weapon weapon;
@@ -22,23 +22,31 @@ public abstract class WeaponItem : UnstackableItem
         weapon = MonoBehaviour.Instantiate(data.prefab);
         weapon.gameObject.SetActive(false);
     }
+    public Action onWield, onUnwield, onInventoryUpdate, onWieldUpdate;
+    public override void OnInventoryUpdate()
+    {
+        base.OnInventoryUpdate();
+        onInventoryUpdate?.Invoke();
+    }
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
         wielder.movement.rotateMode = RotateMode.MouseLocked;
         weapon.transform.SetParent(wielder.inventory.equipAnchor, false);
         weapon.gameObject.SetActive(true);
+        onWield?.Invoke();
     }
     public override void OnWieldUpdate()
     {
         base.OnWieldUpdate();
-        foreach (var i in quirks) i.OnQuirkUpdate(this);
+        onWieldUpdate?.Invoke();
     }
     public override void OnUnwield(Player wielder)
     {
         base.OnUnwield(wielder);
         wielder.movement.rotateMode = RotateMode.Free;
         weapon.gameObject.SetActive(false);
+        onUnwield?.Invoke();
     }
 
     List<Quirk> quirks = new();
@@ -98,6 +106,11 @@ public abstract class WeaponItem : UnstackableItem
                 AddQuirk(quirk);
             }
         }
+    }
+
+    public IEnumerable<Quirk> GetQuirks()
+    {
+        foreach (var i in quirks) yield return i;
     }
 }
 [System.Serializable]

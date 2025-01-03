@@ -5,11 +5,11 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HitscanBullet : Bullet
+public class HitscanBullet : HitscanEffect
 {
     [SerializeField] float speed = 40.0f;
     float range;
-    public void Set(float range)
+    public override void Set(float range)
     {
         counter = 0.0f;
         this.range = range;
