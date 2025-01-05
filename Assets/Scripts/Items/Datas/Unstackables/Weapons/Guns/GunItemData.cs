@@ -190,13 +190,13 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
             fireInfo = fireInfo
         };
         onFireStart?.Invoke(fire);
-        if (fireInfo.bullet is Projectile)
+        if (fireInfo.bullet is GunProjectile)
         {
             int despawned = 0;
             for(int i = 0; i < fireInfo.shotCount; i++)
             {
                 int pierce = fireInfo.pierce;
-                Projectile bul = fireInfo.bullet.Instantiate() as Projectile;
+                GunProjectile bul = fireInfo.bullet.Instantiate() as GunProjectile;
                 bul.transform.position = fireInfo.startPos;
                 bul.transform.forward = Quaternion.Euler(UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread)) * fireInfo.dir;
                 bul.Set(fireInfo.bulletSpeed, fireInfo.range, whatToHit, (GunHitInfo hit) =>

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider))]
-public class Projectile : Bullet
+public class GunProjectile : Bullet
 {
     float speed = 20.0f;
     float range;
