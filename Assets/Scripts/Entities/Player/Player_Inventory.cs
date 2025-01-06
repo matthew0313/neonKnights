@@ -21,6 +21,8 @@ public class Player_Inventory : MonoBehaviour
 
     public Action<Item> onEquippedItemChange;
     public Action onEquippedSlotChange;
+
+    public bool canSwapSlot = true;
     public void OnAwake()
     {
         origin = GetComponent<Player>();
@@ -107,6 +109,7 @@ public class Player_Inventory : MonoBehaviour
     }
     public void ChangeEquipSlot(int slotIndex)
     {
+        if (!canSwapSlot) return;
         if (slotIndex < 0 || slotIndex >= beltLength || slotIndex == equippedSlotIndex) return;
         if(equippedSlot != null)
         {

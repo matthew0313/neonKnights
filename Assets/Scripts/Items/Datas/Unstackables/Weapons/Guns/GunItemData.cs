@@ -77,12 +77,17 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
     int m_mag;
 
     public Action<GunFireInfo> modifyFireInfo;
+
     public Action<GunFire> onFireStart;
-    public Action<GunFire> onFireObjectHit;
     public Action<GunFire> onFireEnd;
-    public Action<GunShotEndInfo> onShotEnd;
-    public Action<GunGiveDamageInfo> modifyDamageGiven;
-    public Action<DamageReceivedInfo> onDamageGive;
+
+    public Action<GunShot> onShotStart;
+    public Action<GunShot, GunHitInfo> onShotObjectHit;
+    public Action<GunShot, GunShotEndInfo> onShotEnd;
+
+    public Action<GunShot, GunGiveDamageInfo> modifyShotDamageGiven;
+    public Action<GunShot, DamageReceivedInfo> onShotDamageGive;
+
     public Action onReload;
     public int mag
     {
@@ -154,7 +159,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                             shotCount = shotCount,
                             bulletDropoffPercentage = bulletDropoffPercentage,
                             startPos = weapon.firePoint.position,
-                            source = GunFireSource.GunFire
+                            source = GunFireSource.GunFire,
+                            whatToHit = whatToHit
                         };
                         if (SystemInfo.deviceType == DeviceType.Desktop)
                         {
@@ -185,6 +191,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
     }
     public void Fire(GunFireInfo fireInfo)
     {
+        //지금 이 한 번의 사격을 의미하는 인스턴스 생성
         GunFire fire = new()
         {
             fireInfo = fireInfo
@@ -193,73 +200,43 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
         if (fireInfo.bullet is GunProjectile)
         {
             int despawned = 0;
-            for(int i = 0; i < fireInfo.shotCount; i++)
+            GunShot[] shots = new GunShot[fireInfo.shotCount];
+            for (int i = 0; i < fireInfo.shotCount; i++)
             {
-                int pierce = fireInfo.pierce;
+                GunShot shot = new()
+                {
+                    origin = fire
+                };
+                fire.shots.Add(shot);
+                shots[i] = shot;
+            }
+            for(int i = 0; i < shots.Length; i++)
+            {
                 GunProjectile bul = fireInfo.bullet.Instantiate() as GunProjectile;
                 bul.transform.position = fireInfo.startPos;
                 bul.transform.forward = Quaternion.Euler(UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread)) * fireInfo.dir;
-                bul.Set(fireInfo.bulletSpeed, fireInfo.range, whatToHit, (GunHitInfo hit) =>
-                {
-                    onFireObjectHit?.Invoke(fire);
-                    if (hit.hitObject.TryGetComponent(out IDamagable target))
-                    {
-                        GunGiveDamageInfo damageInfo = new()
-                        {
-                            damage = fireInfo.damage * (1.0f - fireInfo.bulletDropoffPercentage / 100.0f * Mathf.Min(1.0f, hit.distance / fireInfo.range)),
-                            hit = hit
-                        };
-                        modifyDamageGiven?.Invoke(damageInfo);
-                        onDamageGive?.Invoke(target.GetDamage(damageInfo.damage));
-                        if (pierce <= 0)
-                        {
-                            bul.Release();
-                            onShotEnd?.Invoke(new()
-                            {
-                                endedViaObjectHit = true,
-                                pos = hit.hitPos,
-                                dir = hit.hitDir
-                            });
-                        }
-                        else pierce--;
-                    }
-                    else
-                    {
-                        bul.Release();
-                        onShotEnd?.Invoke(new()
-                        {
-                            endedViaObjectHit = true,
-                            pos = hit.hitPos,
-                            dir = hit.hitDir
-                        });
-                    }
-                });
-                bul.onDespawn = () =>
-                {
-                    despawned++;
-                    if (despawned >= fireInfo.shotCount)
-                    {
-                        onFireEnd?.Invoke(fire);
-                    }
-                };
-                bul.onTimeout = (pos, dir) =>
-                {
-                    onShotEnd?.Invoke(new()
-                    {
-                        endedViaObjectHit = false,
-                        pos = pos,
-                        dir = dir
-                    });
-                };
+                bul.Set(this, shots[i]);
             }
         }
         else if(fireInfo.bullet is HitscanEffect)
         {
-            for(int i = 0; i < fireInfo.shotCount; i++)
+            GunShot[] shots = new GunShot[fireInfo.shotCount];
+            for (int i = 0; i < fireInfo.shotCount; i++)
             {
+                GunShot shot = new()
+                {
+                    origin = fire
+                };
+                fire.shots.Add(shot);
+                shots[i] = shot;
+            }
+            for (int i = 0; i < shots.Length; i++)
+            {
+                GunShot shot = shots[i];
                 Vector3 dir = Quaternion.Euler(UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread)) * fireInfo.dir;
                 List<RaycastHit> hits = Physics.RaycastAll(fireInfo.startPos, dir, fireInfo.range, whatToHit).ToList();
                 float dist = fireInfo.range;
+                //hitscan hits something
                 if(hits.Count > 0)
                 {
                     hits.Sort((a, b) => a.distance.CompareTo(b.distance));
@@ -272,7 +249,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                             hitPos = hits[k].point,
                             hitDir = dir
                         };
-                        onFireObjectHit?.Invoke(fire);
                         if (hit.hitObject.TryGetComponent(out IDamagable target))
                         {
                             GunGiveDamageInfo damageInfo = new()
@@ -280,12 +256,12 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                                 damage = fireInfo.damage * (1.0f - fireInfo.bulletDropoffPercentage / 100.0f * Mathf.Min(1.0f, hit.distance / fireInfo.range)),
                                 hit = hit
                             };
-                            modifyDamageGiven?.Invoke(damageInfo);
-                            onDamageGive?.Invoke(target.GetDamage(damageInfo.damage));
+                            modifyShotDamageGiven?.Invoke(shot, damageInfo);
+                            onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage));
                             if (pierce <= 0)
                             {
                                 dist = hit.distance;
-                                onShotEnd?.Invoke(new()
+                                onShotEnd?.Invoke(shot, new()
                                 {
                                     endedViaObjectHit = true,
                                     pos = hit.hitPos,
@@ -298,7 +274,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                         else
                         {
                             dist = hit.distance;
-                            onShotEnd?.Invoke(new()
+                            onShotEnd?.Invoke(shot, new()
                             {
                                 endedViaObjectHit = true,
                                 pos = hit.hitPos,
@@ -307,9 +283,10 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                         }
                     }
                 }
+                //hitscan hits nothing
                 else
                 {
-                    onShotEnd?.Invoke(new()
+                    onShotEnd?.Invoke(shot, new()
                     {
                         endedViaObjectHit = false,
                         pos = fireInfo.startPos + fireInfo.dir * fireInfo.range,
@@ -352,6 +329,7 @@ public class GunFireInfo
     public float bulletDropoffPercentage;
     public Vector3 startPos, dir;
     public GunFireSource source;
+    public LayerMask whatToHit;
 
     public void PrintDebug()
     {
@@ -363,9 +341,17 @@ public class GunGiveDamageInfo
     public float damage;
     public GunHitInfo hit;
 }
+//한 번의 사격
 public class GunFire
 {
     public GunFireInfo fireInfo;
+    public List<GunShot> shots = new();
+}
+//한 번의 사격에서 생긴 한 번의 발사
+//샷건은 10개, 권총은 1개 등등
+public class GunShot
+{
+    public GunFire origin;
 }
 public struct GunShotEndInfo
 {

@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 [RequireComponent(typeof(Collider))]
 public class GunProjectile : Bullet
 {
-    float speed = 20.0f;
+    /*float speed = 20.0f;
     float range;
     LayerMask whatToHit;
 
@@ -55,6 +57,82 @@ public class GunProjectile : Bullet
             hitPos = transform.position,
             hitDir = transform.forward
         });
+    }*/
+    GunItem gun;
+    GunShot shot;
+    int pierceLeft;
+
+    GunFireInfo fireInfo => shot.origin.fireInfo;
+    public void Set(GunItem gun, GunShot shot)
+    {
+        this.gun = gun;
+        this.shot = shot;
+        pierceLeft = fireInfo.pierce;
+    }
+    float counter = 0.0f;
+    private void Update()
+    {
+        transform.Translate(transform.forward * fireInfo.bulletSpeed * Time.deltaTime);
+        counter += fireInfo.bulletSpeed * Time.deltaTime;
+        if (counter >= fireInfo.range)
+        {
+            gun.onShotEnd?.Invoke(shot, new()
+            {
+                endedViaObjectHit = false,
+                dir = transform.forward,
+                pos = transform.position
+            });
+            Release();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((other.gameObject.layer & fireInfo.whatToHit) == 0) return;
+        GunHitInfo hit = new()
+        {
+            hitObject = other.gameObject,
+            distance = counter,
+            hitPos = transform.position,
+            hitDir = transform.forward
+        };
+        if(hit.hitObject.TryGetComponent(out IDamagable target))
+        {
+            GunGiveDamageInfo damageInfo = new()
+            {
+                damage = fireInfo.damage * (1.0f - fireInfo.bulletDropoffPercentage / 100.0f * Mathf.Min(1.0f, hit.distance / fireInfo.range)),
+                hit = hit
+            };
+            gun.modifyShotDamageGiven?.Invoke(shot, damageInfo);
+            gun.onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage));
+            if (pierceLeft <= 0)
+            {
+                gun.onShotEnd?.Invoke(shot, new()
+                {
+                    endedViaObjectHit = true,
+                    dir = transform.forward,
+                    pos = transform.position
+                });
+                Release();
+            }
+            else pierceLeft--;
+        }
+        else
+        {
+            gun.onShotObjectHit?.Invoke(shot, hit);
+            gun.onShotEnd?.Invoke(shot, new()
+            {
+                endedViaObjectHit = true,
+                dir = transform.forward,
+                pos = transform.position
+            });
+            Release();
+        }
+    }
+    protected override void OnRelease()
+    {
+        base.OnRelease();
+        gun = null;
+        shot = null;
     }
 }
 public struct GunHitInfo
