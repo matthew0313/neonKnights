@@ -7,17 +7,28 @@ public class Debugger : MonoBehaviour
     Player player;
     private void Awake()
     {
-        LangText.language = startLanguage;
+        Settings.language = startLanguage;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     public void AddQuirk()
     {
         if (!Application.isPlaying || addingQuirk == null || player == null) return;
-        if(player.inventory.equipped is WeaponItem)
+        if(player.inventory.equipped is IQuirkable)
+        {
+            if (addingQuirk.IsAddable(player.inventory.equipped as IQuirkable) == false) return;
+            Quirk quirk = addingQuirk.Create();
+            quirk.SetRandom();
+            (player.inventory.equipped as IQuirkable).AddQuirk(quirk);
+        }
+    }
+    public void ForceAddQuirk()
+    {
+        if (!Application.isPlaying || addingQuirk == null || player == null) return;
+        if (player.inventory.equipped is IQuirkable)
         {
             Quirk quirk = addingQuirk.Create();
             quirk.SetRandom();
-            (player.inventory.equipped as WeaponItem).AddQuirk(quirk);
+            (player.inventory.equipped as IQuirkable).AddQuirk(quirk);
         }
     }
 }

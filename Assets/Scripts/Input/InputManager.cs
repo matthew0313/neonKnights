@@ -1,9 +1,45 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    static InputManager instance;
+    public static InputManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = new GameObject().AddComponent<InputManager>();
+                DontDestroyOnLoad(instance);
+            }
+            return instance;
+        }
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+    Dictionary<KeyCode, List<KeyDownAction>> keyDownActions = new();
+    Dictionary<KeyDownAction, KeyCode> locator = new();
+    public void AddKeyDownAction(KeyCode key, KeyDownAction action)
+    {
+        if (!keyDownActions.ContainsKey(key))
+        {
+            keyDownActions.Add(key, new());
+        }
+        keyDownActions[key].Add(action);
+        locator.Add(action, key);
+    }
+    private void Update()
+    {
+        foreach(var i in keyDownActions.Keys)
+        {
+
+        }
+    }
     public static bool GetButtonDown()
     {
         if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetMouseButtonDown(0);
@@ -55,4 +91,15 @@ public enum SlotChangeInput
     MoveLeft = -1,
     Stay = 0,
     MoveRight = 1
+}
+public class KeyDownAction
+{
+    public readonly int priority;
+    public readonly Action action;
+    public bool enabled = true;
+    public KeyDownAction(Action action, int priority)
+    {
+        this.action = action;
+        this.priority = priority;
+    }
 }

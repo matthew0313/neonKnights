@@ -20,6 +20,7 @@ public class Player : Entity
         hpComp = GetComponent<HpComp>();
         movement.OnAwake();
         inventory.OnAwake();
+        animation.OnAwake();
     }
     private void Start()
     {
@@ -29,6 +30,7 @@ public class Player : Entity
     {
         movement.OnUpdate();
         inventory.OnUpdate();
+        animation.OnUpdate();
     }
     private void FixedUpdate()
     {

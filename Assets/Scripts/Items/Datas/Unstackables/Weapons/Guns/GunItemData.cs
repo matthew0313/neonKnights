@@ -34,7 +34,7 @@ public abstract class GunItemData : WeaponItemData
     public float defaultBulletDropoffPercentage => m_defaultBulletDropoffPercentage;
 
 }
-public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
+public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, IDamageModifyable
 {
     new public readonly GunItemData data;
     new public readonly Gun weapon;
@@ -60,7 +60,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
     }
     //stats
     public bool auto;
-    public float damage;
+    public float damage { get; set; }
     public float fireRate;
     public float range;
     public float spread;
@@ -82,11 +82,12 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
     public Action<GunFire> onFireEnd;
 
     public Action<GunShot> onShotStart;
-    public Action<GunShot, GunHitInfo> onShotObjectHit;
-    public Action<GunShot, GunShotEndInfo> onShotEnd;
+    public Action<GunShot, GunHitInfo> onShotHit;
+    public Action<GunShot, DamageReceivedInfo, GunHitInfo> onShotDamageGive;
+    public Action<GunShot, GunHitInfo> onShotNonDamagableHit;
+    public Action<GunShot> onShotEnd;
 
     public Action<GunShot, GunGiveDamageInfo> modifyShotDamageGiven;
-    public Action<GunShot, DamageReceivedInfo> onShotDamageGive;
 
     public Action onReload;
     public int mag
@@ -187,10 +188,13 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
     public override void OnUnwield(Player wielder)
     {
         base.OnUnwield(wielder);
+        reloadCounter = 0.0f;
         reloading = false;
     }
+    readonly int fireID = Animator.StringToHash("Fire");
     public void Fire(GunFireInfo fireInfo)
     {
+        wielder.animation.anim.SetTrigger(fireID);
         //지금 이 한 번의 사격을 의미하는 인스턴스 생성
         GunFire fire = new()
         {
@@ -199,7 +203,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
         onFireStart?.Invoke(fire);
         if (fireInfo.bullet is GunProjectile)
         {
-            int despawned = 0;
             GunShot[] shots = new GunShot[fireInfo.shotCount];
             for (int i = 0; i < fireInfo.shotCount; i++)
             {
@@ -236,63 +239,44 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
                 Vector3 dir = Quaternion.Euler(UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread)) * fireInfo.dir;
                 List<RaycastHit> hits = Physics.RaycastAll(fireInfo.startPos, dir, fireInfo.range, whatToHit).ToList();
                 float dist = fireInfo.range;
-                //hitscan hits something
-                if(hits.Count > 0)
+                hits.Sort((a, b) => a.distance.CompareTo(b.distance));
+                for (int k = 0; k < hits.Count; k++)
                 {
-                    hits.Sort((a, b) => a.distance.CompareTo(b.distance));
-                    for (int k = 0; k < hits.Count; k++)
+                    GunHitInfo hit = new()
                     {
-                        GunHitInfo hit = new()
+                        hitObject = hits[k].transform.gameObject,
+                        distance = hits[k].distance,
+                        hitPos = hits[k].point,
+                        hitDir = dir
+                    };
+                    if (shot.hit.Contains(hit.hitObject)) continue;
+                    onShotHit?.Invoke(shot, hit);
+                    if (hit.hitObject.TryGetComponent(out IDamagable target))
+                    {
+                        GunGiveDamageInfo damageInfo = new()
                         {
-                            hitObject = hits[k].transform.gameObject,
-                            distance = hits[k].distance,
-                            hitPos = hits[k].point,
-                            hitDir = dir
+                            damage = fireInfo.damage * (1.0f - fireInfo.bulletDropoffPercentage / 100.0f * Mathf.Min(1.0f, hit.distance / fireInfo.range)),
+                            hit = hit
                         };
-                        if (hit.hitObject.TryGetComponent(out IDamagable target))
-                        {
-                            GunGiveDamageInfo damageInfo = new()
-                            {
-                                damage = fireInfo.damage * (1.0f - fireInfo.bulletDropoffPercentage / 100.0f * Mathf.Min(1.0f, hit.distance / fireInfo.range)),
-                                hit = hit
-                            };
-                            modifyShotDamageGiven?.Invoke(shot, damageInfo);
-                            onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage));
-                            if (pierce <= 0)
-                            {
-                                dist = hit.distance;
-                                onShotEnd?.Invoke(shot, new()
-                                {
-                                    endedViaObjectHit = true,
-                                    pos = hit.hitPos,
-                                    dir = hit.hitDir
-                                });
-                                break;
-                            }
-                            else pierce--;
-                        }
-                        else
+                        modifyShotDamageGiven?.Invoke(shot, damageInfo);
+                        onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage), hit);
+                        shot.hit.Add(hit.hitObject);
+                        if (pierce <= 0)
                         {
                             dist = hit.distance;
-                            onShotEnd?.Invoke(shot, new()
-                            {
-                                endedViaObjectHit = true,
-                                pos = hit.hitPos,
-                                dir = hit.hitDir
-                            });
+                            break;
                         }
+                        else pierce--;
+                    }
+                    else
+                    {
+                        dist = hit.distance;
+                        onShotNonDamagableHit?.Invoke(shot, hit);
+                        break;
                     }
                 }
-                //hitscan hits nothing
-                else
-                {
-                    onShotEnd?.Invoke(shot, new()
-                    {
-                        endedViaObjectHit = false,
-                        pos = fireInfo.startPos + fireInfo.dir * fireInfo.range,
-                        dir = dir
-                    });
-                }
+                onShotEnd?.Invoke(shot);
+
                 HitscanEffect bul = fireInfo.bullet.Instantiate() as HitscanEffect;
                 bul.transform.position = fireInfo.startPos;
                 bul.transform.forward = dir;
@@ -302,16 +286,48 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed
         }
     }
     public string numberText => $"{mag}/{reserveLeft}";
-    public IEnumerable<string> GetStats()
+    public IEnumerable<LangText> GetStats()
     {
-        yield return $"Damage: {damage}" + (shotCount > 1 ? $"x{shotCount}" : "");
-        yield return $"FireRate: {fireRate}";
-        yield return $"Range: {range}";
-        yield return $"Spread: {spread}";
-        yield return $"Reload Time: {reloadTime}s";
-        yield return $"Mag: {magSize}";
-        yield return $"Reserve: {reserve}";
-        yield return $"Dropoff: {bulletDropoffPercentage}%";
+        yield return new()
+        {
+            en = $"Damage: {damage}" + (shotCount > 1 ? $"x{shotCount}" : ""),
+            kr = $"대미지: {damage}" + (shotCount > 1 ? $"x{shotCount}" : "")
+        };
+        yield return new()
+        {
+            en = $"FireRate: {fireRate}s",
+            kr = $"발사 주기: {fireRate}초"
+        };
+        yield return new()
+        {
+            en = $"Range: {range}",
+            kr = $"범위: {range}"
+        };
+        yield return new()
+        {
+            en = $"Spread: {spread}",
+            kr = $"탄 퍼짐: {spread}"
+        };
+        yield return new()
+        {
+            en = $"Reload Time: {reloadTime}s",
+            kr = $"재장전 시간: {reloadTime}초"
+        };
+        yield return new()
+        {
+            en = $"Mag: {magSize}",
+            kr = $"탄창: {magSize}"
+        };
+        yield return new()
+        {
+            en = $"Reserve: {reserve}",
+            kr = $"탄 저장량: {reserve}"
+        };
+        yield return new()
+        {
+            en = $"Dropoff: {bulletDropoffPercentage}%",
+            kr = $"탄 투하: {bulletDropoffPercentage}%"
+        };
     }
 }
 public enum GunFireSource
@@ -338,7 +354,7 @@ public class GunFireInfo
 }
 public class GunGiveDamageInfo
 {
-    public float damage;
+    public DamageInfo damage;
     public GunHitInfo hit;
 }
 //한 번의 사격
@@ -352,6 +368,7 @@ public class GunFire
 public class GunShot
 {
     public GunFire origin;
+    public List<GameObject> hit = new();
 }
 public struct GunShotEndInfo
 {

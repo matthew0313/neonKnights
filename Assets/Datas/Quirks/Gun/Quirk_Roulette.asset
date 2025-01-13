@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00bf5818c8e3dd48b9e2d45dd20e100, type: 3}
   m_Name: Quirk_Roulette
   m_EditorClassIdentifier: 
-  m_quirkColor: {r: 1, g: 0.75323707, b: 0, a: 0}
+  m_quirkColor: {r: 1, g: 0.5217905, b: 0, a: 0}
   m_quirkIcon: {fileID: 21300000, guid: 4151708d5beea4d47abe1421b225f7cd, type: 3}
   incompatible: []
   m_minRouletteRange: 15

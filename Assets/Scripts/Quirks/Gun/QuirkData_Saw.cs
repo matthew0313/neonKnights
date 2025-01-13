@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_Saw", menuName = "Scriptables/Quirks/Guns/Saw", order = 0)]
 public class QuirkData_Saw : QuirkData
 {
-    public override bool IsAddable(WeaponItem target)
+    public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
     }
@@ -23,12 +23,12 @@ public class Quirk_Saw : Quirk
     {
         this.data = data;
     }
-    public override void OnQuirkAdd(WeaponItem target)
+    public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
         (target as GunItem).range = Mathf.Min(3, (target as GunItem).range);
         (target as GunItem).onFireStart += OnFireStart;
-        (target as GunItem).onFireObjectHit += OnFireObjectHit;
+        (target as GunItem).onShotHit += OnShotHit;
         (target as GunItem).onFireEnd += OnFireEnd;
     }
     List<GunFire> notRefunded = new();
@@ -39,12 +39,12 @@ public class Quirk_Saw : Quirk
             notRefunded.Add(fire);
         }
     }
-    void OnFireObjectHit(GunFire fire)
+    void OnShotHit(GunShot shot, GunHitInfo info)
     {
-        if (notRefunded.Contains(fire))
+        if (notRefunded.Contains(shot.origin))
         {
-            (target as GunItem).mag = Mathf.Min((target as GunItem).magSize, (target as GunItem).mag += fire.fireInfo.consumedBullet);
-            notRefunded.Remove(fire);
+            (target as GunItem).mag = Mathf.Min((target as GunItem).magSize, (target as GunItem).mag += shot.origin.fireInfo.consumedBullet);
+            notRefunded.Remove(shot.origin);
         }
     }
     void OnFireEnd(GunFire fire)

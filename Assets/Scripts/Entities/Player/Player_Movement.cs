@@ -75,6 +75,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
     public Action onStaminaChange;
 
     internal bool canMove = true;
+
     internal bool sprinting = false;
     internal bool dashing = false;
     internal bool sliding = false;
@@ -90,7 +91,8 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
 #endif
         topLayer.OnStateEnter();
     }
-    Vector3 lastMovedDir = Vector3.forward;
+    Vector3 lastLookedDir = Vector3.forward;
+    internal Vector3 relativeMoveInput { get; private set; } = Vector3.forward;
     public void OnUpdate()
     {
         topLayer.OnStateUpdate();
@@ -111,11 +113,11 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             Vector2 pos1 = new Vector2(transform.position.x, transform.position.z);
             Vector2 pos2 = new Vector2(end.x, end.z);
             rot = pos2 - pos1;
-            lastMovedDir = new Vector3(rot.x, 0.0f, rot.y);
+            lastLookedDir = new Vector3(rot.x, 0.0f, rot.y);
         }
         else if (rotateMode == RotateMode.Free)
         {
-            rot = new Vector2(lastMovedDir.x, lastMovedDir.z);
+            rot = new Vector2(lastLookedDir.x, lastLookedDir.z);
         }
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg + 90.0f, 0), rotateSpeed * Time.deltaTime);
     }
@@ -140,7 +142,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
 
     class MoveFSMVals : FSMVals
     {
-
+        public Vector3 moveInput;
     }
     class TopLayer : TopLayer<Player_Movement, MoveFSMVals>
     {
@@ -151,6 +153,14 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             AddState("Running", new Running(origin, this));
             AddState("Dashing", new Dashing(origin, this));
             AddState("Sliding", new Sliding(origin, this));
+        }
+        public override void OnStateUpdate()
+        {
+            Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
+            Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
+            values.moveInput = camFront * InputManager.GetMovementInput().y + camRight * InputManager.GetMovementInput().x;
+            origin.relativeMoveInput = origin.transform.InverseTransformDirection(values.moveInput);
+            base.OnStateUpdate();
         }
         class Walking : State<Player_Movement, MoveFSMVals>
         {
@@ -168,12 +178,12 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateUpdate();
                 if (!origin.canMove || origin.dashing) return;
-                if (InputManager.GetSprintInput() && origin.stamina > 0.0f)
+                if (InputManager.GetSprintInput() && origin.stamina > 0.0f && values.moveInput.magnitude >= 0.1f)
                 {
                     parentLayer.ChangeState("Running");
                     return;
                 }
-                if(InputManager.GetDashInput() && origin.stamina > 0.0f)
+                if(InputManager.GetDashInput() && origin.stamina > 0.0f && values.moveInput.magnitude > 0)
                 {
                     origin.stamina = Mathf.Max(0, origin.stamina - 1.0f);
                     parentLayer.ChangeState("Dashing");
@@ -193,11 +203,8 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateFixedUpdate();
                 if (!origin.canMove || origin.dashing) return;
-                Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
-                Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
-                Vector3 move = camFront * InputManager.GetMovementInput().y + camRight * InputManager.GetMovementInput().x;
-                if(move.magnitude != 0) origin.lastMovedDir = move.normalized;
-                origin.rb.MovePosition(origin.rb.position + move * origin.moveSpeed * Time.fixedDeltaTime);
+                if(values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.moveSpeed * Time.fixedDeltaTime);
             }
         }
         class Running : State<Player_Movement, MoveFSMVals>
@@ -210,7 +217,8 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateUpdate();
                 origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
-                if(!origin.canMove || origin.dashing || !InputManager.GetSprintInput() || origin.stamina <= 0.0f)
+                Debug.Log(values.moveInput);
+                if(!origin.canMove || origin.dashing || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
                 {
                     parentLayer.ChangeState("Walking");
                     return;
@@ -234,12 +242,9 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             public override void OnStateFixedUpdate()
             {
                 base.OnStateFixedUpdate();
-                if (!origin.canMove || origin.dashing) return;
-                Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
-                Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
-                Vector3 move = camFront * InputManager.GetMovementInput().y + camRight * InputManager.GetMovementInput().x;
-                if(move.magnitude != 0) origin.lastMovedDir = move.normalized;
-                origin.rb.MovePosition(origin.rb.position + move * origin.moveSpeed * origin.sprintMultiplier * Time.fixedDeltaTime);
+                if (!origin.canMove) return;
+                if(values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.moveSpeed * origin.sprintMultiplier * Time.fixedDeltaTime);
             }
         }
         class Dashing : State<Player_Movement, MoveFSMVals>
@@ -251,7 +256,10 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
-                origin.Dash(origin.lastMovedDir, origin.dashDistance, origin.dashSpeed, origin.dashEndlag);
+                Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
+                Vector3 move = values.moveInput;
+                if (move.magnitude == 0) move = camFront;
+                origin.Dash(move, origin.dashDistance, origin.dashSpeed, origin.dashEndlag);
                 origin.dashTrail.emitting = true;
             }
             public override void OnStateUpdate()
@@ -274,7 +282,10 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
-                origin.Dash(origin.lastMovedDir, origin.slideDistance, origin.slideSpeed, origin.slideEndlag);
+                Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
+                Vector3 move = values.moveInput;
+                if (move.magnitude == 0) move = camFront;
+                origin.Dash(move, origin.slideDistance, origin.slideSpeed, origin.slideEndlag);
                 origin.slideTrail.emitting = true;
             }
             public override void OnStateUpdate()

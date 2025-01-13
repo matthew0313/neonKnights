@@ -16,5 +16,14 @@ public abstract class PistolItem : GunItem
         this.data = data;
         weapon = base.weapon as Pistol;
     }
-    public override HeldWeapon animationType => HeldWeapon.Pistol;
+    public override void OnWield(Player wielder)
+    {
+        base.OnWield(wielder);
+        wielder.animation.SetAnimationType(AnimationType.Pistol);
+    }
+    public override void OnUnwield(Player wielder)
+    {
+        base.OnUnwield(wielder);
+        wielder.animation.SetAnimationType(AnimationType.None);
+    }
 }

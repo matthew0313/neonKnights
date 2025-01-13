@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StatusAliment_Slowed : StatusAliment
 {
+    public override AlimentType type => AlimentType.Slowed;
     float slowedPercentage = 1.0f;
     float timeLeft = 3.0f;
     public StatusAliment_Slowed()
@@ -17,9 +18,9 @@ public class StatusAliment_Slowed : StatusAliment
         this.timeLeft = timeLeft;
     }
     StatusAlimentEffect effect = null;
-    public override void OnAlimentAdd(HpComp target)
+    public override void OnAlimentAdd()
     {
-        base.OnAlimentAdd(target);
+        base.OnAlimentAdd();
         if(target.TryGetComponent(out ISpeedAdjustable tmp))
         {
             tmp.speed *= slowedPercentage;

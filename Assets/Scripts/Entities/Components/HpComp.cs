@@ -2,6 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
 {
@@ -64,7 +69,8 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     public bool invincible = false;
     public bool dead { get; private set; } = false;
 
-    public Action<float> onShieldDamage, onDamage, onHeal;
+    public Action<DamageInfo> onDamage;
+    public Action<float> onHeal;
     public Action onHpChange;
     public Action onDeath;
     void Awake()
@@ -93,43 +99,43 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
             shield = Mathf.Min(maxShield, shield + maxShield * shieldRegenPercentagePerSecond * Time.deltaTime);
         }
     }
-    public DamageReceivedInfo GetDamage(float damage)
+    public virtual DamageReceivedInfo GetDamage(DamageInfo damage)
     {
         if (dead) return new() { receivedDamage = 0 };
         shieldRegenCounter = 0.0f;
-        if(shield > 0)
+        float amountLeft = damage.amount;
+        DamageReceivedInfo info = new();
+
+        float tmp;
+        if(!damage.ignoreShield && shield > 0)
         {
-            float amount = Mathf.Min(damage, shield);
-            shield -= amount;
-            onShieldDamage?.Invoke(amount);
-            return new() { receivedDamage = amount };
+            tmp = Mathf.Min(amountLeft, shield);
+            shield -= tmp;
+            amountLeft -= tmp;
+            info.receivedDamage += tmp;
+            if (amountLeft <= 0) return info;
         }
-        else
+        tmp = Mathf.Min(amountLeft, hp);
+        hp -= tmp;
+        info.receivedDamage += tmp;
+        onDamage?.Invoke(damage);
+        if (hp <= 0)
         {
-            float amount = Mathf.Min(damage, hp);
-            hp -= amount;
-            onDamage?.Invoke(damage);
-            if (hp <= 0)
-            {
-                dead = true;
-                onDeath?.Invoke();
-                return new() { receivedDamage = amount, fatal = true };
-            }
-            else
-            {
-                return new() { receivedDamage = amount };
-            }
+            dead = true;
+            onDeath?.Invoke();
+            info.fatal = true;
         }
+        return info;
     }
 
-    public void GetHeal(float heal)
+    public virtual void GetHeal(float heal)
     {
         if (dead) return;
         float amount = Mathf.Min(maxHp - hp, heal);
         hp += amount;
         onHeal?.Invoke(amount);
     }
-    public void Revive()
+    public virtual void Revive()
     {
         if (!dead) return;
         dead = false;
@@ -137,7 +143,11 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     }
     List<StatusAliment> aliments = new();
     List<StatusAliment> addQueue = new(), removeQueue = new();
-    public void GetAliment(StatusAliment aliment)
+    public void ApplyAliment(StatusAliment aliment)
+    {
+        aliment.AddTo(this);
+    }
+    public virtual void AddAliment(StatusAliment aliment)
     {
         addQueue.Add(aliment);
     }
@@ -176,7 +186,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         foreach(var i in addQueue)
         {
             aliments.Add(i);
-            i.OnAlimentAdd(this);
+            i.OnAlimentAdd();
         }
         addQueue.Clear();
         foreach (var i in aliments) i.OnAlimentUpdate();
@@ -188,3 +198,14 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         removeQueue.Clear();
     }
 }
+#if UNITY_EDITOR
+[CustomEditor(typeof(HpComp))]
+public class HpComp_Editor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (GUILayout.Button("Deal Damage")) (target as HpComp).GetDamage(10.0f);
+    }
+}
+#endif

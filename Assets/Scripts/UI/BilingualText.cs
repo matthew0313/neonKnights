@@ -9,12 +9,12 @@ public class BilingualText : MonoBehaviour
     private void OnEnable()
     {
         if(origin == null) origin = GetComponent<TMP_Text>();
-        LangText.onLanguageChange += UpdateText;
+        Settings.onLanguageChange += UpdateText;
         UpdateText();
     }
     private void OnDisable()
     {
-        LangText.onLanguageChange -= UpdateText;
+        Settings.onLanguageChange -= UpdateText;
     }
     void UpdateText()
     {

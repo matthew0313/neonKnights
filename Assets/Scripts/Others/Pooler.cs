@@ -7,28 +7,25 @@ using System;
 public class Pooler<T> where T : Component
 {
     List<T> pool = new();
-    Action<T> onTakeout, onRelease;
     readonly int maxSize, defaultSize;
     Func<T> creator;
-    public Pooler(T prefab, int maxSize = 100, int defaultSize = 0, Action<T> onTakeout = null, Action<T> onRelease = null)
+
+    public Action<T> onTakeout, onRelease;
+    public Pooler(T prefab, int maxSize = 100, int defaultSize = 0)
     {
         creator = () => MonoBehaviour.Instantiate(prefab);
         this.maxSize = maxSize;
         this.defaultSize = defaultSize;
-        this.onTakeout = onTakeout;
-        this.onRelease = onRelease;
         for (int i = 0; i < defaultSize; i++) 
         {
             Release(creator.Invoke());
         }
     }
-    public Pooler(Func<T> creator, int maxSize = 100, int defaultSize = 0, Action<T> onTakeout = null, Action<T> onRelease = null)
+    public Pooler(Func<T> creator, int maxSize = 100, int defaultSize = 0)
     {
         this.creator = creator;
         this.maxSize = maxSize;
         this.defaultSize = defaultSize;
-        this.onTakeout = onTakeout;
-        this.onRelease = onRelease;
         for (int i = 0; i < defaultSize; i++)
         {
             Release(creator.Invoke());

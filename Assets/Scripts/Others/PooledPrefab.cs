@@ -7,22 +7,21 @@ using UnityEngine.InputSystem;
 
 public class PooledPrefab<T> : MonoBehaviour where T : PooledPrefab<T>
 {
-    [Header("Pooling")]
-    [SerializeField] bool groupPooledItems = false;
+    protected virtual int maxPoolSize => 100;
+    protected virtual int defaultPoolSize => 0;
 
-    Transform poolParent;
     T prefabOrigin = null;
     Pooler<T> pool = null;
     public T Instantiate()
     {
         if (prefabOrigin != null) return prefabOrigin.Instantiate();
-        if (pool == null) pool = new Pooler<T>(this as T);
-        T tmp = pool.GetObject();
-        if (groupPooledItems)
+        if (pool == null) pool = new Pooler<T>(() =>
         {
-            if (poolParent == null) poolParent = new GameObject(gameObject.name + ": Pool Group").transform;
-            tmp.poolParent = poolParent;
-        }
+            T tmp = Create();
+            tmp.OnCreate();
+            return tmp;
+        }, maxPoolSize, defaultPoolSize);
+        T tmp = pool.GetObject();
         tmp.prefabOrigin = this as T;
         tmp.released = false;
         return tmp;
@@ -31,13 +30,14 @@ public class PooledPrefab<T> : MonoBehaviour where T : PooledPrefab<T>
     public void Release()
     {
         if (prefabOrigin == null || released) return;
-        if (groupPooledItems)
-        {
-            transform.SetParent(poolParent);
-        }
         prefabOrigin.pool.ReleaseObject(this as T);
         released = true;
         OnRelease();
     }
+    protected virtual T Create()
+    {
+        return Instantiate((this as T));
+    }
+    protected virtual void OnCreate() { }
     protected virtual void OnRelease() { }
 }

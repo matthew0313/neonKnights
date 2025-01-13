@@ -10,9 +10,8 @@ public abstract class WeaponItemData : UnstackableItemData
     [SerializeField] Weapon m_prefab;
     public Weapon prefab => m_prefab;
 }
-public abstract class WeaponItem : UnstackableItem, IQuirkDisplayed
+public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
 {
-    public abstract HeldWeapon animationType { get; }
     public readonly Weapon weapon;
 
     new public readonly WeaponItemData data;
@@ -22,65 +21,21 @@ public abstract class WeaponItem : UnstackableItem, IQuirkDisplayed
         weapon = MonoBehaviour.Instantiate(data.prefab);
         weapon.gameObject.SetActive(false);
     }
-    public Action onWield, onUnwield, onInventoryUpdate, onWieldUpdate;
-    public override void OnInventoryUpdate()
-    {
-        base.OnInventoryUpdate();
-        onInventoryUpdate?.Invoke();
-    }
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
         wielder.movement.rotateMode = RotateMode.MouseLocked;
         weapon.transform.SetParent(wielder.inventory.equipAnchor, false);
         weapon.gameObject.SetActive(true);
-        onWield?.Invoke();
-    }
-    public override void OnWieldUpdate()
-    {
-        base.OnWieldUpdate();
-        onWieldUpdate?.Invoke();
     }
     public override void OnUnwield(Player wielder)
     {
         base.OnUnwield(wielder);
         wielder.movement.rotateMode = RotateMode.Free;
         weapon.gameObject.SetActive(false);
-        onUnwield?.Invoke();
     }
 
-    List<Quirk> quirks = new();
-    public void AddQuirk(Quirk quirk)
-    {
-        quirks.Add(quirk);
-        quirk.OnQuirkAdd(this);
-    }
-    public bool FindQuirk<T>(out T quirk) where T : Quirk
-    {
-        if (FindQuirk((tmp) => tmp is T, out Quirk tmp))
-        {
-            quirk = tmp as T;
-            return true;
-        }
-        else
-        {
-            quirk = null;
-            return false;
-        }
-    }
-    public bool FindQuirk(Func<Quirk, bool> predicate, out Quirk quirk)
-    {
-        foreach(var i in quirks)
-        {
-            if (predicate.Invoke(i))
-            {
-                quirk = i;
-                return true;
-            }
-        }
-        quirk = null;
-        return false;
-    }
+    public List<Quirk> quirks { get; } = new();
     public override void Save(DataUnit data)
     {
         base.Save(data);
@@ -103,11 +58,19 @@ public abstract class WeaponItem : UnstackableItem, IQuirkDisplayed
             {
                 Quirk quirk = i.data.Create();
                 quirk.Load(i.save);
-                AddQuirk(quirk);
+                (this as IQuirkable).AddQuirk(quirk);
             }
         }
     }
-
+    public override Item Copy()
+    {
+        WeaponItem tmp = base.Copy() as WeaponItem;
+        foreach(var i in quirks)
+        {
+            tmp.quirks.Add(i.Copy());
+        }
+        return tmp;
+    }
     public IEnumerable<Quirk> GetQuirks()
     {
         foreach (var i in quirks) yield return i;
@@ -118,10 +81,4 @@ public class QuirkSave
 {
     public QuirkData data;
     public DataUnit save = new();
-}
-[System.Serializable]
-public enum WeaponType
-{
-    None = 0,
-    Pistol = 1
 }

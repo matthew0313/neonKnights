@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IAlimentable
 {
-    public void GetAliment(StatusAliment aliment);
+    public void ApplyAliment(StatusAliment aliment);
 }

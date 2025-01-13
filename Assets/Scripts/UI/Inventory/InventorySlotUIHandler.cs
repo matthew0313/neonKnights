@@ -166,7 +166,7 @@ public class InventorySlotUIHandler : MonoBehaviour
             {
                 if (itemStatList.Count <= index) itemStatList.Add(Instantiate(itemStatPrefab, itemStatAnchor));
                 itemStatList[index].gameObject.SetActive(true);
-                itemStatList[index++].text = i;
+                itemStatList[index++].text = i.text;
             }
             for (; index < itemStatList.Count; index++)
             {

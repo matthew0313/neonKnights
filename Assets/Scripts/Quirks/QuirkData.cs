@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public abstract class QuirkData : ScriptableObject
     [SerializeField] QuirkData[] incompatible;
     public Color quirkColor => m_quirkColor;
     public Sprite quirkIcon => m_quirkIcon;
-    public virtual bool IsAddable(WeaponItem target)
+    public virtual bool IsAddable(IQuirkable target)
     {
         foreach(var i in incompatible)
         {
@@ -28,8 +29,8 @@ public abstract class Quirk
     {
         this.data = data;
     }
-    protected WeaponItem target { get; private set; }
-    public virtual void OnQuirkAdd(WeaponItem target)
+    protected IQuirkable target { get; private set; }
+    public virtual void OnQuirkAdd(IQuirkable target)
     {
         this.target = target;
     }
@@ -39,4 +40,8 @@ public abstract class Quirk
     public abstract LangText quirkName { get; }
     public abstract LangText quirkDescription { get; }
     public abstract LangText Describe();
+    public virtual Quirk Copy()
+    {
+        return data.Create();
+    }
 }

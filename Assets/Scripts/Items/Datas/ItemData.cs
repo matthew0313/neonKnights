@@ -27,21 +27,34 @@ public abstract class Item
     public Item(ItemData data)
     {
         this.data = data;
+        ItemUpdater.Instance.AddItem(this);
     }
     public virtual bool IsStackable(Item other) => other != null && data == other.data;
     public virtual Item Copy() => data.Create();
 
     public InventorySlot containedSlot = null;
     public Player wielder { get; private set; }
-    public virtual void OnInventoryUpdate() { }
+
+
+    public Action onWield, onUnwield, onWieldUpdate;
+    public Action onUpdate;
+    public virtual void Update()
+    {
+        onUpdate?.Invoke();
+    }
     public virtual void OnWield(Player wielder)
     {
         this.wielder = wielder;
+        onWield?.Invoke();
     }
-    public virtual void OnWieldUpdate() { }
+    public virtual void OnWieldUpdate()
+    {
+        onWieldUpdate?.Invoke();
+    }
     public virtual void OnUnwield(Player wielder)
     {
         this.wielder = null;
+        onUnwield?.Invoke();
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }
@@ -64,7 +77,11 @@ public abstract class Item
                 en = "Pistol",
                 kr = "권총"
             };
-            default: return new LangText();
+            default: return new LangText()
+            {
+                en = "???",
+                kr = "???"
+            };
         }
     }
 }

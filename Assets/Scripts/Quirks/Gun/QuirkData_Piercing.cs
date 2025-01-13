@@ -12,7 +12,7 @@ public class QuirkData_Piercing : QuirkData
     [SerializeField] float m_maxPierceChance;
     public float minPierceChance => m_minPierceChance;
     public float maxPierceChance => m_maxPierceChance;
-    public override bool IsAddable(WeaponItem target)
+    public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
     }
@@ -29,7 +29,7 @@ public class Quirk_Piercing : Quirk
         this.data = data;
     }
     float pierceChance = 0.0f;
-    public override void OnQuirkAdd(WeaponItem target)
+    public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
         (target as GunItem).modifyFireInfo += (GunFireInfo info) =>
@@ -68,5 +68,11 @@ public class Quirk_Piercing : Quirk
     {
         base.Load(data);
         data.floats.TryGetValue("pierceChance", out pierceChance);
+    }
+    public override Quirk Copy()
+    {
+        Quirk_Piercing tmp = base.Copy() as Quirk_Piercing;
+        tmp.pierceChance = pierceChance;
+        return tmp;
     }
 }

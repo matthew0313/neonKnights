@@ -76,12 +76,7 @@ public class GunProjectile : Bullet
         counter += fireInfo.bulletSpeed * Time.deltaTime;
         if (counter >= fireInfo.range)
         {
-            gun.onShotEnd?.Invoke(shot, new()
-            {
-                endedViaObjectHit = false,
-                dir = transform.forward,
-                pos = transform.position
-            });
+            EndShot();
             Release();
         }
     }
@@ -95,6 +90,8 @@ public class GunProjectile : Bullet
             hitPos = transform.position,
             hitDir = transform.forward
         };
+        if (shot.hit.Contains(hit.hitObject)) return;
+        gun.onShotHit(shot, hit);
         if(hit.hitObject.TryGetComponent(out IDamagable target))
         {
             GunGiveDamageInfo damageInfo = new()
@@ -103,30 +100,27 @@ public class GunProjectile : Bullet
                 hit = hit
             };
             gun.modifyShotDamageGiven?.Invoke(shot, damageInfo);
-            gun.onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage));
+            gun.onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage), hit);
+            shot.hit.Add(hit.hitObject);
             if (pierceLeft <= 0)
             {
-                gun.onShotEnd?.Invoke(shot, new()
-                {
-                    endedViaObjectHit = true,
-                    dir = transform.forward,
-                    pos = transform.position
-                });
+                EndShot();
                 Release();
             }
             else pierceLeft--;
         }
         else
         {
-            gun.onShotObjectHit?.Invoke(shot, hit);
-            gun.onShotEnd?.Invoke(shot, new()
-            {
-                endedViaObjectHit = true,
-                dir = transform.forward,
-                pos = transform.position
-            });
+            gun.onShotNonDamagableHit?.Invoke(shot, hit);
+            EndShot();
             Release();
         }
+    }
+    void EndShot()
+    {
+        gun.onShotEnd?.Invoke(shot);
+        shot.origin.shots.Remove(shot);
+        if (shot.origin.shots.Count == 0) gun.onFireEnd?.Invoke(shot.origin);
     }
     protected override void OnRelease()
     {

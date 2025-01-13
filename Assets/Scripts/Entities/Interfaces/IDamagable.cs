@@ -5,10 +5,31 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    public DamageReceivedInfo GetDamage(float damage);
+    public DamageReceivedInfo GetDamage(DamageInfo damage);
+}
+public struct DamageInfo
+{
+    public float amount;
+
+    public bool ignoreShield;
+    
+    public bool isWeakPointHit, isResistPointHit;
+
+    public static implicit operator float(DamageInfo info)
+    {
+        return info.amount;
+    }
+    public static implicit operator DamageInfo(float other)
+    {
+        return new DamageInfo()
+        {
+            amount = other
+        };
+    }
 }
 public struct DamageReceivedInfo
 {
     public float receivedDamage;
     public bool fatal;
+    public bool isWeakPointHit, isResistPointHit;
 }

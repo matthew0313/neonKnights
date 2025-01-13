@@ -15,7 +15,7 @@ public class QuirkData_Roulette : QuirkData
     public float maxRouletteRange => m_maxRouletteRange;
     public float minRouletteInterval => m_minRouletteInterval;
     public float maxRouletteInterval => m_maxRouletteInterval;
-    public override bool IsAddable(WeaponItem target)
+    public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
     }
@@ -33,17 +33,18 @@ public class Quirk_Roulette : Quirk
     }
     float rouletteRange, rouletteInterval;
     float currentBonus = 0.0f;
-    public override void OnQuirkAdd(WeaponItem target)
+    public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as GunItem).modifyDamageGiven += (GunGiveDamageInfo info) =>
-        {
-            info.damage *= (100.0f + currentBonus) / 100.0f;
-        };
-        target.onWield += OnWield;
-        
+        (target as GunItem).modifyShotDamageGiven += ModifyShotDamageGiven;
+        (target as GunItem).onWield += OnWield;
+        (target as GunItem).onWieldUpdate += OnWieldUpdate;
     }
     float counter = 0.0f;
+    void ModifyShotDamageGiven(GunShot shot, GunGiveDamageInfo info)
+    {
+        info.damage.amount *= (100.0f + currentBonus) / 100.0f;
+    }
     void OnWield()
     {
         Roulette();
@@ -61,6 +62,7 @@ public class Quirk_Roulette : Quirk
     void Roulette()
     {
         currentBonus = UnityEngine.Random.Range(-rouletteRange, rouletteRange);
+        TextIndicator.Indicate((target as GunItem).wielder.transform.position, $"Roulette {Mathf.Round(currentBonus)}% damage", Color.white);
     }
     public override void SetRandom()
     {
@@ -95,5 +97,12 @@ public class Quirk_Roulette : Quirk
     {
         base.Load(data);
         data.floats.TryGetValue("rouletteRange", out rouletteRange);
+    }
+    public override Quirk Copy()
+    {
+        Quirk_Roulette tmp = base.Copy() as Quirk_Roulette;
+        tmp.rouletteRange = rouletteRange;
+        tmp.rouletteInterval = rouletteInterval;
+        return tmp;
     }
 }

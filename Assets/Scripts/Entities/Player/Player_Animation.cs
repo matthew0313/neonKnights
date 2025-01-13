@@ -6,29 +6,28 @@ using UnityEngine;
 public class Player_Animation : MonoBehaviour
 {
     internal Animator anim;
-    void OnAwake()
+    Player origin;
+    public void OnAwake()
     {
         anim = GetComponent<Animator>();
-        GetComponent<Player>().inventory.onEquippedItemChange += OnEquippedItemChange;
+        origin = GetComponent<Player>();
     }
-    readonly int heldWeaponID = Animator.StringToHash("HeldWeapon");
-    public void SetHeldWeapon(HeldWeapon weapon)
+    readonly int animationTypeID = Animator.StringToHash("AnimationType");
+    readonly int movingID = Animator.StringToHash("Moving");
+    readonly int moveXID = Animator.StringToHash("MoveX");
+    readonly int moveYID = Animator.StringToHash("MoveY");
+    public void SetAnimationType(AnimationType type)
     {
-        anim.SetInteger(heldWeaponID, (int)weapon);
+        anim.SetInteger(animationTypeID, (int)type);
     }
-    void OnEquippedItemChange(Item item)
+    public void OnUpdate()
     {
-        if(item is WeaponItem)
-        {
-            anim.SetInteger(heldWeaponID, (int)(item as WeaponItem).animationType);
-        }
-        else
-        {
-            anim.SetInteger(heldWeaponID, (int)HeldWeapon.None);
-        }
+        anim.SetBool(movingID, origin.movement.relativeMoveInput.magnitude > 0.1f);
+        anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
+        anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
     }
 }
-public enum HeldWeapon
+public enum AnimationType
 {
     None = 0,
     Pistol = 1

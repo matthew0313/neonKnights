@@ -29,21 +29,13 @@ public class Inventory : MonoBehaviour
     {
         slotCount = defaultSlotCount;
     }
-    private void Update()
-    {
-        foreach(var i in slots)
-        {
-            if (i.item != null) i.item.OnInventoryUpdate();
-        }
-    }
     public int Insert(Item item, int count)
     {
         foreach(var i in slots)
         {
-            if (i.item == null) continue;
-            if(i.item.IsStackable(item) && item.IsStackable(i.item))
+            if(i.item != null && i.item.IsStackable(item) && item.IsStackable(i.item))
             {
-                count = i.Insert(item.Copy(), count);
+                count = i.Insert(item, count);
                 if (count <= 0) return 0;
             }
         }
