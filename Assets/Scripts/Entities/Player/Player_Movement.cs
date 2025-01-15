@@ -36,6 +36,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
     [SerializeField] TrailRenderer slideTrail;
 
     [Header("Rotate")]
+    [SerializeField] Transform rotator;
     [SerializeField] internal float rotateSpeed = 1.0f;
 
     [Header("Debug")]
@@ -107,7 +108,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
         Vector2 rot = Vector2.zero;
         if (rotateMode == RotateMode.MouseLocked)
         {
-            Ray ray = Camera.main.ScreenPointToRay(InputManager.GetMouseInput());
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             float height = transform.position.y - ray.origin.y;
             Vector3 end = ray.origin + ray.direction * (height / ray.direction.y);
             Vector2 pos1 = new Vector2(transform.position.x, transform.position.z);
@@ -119,7 +120,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
         {
             rot = new Vector2(lastLookedDir.x, lastLookedDir.z);
         }
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg + 90.0f, 0), rotateSpeed * Time.deltaTime);
+        rotator.rotation = Quaternion.Slerp(rotator.rotation, Quaternion.Euler(0, -Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg + 90.0f, 0), rotateSpeed * Time.deltaTime);
     }
     public void Dash(Vector3 dir, float distance, float speed, float endLag)
     {
@@ -158,7 +159,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
         {
             Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
             Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
-            values.moveInput = camFront * InputManager.GetMovementInput().y + camRight * InputManager.GetMovementInput().x;
+            values.moveInput = camFront * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
             origin.relativeMoveInput = origin.transform.InverseTransformDirection(values.moveInput);
             base.OnStateUpdate();
         }

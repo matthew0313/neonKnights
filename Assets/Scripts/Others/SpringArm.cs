@@ -9,10 +9,10 @@ public class SpringArm : MonoBehaviour
     public float armLength = 3.0f;
     private void Update()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, armLength, whatToHit))
+        if(Physics.Raycast(transform.position, transform.forward * -1.0f, out RaycastHit hit, armLength, whatToHit))
         {
             target.transform.position = hit.point;
         }
-        else target.transform.position = transform.position + transform.forward * armLength;
+        else target.transform.position = transform.position + transform.forward * -1.0f * armLength;
     }
 }

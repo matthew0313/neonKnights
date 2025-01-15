@@ -144,7 +144,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
             }
             else if(counter <= 0.0f)
             {
-                if ((auto && InputManager.GetButton() || !auto && InputManager.GetButtonDown()) && UIScanner.ScanUI(InputManager.GetMouseInput()).Count <= 0)
+                if ((auto && Input.GetMouseButton(0) || !auto && Input.GetMouseButtonDown(0)) && UIScanner.ScanUI(Input.mousePosition).Count <= 0)
                 {
                     if (mag > 0)
                     {
@@ -165,7 +165,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         };
                         if (SystemInfo.deviceType == DeviceType.Desktop)
                         {
-                            Ray ray = Camera.main.ScreenPointToRay(InputManager.GetMouseInput());
+                            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                             float height = wielder.transform.position.y - ray.origin.y;
                             Vector3 end = ray.origin + ray.direction * (height / ray.direction.y);
                             fireInfo.dir = (end - weapon.firePoint.position).normalized;
@@ -194,7 +194,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     readonly int fireID = Animator.StringToHash("Fire");
     public void Fire(GunFireInfo fireInfo)
     {
-        wielder.animation.anim.SetTrigger(fireID);
+        wielder.animation.TriggerFire();
         //지금 이 한 번의 사격을 의미하는 인스턴스 생성
         GunFire fire = new()
         {

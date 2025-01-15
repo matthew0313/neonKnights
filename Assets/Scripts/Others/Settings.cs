@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class Settings
@@ -28,4 +29,7 @@ public static class Settings
         }
     }
     public static Action onVolumeChange;
+
+    public static float cameraSensitivity = 1.0f;
+    public static bool cameraYReverse = true;
 }

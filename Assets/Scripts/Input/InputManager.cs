@@ -18,11 +18,18 @@ public class InputManager : MonoBehaviour
             return instance;
         }
     }
+    public InputManager() => instance = this;
+
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode dashKey = KeyCode.Space;
+    [SerializeField] KeyCode slotChangeLeftKey = KeyCode.LeftArrow;
+    [SerializeField] KeyCode slotChangeRightKey = KeyCode.RightArrow;
+    [SerializeField] KeyCode reloadKey = KeyCode.R;
     private void Awake()
     {
         DontDestroyOnLoad(this);
     }
-    /*Dictionary<KeyCode, List<KeyDownAction>> keyDownActions = new();
+    Dictionary<KeyCode, List<KeyDownAction>> keyDownActions = new();
     Dictionary<KeyDownAction, KeyCode> locator = new();
     public void AddKeyDownAction(KeyCode key, KeyDownAction action)
     {
@@ -48,56 +55,24 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
-    }*/
-    public static bool GetButtonDown()
-    {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetMouseButtonDown(0);
-        return false;
-    }
-    public static bool GetButton()
-    {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetMouseButton(0);
-        return false;
-    }
-    public static Vector2 GetMovementInput()
-    {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        return Vector2.zero;
     }
     public static bool GetSprintInput()
     {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetKey(KeyCode.LeftShift);
-        return false;
+        return Input.GetKey(instance.sprintKey);
     }
     public static bool GetDashInput()
     {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetKeyDown(KeyCode.Space);
-        return false;
-    }
-    public static Vector2 GetMouseInput()
-    {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.mousePosition;
-        return Vector2.zero;
+        return Input.GetKeyDown(instance.dashKey);
     }
     public static SlotChangeInput GetSlotChangeInput()
     {
-        if(SystemInfo.deviceType == DeviceType.Desktop)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow)) return SlotChangeInput.MoveLeft;
-            if (Input.GetKey(KeyCode.RightArrow)) return SlotChangeInput.MoveRight;
-            else return SlotChangeInput.Stay;
-        }
-        return SlotChangeInput.Stay;
+        if (Input.GetKey(instance.slotChangeLeftKey)) return SlotChangeInput.MoveLeft;
+        if (Input.GetKey(instance.slotChangeRightKey)) return SlotChangeInput.MoveRight;
+        else return SlotChangeInput.Stay;
     }
     public static bool GetReloadInput()
     {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetKeyDown(KeyCode.R);
-        return false;
-    }
-    public static bool GetCameraRotateInput()
-    {
-        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetMouseButtonDown(0);
-        return false;
+        return Input.GetKeyDown(instance.reloadKey);
     }
 }
 public enum SlotChangeInput

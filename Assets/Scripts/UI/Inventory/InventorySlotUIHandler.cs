@@ -48,16 +48,16 @@ public class InventorySlotUIHandler : MonoBehaviour
         {
             if (grabMode == InventoryGrabMode.Click || grabMode == InventoryGrabMode.Drag)
             {
-                if (InputManager.GetButtonDown())
+                if (Input.GetMouseButtonDown(0))
                 {
-                    List<RaycastResult> results = UIScanner.ScanUI(InputManager.GetMouseInput());
+                    List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
                     foreach (var i in results)
                     {
                         if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
                         {
                             if (slot.origin.item != null && slot.origin.Swap(grabbingSlot))
                             {
-                                grabbingSlotUI.transform.position = InputManager.GetMouseInput();
+                                grabbingSlotUI.transform.position = Input.mousePosition;
                                 grabbing = true;
                                 break;
                             }
@@ -68,10 +68,10 @@ public class InventorySlotUIHandler : MonoBehaviour
         }
         else
         {
-            grabbingSlotUI.transform.position = InputManager.GetMouseInput();
-            if (grabMode == InventoryGrabMode.Click && InputManager.GetButtonDown() || grabMode == InventoryGrabMode.Drag && !InputManager.GetButton())
+            grabbingSlotUI.transform.position = Input.mousePosition;
+            if (grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(0) || grabMode == InventoryGrabMode.Drag && !Input.GetMouseButton(0))
             {
-                List<RaycastResult> results = UIScanner.ScanUI(InputManager.GetMouseInput());
+                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
                 bool slotHit = false;
                 foreach (var i in results)
                 {
@@ -103,14 +103,14 @@ public class InventorySlotUIHandler : MonoBehaviour
     {
         if (!grabbing)
         {
-            List<RaycastResult> results = UIScanner.ScanUI(InputManager.GetMouseInput());
+            List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
             bool detected = false;
             foreach (var i in results)
             {
                 if (i.gameObject.TryGetComponent(out InventorySlotUI slot) && slot.origin.item != null)
                 {
                     detected = true;
-                    describer.transform.position = InputManager.GetMouseInput();
+                    describer.transform.position = Input.mousePosition;
                     if (slot.origin.item != describing) Describe(slot.origin.item);
                     describer.gameObject.SetActive(true);
                     break;

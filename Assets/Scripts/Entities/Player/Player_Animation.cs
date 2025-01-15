@@ -26,6 +26,11 @@ public class Player_Animation : MonoBehaviour
         anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
         anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
     }
+    readonly int fireID = Animator.StringToHash("Fire");
+    public void TriggerFire()
+    {
+        anim.SetTrigger(fireID);
+    }
 }
 public enum AnimationType
 {
