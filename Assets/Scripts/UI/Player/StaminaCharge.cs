@@ -19,7 +19,6 @@ public class StaminaCharge : MonoBehaviour
         }
         if (scale < currentScale)
         {
-            Debug.Log(scale);
             image.transform.localScale = new Vector2(scale, scale);
             currentScale = scale;
         }

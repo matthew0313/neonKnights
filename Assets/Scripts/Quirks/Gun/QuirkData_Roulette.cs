@@ -11,10 +11,13 @@ public class QuirkData_Roulette : QuirkData
     [SerializeField] float m_minRouletteRange;
     [SerializeField] float m_maxRouletteRange;
     [SerializeField] float m_minRouletteInterval, m_maxRouletteInterval;
+    [SerializeField] Color m_negativeEffectTextColor, m_positiveEffectTextColor;
     public float minRouletteRange => m_minRouletteRange;
     public float maxRouletteRange => m_maxRouletteRange;
     public float minRouletteInterval => m_minRouletteInterval;
     public float maxRouletteInterval => m_maxRouletteInterval;
+    public Color negativeEffectTextColor => m_negativeEffectTextColor;
+    public Color positiveEffectTextColor => m_positiveEffectTextColor;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
@@ -62,7 +65,11 @@ public class Quirk_Roulette : Quirk
     void Roulette()
     {
         currentBonus = UnityEngine.Random.Range(-rouletteRange, rouletteRange);
-        TextIndicator.Indicate((target as GunItem).wielder.transform.position, $"Roulette {Mathf.Round(currentBonus)}% damage", Color.white);
+        TextIndicator.Indicate((target as GunItem).wielder.transform.position, new LangText()
+        {
+            en = $"Roulette {Mathf.Round(currentBonus)}% damage",
+            kr = $"룰렛 {Mathf.Round(currentBonus)}% 대미지"
+        }.text, currentBonus > 0.0f ? data.positiveEffectTextColor : data.negativeEffectTextColor);
     }
     public override void SetRandom()
     {

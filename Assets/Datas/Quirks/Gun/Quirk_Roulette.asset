@@ -17,5 +17,7 @@ MonoBehaviour:
   incompatible: []
   m_minRouletteRange: 15
   m_maxRouletteRange: 50
-  m_minRouletteInterval: 1
+  m_minRouletteInterval: 2
   m_maxRouletteInterval: 10
+  m_negativeEffectTextColor: {r: 1, g: 0.39215687, b: 0.39215687, a: 1}
+  m_positiveEffectTextColor: {r: 1, g: 0.78431374, b: 0.39215687, a: 1}

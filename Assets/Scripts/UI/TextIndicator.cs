@@ -15,6 +15,7 @@ public class TextIndicator : PooledPrefab<TextIndicator>
     {
         if (MainCanvas.Instance == null) return;
         if (prefab == null) prefab = Resources.Load<TextIndicator>("TextIndicator");
+        Debug.Log(text);
         TextIndicator tmp = prefab.Instantiate();
         tmp.transform.SetParent(MainCanvas.Instance.transform, false);
         tmp.transform.localScale = Vector3.one;
