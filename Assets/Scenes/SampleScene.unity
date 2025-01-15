@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8537b5ad31e200248841d15a6c4fa83f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1382173705}
   hpBar: {fileID: 6526001519021702884}
   shieldBar: {fileID: 5883257350658064983}
   lossBar: {fileID: 425261242}
