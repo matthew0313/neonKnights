@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
     {
         DontDestroyOnLoad(this);
     }
-    Dictionary<KeyCode, List<KeyDownAction>> keyDownActions = new();
+    /*Dictionary<KeyCode, List<KeyDownAction>> keyDownActions = new();
     Dictionary<KeyDownAction, KeyCode> locator = new();
     public void AddKeyDownAction(KeyCode key, KeyDownAction action)
     {
@@ -31,15 +31,24 @@ public class InputManager : MonoBehaviour
             keyDownActions.Add(key, new());
         }
         keyDownActions[key].Add(action);
+        keyDownActions[key].Sort((a, b) => b.priority.CompareTo(a.priority));
         locator.Add(action, key);
     }
     private void Update()
     {
         foreach(var i in keyDownActions.Keys)
         {
-
+            if (Input.GetKeyDown(i))
+            {
+                for (int k = 0; k < keyDownActions[i].Count; k++)
+                {
+                    if (keyDownActions[i][k].enabled == false) continue;
+                    keyDownActions[i][k].action.Invoke();
+                    break;
+                }
+            }
         }
-    }
+    }*/
     public static bool GetButtonDown()
     {
         if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetMouseButtonDown(0);
@@ -83,6 +92,11 @@ public class InputManager : MonoBehaviour
     public static bool GetReloadInput()
     {
         if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetKeyDown(KeyCode.R);
+        return false;
+    }
+    public static bool GetCameraRotateInput()
+    {
+        if (SystemInfo.deviceType == DeviceType.Desktop) return Input.GetMouseButtonDown(0);
         return false;
     }
 }
