@@ -31,6 +31,11 @@ public class Player_Animation : MonoBehaviour
     {
         anim.SetTrigger(fireID);
     }
+    readonly int reloadID = Animator.StringToHash("Reload");
+    public void TriggerReload()
+    {
+        anim.SetTrigger(reloadID);
+    }
 }
 public enum AnimationType
 {

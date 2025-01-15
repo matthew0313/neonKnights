@@ -34,7 +34,7 @@ public abstract class GunItemData : WeaponItemData
     public float defaultBulletDropoffPercentage => m_defaultBulletDropoffPercentage;
 
 }
-public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, IDamageModifyable
+public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, IDamageModifyable, IReloadDisplayed
 {
     new public readonly GunItemData data;
     new public readonly Gun weapon;
@@ -111,7 +111,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     }
 
     float counter = 0.0f;
-    bool reloading = false;
+    public bool reloading { get; private set; } = false;
+    public float reloadProgress => reloadCounter / reloadTime;
     float reloadCounter = 0.0f;
     public override void OnWield(Player wielder)
     {
@@ -139,6 +140,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         {
             if (InputManager.GetReloadInput() && mag < magSize && reserveLeft > 0)
             {
+                wielder.animation.TriggerReload();
                 reloadCounter = 0.0f;
                 reloading = true;
             }
@@ -166,9 +168,14 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         if (SystemInfo.deviceType == DeviceType.Desktop)
                         {
                             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                            float height = wielder.transform.position.y - ray.origin.y;
-                            Vector3 end = ray.origin + ray.direction * (height / ray.direction.y);
-                            fireInfo.dir = (end - weapon.firePoint.position).normalized;
+                            if(Physics.Raycast(ray, out RaycastHit hit, 100.0f))
+                            {
+                                fireInfo.dir = hit.point - fireInfo.startPos;
+                            }
+                            else
+                            {
+                                fireInfo.dir = ray.origin + ray.direction * 100.0f - fireInfo.startPos;
+                            }
                         }
 
                         modifyFireInfo?.Invoke(fireInfo);

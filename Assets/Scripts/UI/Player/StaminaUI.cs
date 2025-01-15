@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,11 @@ using UnityEngine.UI;
 
 public class StaminaUI : MonoBehaviour
 {
-    [SerializeField]
-    Image[] staminaCharges;
+    [SerializeField] StaminaCharge staminaChargePrefab;
+    [SerializeField] Transform staminaChargeAnchor;
     [SerializeField] float hideTime = 1.5f;
     [SerializeField] Animator hideAnim;
-
-    int displayedCount = 0;
+    List<StaminaCharge> staminaCharges = new();
     Player_Movement origin;
     private void Awake()
     {
@@ -18,33 +18,33 @@ public class StaminaUI : MonoBehaviour
         origin.onStaminaChange += OnStaminaChange;
     }
     float counter = 0.0f;
+    bool showing = false;
     readonly int showID = Animator.StringToHash("Show");
     void OnStaminaChange()
     {
         hideAnim.SetBool(showID, true);
         counter = 0.0f;
-        if (displayedCount < Mathf.CeilToInt(origin.maxStamina))
+        int displayCount = Mathf.CeilToInt(origin.maxStamina);
+        int i;
+        for(i = 0; i < displayCount; i++)
         {
-            for(;displayedCount < Mathf.CeilToInt(origin.maxStamina);)
+            if(staminaCharges.Count <= i)
             {
-                if (displayedCount >= staminaCharges.Length) break;
-                staminaCharges[displayedCount++].gameObject.SetActive(true);
+                staminaCharges.Add(Instantiate(staminaChargePrefab, staminaChargeAnchor));
             }
+            staminaCharges[i].gameObject.SetActive(true);
         }
-        else if(displayedCount > Mathf.CeilToInt(origin.maxStamina))
+        for(; i < staminaCharges.Count; i++)
         {
-            for (; displayedCount > Mathf.CeilToInt(origin.maxStamina);)
-            {
-                staminaCharges[--displayedCount].gameObject.SetActive(false);
-            }
+            staminaCharges[i].gameObject.SetActive(false);
         }
-        for(int i = 0; i < displayedCount; i++)
+        for(i = 0; i < displayCount; i++)
         {
             float scale = Mathf.Clamp(origin.stamina - i, 0.0f, 1.0f);
-            staminaCharges[i].transform.localScale = new Vector2(0.2f + 0.8f * scale, 0.2f + 0.8f * scale);
+            staminaCharges[i].SetScale(0.2f + 0.8f * scale);
             float hue;
-            Color.RGBToHSV(staminaCharges[i].color, out hue, out _, out _);
-            staminaCharges[i].color = Color.HSVToRGB(hue, (scale == 0.0f ? 1.0f : scale), (scale == 0.0f ? 0.5f : 1.0f));
+            Color.RGBToHSV(staminaCharges[i].image.color, out hue, out _, out _);
+            staminaCharges[i].image.color = Color.HSVToRGB(hue, (scale == 0.0f ? 1.0f : scale), (scale == 0.0f ? 0.5f : 1.0f));
         }
     }
     private void Update()

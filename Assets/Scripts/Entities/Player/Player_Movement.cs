@@ -160,7 +160,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
             Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
             values.moveInput = camFront * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
-            origin.relativeMoveInput = origin.transform.InverseTransformDirection(values.moveInput);
+            origin.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
             base.OnStateUpdate();
         }
         class Walking : State<Player_Movement, MoveFSMVals>
@@ -218,7 +218,6 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateUpdate();
                 origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
-                Debug.Log(values.moveInput);
                 if(!origin.canMove || origin.dashing || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
                 {
                     parentLayer.ChangeState("Walking");
