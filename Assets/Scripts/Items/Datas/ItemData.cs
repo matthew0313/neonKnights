@@ -77,6 +77,21 @@ public abstract class Item
                 en = "Pistol",
                 kr = "권총"
             };
+            case ItemCategory.SubmachineGun: return new LangText()
+            {
+                en = "Submachine Gun",
+                kr = "기관단총"
+            };
+            case ItemCategory.SniperRifle: return new LangText()
+            {
+                en = "Sniper Rifle",
+                kr = "저격총"
+            };
+            case ItemCategory.Shotgun: return new LangText()
+            {
+                en = "Shotgun",
+                kr = "샷건"
+            };
             default: return new LangText()
             {
                 en = "???",
@@ -103,5 +118,8 @@ public enum ItemCategory
 {
     Weapon = 1<<0,
     Gun = 1<<1,
-    Pistol = 1<<2
+    Pistol = 1<<2,
+    SubmachineGun = 1<<3,
+    SniperRifle = 1<<4,
+    Shotgun = 1<<5
 }
