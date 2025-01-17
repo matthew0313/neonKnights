@@ -40,5 +40,8 @@ public class Player_Animation : MonoBehaviour
 public enum AnimationType
 {
     None = 0,
-    Pistol = 1
+    Pistol = 1,
+    SubmachineGun = 2,
+    SniperRifle = 3,
+    Shotgun = 4
 }
