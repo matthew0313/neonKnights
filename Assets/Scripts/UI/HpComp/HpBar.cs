@@ -36,7 +36,6 @@ public class HpBar : MonoBehaviour
             if (lossBarTween != null) lossBarTween.Kill();
             lossBarTween = DOTween.To(() => currentScale, value => currentScale = value, targetScale, 3.0f).SetDelay(1.0f).OnUpdate(() => 
             {
-                Debug.Log(currentScale);
                 lossBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * currentScale); 
             });
         }

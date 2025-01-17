@@ -266,7 +266,9 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                             hit = hit
                         };
                         modifyShotDamageGiven?.Invoke(shot, damageInfo);
-                        onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage), hit);
+                        DamageReceivedInfo damageReceivedInfo = target.GetDamage(damageInfo.damage);
+                        onShotDamageGive?.Invoke(shot, damageReceivedInfo, hit);
+                        Debug.Log(damageReceivedInfo);
                         shot.hit.Add(hit.hitObject);
                         if (pierce <= 0)
                         {

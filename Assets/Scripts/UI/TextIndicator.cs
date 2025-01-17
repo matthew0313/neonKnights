@@ -26,7 +26,7 @@ public class TextIndicator : PooledPrefab<TextIndicator>
         DOTween.To(() => counter, value => counter = value, 1.0f, tmp.moveUpTime).OnUpdate(() =>
         {
             tmp.transform.position = Camera.main.WorldToScreenPoint(position);
-            tmp.transform.localPosition = new Vector2(tmp.transform.localPosition.x, tmp.transform.localPosition.y + tmp.moveUpDistance * counter);
+            tmp.transform.localPosition += Vector3.up * tmp.moveUpDistance * counter;
         }).OnComplete(() =>
         {
             tmp.Release();

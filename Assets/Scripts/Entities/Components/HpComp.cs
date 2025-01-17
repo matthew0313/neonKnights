@@ -69,7 +69,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     public bool invincible = false;
     public bool dead { get; private set; } = false;
 
-    public Action<DamageInfo> onDamage;
+    public Action<DamageReceivedInfo> onDamage;
     public Action<float> onHeal;
     public Action onHpChange;
     public Action onDeath;
@@ -99,8 +99,9 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
             shield = Mathf.Min(maxShield, shield + maxShield * shieldRegenPercentagePerSecond * Time.deltaTime);
         }
     }
-    public virtual DamageReceivedInfo GetDamage(DamageInfo damage)
+    public DamageReceivedInfo GetDamage(DamageInfo damage)
     {
+        Debug.Log("RRRRRRAWRADWDAWDDWA");
         if (dead) return new() { receivedDamage = 0 };
         shieldRegenCounter = 0.0f;
         float amountLeft = damage.amount;
@@ -112,19 +113,18 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
             tmp = Mathf.Min(amountLeft, shield);
             shield -= tmp;
             amountLeft -= tmp;
-            info.receivedDamage += tmp;
-            if (amountLeft <= 0) return info;
+            info.receivedShieldDamage += tmp;
         }
         tmp = Mathf.Min(amountLeft, hp);
         hp -= tmp;
         info.receivedDamage += tmp;
-        onDamage?.Invoke(damage);
         if (hp <= 0)
         {
             dead = true;
             onDeath?.Invoke();
             info.fatal = true;
         }
+        onDamage?.Invoke(info);
         return info;
     }
 
