@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class Player_Interaction : MonoBehaviour
 {
-    private List<Interaction> interactions = new List<Interaction>();
+    [SerializeField] Text interactionText;
+    [SerializeField] float m_interactionRange;
+    public float interactionRange => m_interactionRange;
 
-    public GameObject interactionTextPrefab;
-    private GameObject currentInteractionText;
-
+    List<Interaction> interactions = new List<Interaction>();
     private void Update()
     {
         if (interactions.Count > 0)
@@ -25,12 +26,9 @@ public class Player_Interaction : MonoBehaviour
             });
 
             // 최상위 상호작용 표시
-            if (currentInteractionText == null)
-            {
-                currentInteractionText = Instantiate(interactionTextPrefab);
-            }
-            currentInteractionText.transform.position = Camera.main.WorldToScreenPoint(interactions[0].transform.position);
-            currentInteractionText.GetComponent<UnityEngine.UI.Text>().text = $"[E] {interactions[0].interactionName}";
+            interactionText.gameObject.SetActive(true);
+            interactionText.transform.position = Camera.main.WorldToScreenPoint(interactions[0].transform.position);
+            interactionText.text = $"[E] {interactions[0].interactionName}";
 
             // E키로 상호작용 실행
             if (Input.GetKeyDown(KeyCode.E))
@@ -38,9 +36,9 @@ public class Player_Interaction : MonoBehaviour
                 interactions[0].OnInteract();
             }
         }
-        else if (currentInteractionText != null)
+        else
         {
-            Destroy(currentInteractionText);
+            interactionText.gameObject.SetActive(false);
         }
     }
 
