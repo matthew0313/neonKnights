@@ -19,6 +19,7 @@ public abstract class GunItemData : WeaponItemData
     [SerializeField] float m_baseBulletSpeed;
     [SerializeField] int m_defaultPierce = 0;
     [SerializeField] float m_defaultBulletDropoffPercentage = 50.0f;
+    [SerializeField] float m_baseWeight = 0;
     public bool auto => m_auto;
     public float baseDamage => m_baseDamage;
     public float baseFireRate => m_baseFireRate;
@@ -32,6 +33,7 @@ public abstract class GunItemData : WeaponItemData
     public float baseBulletSpeed => m_baseBulletSpeed;
     public int defaultPierce => m_defaultPierce;
     public float defaultBulletDropoffPercentage => m_defaultBulletDropoffPercentage;
+    public float baseWeight => m_baseWeight;
 
 }
 public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, IDamageModifyable, IReloadDisplayed
@@ -56,6 +58,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         pierce = data.defaultPierce;
         shotCount = data.baseShotCount;
         bulletDropoffPercentage = data.defaultBulletDropoffPercentage;
+        weight = data.baseWeight;
     }
     //stats
     public bool auto;
@@ -71,6 +74,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public int pierce = 0;
     public int shotCount = 1;
     public float bulletDropoffPercentage;
+    public float weight = 0;
 
     public Action onNumberUpdate { get; set; }
     int m_mag;
@@ -117,6 +121,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     {
         base.OnWield(wielder);
         counter = fireRate;
+        wielder.movement.moveSpeed -= weight;
     }
     readonly LayerMask whatToHit = LayerMask.GetMask("Map", "Enemy");
     public override void OnWieldUpdate()
@@ -196,6 +201,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         base.OnUnwield(wielder);
         reloadCounter = 0.0f;
         reloading = false;
+        wielder.movement.moveSpeed += weight;
     }
     readonly int fireID = Animator.StringToHash("Fire");
     public void Fire(GunFireInfo fireInfo)
