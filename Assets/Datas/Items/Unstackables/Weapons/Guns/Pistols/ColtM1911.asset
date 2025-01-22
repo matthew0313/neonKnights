@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ColtM1911
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: ColtM1911
+    kr: "\uCF5C\uD2B8M1911"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: 'A classic .45 caliber pistol that has been in use for over a century. '
+    kr: "100\uB144 \uB118\uAC8C \uC0AC\uB791\uBC1B\uC544\uC628 .45\uAD6C\uACBD\uC758
+      \uD074\uB798\uC2DD \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 7
   m_prefab: {fileID: 0}
@@ -35,3 +35,4 @@ MonoBehaviour:
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 1

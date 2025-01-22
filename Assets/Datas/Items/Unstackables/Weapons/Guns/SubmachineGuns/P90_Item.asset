@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: P90_Item
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: P90
+    kr: P90
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: A futuristic personal defense weapon known for its 50-round magazine.
+    kr: "\uBBF8\uB798\uC801\uC778 \uB514\uC790\uC778\uACFC 50\uBC1C \uD0C4\uCC3D\uC73C\uB85C
+      \uC720\uBA85\uD55C PDW\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 11
   m_prefab: {fileID: 0}
@@ -35,3 +35,4 @@ MonoBehaviour:
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 2

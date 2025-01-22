@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: DesertEagle
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: DesertEagle
+    kr: "\uB370\uC808\uD2B8\uC774\uAE00"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: A large pistol that uses powerful .50 caliber ammunition.
+    kr: "\uAC15\uB825\uD55C .50\uAD6C\uACBD \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294
+      \uB300\uD615 \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 7
   m_prefab: {fileID: 0}
@@ -35,3 +35,4 @@ MonoBehaviour:
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 1

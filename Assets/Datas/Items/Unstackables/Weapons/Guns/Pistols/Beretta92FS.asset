@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Beretta92FS
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: Beratta92FS
+    kr: "\uBCA0\uB77C\uD0C092FS"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: ' An Italian pistol famous for its smooth shooting and durability.'
+    kr: "\uBD80\uB4DC\uB7EC\uC6B4 \uC0AC\uACA9\uACFC \uB192\uC740 \uB0B4\uAD6C\uC131\uC73C\uB85C
+      \uC720\uBA85\uD55C \uC774\uD0C8\uB9AC\uC544 \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 7
   m_prefab: {fileID: 0}
@@ -35,3 +35,4 @@ MonoBehaviour:
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 1

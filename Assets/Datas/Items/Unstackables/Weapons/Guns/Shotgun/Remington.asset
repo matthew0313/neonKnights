@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Remington
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: Remington 870
+    kr: "\uB808\uBC0D\uD1A4 870"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: A versatile pump-action shotgun popular among law enforcement and hunters.
+    kr: "\uB2E4\uBAA9\uC801\uC73C\uB85C \uC0AC\uC6A9\uB418\uB294 \uD38C\uD504 \uC561\uC158
+      \uC0F7\uAC74\uC73C\uB85C, \uACBD\uCC30\uACFC \uC0AC\uB0E5\uAFBC\uB4E4\uC5D0\uAC8C
+      \uC778\uAE30 \uC788\uC2B5\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 35
   m_prefab: {fileID: 0}
@@ -35,3 +36,4 @@ MonoBehaviour:
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 1.5

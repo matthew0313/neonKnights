@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: Revolver
+    kr: "\uB9AC\uBCFC\uBC84"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: A six-shot revolver symbolizing the Wild West, often associated with cowboys.
+    kr: "\uC11C\uBD80 \uC2DC\uB300\uB97C \uC0C1\uC9D5\uD558\uB294 6\uBC1C \uB9AC\uBCFC\uBC84\uB85C,
+      \uCE74\uC6B0\uBCF4\uC774\uC758 \uC0C1\uC9D5\uC774\uC5C8\uC2B5\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 7
   m_prefab: {fileID: 0}
@@ -35,3 +35,4 @@ MonoBehaviour:
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 1
