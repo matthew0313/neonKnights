@@ -48,7 +48,7 @@ public class Quirk_Roulette : Quirk
     {
         info.damage.amount *= (100.0f + currentBonus) / 100.0f;
     }
-    void OnWield()
+    void OnWield(Player wielder)
     {
         Roulette();
         counter = 0.0f;

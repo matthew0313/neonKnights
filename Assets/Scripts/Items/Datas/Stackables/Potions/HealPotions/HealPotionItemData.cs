@@ -10,7 +10,8 @@ public abstract class HealPotionItemData : PotionItemData
 }
 public abstract class HealPotionItem : PotionItem
 {
-    new HealPotionItemData data;
+    new public readonly HealPotionItemData data;
+    new public HealPotion potion => base.potion as HealPotion;
     public HealPotionItem(HealPotionItemData data) : base(data)
     {
         this.data = data;

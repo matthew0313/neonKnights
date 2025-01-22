@@ -5,13 +5,13 @@ using UnityEngine;
 public abstract class PotionItemData : StackableItemData
 {
     [Header("Potion")]
-    [SerializeField] Potion m_potion;
+    [SerializeField] Potion m_prefab;
     [SerializeField] float m_drinkTime;
     [SerializeField] float m_cooldown;
     [SerializeField] CooldownSource m_cooldownSource;
     [SerializeField] Color m_cooldownBarColor;
 
-    public Potion potion => m_potion;
+    public Potion prefab => m_prefab;
     public float drinkTime => m_drinkTime;
     public float cooldown => m_cooldown;
     public CooldownSource cooldownSource => m_cooldownSource;
@@ -19,7 +19,20 @@ public abstract class PotionItemData : StackableItemData
 }
 public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
 {
-    new PotionItemData data;
+    new public readonly PotionItemData data;
+    Potion m_potion;
+    public Potion potion
+    {
+        get
+        {
+            if (m_potion == null)
+            {
+                m_potion = MonoBehaviour.Instantiate(data.prefab);
+                m_potion.gameObject.SetActive(false);
+            }
+            return m_potion;
+        }
+    }
     public PotionItem(PotionItemData data) : base(data)
     {
         this.data = data;
@@ -33,6 +46,8 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
     {
         base.OnWield(wielder);
         wielder.animation.SetAnimationType(AnimationType.Potion);
+        potion.transform.SetParent(wielder.inventory.equipAnchor, false);
+        potion.gameObject.SetActive(true);
     }
     public override void OnWieldUpdate()
     {
@@ -64,6 +79,7 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
         {
             ItemManager.Instance.StopCoroutine(drinking);
         }
+        potion.gameObject.SetActive(false);
     }
     public virtual IEnumerable<LangText> GetStats()
     {

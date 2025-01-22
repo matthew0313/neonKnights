@@ -29,6 +29,7 @@ public class Player : Entity
         inventory.OnAwake();
         animation.OnAwake();
         camera.OnAwake();
+        cooldowns.OnAwake();
     }
     private void Start()
     {

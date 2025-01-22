@@ -12,7 +12,8 @@ public class HealPotion_Mk1_ItemData : HealPotionItemData
 }
 public class HealPotion_Mk1_Item : HealPotionItem
 {
-    new HealPotion_Mk1_ItemData data;
+    new public readonly HealPotion_Mk1_ItemData data;
+    new public HealPotion_Mk1 potion => base.potion as HealPotion_Mk1;
     public HealPotion_Mk1_Item(HealPotion_Mk1_ItemData data) : base(data)
     {
         this.data = data;

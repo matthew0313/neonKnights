@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Text;
 using UnityEditor.UIElements;
+using Unity.VisualScripting;
 
 public class InventorySlotUIHandler : MonoBehaviour
 {
@@ -30,14 +31,10 @@ public class InventorySlotUIHandler : MonoBehaviour
     
 
     InventorySlot grabbingSlot;
-    bool grabbing = false;
+    bool grabbing => grabbingSlot.item != null;
     private void Awake()
     {
         grabbingSlot = new InventorySlot();
-        grabbingSlot.onItemChange += () =>
-        {
-            if (grabbingSlot.item == null) grabbing = false;
-        };
         grabbingSlotUI.Set(grabbingSlot);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
     }
@@ -51,21 +48,36 @@ public class InventorySlotUIHandler : MonoBehaviour
     {
         if (!grabbing)
         {
-            if (grabMode == InventoryGrabMode.Click || grabMode == InventoryGrabMode.Drag)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
+                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                foreach (var i in results)
                 {
-                    List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
-                    foreach (var i in results)
+                    if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
                     {
-                        if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
+                        if (slot.origin.item != null && slot.origin.Swap(grabbingSlot))
                         {
-                            if (slot.origin.item != null && slot.origin.Swap(grabbingSlot))
-                            {
-                                grabbingSlotUI.transform.position = Input.mousePosition;
-                                grabbing = true;
-                                break;
-                            }
+                            grabbingSlotUI.transform.position = Input.mousePosition;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                foreach (var i in results)
+                {
+                    if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
+                    {
+                        if (slot.origin.item != null && grabbingSlot.CanSetItem(slot.origin.item))
+                        {
+                            int count = slot.origin.count / 2 + slot.origin.count % 2;
+                            grabbingSlot.SetItem(slot.origin.item.Copy());
+                            grabbingSlot.count = count;
+                            slot.origin.count -= count;
+                            grabbingSlotUI.transform.position = Input.mousePosition;
+                            break;
                         }
                     }
                 }
@@ -74,7 +86,7 @@ public class InventorySlotUIHandler : MonoBehaviour
         else
         {
             grabbingSlotUI.transform.position = Input.mousePosition;
-            if (grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(0) || grabMode == InventoryGrabMode.Drag && !Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
                 bool slotHit = false;
@@ -96,17 +108,35 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit)
                 {
-                    grabbingSlot.item.containedSlot = null;
                     DropItem(grabbingSlot.item, grabbingSlot.count);
+                    grabbingSlot.SetItem(null);
                 }
-                else if (grabbingSlot.count == 0) grabbing = false;
+            }
+            else if(grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(1))
+            {
+                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                bool slotHit = false;
+                foreach (var i in results)
+                {
+                    if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
+                    {
+                        slotHit = true;
+                        grabbingSlot.count -= 1 - slot.origin.Insert(grabbingSlot.item, 1);
+                        break;
+                    }
+                }
+                if (!slotHit)
+                {
+                    DropItem(grabbingSlot.item.Copy(), 1);
+                    grabbingSlot.count--;
+                }
             }
         }
     }
     Item describing;
     void DescUpdate()
     {
-        if (!grabbing)
+        if (grabbingSlot.item == null)
         {
             List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
             bool detected = false;
@@ -207,7 +237,6 @@ public class InventorySlotUIHandler : MonoBehaviour
         {
             DropItem(grabbingSlot.item, grabbingSlot.count);
             grabbingSlot.count = 0;
-            grabbing = false;
         }
     }
 }

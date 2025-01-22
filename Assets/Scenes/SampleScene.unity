@@ -4539,7 +4539,9 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: a78b81e055be3804e953f436035a70f4, type: 2}
     count: 1
   - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
-    count: 1
+    count: 10
+  - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
+    count: 10
   canSwapSlot: 1
 --- !u!114 &1382173700
 MonoBehaviour:

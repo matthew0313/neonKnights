@@ -22,7 +22,7 @@ MonoBehaviour:
   m_category: 0
   m_maxStack: 64
   m_unit: x
-  m_potion: {fileID: 494905712687354735, guid: 8bce7476daf276042a7d6373b86ee1e9, type: 3}
+  m_prefab: {fileID: 494905712687354735, guid: 8bce7476daf276042a7d6373b86ee1e9, type: 3}
   m_drinkTime: 2
   m_cooldown: 20
   m_cooldownSource: {fileID: 11400000, guid: df55e7332e5d96a49940ba16973322f8, type: 2}

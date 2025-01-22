@@ -4,6 +4,12 @@ using UnityEngine;
 public class Player_Cooldowns : MonoBehaviour
 {
     List<CooldownSource> cooldowns = new(), removeQueue = new(), addQueue = new();
+    public void OnAwake()
+    {
+#if UNITY_EDITOR
+        foreach(var i in FindObjectsByType<CooldownSource>(FindObjectsSortMode.None)) i.cooldownLeft = 0;
+#endif
+    }
     public void OnUpdate()
     {
         foreach(var i in cooldowns)

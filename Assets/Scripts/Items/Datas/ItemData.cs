@@ -51,7 +51,8 @@ public abstract class Item
     public Player wielder { get; private set; }
 
 
-    public Action onWield, onUnwield, onWieldUpdate;
+    public Action<Player> onWield, onUnwield;
+    public Action onWieldUpdate;
     public Action onUpdate;
     public Action onModelUpdate;
     public Action<ItemModel> modifyModel;
@@ -62,7 +63,7 @@ public abstract class Item
     public virtual void OnWield(Player wielder)
     {
         this.wielder = wielder;
-        onWield?.Invoke();
+        onWield?.Invoke(wielder);
     }
     public virtual void OnWieldUpdate()
     {
@@ -71,7 +72,7 @@ public abstract class Item
     public virtual void OnUnwield(Player wielder)
     {
         this.wielder = null;
-        onUnwield?.Invoke();
+        onUnwield?.Invoke(wielder);
     }
     public virtual void Delete()
     {

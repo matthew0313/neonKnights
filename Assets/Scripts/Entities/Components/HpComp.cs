@@ -189,14 +189,3 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         if (updated) onAlimentUpdate?.Invoke();
     }
 }
-#if UNITY_EDITOR
-[CustomEditor(typeof(HpComp))]
-public class HpComp_Editor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        if (GUILayout.Button("Deal Damage")) (target as HpComp).GetDamage(10.0f);
-    }
-}
-#endif

@@ -16,7 +16,7 @@ public class StackableItemData : ItemData
 }
 public class StackableItem : Item
 {
-    new StackableItemData data;
+    new public readonly StackableItemData data;
     public StackableItem(StackableItemData data) : base(data)
     {
         this.data = data;
