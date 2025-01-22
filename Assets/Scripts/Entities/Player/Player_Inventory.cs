@@ -3,18 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Inventory))]
-public class Player_Inventory : MonoBehaviour
+public class Player_Inventory : Inventory
 {
     Player origin;
-    [SerializeField] InventorySlotUIHandler grabber;
     [SerializeField] Transform m_equipAnchor;
     public Transform equipAnchor => m_equipAnchor;
 
     [SerializeField] ItemDataIntPair[] startContents;
     public const int beltLength = 6;
 
-    internal Inventory inventory;
     internal InventorySlot equippedSlot;
     internal int equippedSlotIndex = -1;
     internal Item equipped;
@@ -25,17 +22,16 @@ public class Player_Inventory : MonoBehaviour
     public bool canSwapSlot = true;
     public void OnAwake()
     {
+        Init();
         origin = GetComponent<Player>();
-        inventory = GetComponent<Inventory>();
-        if (grabber != null) grabber.onItemDrop += DropItem;
         ChangeEquipSlot(0);
     }
     public void OnStart()
     {
-        for (int i = 0; i < Mathf.Min(startContents.Length, inventory.slotCount); i++)
+        for (int i = 0; i < Mathf.Min(startContents.Length, slotCount); i++)
         {
-            inventory.slots[i].SetItem(startContents[i].data.Create());
-            inventory.slots[i].count = startContents[i].count;
+            slots[i].SetItem(startContents[i].data.Create());
+            slots[i].count = startContents[i].count;
         }
     }
     public void OnUpdate()
@@ -115,7 +111,7 @@ public class Player_Inventory : MonoBehaviour
         {
             equippedSlot.onItemChange -= OnEquippedSlotUpdate;
         }
-        equippedSlot = inventory.slots[slotIndex];
+        equippedSlot = slots[slotIndex];
         equippedSlotIndex = slotIndex;
         equippedSlot.onItemChange += OnEquippedSlotUpdate;
         onEquippedSlotChange?.Invoke();
@@ -132,7 +128,7 @@ public class Player_Inventory : MonoBehaviour
         onEquippedItemChange?.Invoke(equipped);
         if (equipped != null) equipped.OnWield(origin);
     }
-    void DropItem(Item item, int count)
+    public void DropItem(Item item, int count)
     {
 
     }

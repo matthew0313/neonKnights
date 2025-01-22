@@ -20,14 +20,24 @@ public abstract class Interaction : MonoBehaviour
         
         if(distance <= player.interactionRange && !isAdded)
         {
-            player.AddInteraction(this);
-            isAdded = true;
+            AddInteraction();
         }
         else if(distance > player.interactionRange && isAdded)
         {
-            player.RemoveInteraction(this);
-            isAdded = false;
+            RemoveInteraction();
         }
+    }
+    protected void AddInteraction()
+    {
+        if (isAdded) return;
+        isAdded = true;
+        player.AddInteraction(this);
+    }
+    protected void RemoveInteraction()
+    {
+        if (!isAdded) return;
+        isAdded = false;
+        player.RemoveInteraction(this);
     }
     public abstract void OnInteract();
 }

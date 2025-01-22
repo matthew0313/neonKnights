@@ -8,7 +8,7 @@ using TMPro;
 public class InventorySlotUI : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] Image icon;
+    [SerializeField] RawImage icon;
     [SerializeField] TMP_Text count;
 
     [Header("Bar")]
@@ -40,7 +40,8 @@ public class InventorySlotUI : MonoBehaviour
 
         if(displaying != null)
         {
-            icon.sprite = displaying.data.icon;
+            icon.texture = displaying.render;
+            //icon.sprite = displaying.data.icon;
             icon.gameObject.SetActive(true);
         }
         else
@@ -50,7 +51,6 @@ public class InventorySlotUI : MonoBehaviour
 
         if (displaying is IBarDisplayed)
         {
-            bar.SetActive(true);
             OnBarUpdate();
         }
         else bar.SetActive(false);
@@ -84,6 +84,7 @@ public class InventorySlotUI : MonoBehaviour
     }
     void OnBarUpdate()
     {
+        bar.gameObject.SetActive((displaying as IBarDisplayed).barDisplay);
         barScaler.transform.localScale = new Vector2((displaying as IBarDisplayed).barFill, 1.0f);
         barScaler.color = (displaying as IBarDisplayed).barColor;
     }

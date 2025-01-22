@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -73,6 +75,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     public Action<float> onHeal;
     public Action onHpChange;
     public Action onDeath;
+    public Action onAlimentUpdate;
     void Awake()
     {
         hp = maxHp;
@@ -94,12 +97,12 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     {
         if (dead || maxShield <= 0) return;
         if (shieldRegenCounter < shieldRegenStartTime) shieldRegenCounter += Time.deltaTime;
-        else if(shield < maxShield)
+        else if (shield < maxShield)
         {
             shield = Mathf.Min(maxShield, shield + maxShield * shieldRegenPercentagePerSecond * Time.deltaTime);
         }
     }
-    public DamageReceivedInfo GetDamage(DamageInfo damage)
+    public virtual DamageReceivedInfo GetDamage(DamageInfo damage)
     {
         Debug.Log("RRRRRRAWRADWDAWDDWA");
         if (dead) return new() { receivedDamage = 0 };
@@ -108,7 +111,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         DamageReceivedInfo info = new();
 
         float tmp;
-        if(!damage.ignoreShield && shield > 0)
+        if (!damage.ignoreShield && shield > 0)
         {
             tmp = Mathf.Min(amountLeft, shield);
             shield -= tmp;
@@ -143,11 +146,11 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     }
     List<StatusAliment> aliments = new();
     List<StatusAliment> addQueue = new(), removeQueue = new();
-    public void ApplyAliment(StatusAliment aliment)
+    public virtual void ApplyAliment(StatusAliment aliment)
     {
         aliment.AddTo(this);
     }
-    public virtual void AddAliment(StatusAliment aliment)
+    public void AddAliment(StatusAliment aliment)
     {
         addQueue.Add(aliment);
     }
@@ -155,47 +158,35 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     {
         removeQueue.Add(aliment);
     }
-    public bool FindAliment(Func<StatusAliment, bool> predicate, out StatusAliment aliment)
+    public IEnumerable<StatusAliment> GetAliments()
     {
-        foreach(var i in aliments)
-        {
-            if (predicate.Invoke(i))
-            {
-                aliment = i;
-                return true;
-            }
-        }
-        aliment = null;
-        return false;
-    }
-    public bool FindAliment<T>(out T aliment) where T : StatusAliment
-    {
-        if(FindAliment((tmp) => tmp is T, out StatusAliment tmp))
-        {
-            aliment = tmp as T;
-            return true;
-        }
-        else
-        {
-            aliment = null;
-            return false;
-        }
+        foreach (var i in aliments) yield return i;
     }
     void AlimentsUpdate()
     {
-        foreach(var i in addQueue)
-        {
-            aliments.Add(i);
-            i.OnAlimentAdd();
-        }
-        addQueue.Clear();
         foreach (var i in aliments) i.OnAlimentUpdate();
-        foreach(var i in removeQueue)
+        bool updated = false;
+        if(addQueue.Count > 0)
         {
-            aliments.Remove(i);
-            i.OnAlimentRemove();
+            updated = true;
+            foreach (var i in addQueue)
+            {
+                aliments.Add(i);
+                i.OnAlimentAdd();
+            }
+            addQueue.Clear();
         }
-        removeQueue.Clear();
+        if(removeQueue.Count > 0)
+        {
+            updated = true;
+            foreach (var i in removeQueue)
+            {
+                aliments.Remove(i);
+                i.OnAlimentRemove();
+            }
+            removeQueue.Clear();
+        }
+        if (updated) onAlimentUpdate?.Invoke();
     }
 }
 #if UNITY_EDITOR

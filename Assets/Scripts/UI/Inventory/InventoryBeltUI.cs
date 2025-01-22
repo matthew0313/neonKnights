@@ -15,7 +15,7 @@ public class InventoryBeltUI : MonoBehaviour
     {
         for(int i = 0; i < Player_Inventory.beltLength; i++)
         {
-            slots[i].Set(origin.inventory.slots[i]);
+            slots[i].Set(origin.slots[i]);
         }
     }
     private void LateUpdate()

@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
             onSlotCountChange?.Invoke();
         }
     }
-    private void Awake()
+    public void Init()
     {
         slotCount = defaultSlotCount;
     }
@@ -77,17 +77,14 @@ public class Inventory : MonoBehaviour
     public bool TakeOut(Func<Item, bool> predicate, int count)
     {
         if (Search(predicate) < count) return false;
-        foreach (var i in slots)
+        foreach (var i in SearchAll(predicate))
         {
-            if (i.item != null && predicate.Invoke(i.item))
-            {
-                Item tmp = i.item;
-                int prev = count;
-                count = Mathf.Max(0, count - i.count);
-                i.count -= prev - count;
-                onInventoryUpdate?.Invoke(tmp);
-                if (count <= 0) break;
-            }
+            Item tmp = i.item;
+            int prev = count;
+            count = Mathf.Max(0, count - i.count);
+            i.count -= prev - count;
+            onInventoryUpdate?.Invoke(tmp);
+            if (count <= 0) break;
         }
         return true;
     }

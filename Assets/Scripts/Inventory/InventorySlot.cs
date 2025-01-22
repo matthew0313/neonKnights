@@ -36,7 +36,7 @@ public class InventorySlot
     }
     public bool SetItem(Item item)
     {
-        if (slotRestriction != null && slotRestriction.Invoke(item) == false) return false;
+        if (!CanSetItem(item)) return false;
         this.item = item;
         this.item.containedSlot = this;
         onItemChange?.Invoke();
@@ -70,6 +70,7 @@ public class InventorySlot
             onCountChange?.Invoke();
             if(m_count == 0)
             {
+                if (item != null) item.Delete();
                 ForcedSetItem(null);
             }
         }

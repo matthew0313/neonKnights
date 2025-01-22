@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] KeyCode slotChangeLeftKey = KeyCode.LeftArrow;
     [SerializeField] KeyCode slotChangeRightKey = KeyCode.RightArrow;
     [SerializeField] KeyCode reloadKey = KeyCode.R;
+    [SerializeField] KeyCode interactKey = KeyCode.E;
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -73,6 +74,10 @@ public class InputManager : MonoBehaviour
     public static bool GetReloadInput()
     {
         return Input.GetKeyDown(instance.reloadKey);
+    }
+    public static bool GetInteractInput()
+    {
+        return Input.GetKeyDown(instance.interactKey);
     }
 }
 public enum SlotChangeInput

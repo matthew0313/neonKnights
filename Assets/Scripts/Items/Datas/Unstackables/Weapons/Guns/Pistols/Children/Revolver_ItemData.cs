@@ -15,10 +15,9 @@ public class Revolver_ItemData : PistolItemData
 public class Revolver_Item : PistolItem
 {
     new public readonly Revolver_ItemData data;
-    new public readonly Revolver weapon;
+    new public Revolver weapon => base.weapon as Revolver;
     public Revolver_Item(Revolver_ItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as Revolver;
     }
 }

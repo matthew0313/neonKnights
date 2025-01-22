@@ -12,14 +12,24 @@ public abstract class WeaponItemData : UnstackableItemData
 }
 public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
 {
-    public readonly Weapon weapon;
+    Weapon m_weapon = null;
+    public Weapon weapon
+    {
+        get
+        {
+            if(m_weapon == null)
+            {
+                m_weapon = MonoBehaviour.Instantiate(data.prefab);
+                m_weapon.gameObject.SetActive(false);
+            }
+            return m_weapon;
+        }
+    }
 
     new public readonly WeaponItemData data;
     public WeaponItem(WeaponItemData data) : base(data)
     {
         this.data = data;
-        weapon = MonoBehaviour.Instantiate(data.prefab);
-        weapon.gameObject.SetActive(false);
     }
     public override void OnWield(Player wielder)
     {
@@ -70,6 +80,11 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
             tmp.quirks.Add(i.Copy());
         }
         return tmp;
+    }
+    public override void Delete()
+    {
+        base.Delete();
+        MonoBehaviour.Destroy(weapon);
     }
     public IEnumerable<Quirk> GetQuirks()
     {

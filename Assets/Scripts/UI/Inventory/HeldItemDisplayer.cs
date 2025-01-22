@@ -9,6 +9,7 @@ using System.Text;
 using UnityEditor.UIElements;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using static UnityEditor.Progress;
 
 public class HeldItemDisplayer : MonoBehaviour
 {
@@ -28,12 +29,14 @@ public class HeldItemDisplayer : MonoBehaviour
     }
     void OnEquippedItemChange(Item item)
     {
+        if (displayingItem != null) displayingItem.onModelUpdate -= OnDisplayingItemModelUpdate;
         displayingItem = item;
+        if(displayingItem != null) displayingItem.onModelUpdate += OnDisplayingItemModelUpdate;
 
         if(displaying != null) displaying.Release();
-        if(item != null && item.data.model != null)
+        if(item != null)
         {
-            displaying = item.data.model.Instantiate();
+            displaying = item.GetModel();
             displaying.transform.SetParent(itemModelAnchor, false);
             displaying.transform.localPosition = Vector3.zero;
         }
@@ -43,6 +46,13 @@ public class HeldItemDisplayer : MonoBehaviour
             UpdateReloadDisplay();
         }
         else reloadDisplay.SetActive(false);
+    }
+    void OnDisplayingItemModelUpdate()
+    {
+        displaying.Release();
+        displaying = displayingItem.GetModel();
+        displaying.transform.SetParent(itemModelAnchor, false);
+        displaying.transform.localPosition = Vector3.zero;
     }
     private void Update()
     {

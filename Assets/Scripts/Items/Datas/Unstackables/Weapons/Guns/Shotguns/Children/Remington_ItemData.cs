@@ -10,11 +10,10 @@ public class Remington_ItemData : ShotgunItemData
 }
 public class Remington_Item : ShotgunItem
 {
-    new public Remington_ItemData data;
-    new public Remington weapon;
+    new public readonly Remington_ItemData data;
+    new public Remington weapon => base.weapon as Remington;
     public Remington_Item(Remington_ItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as Remington;
     }
 }

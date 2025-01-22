@@ -9,12 +9,10 @@ public abstract class ItemData : ScriptableObject
     [Header("Item")]
     [SerializeField] LangText m_itemName;
     [SerializeField] LangText m_description;
-    [SerializeField] Sprite m_icon;
     [SerializeField] ItemModel m_model;
     [SerializeField] ItemCategory m_category;
     public LangText itemName => m_itemName;
     public LangText description => m_description;
-    public Sprite icon => m_icon;
     public ItemModel model => m_model;
     public ItemCategory category => m_category;
     public abstract Item Create();
@@ -24,10 +22,27 @@ public abstract class ItemData : ScriptableObject
 public abstract class Item
 {
     public readonly ItemData data;
+    RenderTexture m_render;
+    ItemRenderSpace renderSpace;
+    public RenderTexture render
+    {
+        get
+        {
+            if(m_render == null)
+            {
+                m_render = new RenderTexture(256, 256, 16, UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_UNorm);
+                m_render.Create();
+                renderSpace = ItemRenderSpace.GetSpace();
+                renderSpace.SetTarget(m_render);
+                renderSpace.RenderItem(GetModel());
+            }
+            return m_render;
+        }
+    }
     public Item(ItemData data)
     {
         this.data = data;
-        ItemUpdater.Instance.AddItem(this);
+        ItemManager.Instance.AddItem(this);
     }
     public virtual bool IsStackable(Item other) => other != null && data == other.data;
     public virtual Item Copy() => data.Create();
@@ -38,6 +53,8 @@ public abstract class Item
 
     public Action onWield, onUnwield, onWieldUpdate;
     public Action onUpdate;
+    public Action onModelUpdate;
+    public Action<ItemModel> modifyModel;
     public virtual void Update()
     {
         onUpdate?.Invoke();
@@ -56,8 +73,23 @@ public abstract class Item
         this.wielder = null;
         onUnwield?.Invoke();
     }
+    public virtual void Delete()
+    {
+        ItemManager.Instance.RemoveItem(this);
+    }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }
+    public virtual ItemModel GetModel()
+    {
+        ItemModel tmp = data.model.Instantiate();
+        modifyModel?.Invoke(tmp);
+        return tmp;
+    }
+    public void UpdateModel()
+    {
+        if (renderSpace != null) renderSpace.RenderItem(GetModel());
+        onModelUpdate?.Invoke();
+    }
     public static LangText CategoryToLangText(ItemCategory category)
     {
         switch (category)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Player_Movement), typeof(Player_Inventory), typeof(Player_Animation))]
 [RequireComponent(typeof(Player_Statistics), typeof(Player_HpComp), typeof(Player_Camera))]
+[RequireComponent(typeof(Player_Cooldowns), typeof(Player_Interaction))]
 public class Player : Entity
 {
     internal Player_Movement movement;
@@ -12,6 +13,8 @@ public class Player : Entity
     internal Player_Statistics statistics;
     internal Player_HpComp hpComp;
     internal Player_Camera camera;
+    internal Player_Cooldowns cooldowns;
+    internal Player_Interaction interaction;
     private void Awake()
     {
         movement = GetComponent<Player_Movement>();
@@ -20,6 +23,8 @@ public class Player : Entity
         statistics = GetComponent<Player_Statistics>();
         hpComp = GetComponent<Player_HpComp>();
         camera = GetComponent<Player_Camera>();
+        cooldowns = GetComponent<Player_Cooldowns>();
+        interaction = GetComponent<Player_Interaction>();
         movement.OnAwake();
         inventory.OnAwake();
         animation.OnAwake();
@@ -31,10 +36,12 @@ public class Player : Entity
     }
     private void Update()
     {
+        cooldowns.OnUpdate();
         movement.OnUpdate();
         inventory.OnUpdate();
         animation.OnUpdate();
         camera.OnUpdate();
+        interaction.OnUpdate();
     }
     private void FixedUpdate()
     {

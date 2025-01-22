@@ -10,11 +10,10 @@ public abstract class SniperRifleItemData : GunItemData
 public abstract class SniperRifleItem : GunItem
 {
     new public readonly SniperRifleItemData data;
-    new public readonly SniperRifle weapon;
+    new public SniperRifle weapon => base.weapon as SniperRifle;
     public SniperRifleItem(SniperRifleItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as SniperRifle;
     }
     public override void OnWield(Player wielder)
     {

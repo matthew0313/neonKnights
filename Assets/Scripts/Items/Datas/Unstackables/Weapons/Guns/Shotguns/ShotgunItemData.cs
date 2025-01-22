@@ -10,11 +10,10 @@ public abstract class ShotgunItemData : GunItemData
 public abstract class ShotgunItem : GunItem
 {
     new public readonly ShotgunItemData data;
-    new public readonly Shotgun weapon;
+    new public Shotgun weapon => base.weapon as Shotgun;
     public ShotgunItem(ShotgunItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as Shotgun;
     }
     public override void OnWield(Player wielder)
     {

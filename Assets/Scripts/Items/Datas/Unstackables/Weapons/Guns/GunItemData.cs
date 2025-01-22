@@ -37,11 +37,10 @@ public abstract class GunItemData : WeaponItemData
 public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, IDamageModifyable, IReloadDisplayed
 {
     new public readonly GunItemData data;
-    new public readonly Gun weapon;
+    new public Gun weapon => base.weapon as Gun;
     public GunItem(GunItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as Gun;
         auto = data.auto;
         damage = data.baseDamage;
         fireRate = data.baseFireRate;

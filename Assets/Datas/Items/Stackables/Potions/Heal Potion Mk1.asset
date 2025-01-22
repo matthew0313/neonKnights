@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105cb805e976b5542b55ce0a53dd5f56, type: 3}
+  m_Name: Heal Potion Mk1
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Heal Potion Mk1
+    kr: "\uD68C\uBCF5 \uD3EC\uC158 Mk1"
+  m_description:
+    en: A relatively weak healing potion.
+    kr: "\uBE44\uAD50\uC801 \uC57D\uD55C \uD68C\uBCF5 \uD3EC\uC158\uC785\uB2C8\uB2E4."
+  m_model: {fileID: 250608228334481033, guid: c44f014eea1ed8e4782d08e778ff78f8, type: 3}
+  m_category: 0
+  m_maxStack: 64
+  m_unit: x
+  m_potion: {fileID: 494905712687354735, guid: 8bce7476daf276042a7d6373b86ee1e9, type: 3}
+  m_drinkTime: 2
+  m_cooldown: 20
+  m_cooldownSource: {fileID: 11400000, guid: df55e7332e5d96a49940ba16973322f8, type: 2}
+  m_cooldownBarColor: {r: 1, g: 0, b: 0, a: 1}
+  m_healAmount: 30

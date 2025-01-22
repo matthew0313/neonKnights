@@ -12,7 +12,7 @@ public class InventorySlotUIHandler : MonoBehaviour
 {
     [SerializeField] InventorySlotUI grabbingSlotUI;
     public InventoryGrabMode grabMode = InventoryGrabMode.Click;
-    public Action<Item, int> onItemDrop;
+    Player_Inventory player;
 
     [Header("Description")]
     [SerializeField] GameObject describer;
@@ -34,7 +34,12 @@ public class InventorySlotUIHandler : MonoBehaviour
     private void Awake()
     {
         grabbingSlot = new InventorySlot();
+        grabbingSlot.onItemChange += () =>
+        {
+            if (grabbingSlot.item == null) grabbing = false;
+        };
         grabbingSlotUI.Set(grabbingSlot);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
     }
     private void Update()
     {
@@ -92,7 +97,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                 if (!slotHit)
                 {
                     grabbingSlot.item.containedSlot = null;
-                    onItemDrop?.Invoke(grabbingSlot.item, grabbingSlot.count);
+                    DropItem(grabbingSlot.item, grabbingSlot.count);
                 }
                 else if (grabbingSlot.count == 0) grabbing = false;
             }
@@ -188,15 +193,19 @@ public class InventorySlotUIHandler : MonoBehaviour
             {
                 itemQuirkList[index].gameObject.SetActive(false);
             }
-            itemQuirkAnchor.gameObject.SetActive(true);
+            itemQuirkAnchor.gameObject.SetActive(index > 0);
         }
         else itemQuirkAnchor.gameObject.SetActive(false);
+    }
+    void DropItem(Item item, int count)
+    {
+        player.DropItem(item, count);
     }
     private void OnDisable()
     {
         if (grabbing)
         {
-            onItemDrop?.Invoke(grabbingSlot.item, grabbingSlot.count);
+            DropItem(grabbingSlot.item, grabbingSlot.count);
             grabbingSlot.count = 0;
             grabbing = false;
         }

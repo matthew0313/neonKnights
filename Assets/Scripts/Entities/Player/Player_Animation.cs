@@ -36,6 +36,15 @@ public class Player_Animation : MonoBehaviour
     {
         anim.SetTrigger(reloadID);
     }
+    readonly int drinkStartID = Animator.StringToHash("DrinkStart"), drinkEndID = Animator.StringToHash("DrinkEnd");
+    public void TriggerDrinkStart()
+    {
+        anim.SetTrigger(drinkStartID);
+    }
+    public void TriggerDrinkEnd()
+    {
+        anim.SetTrigger(drinkEndID);
+    }
 }
 public enum AnimationType
 {
@@ -43,5 +52,6 @@ public enum AnimationType
     Pistol = 1,
     SubmachineGun = 2,
     SniperRifle = 3,
-    Shotgun = 4
+    Shotgun = 4,
+    Potion = 5
 }

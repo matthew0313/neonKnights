@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class Player_Interaction : MonoBehaviour
 {
-    [SerializeField] Text interactionText;
+    [SerializeField] TMP_Text interactionText;
     [SerializeField] float m_interactionRange;
     public float interactionRange => m_interactionRange;
 
     List<Interaction> interactions = new List<Interaction>();
-    private void Update()
+    public void OnUpdate()
     {
         if (interactions.Count > 0)
         {
@@ -31,7 +32,7 @@ public class Player_Interaction : MonoBehaviour
             interactionText.text = $"[E] {interactions[0].interactionName}";
 
             // E키로 상호작용 실행
-            if (Input.GetKeyDown(KeyCode.E))
+            if (InputManager.GetInteractInput())
             {
                 interactions[0].OnInteract();
             }
