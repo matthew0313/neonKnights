@@ -20,17 +20,17 @@ MonoBehaviour:
     kr: 
   m_icon: {fileID: 0}
   m_model: {fileID: 0}
-  m_category: 3
+  m_category: 35
   m_prefab: {fileID: 0}
   m_auto: 0
-  m_baseDamage: 0
-  m_baseFireRate: 0
-  m_baseRange: 0
-  m_baseSpread: 0
-  m_baseMagSize: 0
-  m_baseReloadTime: 0
-  m_baseReserve: 0
-  m_baseShotCount: 1
+  m_baseDamage: 7
+  m_baseFireRate: 0.2
+  m_baseRange: 15
+  m_baseSpread: 8
+  m_baseMagSize: 12
+  m_baseReloadTime: 4
+  m_baseReserve: 300
+  m_baseShotCount: 4
   m_defaultBullet: {fileID: 0}
   m_baseBulletSpeed: 0
   m_defaultPierce: 0
