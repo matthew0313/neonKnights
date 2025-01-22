@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TommyGun : SubmachineGuns
+public class TommyGun : SubmachineGun
 {
     
 }

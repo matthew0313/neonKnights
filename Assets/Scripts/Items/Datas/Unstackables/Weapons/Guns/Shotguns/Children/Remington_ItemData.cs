@@ -6,7 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Remington_Item", menuName = "Scriptables/Items/Unstackables/Weapons/Guns/Shotguns/Remington", order = 0)]
 public class Remington_ItemData : ShotgunItemData
 {
-    
+    public override Item Create()
+    {
+        return new Remington_Item(this);
+    }
 }
 public class Remington_Item : ShotgunItem
 {

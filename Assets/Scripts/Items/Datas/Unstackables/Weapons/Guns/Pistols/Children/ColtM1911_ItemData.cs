@@ -16,11 +16,10 @@ public class ColtM1911_ItemData : PistolItemData
 public class ColtM1911_Item : PistolItem
 {
     new public readonly ColtM1911_ItemData data;
-    new public readonly ColtM1911 weapon;
+    new public ColtM1911 weapon => base.weapon as ColtM1911;
 
     public ColtM1911_Item(ColtM1911_ItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as ColtM1911;
     }
 }

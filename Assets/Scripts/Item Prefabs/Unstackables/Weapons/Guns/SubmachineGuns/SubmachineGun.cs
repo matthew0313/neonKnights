@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class SubmachineGuns : Gun
+public abstract class SubmachineGun : Gun
 {
     
 }

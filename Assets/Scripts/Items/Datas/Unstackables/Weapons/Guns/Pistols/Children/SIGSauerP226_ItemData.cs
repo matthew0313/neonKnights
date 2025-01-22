@@ -16,11 +16,10 @@ public class SIGSauerP226_ItemData : PistolItemData
 public class SIGSauerP226_Item : PistolItem
 {
     new public readonly SIGSauerP226_ItemData data;
-    new public readonly SIGSauerP226 weapon;
+    new public SIGSauerP226 weapon => base.weapon as SIGSauerP226;
 
     public SIGSauerP226_Item(SIGSauerP226_ItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as SIGSauerP226;
     }
 }

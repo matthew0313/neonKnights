@@ -16,11 +16,10 @@ public class DesertEagle_ItemData : PistolItemData
 public class DesertEagle_Item : PistolItem
 {
     new public readonly DesertEagle_ItemData data;
-    new public readonly DesertEagle weapon;
+    new public DesertEagle weapon => base.weapon as DesertEagle;
 
     public DesertEagle_Item(DesertEagle_ItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as DesertEagle;
     }
 }

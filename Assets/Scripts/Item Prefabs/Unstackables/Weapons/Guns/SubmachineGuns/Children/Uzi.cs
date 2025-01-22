@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Uzi : SubmachineGuns
+public class Uzi : SubmachineGun
 {
     
 }

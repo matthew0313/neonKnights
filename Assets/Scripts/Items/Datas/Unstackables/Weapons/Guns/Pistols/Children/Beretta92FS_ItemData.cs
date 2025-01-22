@@ -16,11 +16,10 @@ public class Beretta92FS_ItemData : PistolItemData
 public class Beretta92FS_Item : PistolItem
 {
     new public readonly Beretta92FS_ItemData data;
-    new public readonly Beretta92FS weapon;
+    new public Beretta92FS weapon => base.weapon as Beretta92FS;
 
     public Beretta92FS_Item(Beretta92FS_ItemData data) : base(data)
     {
         this.data = data;
-        weapon = base.weapon as Beretta92FS;
     }
 }
