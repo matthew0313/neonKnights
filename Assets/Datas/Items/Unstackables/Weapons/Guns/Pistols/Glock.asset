@@ -21,7 +21,7 @@ MonoBehaviour:
       \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
   m_icon: {fileID: 21300000, guid: 0ff66271685c00e4cbb43fc166bb5c0c, type: 3}
   m_model: {fileID: 4315574821823046423, guid: a991c7b29b4b27441bd98a9d93b465d8, type: 3}
-  m_category: -1
+  m_category: 7
   m_prefab: {fileID: 2286668309897709226, guid: 7afaf7ad201a9ab41aa1ecb10f29931d,
     type: 3}
   m_auto: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   m_baseRange: 15
   m_baseSpread: 2
   m_baseMagSize: 12
-  m_baseReloadTime: 2
+  m_baseReloadTime: 4
   m_baseReserve: 300
   m_baseShotCount: 1
   m_defaultBullet: {fileID: 5832811861654171486, guid: 2c06104e19f1c3440810962b4e457acd,
