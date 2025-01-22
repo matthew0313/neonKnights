@@ -23,16 +23,16 @@ MonoBehaviour:
   m_category: 11
   m_prefab: {fileID: 0}
   m_auto: 1
-  m_baseDamage: 5
+  m_baseDamage: 7
   m_baseFireRate: 0.1
-  m_baseRange: 15
-  m_baseSpread: 0.3
-  m_baseMagSize: 12
+  m_baseRange: 32
+  m_baseSpread: 4
+  m_baseMagSize: 100
   m_baseReloadTime: 5
   m_baseReserve: 200
   m_baseShotCount: 1
   m_defaultBullet: {fileID: 0}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 12
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
   m_baseWeight: 2

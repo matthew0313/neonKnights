@@ -25,14 +25,14 @@ MonoBehaviour:
   m_auto: 0
   m_baseDamage: 6
   m_baseFireRate: 0.2
-  m_baseRange: 15
-  m_baseSpread: 8
+  m_baseRange: 40
+  m_baseSpread: 9
   m_baseMagSize: 12
   m_baseReloadTime: 4
   m_baseReserve: 300
-  m_baseShotCount: 4
+  m_baseShotCount: 6
   m_defaultBullet: {fileID: 0}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 3
   m_defaultPierce: 0
-  m_defaultBulletDropoffPercentage: 50
-  m_baseWeight: 1.5
+  m_defaultBulletDropoffPercentage: 69
+  m_baseWeight: 2
