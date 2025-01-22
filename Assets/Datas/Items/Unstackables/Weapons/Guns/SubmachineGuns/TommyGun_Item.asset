@@ -13,25 +13,26 @@ MonoBehaviour:
   m_Name: TommyGun_Item
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: Tommy Gun
+    kr: "\uD1A0\uBBF8\uAC74"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: An iconic submachine gun from the Prohibition era and World War II.
+    kr: "\uBBF8\uAD6D \uAE08\uC8FC \uC2DC\uB300\uC640 \uC81C2\uCC28 \uC138\uACC4
+      \uB300\uC804\uC5D0\uC11C \uC0C1\uC9D5\uC801\uC778 \uAE30\uAD00\uB2E8\uCD1D\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 11
   m_prefab: {fileID: 0}
   m_auto: 1
-  m_baseDamage: 5
+  m_baseDamage: 3
   m_baseFireRate: 0.1
-  m_baseRange: 15
-  m_baseSpread: 0.3
-  m_baseMagSize: 12
+  m_baseRange: 35
+  m_baseSpread: 4
+  m_baseMagSize: 150
   m_baseReloadTime: 5
   m_baseReserve: 200
   m_baseShotCount: 1
   m_defaultBullet: {fileID: 0}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 30
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 2

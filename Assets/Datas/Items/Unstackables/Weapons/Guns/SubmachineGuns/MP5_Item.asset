@@ -13,25 +13,26 @@ MonoBehaviour:
   m_Name: MP5_Item
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: MP5
+    kr: MP5
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: A compact and highly accurate submachine gun widely used by special forces.
+    kr: "\uCF64\uD329\uD2B8\uD558\uACE0 \uC815\uD655\uB3C4\uAC00 \uB192\uC740 \uAE30\uAD00\uB2E8\uCD1D\uC73C\uB85C
+      \uD2B9\uC218\uBD80\uB300\uC5D0\uC11C \uB9CE\uC774 \uC0AC\uC6A9\uB429\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 11
   m_prefab: {fileID: 0}
   m_auto: 1
   m_baseDamage: 5
   m_baseFireRate: 0.1
-  m_baseRange: 15
-  m_baseSpread: 0.3
-  m_baseMagSize: 12
+  m_baseRange: 30
+  m_baseSpread: 5
+  m_baseMagSize: 150
   m_baseReloadTime: 5
   m_baseReserve: 200
   m_baseShotCount: 1
   m_defaultBullet: {fileID: 0}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 15
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseWeight: 3

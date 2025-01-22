@@ -13,25 +13,26 @@ MonoBehaviour:
   m_Name: BenelliM4_Item
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: Benelli M4
+    kr: "\uBCA0\uB2D0\uB9AC M4"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: A semi-automatic shotgun designed for military and tactical use.
+    kr: "\uBC18\uC790\uB3D9 \uC0F7\uAC74\uC73C\uB85C, \uAD70\uC0AC\uC6A9 \uBC0F \uC804\uC220\uC801
+      \uBAA9\uC801\uC73C\uB85C \uC124\uACC4\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 35
   m_prefab: {fileID: 0}
   m_auto: 0
-  m_baseDamage: 6
+  m_baseDamage: 3
   m_baseFireRate: 0.2
-  m_baseRange: 15
+  m_baseRange: 30
   m_baseSpread: 8
   m_baseMagSize: 12
   m_baseReloadTime: 2
-  m_baseReserve: 300
-  m_baseShotCount: 4
+  m_baseReserve: 200
+  m_baseShotCount: 8
   m_defaultBullet: {fileID: 0}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 2
   m_defaultPierce: 0
-  m_defaultBulletDropoffPercentage: 50
+  m_defaultBulletDropoffPercentage: 79
+  m_baseWeight: 3

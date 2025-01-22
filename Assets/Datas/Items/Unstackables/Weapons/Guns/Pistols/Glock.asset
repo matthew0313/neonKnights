@@ -29,14 +29,14 @@ MonoBehaviour:
   m_baseRange: 15
   m_baseSpread: 2
   m_baseMagSize: 12
-  m_baseReloadTime: 2
+  m_baseReloadTime: 3
   m_baseReserve: 300
   m_baseShotCount: 1
   m_defaultBullet: {fileID: 5832811861654171486, guid: 2c06104e19f1c3440810962b4e457acd,
     type: 3}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
-  m_baseWeight: 3
+  m_baseWeight: 1
   m_scopeSpreadReduction: 50
   m_scopeCost: 1000

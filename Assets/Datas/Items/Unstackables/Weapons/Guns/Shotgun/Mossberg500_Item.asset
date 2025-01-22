@@ -13,25 +13,26 @@ MonoBehaviour:
   m_Name: Mossberg500_Item
   m_EditorClassIdentifier: 
   m_itemName:
-    en: 
-    kr: 
+    en: Mossberg 500
+    kr: "\uBAA8\uC2A4\uBC84\uADF8 500"
   m_description:
-    en: 
-    kr: 
-  m_icon: {fileID: 0}
+    en: Known for its durability and reliability as a pump-action shotgun.
+    kr: "\uB0B4\uAD6C\uC131\uACFC \uC2E0\uB8B0\uC131\uC73C\uB85C \uC720\uBA85\uD55C
+      \uD38C\uD504 \uC561\uC158 \uC0F7\uAC74\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 35
   m_prefab: {fileID: 0}
   m_auto: 0
   m_baseDamage: 6
   m_baseFireRate: 0.2
-  m_baseRange: 15
-  m_baseSpread: 8
+  m_baseRange: 40
+  m_baseSpread: 9
   m_baseMagSize: 12
   m_baseReloadTime: 4
   m_baseReserve: 300
-  m_baseShotCount: 4
+  m_baseShotCount: 6
   m_defaultBullet: {fileID: 0}
-  m_baseBulletSpeed: 0
+  m_baseBulletSpeed: 3
   m_defaultPierce: 0
-  m_defaultBulletDropoffPercentage: 50
+  m_defaultBulletDropoffPercentage: 69
+  m_baseWeight: 2
