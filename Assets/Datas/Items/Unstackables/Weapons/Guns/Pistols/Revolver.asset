@@ -44,3 +44,5 @@ MonoBehaviour:
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
   m_baseWeight: 2.1
+  m_scopeSpreadReduction: 50
+  m_scopeCost: 1000

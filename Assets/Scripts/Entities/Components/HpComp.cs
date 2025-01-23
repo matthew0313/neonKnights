@@ -187,6 +187,14 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
                 return true;
             }
         }
+        foreach(var i in addQueue)
+        {
+            if (predicate(i))
+            {
+                found = i;
+                return true;
+            }
+        }
         found = null;
         return false;
     }

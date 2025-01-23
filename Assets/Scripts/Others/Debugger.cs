@@ -24,7 +24,7 @@ public class Debugger : MonoBehaviour
     }
     public void GiveQuirkShard()
     {
-        if (!Application.isPlaying || addingQuirk == null || shardItemData == null || player == null) return;
+        if (!Application.isPlaying || addingQuirk == null || shardItemData == null || player == null || !addingQuirk.isShardable) return;
         QuirkShard_Item tmp = shardItemData.Create() as QuirkShard_Item;
         tmp.SetQuirk(addingQuirk);
         player.inventory.Insert(tmp, 1);

@@ -15,3 +15,6 @@ MonoBehaviour:
   m_slowedColor: {r: 0, g: 0.4234619, b: 1, a: 1}
   m_slowedEffect: {fileID: 4378623580918795535, guid: ebe421f15b0f7404ea3ca99fc4ad1e62,
     type: 3}
+  m_stunnedColor: {r: 1, g: 1, b: 0, a: 1}
+  m_stunnedEffect: {fileID: 4378623580918795535, guid: 734bf3c4d568b554892cf6d3acd88996,
+    type: 3}

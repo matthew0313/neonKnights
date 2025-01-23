@@ -22,7 +22,7 @@ MonoBehaviour:
   m_quirkColor: {r: 0, g: 0.27395344, b: 1, a: 0}
   m_quirkIcon: {fileID: 21300000, guid: 4e6319cbc5d91484a8021d47288cac05, type: 3}
   incompatible: []
-  m_minSlowChance: 50
-  m_maxSlowChance: 100
+  m_minSlowChance: 15
+  m_maxSlowChance: 30
   m_minSlowPercentage: 40
   m_maxSlowPercentage: 60

@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saturation: 0.5
   value: 1
-  rainbowSpeed: 1
+  rainbowSpeed: 5
 --- !u!114 &6116289767687892020
 MonoBehaviour:
   m_ObjectHideFlags: 0

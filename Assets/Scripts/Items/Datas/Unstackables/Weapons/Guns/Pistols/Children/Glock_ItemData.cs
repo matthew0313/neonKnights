@@ -40,7 +40,6 @@ public class Glock_Item : PistolItem, IScopeAttachable
     public int scopeCost => data.scopeCost;
     public override ItemModel GetModel()
     {
-        Debug.Log("RAWADCWw");
         Glock_Model tmp = base.GetModel() as Glock_Model;
         tmp.scope.gameObject.SetActive(scopeAttached);
         return tmp;

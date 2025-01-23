@@ -6,5 +6,6 @@ using UnityEngine;
 
 public class Revolver : Pistol
 {
-
+    [SerializeField] GameObject m_scope;
+    public GameObject scope => m_scope;
 }

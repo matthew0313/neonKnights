@@ -31,7 +31,7 @@ public class Quirk_Slowing : Quirk
     {
         this.data = data;
     }
-    float slowChance, slowPercentage;
+    float slowChance;
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
@@ -40,7 +40,6 @@ public class Quirk_Slowing : Quirk
     public override void SetRandom()
     {
         slowChance = Mathf.Round(UnityEngine.Random.Range(data.minSlowChance, data.maxSlowChance));
-        slowPercentage = Mathf.Round(UnityEngine.Random.Range(data.minSlowPercentage, data.maxSlowPercentage));
     }
     void OnShotHit(GunShot shot, GunHitInfo info)
     {
@@ -48,7 +47,7 @@ public class Quirk_Slowing : Quirk
         {
             if (UnityEngine.Random.Range(0.0f, 100.0f) <= slowChance)
             {
-                tmp.ApplyAliment(new Aliment_Slowed(slowPercentage, 3.0f));
+                tmp.ApplyAliment(new Aliment_Slowed(UnityEngine.Random.Range(data.minSlowPercentage, data.maxSlowPercentage), 3.0f));
             }
         }
     }
@@ -56,27 +55,24 @@ public class Quirk_Slowing : Quirk
     {
         return new LangText()
         {
-            en = $"{slowChance}% 3 sec speed debuff(-{slowPercentage}%)",
-            kr = $"{slowChance}% 3초 감속 디버프(-{slowPercentage}%)"
+            en = $"{slowChance}% 3 sec speed debuff({data.minSlowPercentage}%~{data.maxSlowPercentage})",
+            kr = $"{slowChance}% 3초 감속 디버프({data.minSlowPercentage}%~{data.maxSlowPercentage})"
         };
     }
     public override void Save(DataUnit data)
     {
         base.Save(data);
         data.floats["slowChance"] = slowChance;
-        data.floats["slowPercentage"] = slowPercentage;
     }
     public override void Load(DataUnit data)
     {
         base.Load(data);
         data.floats.TryGetValue("slowChance", out slowChance);
-        data.floats.TryGetValue("slowPercentage", out slowPercentage);
     }
     public override Quirk Copy()
     {
         Quirk_Slowing tmp = base.Copy() as Quirk_Slowing;
         tmp.slowChance = slowChance;
-        tmp.slowPercentage = slowPercentage;
         return tmp;
     }
 }

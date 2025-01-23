@@ -12,6 +12,7 @@ public abstract class StatusAliment
         switch (type)
         {
             case AlimentType.slowed: return new Aliment_Slowed();
+            case AlimentType.stunned: return new Aliment_Stunned();
             default: return null;
         }
     }
@@ -49,5 +50,6 @@ public abstract class StatusAliment
 }
 public enum AlimentType
 {
-    slowed = 0
+    slowed = 0,
+    stunned = 1
 }

@@ -1,0 +1,173 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &336831120434586440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4979900453809969462}
+  - component: {fileID: 6180976088278488871}
+  m_Layer: 0
+  m_Name: Remington
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4979900453809969462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336831120434586440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1228763647827612126}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6180976088278488871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336831120434586440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e80d0ee061b8f4da8390c2eaa53db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_firePoint: {fileID: 6233823300642372431}
+--- !u!1 &7222410073668624034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6233823300642372431}
+  m_Layer: 8
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6233823300642372431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7222410073668624034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.005, z: 0.469}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1228763647827612126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2845142340126487366
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4979900453809969462}
+    m_Modifications:
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.047
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.208
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102641282822017318, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      propertyPath: m_Name
+      value: Remington_Model
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6238193577587550836, guid: 90c14e28ea291dd438cc97274b4ad781, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6233823300642372431}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90c14e28ea291dd438cc97274b4ad781, type: 3}
+--- !u!4 &1228763647827612126 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3924477942356517528, guid: 90c14e28ea291dd438cc97274b4ad781,
+    type: 3}
+  m_PrefabInstance: {fileID: 2845142340126487366}
+  m_PrefabAsset: {fileID: 0}

@@ -20,4 +20,10 @@ public class StatusAlimentGlobalData : ScriptableObject
     [SerializeField] StatusAlimentEffect m_slowedEffect;
     public Color slowedColor => m_slowedColor;
     public StatusAlimentEffect slowedEffect => m_slowedEffect;
+
+    [Header("Stunned")]
+    [SerializeField] Color m_stunnedColor;
+    [SerializeField] StatusAlimentEffect m_stunnedEffect;
+    public Color stunnedColor => m_stunnedColor;
+    public StatusAlimentEffect stunnedEffect => m_stunnedEffect;
 }

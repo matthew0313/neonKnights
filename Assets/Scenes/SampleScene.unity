@@ -5268,8 +5268,8 @@ MonoBehaviour:
     count: 1
   - data: {fileID: 11400000, guid: a0575691e94d5344f8dc53fa9f2e4a33, type: 2}
     count: 1
-  - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
-    count: 10
+  - data: {fileID: 11400000, guid: 4b98c85d3184a4848bf011ff19d57fbf, type: 2}
+    count: 1
   - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
     count: 10
   canSwapSlot: 1
