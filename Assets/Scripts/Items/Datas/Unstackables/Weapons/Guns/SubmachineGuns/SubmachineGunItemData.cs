@@ -15,14 +15,5 @@ public abstract class SubmachineGunItem : GunItem
     {
         this.data = data;
     }
-    public override void OnWield(Player wielder)
-    {
-        base.OnWield(wielder);
-        wielder.animation.SetAnimationType(AnimationType.SubmachineGun);
-    }
-    public override void OnUnwield(Player wielder)
-    {
-        base.OnUnwield(wielder);
-        wielder.animation.SetAnimationType(AnimationType.None);
-    }
+    public override AnimationType heldAnimation => AnimationType.SubmachineGun;
 }

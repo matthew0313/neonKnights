@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 835967063935392350}
   - component: {fileID: 5832811861654171486}
   m_Layer: 0
-  m_Name: HitscanEffect_BulletStandard
+  m_Name: HitscanEffect_YellowBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

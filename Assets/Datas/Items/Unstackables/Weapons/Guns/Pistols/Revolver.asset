@@ -19,9 +19,16 @@ MonoBehaviour:
     en: A six-shot revolver symbolizing the Wild West, often associated with cowboys.
     kr: "\uC11C\uBD80 \uC2DC\uB300\uB97C \uC0C1\uC9D5\uD558\uB294 6\uBC1C \uB9AC\uBCFC\uBC84\uB85C,
       \uCE74\uC6B0\uBCF4\uC774\uC758 \uC0C1\uC9D5\uC774\uC5C8\uC2B5\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 5698401187091628457, guid: dfa208a116b9d634c83dbfdd98f3b174, type: 3}
   m_category: 7
-  m_prefab: {fileID: 0}
+  m_prefab: {fileID: 3660711220158609357, guid: a2e94145b1d0c18429c244adbe96d123,
+    type: 3}
+  m_fireSound:
+    clip: {fileID: 8300000, guid: 34a6e000a638a8b41b40b7c8ed67eaa8, type: 3}
+    volume: 1
+  m_reloadSound:
+    clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
+    volume: 1
   m_auto: 0
   m_baseDamage: 12
   m_baseFireRate: 0.2
@@ -31,7 +38,8 @@ MonoBehaviour:
   m_baseReloadTime: 2
   m_baseReserve: 300
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 3
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50

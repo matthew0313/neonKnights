@@ -38,7 +38,7 @@ public class InventorySlot
     {
         if (!CanSetItem(item)) return false;
         this.item = item;
-        this.item.containedSlot = this;
+        if(this.item != null) this.item.containedSlot = this;
         onItemChange?.Invoke();
         return true;
     }
@@ -56,6 +56,7 @@ public class InventorySlot
     public void ForcedSetItem(Item item)
     {
         this.item = item;
+        if (this.item != null) this.item.containedSlot = this;
         onItemChange?.Invoke();
     }
     public int count

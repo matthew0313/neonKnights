@@ -74,7 +74,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     public Action<DamageReceivedInfo> onDamage;
     public Action<float> onHeal;
     public Action onHpChange;
-    public Action onDeath;
+    public Action onDeath, onRevive;
     public Action onAlimentUpdate;
     void Awake()
     {
@@ -104,7 +104,6 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     }
     public virtual DamageReceivedInfo GetDamage(DamageInfo damage)
     {
-        Debug.Log("RRRRRRAWRADWDAWDDWA");
         if (dead) return new() { receivedDamage = 0 };
         shieldRegenCounter = 0.0f;
         float amountLeft = damage.amount;
@@ -123,10 +122,11 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         info.receivedDamage += tmp;
         if (hp <= 0)
         {
-            dead = true;
-            onDeath?.Invoke();
+            Die();
             info.fatal = true;
         }
+        info.isWeakPointHit = damage.isWeakPointHit;
+        info.isResistPointHit = damage.isResistPointHit;
         onDamage?.Invoke(info);
         return info;
     }
@@ -138,11 +138,26 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         hp += amount;
         onHeal?.Invoke(amount);
     }
+    public void Die()
+    {
+        if (dead) return;
+        dead = true;
+        OnDeath();
+    }
+    protected virtual void OnDeath()
+    {
+        onDeath?.Invoke();
+    }
     public virtual void Revive()
     {
         if (!dead) return;
         dead = false;
+        OnRevive();
+    }
+    protected virtual void OnRevive()
+    {
         hp = maxHp;
+        shield = maxShield;
     }
     List<StatusAliment> aliments = new();
     List<StatusAliment> addQueue = new(), removeQueue = new();
@@ -162,9 +177,31 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
     {
         foreach (var i in aliments) yield return i;
     }
+    public bool FindAliment(Func<StatusAliment, bool> predicate, out StatusAliment found)
+    {
+        foreach(var i in aliments)
+        {
+            if (predicate(i))
+            {
+                found = i;
+                return true;
+            }
+        }
+        found = null;
+        return false;
+    }
+    public bool FindAliment<T>(out T found) where T : StatusAliment
+    {
+        if (FindAliment((tmp) => tmp is T, out StatusAliment tmp2))
+        {
+            found = tmp2 as T;
+            return true;
+        }
+        found = null;
+        return false;
+    }
     void AlimentsUpdate()
     {
-        foreach (var i in aliments) i.OnAlimentUpdate();
         bool updated = false;
         if(addQueue.Count > 0)
         {
@@ -186,6 +223,38 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
             }
             removeQueue.Clear();
         }
+        foreach (var i in aliments) i.OnAlimentUpdate();
         if (updated) onAlimentUpdate?.Invoke();
     }
+    public HpCompSaveData Save()
+    {
+        HpCompSaveData data = new();
+        data.hp = hp;
+        data.shield = shield;
+        foreach(var i in aliments)
+        {
+            DataUnit tmp = new();
+            tmp.integers["type"] = (int)i.type;
+            i.Save(tmp);
+            data.aliments.Add(tmp);
+        }
+        return data;
+    }
+    public void Load(HpCompSaveData data)
+    {
+        hp = data.hp;
+        shield = data.shield;
+        foreach(var i in data.aliments)
+        {
+            StatusAliment tmp = StatusAliment.GetAliment((AlimentType)i.integers["type"]);
+            tmp.Load(i);
+            tmp.AddTo(this);
+        }
+    }
+}
+[System.Serializable]
+public class HpCompSaveData
+{
+    public float hp, shield;
+    public List<DataUnit> aliments = new();
 }

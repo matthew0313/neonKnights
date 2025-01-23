@@ -5,16 +5,19 @@ using UnityEngine;
 public abstract class StatusAliment
 {
     public abstract AlimentType type { get; }
-    public static StatusAliment GetAlimentByType(AlimentType type)
+    public abstract string alimentDisplayString { get; }
+    public abstract Color alimentColor { get; }
+    public static StatusAliment GetAliment(AlimentType type)
     {
         switch (type)
         {
+            case AlimentType.slowed: return new Aliment_Slowed();
             default: return null;
         }
     }
     public StatusAliment()
     {
-
+        
     }
     protected HpComp target { get; private set; }
     public virtual void AddTo(HpComp target)
@@ -24,7 +27,7 @@ public abstract class StatusAliment
     }
     public virtual void OnAlimentAdd()
     {
-
+        TextIndicator.Indicate(target.transform.position, alimentDisplayString, alimentColor);
     }
     public virtual void OnAlimentUpdate()
     {
@@ -46,5 +49,5 @@ public abstract class StatusAliment
 }
 public enum AlimentType
 {
-    Slowed = 0
+    slowed = 0
 }

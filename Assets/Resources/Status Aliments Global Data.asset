@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86b9cdc517563234d9f3d26f8df8fb21, type: 3}
-  m_Name: Wood
+  m_Script: {fileID: 11500000, guid: 234a3de72dd796a478f0fb027cfd48fc, type: 3}
+  m_Name: Status Aliments Global Data
   m_EditorClassIdentifier: 
-  m_icon: {fileID: 21300000, guid: 2aa6339ab36f196458091dadea994ff2, type: 3}
-  m_maxStack: 64
-  m_unit: x
+  m_slowedColor: {r: 0, g: 0.4234619, b: 1, a: 1}
+  m_slowedEffect: {fileID: 4378623580918795535, guid: ebe421f15b0f7404ea3ca99fc4ad1e62,
+    type: 3}

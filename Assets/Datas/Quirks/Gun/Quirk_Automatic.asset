@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee5aeb74b3efba49a2c2ea6c3cb4b5c, type: 3}
   m_Name: Quirk_Automatic
   m_EditorClassIdentifier: 
+  m_quirkName:
+    en: Automatic
+    kr: "\uC790\uB3D9"
+  m_quirkDescription:
+    en: Less stress on your fingers!
+    kr: "\uC190\uAC00\uB77D \uBD80\uB2F4\uC744 \uC904\uC5EC\uC90D\uB2C8\uB2E4!"
   m_quirkColor: {r: 1, g: 0.77448016, b: 0, a: 0}
   m_quirkIcon: {fileID: 21300000, guid: 194fb12b183b0d948b51c18096c3cdec, type: 3}
   incompatible: []

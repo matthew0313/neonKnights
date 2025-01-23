@@ -23,6 +23,12 @@ MonoBehaviour:
   m_category: 7
   m_prefab: {fileID: 2286668309897709226, guid: 7afaf7ad201a9ab41aa1ecb10f29931d,
     type: 3}
+  m_fireSound:
+    clip: {fileID: 8300000, guid: 1bb663f5d33443c48b8a16062503e3eb, type: 3}
+    volume: 1
+  m_reloadSound:
+    clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
+    volume: 1
   m_auto: 0
   m_baseDamage: 10
   m_baseFireRate: 0.2

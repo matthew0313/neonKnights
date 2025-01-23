@@ -43,16 +43,6 @@ public class Quirk_EagleEyed : Quirk
     {
         damageBonusPercentage = Mathf.Round(UnityEngine.Random.Range(data.minDamageBonusPercentage, data.maxDamageBonusPercentage));
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Eagle-Eyed",
-        kr = "매의 눈"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Increases damage against weak points.",
-        kr = "약점에 주는 대미지가 증가합니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

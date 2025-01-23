@@ -6,10 +6,15 @@ using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Unity.VisualScripting.Member;
 
 public abstract class GunItemData : WeaponItemData
 {
+    [Header("Gun Audio")]
+    [SerializeField] Sound m_fireSound;
+    [SerializeField] Sound m_reloadSound;
+    public Sound fireSound => m_fireSound;
+    public Sound reloadSound => m_reloadSound;
+
     [Header("Default Stats")]
     [SerializeField] bool m_auto;
     [SerializeField] float m_baseDamage;
@@ -124,6 +129,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         wielder.movement.moveSpeed -= weight;
     }
     readonly LayerMask whatToHit = LayerMask.GetMask("Map", "Enemy");
+    PlayingAudio reloadAudio;
     public override void OnWieldUpdate()
     {
         base.OnWieldUpdate();
@@ -147,6 +153,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                 wielder.animation.TriggerReload();
                 reloadCounter = 0.0f;
                 reloading = true;
+                reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound, weapon.transform.position).SetLocator(() => weapon.transform.position);
             }
             else if(counter <= 0.0f)
             {
@@ -186,6 +193,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         mag = Mathf.Max(mag - fireInfo.consumedBullet, 0);
                         counter = fireInfo.fireRate;
 
+                        AudioManager.Instance.PlaySound(data.fireSound, weapon.firePoint.position);
                         Fire(fireInfo);
                     }
                     else
@@ -199,8 +207,12 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public override void OnUnwield(Player wielder)
     {
         base.OnUnwield(wielder);
-        reloadCounter = 0.0f;
-        reloading = false;
+        if (reloading)
+        {
+            reloadCounter = 0.0f;
+            reloading = false;
+            reloadAudio?.source.Stop();
+        }
         wielder.movement.moveSpeed += weight;
     }
     readonly int fireID = Animator.StringToHash("Fire");
@@ -252,6 +264,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                 List<RaycastHit> hits = Physics.RaycastAll(fireInfo.startPos, dir, fireInfo.range, whatToHit).ToList();
                 float dist = fireInfo.range;
                 hits.Sort((a, b) => a.distance.CompareTo(b.distance));
+                int pierce = fireInfo.pierce;
                 for (int k = 0; k < hits.Count; k++)
                 {
                     GunHitInfo hit = new()
@@ -261,7 +274,16 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         hitPos = hits[k].point,
                         hitDir = dir
                     };
-                    if (shot.hit.Contains(hit.hitObject)) continue;
+                    if (hit.hitObject.TryGetComponent(out HitPoint point))
+                    {
+                        if(shot.hit.Contains(point.pointOf)) continue;
+                        shot.hit.Add(point.pointOf);
+                    }
+                    else
+                    {
+                        if (shot.hit.Contains(hit.hitObject)) continue;
+                        shot.hit.Add(hit.hitObject);
+                    }
                     onShotHit?.Invoke(shot, hit);
                     if (hit.hitObject.TryGetComponent(out IDamagable target))
                     {
@@ -273,8 +295,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         modifyShotDamageGiven?.Invoke(shot, damageInfo);
                         DamageReceivedInfo damageReceivedInfo = target.GetDamage(damageInfo.damage);
                         onShotDamageGive?.Invoke(shot, damageReceivedInfo, hit);
-                        Debug.Log(damageReceivedInfo);
-                        shot.hit.Add(hit.hitObject);
                         if (pierce <= 0)
                         {
                             dist = hit.distance;

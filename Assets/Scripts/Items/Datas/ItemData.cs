@@ -39,6 +39,9 @@ public abstract class Item
             return m_render;
         }
     }
+    public virtual AnimationType heldAnimation => AnimationType.None;
+    public virtual LangText GetName() => data.itemName;
+    public virtual LangText GetDescription() => data.description;
     public Item(ItemData data)
     {
         this.data = data;
@@ -80,8 +83,14 @@ public abstract class Item
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }
+    static ItemModel dummyModel;
     public virtual ItemModel GetModel()
     {
+        if (data.model == null)
+        {
+            if (dummyModel == null) dummyModel = Resources.Load<ItemModel>("DummyModel");
+            return dummyModel.Instantiate();
+        }
         ItemModel tmp = data.model.Instantiate();
         modifyModel?.Invoke(tmp);
         return tmp;

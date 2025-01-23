@@ -94,6 +94,12 @@ public class InventorySlotUIHandler : MonoBehaviour
                 {
                     if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
                     {
+                        if(grabbingSlot.item is IApplied && slot.origin.item != null)
+                        {
+                            Debug.Log(grabbingSlot.count);
+                            (grabbingSlot.item as IApplied).ApplyTo(slot.origin.item);
+                            return;
+                        }
                         slotHit = true;
                         if (grabbingSlot.item.IsStackable(slot.origin.item))
                         {
@@ -108,8 +114,8 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit)
                 {
-                    DropItem(grabbingSlot.item, grabbingSlot.count);
-                    grabbingSlot.SetItem(null);
+                    //DropItem(grabbingSlot.item, grabbingSlot.count);
+                    //grabbingSlot.SetItem(null);
                 }
             }
             else if(grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(1))
@@ -170,7 +176,7 @@ public class InventorySlotUIHandler : MonoBehaviour
 
         }
         describing = item;
-        itemName.text = item.data.itemName.text;
+        itemName.text = item.GetName().text;
         if (item.data.category != 0)
         {
             StringBuilder sb = new();
@@ -188,9 +194,9 @@ public class InventorySlotUIHandler : MonoBehaviour
             itemCategory.gameObject.SetActive(true);
         }
         else itemCategory.gameObject.SetActive(false);
-        if (item.data.description.text != string.Empty)
+        if (item.GetDescription().text != string.Empty)
         {
-            itemDesc.text = item.data.description.text;
+            itemDesc.text = item.GetDescription().text;
             itemDesc.gameObject.SetActive(true);
         }
         else itemDesc.gameObject.SetActive(false);

@@ -77,16 +77,6 @@ public class Quirk_Roulette : Quirk
         rouletteRange = Mathf.Round(UnityEngine.Random.Range(data.minRouletteRange, data.maxRouletteRange));
         rouletteInterval = Mathf.Round(UnityEngine.Random.Range(data.minRouletteInterval, data.maxRouletteInterval) * 10.0f) / 10.0f;
     }
-    public override LangText quirkName => new()
-    {
-        en = "Roulette",
-        kr = "룰렛"
-    };
-    public override LangText quirkDescription => new()
-    {
-        en = "Randomly changes damage",
-        kr = "대미지를 랜덤하게 변경합니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

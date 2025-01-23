@@ -28,16 +28,6 @@ public class Quirk_Automatic : Quirk
         base.OnQuirkAdd(target);
         (target as GunItem).auto = true;
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Automatic",
-        kr = "자동"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Less stress on your fingers!",
-        kr = "손가락에 가는 부담을 덜어줍니다!"
-    };
     public override LangText Describe()
     {
         return new LangText()

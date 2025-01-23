@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_Scoped", menuName = "Scriptables/Quirks/Attachments/Scoped", order = 0)]
 public class QuirkData_Scoped : QuirkData
 {
+    public override bool isShardable => false;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem && target is IScopeAttachable && (target as IScopeAttachable).scopeAttached == false;
@@ -29,16 +30,6 @@ public class Quirk_Scoped : Quirk
         (target as IScopeAttachable).scopeAttached = true;
         (target as GunItem).spread *= (1.0f - (target as IScopeAttachable).scopeSpreadReduction / 100.0f);
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Scoped",
-        kr = "스코프"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Gun gains some additional accuracy.",
-        kr = "총의 정확성을 높여줍니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

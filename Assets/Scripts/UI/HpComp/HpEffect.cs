@@ -8,15 +8,18 @@ using DG.Tweening.Plugins.Options;
 public class HpEffect : MonoBehaviour
 {
     [SerializeField] HpComp origin;
-    [SerializeField] Color normalHitColor, resistHitColor;
     static HpEffectText effectText;
     private void OnEnable()
     {
         origin.onDamage += OnDamage;
     }
+    private void OnDisable()
+    {
+        origin.onDamage -= OnDamage;
+    }
     void OnDamage(DamageReceivedInfo info)
     {
         if (effectText == null) effectText = Resources.Load<HpEffectText>("HpEffectText");
-        effectText.Instantiate().Set(Mathf.Round(info.receivedDamageTotal).ToString(), origin.transform.position, info.isResistPointHit ? resistHitColor : normalHitColor, info.isWeakPointHit);
+        effectText.Instantiate().Set(origin.transform.position, info);
     }
 }

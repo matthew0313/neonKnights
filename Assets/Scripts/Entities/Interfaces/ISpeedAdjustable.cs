@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface ISpeedAdjustable
 {
-    public float speed { get; set; }
+    public float speedMultiplier { get; set; }
 }

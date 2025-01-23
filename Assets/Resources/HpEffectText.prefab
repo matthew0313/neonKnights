@@ -69,8 +69,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: da2af240fb95f624f975dc1a8724f810, type: 2}
+  m_sharedMaterial: {fileID: 6418408542199132269, guid: da2af240fb95f624f975dc1a8724f810,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c22b03387f6fd4583d4fc53647e931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalHitColor: {r: 1, g: 1, b: 1, a: 1}
-  resistHitColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  resistColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   disappearTime: 0.5
   moveRange: 100

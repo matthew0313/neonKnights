@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(TMP_Text), typeof(RainbowText))]
 public class HpEffectText : PooledPrefab<HpEffectText>
 {
+    [SerializeField] Color normalColor, resistColor;
     [SerializeField] float disappearTime = 0.5f, moveRange = 100.0f;
     TMP_Text text;
     RainbowText rainbow;
@@ -17,11 +19,11 @@ public class HpEffectText : PooledPrefab<HpEffectText>
         rainbow = GetComponent<RainbowText>();
         text = GetComponent<TMP_Text>();
     }
-    public void Set(string text, Vector3 position, Color color, bool isRainbow = false)
+    public void Set(Vector3 position, DamageReceivedInfo info)
     {
-        rainbow.enabled = isRainbow;
-        this.text.text = text;
-        this.text.color = color;
+        rainbow.enabled = info.isWeakPointHit;
+        this.text.text = (Mathf.Round(info.receivedDamageTotal * 10.0f) / 10.0f).ToString();
+        this.text.color = (info.isResistPointHit ? resistColor : normalColor);
 
         transform.SetParent(MainCanvas.Instance.transform);
 
@@ -36,7 +38,7 @@ public class HpEffectText : PooledPrefab<HpEffectText>
             counter = value;
             transform.position = Camera.main.WorldToScreenPoint(position);
             transform.localPosition += dir * counter * moveRange;
-            this.text.color = new Color(this.text.color.r, this.text.color.g, this.text.color.b, 1.0f - counter);
+            this.text.color = new Color(this.text.color.r, this.text.color.g, this.text.color.b, Mathf.Min(1.0f, 2.0f - counter * 2.0f));
         }, 1.0f, disappearTime).SetEase(Ease.OutCirc).OnComplete(() =>
         {
             Release();

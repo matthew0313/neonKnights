@@ -19,7 +19,7 @@ public class QuirkListElement : MonoBehaviour
         backImage.material.SetColor(startColorID, new Color(quirk.data.quirkColor.r, quirk.data.quirkColor.g, quirk.data.quirkColor.b, 1.0f));
         backImage.material.SetColor(endColorID, new Color(quirk.data.quirkColor.r, quirk.data.quirkColor.g, quirk.data.quirkColor.b, 0.0f));
         quirkIcon.sprite = quirk.data.quirkIcon;
-        primaryText.text = $"[{quirk.quirkName.text}] {quirk.Describe().text}";
-        secondaryText.text = quirk.quirkDescription.text;
+        primaryText.text = $"[{quirk.data.quirkName.text}] {quirk.Describe().text}";
+        secondaryText.text = quirk.data.quirkDescription.text;
     }
 }

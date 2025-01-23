@@ -17,7 +17,7 @@ public abstract class PotionItemData : StackableItemData
     public CooldownSource cooldownSource => m_cooldownSource;
     public Color cooldownBarColor => m_cooldownBarColor;
 }
-public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
+public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadDisplayed
 {
     new public readonly PotionItemData data;
     Potion m_potion;
@@ -37,15 +37,16 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
     {
         this.data = data;
     }
-
+    public override AnimationType heldAnimation => AnimationType.Potion;
     public bool barDisplay => data.cooldownSource.isOnCooldown;
-    public float barFill => 1.0f - data.cooldownSource.cooldownLeft / data.cooldown;
+    public float barFill => 1.0f - data.cooldownSource.cooldownLeft / data.cooldownSource.startCooldown;
     public Color barColor => data.cooldownBarColor;
+    public bool reloading => barDisplay;
+    public float reloadProgress => barFill;
     IEnumerator drinking = null;
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
-        wielder.animation.SetAnimationType(AnimationType.Potion);
         potion.transform.SetParent(wielder.inventory.equipAnchor, false);
         potion.gameObject.SetActive(true);
     }
@@ -66,7 +67,7 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
         wielder.animation.TriggerDrinkEnd();
         drinking = null;
         OnDrink();
-        data.cooldownSource.cooldownLeft = data.cooldown;
+        data.cooldownSource.SetCooldown(data.cooldown);
         wielder.cooldowns.AddCooldown(data.cooldownSource);
         containedSlot.count--;
     }
@@ -74,7 +75,6 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed
     public override void OnUnwield(Player wielder)
     {
         base.OnUnwield(wielder);
-        wielder.animation.SetAnimationType(AnimationType.None);
         if(drinking != null)
         {
             ItemManager.Instance.StopCoroutine(drinking);
