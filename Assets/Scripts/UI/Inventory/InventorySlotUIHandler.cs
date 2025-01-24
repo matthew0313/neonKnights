@@ -133,8 +133,8 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit)
                 {
-                    DropItem(grabbingSlot.item.Copy(), 1);
-                    grabbingSlot.count--;
+                    //DropItem(grabbingSlot.item.Copy(), 1);
+                    //grabbingSlot.count--;
                 }
             }
         }
