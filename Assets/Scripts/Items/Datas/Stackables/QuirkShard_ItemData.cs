@@ -37,6 +37,12 @@ public class QuirkShard_Item : StackableItem, IApplied
             (appliedTo as IQuirkable).AddQuirk(tmp);
         }
     }
+    public override ItemModel GetModel()
+    {
+        QuirkShard_Model tmp = base.GetModel() as QuirkShard_Model;
+        tmp.SetColor(quirkShardOf.quirkColor);
+        return tmp;
+    }
 }
 [System.Serializable]
 public class QuirkShardSave

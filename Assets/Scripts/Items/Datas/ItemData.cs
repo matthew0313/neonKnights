@@ -134,6 +134,16 @@ public abstract class Item
                 en = "Shotgun",
                 kr = "샷건"
             };
+            case ItemCategory.Consumable: return new LangText()
+            {
+                en = "Consumable",
+                kr = "소모품"
+            };
+            case ItemCategory.Potion: return new LangText()
+            {
+                en = "Potion",
+                kr = "포션"
+            };
             default: return new LangText()
             {
                 en = "???",
@@ -163,5 +173,7 @@ public enum ItemCategory
     Pistol = 1<<2,
     SubmachineGun = 1<<3,
     SniperRifle = 1<<4,
-    Shotgun = 1<<5
+    Shotgun = 1<<5,
+    Consumable = 1<<6,
+    Potion = 1<<7
 }

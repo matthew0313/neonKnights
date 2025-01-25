@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 485ea46f569cf764881f1751c54f6c62, type: 3}
-  m_Name: Automatic
+  m_Name: Slowing_Shard
   m_EditorClassIdentifier: 
   m_itemName:
     en: Quirk Shard
@@ -19,11 +19,12 @@ MonoBehaviour:
     en: Using 3 of this, you can add a quirk to an item.
     kr: "\uC870\uAC01\uC744 3\uAC1C \uC0AC\uC6A9\uD574 \uC544\uC774\uD15C\uC5D0 \uCFFC\uD06C\uB97C
       \uBD99\uC77C \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  m_model: {fileID: 0}
-  m_category: 0
+  m_model: {fileID: -1710427300995771994, guid: 786beca1130a07a4688623d15dd902b0,
+    type: 3}
+  m_category: 64
   m_maxStack: 10
   m_unit: x
-  m_shardOf: {fileID: 11400000, guid: 2af38531347779b4ab94121ed9f02b18, type: 2}
+  m_shardOf: {fileID: 11400000, guid: 56ea1ebe409c8af42b9f0d4c7c6ead26, type: 2}
   m_shardRequired: 3
   m_applySound:
     clip: {fileID: 8300000, guid: 739cad878fb98644797bde65f6273b4c, type: 3}
