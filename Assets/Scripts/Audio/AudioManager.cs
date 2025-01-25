@@ -26,9 +26,6 @@ public class AudioManager : MonoBehaviour
     {
         if (sound.clip == null) return null;
         PlayingAudio tmp = new(sound, audioSourcePool.GetObject());
-        tmp.source.clip = tmp.sound.clip;
-        tmp.source.volume = tmp.sound.volume;
-        tmp.source.Play();
         playing.Add(tmp);
         return tmp;
     }
@@ -81,6 +78,11 @@ public class PlayingAudio
     {
         this.sound = sound;
         this.source = source;
+        source.time = 0;
+        source.loop = false;
+        source.clip = sound.clip;
+        source.volume = sound.volume;
+        source.Play();
     }
     public readonly Sound sound;
     public readonly AudioSource source;
