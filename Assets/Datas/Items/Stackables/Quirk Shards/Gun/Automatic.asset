@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 485ea46f569cf764881f1751c54f6c62, type: 3}
-  m_Name: Quirk Shard
+  m_Name: Automatic
   m_EditorClassIdentifier: 
   m_itemName:
     en: Quirk Shard
@@ -21,5 +21,10 @@ MonoBehaviour:
       \uBD99\uC77C \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 0
-  m_maxStack: 3
+  m_maxStack: 10
   m_unit: x
+  m_shardOf: {fileID: 11400000, guid: 2af38531347779b4ab94121ed9f02b18, type: 2}
+  m_shardRequired: 3
+  m_applySound:
+    clip: {fileID: 8300000, guid: 739cad878fb98644797bde65f6273b4c, type: 3}
+    volume: 1

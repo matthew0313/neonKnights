@@ -17,7 +17,6 @@ public abstract class QuirkData : ScriptableObject
     public Sprite quirkIcon => m_quirkIcon;
     const int maxQuirks = 6;
 
-    public virtual bool isShardable => true;
     public virtual bool IsAddable(IQuirkable target)
     {
         if (target.quirks.Count >= maxQuirks) return false;

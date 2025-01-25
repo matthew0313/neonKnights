@@ -128,6 +128,11 @@ public class Player_Inventory : Inventory
         onEquippedItemChange?.Invoke(equipped);
         if (equipped != null) equipped.OnWield(origin);
     }
+    public void AddItem_DropRest(Item item, int count)
+    {
+        count = Insert(item, count);
+        if (count > 0) DropItem(item.Copy(), count);
+    }
     public void DropItem(Item item, int count)
     {
 

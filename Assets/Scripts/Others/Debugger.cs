@@ -4,7 +4,8 @@ public class Debugger : MonoBehaviour
 {
     [SerializeField] Language startLanguage = Language.English;
     [SerializeField] QuirkData addingQuirk;
-    [SerializeField] QuirkShard_ItemData shardItemData;
+    [SerializeField] ItemData givingItem;
+    [SerializeField] int givingCount = 1;
     Player player;
     private void Awake()
     {
@@ -22,11 +23,9 @@ public class Debugger : MonoBehaviour
             (player.inventory.equipped as IQuirkable).AddQuirk(quirk);
         }
     }
-    public void GiveQuirkShard()
+    public void GiveItem()
     {
-        if (!Application.isPlaying || addingQuirk == null || shardItemData == null || player == null || !addingQuirk.isShardable) return;
-        QuirkShard_Item tmp = shardItemData.Create() as QuirkShard_Item;
-        tmp.SetQuirk(addingQuirk);
-        player.inventory.Insert(tmp, 1);
+        if (!Application.isPlaying || givingItem == null || player == null) return;
+        player.inventory.AddItem_DropRest(givingItem.Create(), givingCount);
     }
 }

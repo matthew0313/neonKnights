@@ -7,7 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_Scoped", menuName = "Scriptables/Quirks/Attachments/Scoped", order = 0)]
 public class QuirkData_Scoped : QuirkData
 {
-    public override bool isShardable => false;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem && target is IScopeAttachable && (target as IScopeAttachable).scopeAttached == false;

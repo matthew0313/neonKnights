@@ -37,9 +37,9 @@ public class Player : Entity
     }
     private void Update()
     {
+        inventory.OnUpdate();
         cooldowns.OnUpdate();
         movement.OnUpdate();
-        inventory.OnUpdate();
         animation.OnUpdate();
         camera.OnUpdate();
         interaction.OnUpdate();

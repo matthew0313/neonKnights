@@ -11,7 +11,7 @@ public class Debugger_Editor : Editor
     {
         VisualElement tmp = treeAsset.CloneTree();
         tmp.Q<Button>("AddQuirkButton").clicked += (target as Debugger).AddQuirk;
-        tmp.Q<Button>("GiveQuirkShardButton").clicked += (target as Debugger).GiveQuirkShard;
+        tmp.Q<Button>("GiveItemButton").clicked += (target as Debugger).GiveItem;
         return tmp;
     }
 }

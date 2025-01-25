@@ -1,0 +1,55 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Quirk_OneMag", menuName = "Scriptables/Quirks/Guns/OneMag", order = 0)]
+public class QuirkData_OneMag : QuirkData
+{
+    [Header("OneMag")]
+    [SerializeField] float m_minConvertPercentage;
+    [SerializeField] float m_maxConvertPercentage;
+    public float minConvertPercentage => m_minConvertPercentage;
+    public float maxConvertPercentage => m_maxConvertPercentage;
+    public override bool IsAddable(IQuirkable target)
+    {
+        return base.IsAddable(target) && target is GunItem;
+    }
+    public override Quirk Create()
+    {
+        return new Quirk_OneMag(this);
+    }
+}
+public class Quirk_OneMag : Quirk
+{
+    new public readonly QuirkData_OneMag data;
+    public Quirk_OneMag(QuirkData_OneMag data) : base(data)
+    {
+        this.data = data;
+    }
+    float convertPercentage = 50.0f;
+    public override void OnQuirkAdd(IQuirkable target)
+    {
+        base.OnQuirkAdd(target);
+        int bonus = Mathf.RoundToInt((target as GunItem).reserve * convertPercentage / 100.0f);
+        (target as GunItem).magSize += bonus;
+        (target as GunItem).reserve = 0;
+        (target as GunItem).mag += bonus;
+        (target as GunItem).reserveLeft = 0;
+        (target as GunItem).onAmmoRefill += (GunAmmoRefillInfo info) => { (target as GunItem).mag += info.amount; };
+    }
+    public override void SetRandom()
+    {
+        base.SetRandom();
+        convertPercentage = Mathf.Round(UnityEngine.Random.Range(data.minConvertPercentage, data.maxConvertPercentage));
+    }
+    public override LangText Describe()
+    {
+        return new LangText()
+        {
+            en = $"{convertPercentage}% reserve => magSize, no reserve",
+            kr = $"{convertPercentage}% 탄환 소지 상한 => 탄창 크기, 탄환 소지 상한 0"
+        };
+    }
+}

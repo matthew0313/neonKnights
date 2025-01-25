@@ -133,7 +133,11 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public override void OnWieldUpdate()
     {
         base.OnWieldUpdate();
-        if (counter > 0.0f) counter -= Time.deltaTime;
+        if (counter > 0.0f)
+        {
+            Debug.Log(counter);
+            counter -= Time.deltaTime;
+        }
         if (reloading)
         {
             reloadCounter += Time.deltaTime;
@@ -153,7 +157,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                 wielder.animation.TriggerReload();
                 reloadCounter = 0.0f;
                 reloading = true;
-                reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound, weapon.transform.position).SetLocator(() => weapon.transform.position);
+                reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound);
             }
             else if(counter <= 0.0f)
             {
@@ -193,7 +197,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         mag = Mathf.Max(mag - fireInfo.consumedBullet, 0);
                         counter = fireInfo.fireRate;
 
-                        AudioManager.Instance.PlaySound(data.fireSound, weapon.firePoint.position);
+                        AudioManager.Instance.PlaySound(data.fireSound);
                         Fire(fireInfo);
                     }
                     else
@@ -211,7 +215,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         {
             reloadCounter = 0.0f;
             reloading = false;
-            reloadAudio?.source.Stop();
+            reloadAudio?.Stop();
         }
         wielder.movement.moveSpeed += weight;
     }
@@ -319,6 +323,13 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
             onFireEnd?.Invoke(fire);
         }
     }
+    public Action<GunAmmoRefillInfo> modifyAmmoRefilled, onAmmoRefill;
+    public void RefillAmmo(GunAmmoRefillInfo info)
+    {
+        modifyAmmoRefilled?.Invoke(info);
+        reserveLeft = Mathf.Min(reserveLeft + info.amount, reserve);
+        onAmmoRefill?.Invoke(info);
+    }
     public string numberText => $"{mag}/{reserveLeft}";
     public IEnumerable<LangText> GetStats()
     {
@@ -403,6 +414,10 @@ public class GunShot
 {
     public GunFire origin;
     public List<GameObject> hit = new();
+}
+public class GunAmmoRefillInfo
+{
+    public int amount;
 }
 public struct GunShotEndInfo
 {
