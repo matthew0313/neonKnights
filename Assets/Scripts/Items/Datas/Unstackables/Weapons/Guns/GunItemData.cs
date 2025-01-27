@@ -167,7 +167,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                     {
                         GunFireInfo fireInfo = new()
                         {
-                            damage = damage,
+                            damage = damage * wielder.statistics.damageMultiplier,
                             fireRate = fireRate,
                             range = range,
                             spread = spread,
@@ -278,7 +278,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         hitPos = hits[k].point,
                         hitDir = dir
                     };
-                    if (hit.hitObject.TryGetComponent(out HitPoint point))
+                    if (hit.hitObject.TryGetComponent(out Point point))
                     {
                         if(shot.hit.Contains(point.pointOf)) continue;
                         shot.hit.Add(point.pointOf);
@@ -299,6 +299,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         modifyShotDamageGiven?.Invoke(shot, damageInfo);
                         DamageReceivedInfo damageReceivedInfo = target.GetDamage(damageInfo.damage);
                         onShotDamageGive?.Invoke(shot, damageReceivedInfo, hit);
+                        shot.damageGiven = true;
                         if (pierce <= 0)
                         {
                             dist = hit.distance;
@@ -414,6 +415,7 @@ public class GunShot
 {
     public GunFire origin;
     public List<GameObject> hit = new();
+    public bool damageGiven = false;
 }
 public class GunAmmoRefillInfo
 {

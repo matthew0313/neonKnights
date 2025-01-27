@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeakPoint : HitPoint, IDamagable, IHealable, IAlimentable
+public class WeakPoint : Point, IDamagable, IHealable, IAlimentable
 {
     [Header("WeakPoint")]
     [SerializeField] HpComp weakPointOf;

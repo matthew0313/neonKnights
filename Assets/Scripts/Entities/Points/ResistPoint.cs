@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResistPoint : HitPoint, IDamagable, IHealable, IAlimentable
+public class ResistPoint : Point, IDamagable, IHealable, IAlimentable
 {
     [Header("ResistPoint")]
     [SerializeField] HpComp resistPointOf;

@@ -32,7 +32,7 @@ public class Aliment_Slowed : StatusAliment, IAlimentProgressDisplayed
         base.OnAlimentAdd();
         effect = StatusAlimentGlobalData.Instance.slowedEffect.Instantiate();
         effect.transform.SetParent(target.alimentEffectAnchor, false);
-        if (target.TryGetComponent(out ISpeedAdjustable tmp))
+        if (target.TryGetComponent(out ISpeedMultiplierAdjustable tmp))
         {
             tmp.speedMultiplier *= slowedPercentage / 100.0f;
         }
@@ -47,7 +47,7 @@ public class Aliment_Slowed : StatusAliment, IAlimentProgressDisplayed
     {
         base.OnAlimentRemove();
         effect.Release();
-        if (target.TryGetComponent(out ISpeedAdjustable tmp))
+        if (target.TryGetComponent(out ISpeedMultiplierAdjustable tmp))
         {
             tmp.speedMultiplier /= slowedPercentage / 100.0f;
         }

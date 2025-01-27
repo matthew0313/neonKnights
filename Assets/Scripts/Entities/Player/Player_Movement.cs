@@ -7,8 +7,10 @@ using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player_Movement : MonoBehaviour, ISpeedAdjustable
+public class Player_Movement : MonoBehaviour
 {
+    Player origin;
+
     [Header("Movement")]
     [SerializeField] internal float moveSpeed;
 
@@ -43,11 +45,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
     [SerializeField] string FSMPath;
 
     float m_speedMultiplier = 1.0f;
-    public float speedMultiplier
-    {
-        get => m_speedMultiplier;
-        set => m_speedMultiplier = value;
-    }
+    public float speedMultiplier => origin.statistics.speedMultiplier;
     public float speed => moveSpeed * speedMultiplier;
 
     float m_stamina = 2.0f;
@@ -87,6 +85,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
     TopLayer topLayer;
     public void OnAwake()
     {
+        origin = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
         topLayer = new TopLayer(this, new MoveFSMVals());
 #if UNITY_EDITOR

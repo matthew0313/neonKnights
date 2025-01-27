@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Glock
   m_EditorClassIdentifier: 
   m_itemName:
-    en: Pistol
-    kr: "\uAD8C\uCD1D"
+    en: Glock
+    kr: "\uAE00\uB85D"
   m_description:
     en: A decent pistol, often carried around as simple means of self-defense.
     kr: "\uD638\uC2E0\uC6A9\uC73C\uB85C \uC790\uC8FC \uC4F0\uC774\uB294 \uC800\uB834\uD55C
