@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61bbad85de038947b55db48a2744521, type: 3}
   m_Name: Quirk_Scoped
   m_EditorClassIdentifier: 
+  m_quirkName:
+    en: Scope
+    kr: "\uC870\uC900\uACBD"
+  m_quirkDescription:
+    en: Reduces spread.
+    kr: "\uD37C\uC9D0\uC774 \uC904\uC5B4\uB4ED\uB2C8\uB2E4."
   m_quirkColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0}
   m_quirkIcon: {fileID: 21300000, guid: ec34be9cde10d08478341d50b475cc32, type: 3}
   incompatible: []

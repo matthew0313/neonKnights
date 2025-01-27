@@ -5,8 +5,14 @@
         <editor:PropertyField label="Start Language" binding-path="startLanguage" />
     </engine:VisualElement>
     <engine:VisualElement class="Area" style="flex-grow: 1;">
-        <engine:Label text="Add Quirk" class="Title" style="font-size: 24px;" />
+        <engine:Label text="Quirks" class="Title" style="font-size: 24px;" />
         <editor:PropertyField label="Adding Quirk" binding-path="addingQuirk" />
         <engine:Button text="Add Quirk To Equipped" name="AddQuirkButton" />
+    </engine:VisualElement>
+    <engine:VisualElement class="Area" style="flex-grow: 1;">
+        <engine:Label text="Items" class="Title" style="font-size: 24px;" />
+        <editor:PropertyField label="Giving Item" binding-path="givingItem" />
+        <editor:PropertyField label="Count" binding-path="givingCount" />
+        <engine:Button text="Give Item" name="GiveItemButton" />
     </engine:VisualElement>
 </engine:UXML>

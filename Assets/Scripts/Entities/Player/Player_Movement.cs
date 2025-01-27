@@ -7,8 +7,10 @@ using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player_Movement : MonoBehaviour, ISpeedAdjustable
+public class Player_Movement : MonoBehaviour
 {
+    Player origin;
+
     [Header("Movement")]
     [SerializeField] internal float moveSpeed;
 
@@ -42,11 +44,9 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
     [Header("Debug")]
     [SerializeField] string FSMPath;
 
-    public float speed
-    {
-        get => moveSpeed;
-        set => moveSpeed = value;
-    }
+    float m_speedMultiplier = 1.0f;
+    public float speedMultiplier => origin.statistics.speedMultiplier;
+    public float speed => moveSpeed * speedMultiplier;
 
     float m_stamina = 2.0f;
     internal float stamina
@@ -85,6 +85,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
     TopLayer topLayer;
     public void OnAwake()
     {
+        origin = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
         topLayer = new TopLayer(this, new MoveFSMVals());
 #if UNITY_EDITOR
@@ -134,8 +135,10 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
         while (counter < distance)
         {
             counter += Time.deltaTime * speed;
-            rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
+            Vector3 tmp = dir * speed;
+            rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
+            //rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
+            yield return null;
         }
         yield return new WaitForSeconds(endLag);
         dashing = false;
@@ -178,7 +181,13 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
-                if (!origin.canMove || origin.dashing) return;
+                if (!origin.canMove) return;
+                else
+                {
+                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                    Vector3 tmp = values.moveInput * origin.speed;
+                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                }
                 if (InputManager.GetSprintInput() && origin.stamina > 0.0f && values.moveInput.magnitude >= 0.1f)
                 {
                     parentLayer.ChangeState("Running");
@@ -203,9 +212,9 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             public override void OnStateFixedUpdate()
             {
                 base.OnStateFixedUpdate();
-                if (!origin.canMove || origin.dashing) return;
-                if(values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.moveSpeed * Time.fixedDeltaTime);
+                if (!origin.canMove) return;
+                //if(values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                //origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.speed * Time.fixedDeltaTime);
             }
         }
         class Running : State<Player_Movement, MoveFSMVals>
@@ -218,7 +227,13 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateUpdate();
                 origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
-                if(!origin.canMove || origin.dashing || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
+                if (origin.canMove)
+                {
+                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                    Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
+                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                }
+                if (!origin.canMove || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
                 {
                     parentLayer.ChangeState("Walking");
                     return;
@@ -243,8 +258,8 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateFixedUpdate();
                 if (!origin.canMove) return;
-                if(values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.moveSpeed * origin.sprintMultiplier * Time.fixedDeltaTime);
+                //if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                //origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.speed * origin.sprintMultiplier * Time.fixedDeltaTime);
             }
         }
         class Dashing : State<Player_Movement, MoveFSMVals>
@@ -287,6 +302,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
                 if (move.magnitude == 0) move = camFront;
                 origin.Dash(move, origin.slideDistance, origin.slideSpeed, origin.slideEndlag);
                 origin.slideTrail.emitting = true;
+                origin.sliding = true;
             }
             public override void OnStateUpdate()
             {
@@ -297,6 +313,7 @@ public class Player_Movement : MonoBehaviour, ISpeedAdjustable
             {
                 base.OnStateExit();
                 origin.slideTrail.emitting = false;
+                origin.sliding = false;
             }
         }
     }

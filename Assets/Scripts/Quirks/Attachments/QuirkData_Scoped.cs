@@ -29,16 +29,6 @@ public class Quirk_Scoped : Quirk
         (target as IScopeAttachable).scopeAttached = true;
         (target as GunItem).spread *= (1.0f - (target as IScopeAttachable).scopeSpreadReduction / 100.0f);
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Scoped",
-        kr = "스코프"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Gun gains some additional accuracy.",
-        kr = "총의 정확성을 높여줍니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

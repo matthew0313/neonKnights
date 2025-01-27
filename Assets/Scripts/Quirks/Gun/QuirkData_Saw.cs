@@ -51,16 +51,6 @@ public class Quirk_Saw : Quirk
     {
         if (notRefunded.Contains(fire)) notRefunded.Remove(fire);
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Saw",
-        kr = "전기톱"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Hitting anything with this gun will refund the ammo used.",
-        kr = "탄환이 맞으면 사용한 총알을 돌려줍니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

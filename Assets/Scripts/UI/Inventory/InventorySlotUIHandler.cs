@@ -21,14 +21,23 @@ public class InventorySlotUIHandler : MonoBehaviour
     [SerializeField] GameObject itemCategory;
     [SerializeField] TMP_Text itemCategoryText, itemDesc;
 
+    [Header("StatDisplay")]
     [SerializeField] Transform itemStatAnchor;
     [SerializeField] TMP_Text itemStatPrefab;
     List<TMP_Text> itemStatList = new();
 
+    [Header("QuirkDisplay")]
     [SerializeField] Transform itemQuirkAnchor;
     [SerializeField] QuirkListElement itemQuirkPrefab;
     List<QuirkListElement> itemQuirkList = new();
-    
+
+    [Header("QuirkShardDisplay")]
+    [SerializeField] GameObject quirkShardDisplay;
+    [SerializeField] Image quirkShardBackImage;
+    [SerializeField] TMP_Text quirkShardQuirkDesc;
+    readonly int startColorID = Shader.PropertyToID("_Start_Color");
+    readonly int endColorID = Shader.PropertyToID("_End_Color");
+
 
     InventorySlot grabbingSlot;
     bool grabbing => grabbingSlot.item != null;
@@ -37,6 +46,7 @@ public class InventorySlotUIHandler : MonoBehaviour
         grabbingSlot = new InventorySlot();
         grabbingSlotUI.Set(grabbingSlot);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
+        quirkShardBackImage.material = new Material(quirkShardBackImage.material);
     }
     private void Update()
     {
@@ -94,6 +104,12 @@ public class InventorySlotUIHandler : MonoBehaviour
                 {
                     if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
                     {
+                        if(grabbingSlot.item is IApplied && slot.origin.item != null)
+                        {
+                            Debug.Log(grabbingSlot.count);
+                            (grabbingSlot.item as IApplied).ApplyTo(slot.origin.item);
+                            return;
+                        }
                         slotHit = true;
                         if (grabbingSlot.item.IsStackable(slot.origin.item))
                         {
@@ -108,8 +124,8 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit)
                 {
-                    DropItem(grabbingSlot.item, grabbingSlot.count);
-                    grabbingSlot.SetItem(null);
+                    //DropItem(grabbingSlot.item, grabbingSlot.count);
+                    //grabbingSlot.SetItem(null);
                 }
             }
             else if(grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(1))
@@ -127,8 +143,8 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit)
                 {
-                    DropItem(grabbingSlot.item.Copy(), 1);
-                    grabbingSlot.count--;
+                    //DropItem(grabbingSlot.item.Copy(), 1);
+                    //grabbingSlot.count--;
                 }
             }
         }
@@ -170,7 +186,7 @@ public class InventorySlotUIHandler : MonoBehaviour
 
         }
         describing = item;
-        itemName.text = item.data.itemName.text;
+        itemName.text = item.GetName().text;
         if (item.data.category != 0)
         {
             StringBuilder sb = new();
@@ -188,9 +204,9 @@ public class InventorySlotUIHandler : MonoBehaviour
             itemCategory.gameObject.SetActive(true);
         }
         else itemCategory.gameObject.SetActive(false);
-        if (item.data.description.text != string.Empty)
+        if (item.GetDescription().text != string.Empty)
         {
-            itemDesc.text = item.data.description.text;
+            itemDesc.text = item.GetDescription().text;
             itemDesc.gameObject.SetActive(true);
         }
         else itemDesc.gameObject.SetActive(false);
@@ -226,6 +242,16 @@ public class InventorySlotUIHandler : MonoBehaviour
             itemQuirkAnchor.gameObject.SetActive(index > 0);
         }
         else itemQuirkAnchor.gameObject.SetActive(false);
+        if(item is QuirkShard_Item)
+        {
+            QuirkShard_Item tmp = item as QuirkShard_Item;
+            Color tmp2 = tmp.quirkShardOf.quirkColor;
+            quirkShardDisplay.SetActive(true);
+            quirkShardBackImage.material.SetColor(startColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 1.0f));
+            quirkShardBackImage.material.SetColor(endColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 0.0f));
+            quirkShardQuirkDesc.text = $"[{tmp.quirkShardOf.quirkName}]: {tmp.quirkShardOf.quirkDescription.text}";
+        }
+        else quirkShardDisplay.SetActive(false);
     }
     void DropItem(Item item, int count)
     {

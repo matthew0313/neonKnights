@@ -11,15 +11,17 @@ public class Player_Animation : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
+        origin.inventory.onEquippedItemChange += OnEquippedItemChange;
+    }
+    void OnEquippedItemChange(Item item)
+    {
+        if (item == null) anim.SetInteger(animationTypeID, (int)AnimationType.None);
+        else anim.SetInteger(animationTypeID, (int)item.heldAnimation);
     }
     readonly int animationTypeID = Animator.StringToHash("AnimationType");
     readonly int movingID = Animator.StringToHash("Moving");
     readonly int moveXID = Animator.StringToHash("MoveX");
     readonly int moveYID = Animator.StringToHash("MoveY");
-    public void SetAnimationType(AnimationType type)
-    {
-        anim.SetInteger(animationTypeID, (int)type);
-    }
     public void OnUpdate()
     {
         anim.SetBool(movingID, origin.movement.relativeMoveInput.magnitude > 0.1f);

@@ -42,16 +42,6 @@ public class Quirk_BruteForce : Quirk
     {
         damageBonusPercentage = Mathf.Round(UnityEngine.Random.Range(data.minDamageBonusPercentage, data.maxDamageBonusPercentage));
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Brute Force",
-        kr = "강제돌파"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Increases damage against resist points.",
-        kr = "방어 포인트에 주는 대미지가 증가합니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

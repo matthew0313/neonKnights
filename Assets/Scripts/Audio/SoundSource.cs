@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
+/*[RequireComponent(typeof(AudioSource))]
 public class SoundSource : MonoBehaviour
 {
     [SerializeField] Sound sound;
@@ -51,10 +51,4 @@ public class SoundSource : MonoBehaviour
         source.bypassListenerEffects = baseSource.bypassListenerEffects;
         source.bypassReverbZones = baseSource.bypassReverbZones;
     }
-}
-[System.Serializable]
-public struct Sound
-{
-    public AudioClip clip;
-    public float volume;
-}
+}*/

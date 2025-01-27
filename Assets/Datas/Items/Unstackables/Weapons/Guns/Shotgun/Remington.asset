@@ -20,9 +20,16 @@ MonoBehaviour:
     kr: "\uB2E4\uBAA9\uC801\uC73C\uB85C \uC0AC\uC6A9\uB418\uB294 \uD38C\uD504 \uC561\uC158
       \uC0F7\uAC74\uC73C\uB85C, \uACBD\uCC30\uACFC \uC0AC\uB0E5\uAFBC\uB4E4\uC5D0\uAC8C
       \uC778\uAE30 \uC788\uC2B5\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 6238193577587550836, guid: 90c14e28ea291dd438cc97274b4ad781, type: 3}
   m_category: 35
-  m_prefab: {fileID: 0}
+  m_prefab: {fileID: 6180976088278488871, guid: 32c727b442af7f94aa3f77f7228e926f,
+    type: 3}
+  m_fireSound:
+    clip: {fileID: 8300000, guid: 64e4fc086b843b84394c992f3c97b4eb, type: 3}
+    volume: 1
+  m_reloadSound:
+    clip: {fileID: 8300000, guid: f2911fa5a676a404fb8483d1a41572c8, type: 3}
+    volume: 1
   m_auto: 0
   m_baseDamage: 2
   m_baseFireRate: 0.2
@@ -32,7 +39,8 @@ MonoBehaviour:
   m_baseReloadTime: 4
   m_baseReserve: 200
   m_baseShotCount: 10
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 74

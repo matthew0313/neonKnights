@@ -39,6 +39,9 @@ public abstract class Item
             return m_render;
         }
     }
+    public virtual AnimationType heldAnimation => AnimationType.None;
+    public virtual LangText GetName() => data.itemName;
+    public virtual LangText GetDescription() => data.description;
     public Item(ItemData data)
     {
         this.data = data;
@@ -80,8 +83,14 @@ public abstract class Item
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }
+    static ItemModel dummyModel;
     public virtual ItemModel GetModel()
     {
+        if (data.model == null)
+        {
+            if (dummyModel == null) dummyModel = Resources.Load<ItemModel>("DummyModel");
+            return dummyModel.Instantiate();
+        }
         ItemModel tmp = data.model.Instantiate();
         modifyModel?.Invoke(tmp);
         return tmp;
@@ -125,6 +134,16 @@ public abstract class Item
                 en = "Shotgun",
                 kr = "샷건"
             };
+            case ItemCategory.Consumable: return new LangText()
+            {
+                en = "Consumable",
+                kr = "소모품"
+            };
+            case ItemCategory.Potion: return new LangText()
+            {
+                en = "Potion",
+                kr = "포션"
+            };
             default: return new LangText()
             {
                 en = "???",
@@ -154,5 +173,7 @@ public enum ItemCategory
     Pistol = 1<<2,
     SubmachineGun = 1<<3,
     SniperRifle = 1<<4,
-    Shotgun = 1<<5
+    Shotgun = 1<<5,
+    Consumable = 1<<6,
+    Potion = 1<<7
 }

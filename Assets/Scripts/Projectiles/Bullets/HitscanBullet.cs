@@ -17,7 +17,7 @@ public class HitscanBullet : HitscanEffect
     float counter = 0.0f;
     private void Update()
     {
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
         counter += speed * Time.deltaTime;
         if (counter >= range) Release();
     }

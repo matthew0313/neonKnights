@@ -38,16 +38,6 @@ public class Quirk_Strong : Quirk
     {
         damageBonusPercentage = Mathf.Round(UnityEngine.Random.Range(data.minDamageBonusPercentage, data.maxDamageBonusPercentage));
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Strong",
-        kr = "힘"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Increases Damage by percentage.",
-        kr = "대미지가 올라갑니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

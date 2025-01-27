@@ -41,16 +41,6 @@ public class Quirk_Piercing : Quirk
     {
         pierceChance = Mathf.Round(UnityEngine.Random.Range(data.minPierceChance, data.maxPierceChance));
     }
-    public override LangText quirkName => new LangText()
-    {
-        en = "Piercing",
-        kr = "관통"
-    };
-    public override LangText quirkDescription => new LangText()
-    {
-        en = "Bullets may get 1 pierce",
-        kr = "탄환이 확률적으로 1회 관통력을 가집니다."
-    };
     public override LangText Describe()
     {
         return new LangText()

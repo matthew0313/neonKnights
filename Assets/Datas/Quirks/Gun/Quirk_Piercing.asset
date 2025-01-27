@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07384c2693a2fe54f8712c5fcca0a779, type: 3}
   m_Name: Quirk_Piercing
   m_EditorClassIdentifier: 
+  m_quirkName:
+    en: Piercing
+    kr: "\uAD00\uD1B5"
+  m_quirkDescription:
+    en: Bullets have a chance to gain an additional pierce.
+    kr: "\uCD1D\uC54C\uC774 \uD655\uB960\uC801\uC73C\uB85C \uAD00\uD1B5\uB825\uC744
+      \uAC00\uC9D1\uB2C8\uB2E4."
   m_quirkColor: {r: 0, g: 0.62896585, b: 1, a: 0}
   m_quirkIcon: {fileID: 21300000, guid: 58d68917a45fe8147b0192b1a344eb89, type: 3}
   incompatible: []
