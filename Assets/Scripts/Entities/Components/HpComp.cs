@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 #endif
 
-public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
+public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamageTakenMultiplierAdjustable
 {
     //hp
     [SerializeField] float m_baseHp;
@@ -102,11 +102,12 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
             shield = Mathf.Min(maxShield, shield + maxShield * shieldRegenPercentagePerSecond * Time.deltaTime);
         }
     }
+    public float damageTakenMultiplier { get; set; } = 1.0f;
     public virtual DamageReceivedInfo GetDamage(DamageInfo damage)
     {
         if (dead) return new() { receivedDamage = 0 };
         shieldRegenCounter = 0.0f;
-        float amountLeft = damage.amount;
+        float amountLeft = damage.amount * damageTakenMultiplier;
         DamageReceivedInfo info = new();
 
         float tmp;
@@ -120,14 +121,16 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable
         tmp = Mathf.Min(amountLeft, hp);
         hp -= tmp;
         info.receivedDamage += tmp;
+        bool dying = false;
         if (hp <= 0)
         {
-            Die();
             info.fatal = true;
+            dying = true;
         }
         info.isWeakPointHit = damage.isWeakPointHit;
         info.isResistPointHit = damage.isResistPointHit;
         onDamage?.Invoke(info);
+        if (dying) Die();
         return info;
     }
 

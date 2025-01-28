@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8e366063f200930488dd0f64655b34b3
+timeCreated: 1553477671
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 143026
+  packageName: POLYGON Dungeons Map - Low Poly 3D Art by Synty
+  packageVersion: 1.2
+  assetPath: Assets/PolygonDungeonMap/Prefabs/SM_Prop_Book_Open_02.prefab
+  uploadId: 620931

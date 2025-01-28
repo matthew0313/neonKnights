@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 91a3f39a8f575fa47a9f313cc5e9d388
+timeCreated: 1553477671
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 143026
+  packageName: POLYGON Dungeons Map - Low Poly 3D Art by Synty
+  packageVersion: 1.2
+  assetPath: Assets/PolygonDungeonMap/Prefabs/SM_Prop_Bookcase_Small_Empty_01.prefab
+  uploadId: 620931

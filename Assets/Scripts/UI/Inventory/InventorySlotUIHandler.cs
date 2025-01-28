@@ -249,7 +249,7 @@ public class InventorySlotUIHandler : MonoBehaviour
             quirkShardDisplay.SetActive(true);
             quirkShardBackImage.material.SetColor(startColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 1.0f));
             quirkShardBackImage.material.SetColor(endColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 0.0f));
-            quirkShardQuirkDesc.text = $"[{tmp.quirkShardOf.quirkName}]: {tmp.quirkShardOf.quirkDescription.text}";
+            quirkShardQuirkDesc.text = $"[{tmp.quirkShardOf.quirkName.text}]: {tmp.quirkShardOf.quirkDescription.text}";
         }
         else quirkShardDisplay.SetActive(false);
     }

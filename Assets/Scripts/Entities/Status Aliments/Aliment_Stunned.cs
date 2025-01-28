@@ -20,6 +20,19 @@ public class Aliment_Stunned : StatusAliment, IAlimentProgressDisplayed
         timeLeft = startTime;
     }
     StatusAlimentEffect effect = null;
+    public override void AddTo(HpComp target)
+    {
+        if(target.FindAliment(out Aliment_Stunned found))
+        {
+            if(timeLeft > found.timeLeft)
+            {
+                found.startTime = startTime;
+                found.timeLeft = timeLeft;
+                TextIndicator.Indicate(target.transform.position, alimentDisplayString, alimentColor);
+            }
+        }
+        else base.AddTo(target);
+    }
     public override void OnAlimentAdd()
     {
         base.OnAlimentAdd();
