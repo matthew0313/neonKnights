@@ -22,6 +22,12 @@ MonoBehaviour:
   m_category: 0
   m_maxStack: 64
   m_unit: x
+  m_drinkingSound:
+    clip: {fileID: 8300000, guid: 03f4138683236cb42afd1f8d1bc2ce9a, type: 3}
+    volume: 1
+  m_drinkSound:
+    clip: {fileID: 8300000, guid: 552cd149a48478b469a172f247913849, type: 3}
+    volume: 1
   m_prefab: {fileID: 494905712687354735, guid: 8bce7476daf276042a7d6373b86ee1e9, type: 3}
   m_drinkTime: 2
   m_cooldown: 20

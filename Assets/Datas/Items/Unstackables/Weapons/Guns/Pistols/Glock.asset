@@ -29,6 +29,8 @@ MonoBehaviour:
   m_reloadSound:
     clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
     volume: 1
+  m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
+    type: 3}
   m_auto: 0
   m_baseDamage: 10
   m_baseFireRate: 0.2

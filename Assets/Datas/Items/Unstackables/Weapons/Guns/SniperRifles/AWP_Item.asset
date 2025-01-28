@@ -22,6 +22,14 @@ MonoBehaviour:
   m_model: {fileID: 0}
   m_category: 19
   m_prefab: {fileID: 0}
+  m_fireSound:
+    clip: {fileID: 0}
+    volume: 0
+  m_reloadSound:
+    clip: {fileID: 0}
+    volume: 0
+  m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
+    type: 3}
   m_auto: 0
   m_baseDamage: 70
   m_baseFireRate: 0.2

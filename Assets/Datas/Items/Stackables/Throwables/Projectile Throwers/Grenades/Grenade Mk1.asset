@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9b2a755effe3547870d15855cd9937, type: 3}
+  m_Name: Grenade Mk1
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Grenade Mk1
+    kr: "\uC218\uB958\uD0C4 Mk1"
+  m_description:
+    en: A weak grenade.
+    kr: "\uC57D\uD55C \uC218\uB958\uD0C4\uC785\uB2C8\uB2E4."
+  m_model: {fileID: 5621797473667551166, guid: 570ae9661b643614eb47dbe30efda3a4, type: 3}
+  m_category: 64
+  m_maxStack: 64
+  m_unit: x
+  m_prefab: {fileID: 7463664711872423132, guid: 88645df27df86ca44a8872df1722b4b5,
+    type: 3}
+  m_cooldownSource: {fileID: 11400000, guid: b494f2af948bef340ae36acad82092a2, type: 2}
+  m_cooldown: 5
+  m_cooldownBarColor: {r: 0.04172965, g: 0.5566038, b: 0, a: 1}
+  m_projectile: {fileID: 3808324862000984977, guid: 8e7e4541a6f38ac4dbed513cb069bce4,
+    type: 3}
+  m_effect: {fileID: 6919117170117993483, guid: e55a8ecae77bd39449fb9fb1a4f9bff7,
+    type: 3}
+  m_throwForce: 20
+  m_blastRadius: 5
+  m_whatToHit:
+    serializedVersion: 2
+    m_Bits: 128
+  m_damage: 50
