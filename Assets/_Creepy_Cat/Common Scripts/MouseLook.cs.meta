@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 99fe8101c5aee844292be03a42245674
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150741
+  packageName: 3D Showroom Level Kit Vol 7
+  packageVersion: 2.0
+  assetPath: Assets/_Creepy_Cat/Common Scripts/MouseLook.cs
+  uploadId: 690298
