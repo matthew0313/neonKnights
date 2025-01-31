@@ -9,11 +9,15 @@ using UnityEngine.InputSystem;
 
 public abstract class GunItemData : WeaponItemData
 {
-    [Header("Gun Audio")]
+    [Header("Audio")]
     [SerializeField] Sound m_fireSound;
     [SerializeField] Sound m_reloadSound;
     public Sound fireSound => m_fireSound;
     public Sound reloadSound => m_reloadSound;
+
+    [Header("Effects")]
+    [SerializeField] HitEffect m_defaultHitEffect;
+    public HitEffect defaultHitEffect => m_defaultHitEffect;
 
     [Header("Default Stats")]
     [SerializeField] bool m_auto;
@@ -64,6 +68,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         shotCount = data.baseShotCount;
         bulletDropoffPercentage = data.defaultBulletDropoffPercentage;
         weight = data.baseWeight;
+        hitEffect = data.defaultHitEffect;
     }
     //stats
     public bool auto;
@@ -80,6 +85,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public int shotCount = 1;
     public float bulletDropoffPercentage;
     public float weight = 0;
+    public HitEffect hitEffect;
 
     public Action onNumberUpdate { get; set; }
     int m_mag;
@@ -135,7 +141,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         base.OnWieldUpdate();
         if (counter > 0.0f)
         {
-            Debug.Log(counter);
             counter -= Time.deltaTime;
         }
         if (reloading)
@@ -178,20 +183,20 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                             bulletDropoffPercentage = bulletDropoffPercentage,
                             startPos = weapon.firePoint.position,
                             source = GunFireSource.GunFire,
-                            whatToHit = whatToHit
+                            whatToHit = whatToHit,
+                            hitEffect = hitEffect
                         };
-                        if (SystemInfo.deviceType == DeviceType.Desktop)
+
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(ray, out RaycastHit hit, 100.0f))
                         {
-                            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                            if(Physics.Raycast(ray, out RaycastHit hit, 100.0f))
-                            {
-                                fireInfo.dir = hit.point - fireInfo.startPos;
-                            }
-                            else
-                            {
-                                fireInfo.dir = ray.origin + ray.direction * 100.0f - fireInfo.startPos;
-                            }
+                            fireInfo.dir = hit.point - fireInfo.startPos;
                         }
+                        else
+                        {
+                            fireInfo.dir = ray.origin + ray.direction * 100.0f - fireInfo.startPos;
+                        }
+                        fireInfo.dir.Normalize();
 
                         modifyFireInfo?.Invoke(fireInfo);
                         mag = Mathf.Max(mag - fireInfo.consumedBullet, 0);
@@ -297,6 +302,12 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                             hit = hit
                         };
                         modifyShotDamageGiven?.Invoke(shot, damageInfo);
+                        if(fireInfo.hitEffect != null)
+                        {
+                            HitEffect tmp = fireInfo.hitEffect.Instantiate();
+                            tmp.transform.SetParent(hit.hitObject.transform);
+                            tmp.transform.position = hit.hitPos;
+                        }
                         DamageReceivedInfo damageReceivedInfo = target.GetDamage(damageInfo.damage);
                         onShotDamageGive?.Invoke(shot, damageReceivedInfo, hit);
                         shot.damageGiven = true;
@@ -392,6 +403,7 @@ public class GunFireInfo
     public Vector3 startPos, dir;
     public GunFireSource source;
     public LayerMask whatToHit;
+    public HitEffect hitEffect;
 
     public void PrintDebug()
     {

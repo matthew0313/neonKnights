@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f79bca9d448e259488f388a839bf21ef
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Prefab/Sample/SmokeShader_CustomData_Sample_UvDistDissolve.prefab
+  uploadId: 533063

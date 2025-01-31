@@ -78,7 +78,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
-                if (Vector3.Distance(origin.player.transform.position, origin.transform.position) > origin.detectRange) parentLayer.ChangeState("Idle");
+                if (Vector3.Distance(origin.player.transform.position, origin.transform.position) > origin.detectRange || origin.player.statistics.canBeDetected == false) parentLayer.ChangeState("Idle");
             }
             class RunningTowards : State<Shielder, ShielderFSMVals>
             {

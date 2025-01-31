@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 36198298e608c3942a6edcd3c5c49039
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Shader/TotalShader_Additive_1Side.shadergraph
+  uploadId: 533063

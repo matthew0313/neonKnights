@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c37776ba62bcc7145bb635b1767e91fa
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Prefab/Sample/TotalShader_CustomData_Sample_Dissolve.prefab
+  uploadId: 533063

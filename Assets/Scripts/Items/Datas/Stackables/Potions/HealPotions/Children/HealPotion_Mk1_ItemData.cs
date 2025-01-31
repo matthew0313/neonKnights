@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "Heal Potion Mk1", menuName = "Scriptables/Items/Stackables/Potions/Heal Potion", order = 0)]
+[CreateAssetMenu(fileName = "Heal Potion Mk1", menuName = "Scriptables/Items/Stackables/Potions/Heal Potions/Heal Potion Mk1", order = 0)]
 public class HealPotion_Mk1_ItemData : HealPotionItemData
 {
     public override Item Create()

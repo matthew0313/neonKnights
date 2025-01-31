@@ -26,7 +26,7 @@ public class PooledPrefab<T> : MonoBehaviour where T : PooledPrefab<T>
         tmp.released = false;
         return tmp;
     }
-    bool released = false;
+    public bool released { get; private set; } = false;
     public void Release()
     {
         if (prefabOrigin == null || released) return;

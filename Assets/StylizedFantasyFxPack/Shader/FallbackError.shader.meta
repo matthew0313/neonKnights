@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a98b4d14c6babc54293aa6d8191179cf
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Shader/FallbackError.shader
+  uploadId: 533063

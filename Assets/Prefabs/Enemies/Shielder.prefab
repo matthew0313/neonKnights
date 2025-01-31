@@ -799,7 +799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baseHp: 100
   m_maxShield: 0
-  m_alimentEffectAnchor: {fileID: 3881960449030190289}
+  m_alimentEffectAnchor: {fileID: 6428298227700554316}
   invincible: 0
 --- !u!95 &8842329122693154525
 Animator:

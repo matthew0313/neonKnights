@@ -7,4 +7,5 @@ public class Player_Statistics : MonoBehaviour, ISpeedMultiplierAdjustable, IDam
     public float speedMultiplier { get; set; } = 1.0f;
     public float damageMultiplier { get; set; } = 1.0f;
     public float damageTakenMultiplier { get; set; } = 1.0f;
+    public bool canBeDetected = true;
 }

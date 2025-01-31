@@ -22,7 +22,7 @@ public abstract class Enemy : Entity
         public override void OnStateUpdate()
         {
             base.OnStateUpdate();
-            if (Vector3.Distance(origin.transform.position, origin.player.transform.position) <= detectRangeGetter.Invoke())
+            if (Vector3.Distance(origin.transform.position, origin.player.transform.position) <= detectRangeGetter.Invoke() && origin.player.statistics.canBeDetected)
             {
                 onDetect?.Invoke();
             }

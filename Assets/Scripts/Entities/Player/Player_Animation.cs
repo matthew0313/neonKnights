@@ -47,6 +47,11 @@ public class Player_Animation : MonoBehaviour
     {
         anim.SetTrigger(drinkEndID);
     }
+    readonly int throwID = Animator.StringToHash("Throw");
+    public void TriggerThrow()
+    {
+        anim.SetTrigger(throwID);
+    }
 }
 public enum AnimationType
 {
@@ -55,5 +60,6 @@ public enum AnimationType
     SubmachineGun = 2,
     SniperRifle = 3,
     Shotgun = 4,
-    Potion = 5
+    Potion = 5,
+    Throwable = 6
 }

@@ -4,13 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class PotionItemData : StackableItemData
 {
+    [Header("Sound Effects")]
+    [SerializeField] Sound m_drinkingSound;
+    [SerializeField] Sound m_drinkSound;
+    public Sound drinkingSound => m_drinkingSound;
+    public Sound drinkSound => m_drinkSound;
+
     [Header("Potion")]
     [SerializeField] Potion m_prefab;
     [SerializeField] float m_drinkTime;
     [SerializeField] float m_cooldown;
     [SerializeField] CooldownSource m_cooldownSource;
     [SerializeField] Color m_cooldownBarColor;
-
     public Potion prefab => m_prefab;
     public float drinkTime => m_drinkTime;
     public float cooldown => m_cooldown;
@@ -60,12 +65,16 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
             ItemManager.Instance.StartCoroutine(drinking);
         }
     }
+    PlayingAudio drinkingSound;
     IEnumerator Drinking()
     {
+        drinkingSound = AudioManager.Instance.PlaySound(data.drinkingSound).Loop();
         wielder.animation.TriggerDrinkStart();
         yield return new WaitForSeconds(data.drinkTime);
         wielder.animation.TriggerDrinkEnd();
         drinking = null;
+        drinkingSound.Stop();
+        AudioManager.Instance.PlaySound(data.drinkSound);
         OnDrink();
         data.cooldownSource.SetCooldown(data.cooldown);
         wielder.cooldowns.AddCooldown(data.cooldownSource);
@@ -77,6 +86,7 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
         base.OnUnwield(wielder);
         if(drinking != null)
         {
+            drinkingSound.Stop();
             ItemManager.Instance.StopCoroutine(drinking);
         }
         potion.gameObject.SetActive(false);
@@ -85,8 +95,13 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
     {
         yield return new()
         {
-            en = $"Cooldown: {data.cooldown}",
-            kr = $"쿨타임: {data.cooldown}"
+            en = $"Cooldown: {data.cooldown}s",
+            kr = $"쿨타임: {data.cooldown}s"
+        };
+        yield return new()
+        {
+            en = $"Drink Time: {data.drinkTime}s",
+            kr = $"마시는 시간: {data.drinkTime}s"
         };
     }
     

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2e0793857a1b9a041b968a3f9d763846
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Prefab/Sample/TotalShader_CustomData_Sample_UvDistortion.prefab
+  uploadId: 533063

@@ -49,7 +49,7 @@ public class Quirk_OneMag : Quirk
         return new LangText()
         {
             en = $"{convertPercentage}% reserve => magSize, no reserve",
-            kr = $"{convertPercentage}% 탄환 소지 상한 => 탄창 크기, 탄환 소지 상한 0"
+            kr = $"{convertPercentage}% 탄환 저장량 => 탄창 크기"
         };
     }
 }

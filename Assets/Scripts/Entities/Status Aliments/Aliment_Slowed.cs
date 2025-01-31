@@ -32,6 +32,7 @@ public class Aliment_Slowed : StatusAliment, IAlimentProgressDisplayed
         base.OnAlimentAdd();
         effect = StatusAlimentGlobalData.Instance.slowedEffect.Instantiate();
         effect.transform.SetParent(target.alimentEffectAnchor, false);
+        effect.transform.localPosition = new Vector3(0, 0, 0);
         if (target.TryGetComponent(out ISpeedMultiplierAdjustable tmp))
         {
             tmp.speedMultiplier *= slowedPercentage / 100.0f;

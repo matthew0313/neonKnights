@@ -86,6 +86,7 @@ public class Player_Movement : MonoBehaviour
     public void OnAwake()
     {
         origin = GetComponent<Player>();
+        origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         rb = GetComponent<Rigidbody>();
         topLayer = new TopLayer(this, new MoveFSMVals());
 #if UNITY_EDITOR
@@ -95,6 +96,11 @@ public class Player_Movement : MonoBehaviour
     }
     Vector3 lastLookedDir = Vector3.forward;
     internal Vector3 relativeMoveInput { get; private set; } = Vector3.forward;
+    void OnEquippedItemChange(Item item)
+    {
+        if (item == null) rotateMode = RotateMode.Free;
+        else rotateMode = item.rotateMode;
+    }
     public void OnUpdate()
     {
         topLayer.OnStateUpdate();

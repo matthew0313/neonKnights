@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d05792a1faa883b4cbf69e5385cb9136
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Prefab/Sample/TotalShader_CustomData_Sample_UvPanner.prefab
+  uploadId: 533063

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 435c396bb14acf0419f98401dca641e1
+timeCreated: 1503472755
+licenseType: Store
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 209416
+  packageName: Stylized Fantasy Fx Pack
+  packageVersion: 1.0.1
+  assetPath: Assets/StylizedFantasyFxPack/Shader/Lit.shader
+  uploadId: 533063
