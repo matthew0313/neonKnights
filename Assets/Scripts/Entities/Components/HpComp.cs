@@ -56,6 +56,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
         {
             m_maxShield = value;
             onHpChange?.Invoke();
+            if (shield > maxShield) shield = maxShield;
         }
     }
     float m_shield;
@@ -139,7 +140,10 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
         if (dead) return;
         float amount = Mathf.Min(maxHp - hp, heal);
         hp += amount;
-        onHeal?.Invoke(amount);
+        heal -= amount;
+        float amount2 = Mathf.Min(maxShield - shield, heal);
+        shield += amount2;
+        onHeal?.Invoke(amount + amount2);
     }
     public void Die()
     {

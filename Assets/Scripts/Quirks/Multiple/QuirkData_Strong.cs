@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_Strong", menuName = "Scriptables/Quirks/Guns/Strong", order = 0)]
+[CreateAssetMenu(fileName = "Quirk_Strong", menuName = "Scriptables/Quirks/Multiple/Strong", order = 0)]
 public class QuirkData_Strong : QuirkData
 {
     [Header("Strong")]

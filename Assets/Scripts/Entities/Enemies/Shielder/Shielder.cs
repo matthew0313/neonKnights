@@ -19,6 +19,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] float bashRotateSpeed, bashRotateTime;
     [SerializeField] float bashRunSpeed, bashRunDistance;
     [SerializeField] float bashCooldown;
+    [SerializeField] float bashDamage;
     Rigidbody rb;
 
     [Header("Debug")]
@@ -188,7 +189,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                         if(hit.TryGetComponent(out IDamagable tmp))
                         {
                             origin.rb.linearVelocity = new Vector3(0.0f, origin.rb.linearVelocity.y, 0.0f);
-                            tmp.GetDamage(10.0f);
+                            tmp.GetDamage(origin.bashDamage);
                             parentLayer.parentLayer.ChangeState("Cooldown");
                         }
                     }

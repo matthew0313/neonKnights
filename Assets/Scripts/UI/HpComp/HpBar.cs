@@ -25,22 +25,24 @@ public class HpBar : MonoBehaviour
     {
         target.onHpChange -= OnHpChange;
     }
-    Tween lossBarTween;
+    Tween barTween;
     void OnHpChange()
     {
-        hpBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * target.hp / target.baseHp);
-        shieldBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * target.shield / target.baseHp);
         float targetScale = target.hp / target.baseHp + target.shield / target.baseHp;
+        hpBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * target.hp / target.baseHp);
+        shieldBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * (target.hp / target.baseHp + target.shield / target.baseHp));
         if (targetScale < currentScale)
         {
-            if (lossBarTween != null) lossBarTween.Kill();
-            lossBarTween = DOTween.To(() => currentScale, value => currentScale = value, targetScale, 3.0f).SetDelay(1.0f).OnUpdate(() => 
+            if (barTween != null) barTween.Kill();
+            lossBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * currentScale);
+            barTween = DOTween.To(() => currentScale, value => currentScale = value, targetScale, 3.0f).SetDelay(1.0f).OnUpdate(() => 
             {
                 lossBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * currentScale); 
             });
         }
         else if(targetScale > currentScale)
         {
+            if (barTween != null) barTween.Kill();
             currentScale = targetScale;
             lossBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, defaultHpBarWidth * currentScale);
         }

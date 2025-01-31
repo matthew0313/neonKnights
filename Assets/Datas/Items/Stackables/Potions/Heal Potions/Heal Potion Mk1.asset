@@ -33,4 +33,4 @@ MonoBehaviour:
   m_cooldown: 20
   m_cooldownSource: {fileID: 11400000, guid: df55e7332e5d96a49940ba16973322f8, type: 2}
   m_cooldownBarColor: {r: 1, g: 0, b: 0, a: 1}
-  m_healAmount: 30
+  m_healAmount: 5
