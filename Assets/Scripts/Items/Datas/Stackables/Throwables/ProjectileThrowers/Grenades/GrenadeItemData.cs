@@ -16,8 +16,18 @@ public abstract class GrenadeItem : ProjectileThrowerItem
     {
         this.data = data;
     }
+
     protected override void OnHit(GameObject hit)
     {
         if (hit.TryGetComponent(out IDamagable tmp)) tmp.GetDamage(data.damage);
+    }
+    public override IEnumerable<LangText> GetStats()
+    {
+        yield return new()
+        {
+            en = $"Damage: {data.damage}",
+            kr = $"대미지: {data.damage}"
+        };
+        foreach (var i in base.GetStats()) yield return i;
     }
 }

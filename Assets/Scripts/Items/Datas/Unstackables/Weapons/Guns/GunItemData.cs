@@ -166,8 +166,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
             }
             else if(counter <= 0.0f)
             {
-                Debug.Log("RRR");
-                if ((auto && Input.GetMouseButton(0) || !auto && Input.GetMouseButtonDown(0)) && UIScanner.ScanUI(Input.mousePosition).Count <= 0)
+                if ((auto && Input.GetMouseButton(0) || !auto && Input.GetMouseButtonDown(0)) && UIScanner.ScanUI().Count <= 0)
                 {
                     if (mag > 0)
                     {

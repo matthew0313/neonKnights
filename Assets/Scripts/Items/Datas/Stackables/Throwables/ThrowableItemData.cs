@@ -14,7 +14,7 @@ public abstract class ThrowableItemData : StackableItemData
     public float cooldown => m_cooldown;
     public Color cooldownBarColor => m_cooldownBarColor;
 }
-public abstract class ThrowableItem : StackableItem, IBarDisplayed, IReloadDisplayed
+public abstract class ThrowableItem : StackableItem, IBarDisplayed, IReloadDisplayed, IStatDisplayed
 {
     new public readonly ThrowableItemData data;
     Throwable m_throwable;
@@ -74,5 +74,13 @@ public abstract class ThrowableItem : StackableItem, IBarDisplayed, IReloadDispl
     {
         base.OnUnwield(wielder);
         throwable.gameObject.SetActive(false);
+    }
+    public virtual IEnumerable<LangText> GetStats()
+    {
+        yield return new()
+        {
+            en = $"Cooldown: {data.cooldown}s",
+            kr = $"쿨타임: {data.cooldown}s"
+        };
     }
 }

@@ -11,6 +11,7 @@ public class InventorySlot
     public Item item { get; private set; }
     int m_count = 0;
     public InventorySlot() { }
+    public InventorySlot(Func<Item, bool> slotRestriction) => this.slotRestriction = slotRestriction;
     public int Insert(Item item, int count)
     {
         if (this.item == null)

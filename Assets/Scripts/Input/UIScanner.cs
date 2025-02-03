@@ -8,7 +8,7 @@ public class UIScanner : MonoBehaviour
     static UIScanner Instance;
     static List<RaycastResult> hits = new();
     bool scanned = false;
-    public static List<RaycastResult> ScanUI(Vector2 screenPos)
+    public static List<RaycastResult> ScanUI()
     {
         if(Instance == null)
         {
@@ -17,7 +17,7 @@ public class UIScanner : MonoBehaviour
         }
         if (!Instance.scanned)
         {
-            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = screenPos }, hits);
+            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = Input.mousePosition }, hits);
             Instance.scanned = true;
         }
         return hits;

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6e4aad59e6f9e408d7cbab9bc5eef7, type: 3}
+  m_Name: Quirk_Armor
+  m_EditorClassIdentifier: 
+  m_quirkName:
+    en: Armor
+    kr: "\uAC11\uC637"
+  m_quirkDescription:
+    en: Charges upon time, nullifies 1 damage when fully charged.
+    kr: "\uC2DC\uAC04\uC774 \uC9C0\uB098\uBA74 \uCDA9\uC804\uD558\uACE0, \uC644\uC804
+      \uCDA9\uC804 \uC0C1\uD0DC\uC5D0\uC120 1\uD68C \uB300\uBBF8\uC9C0\uB97C \uBB34\uD6A8\uD654\uD569\uB2C8\uB2E4."
+  m_quirkColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0}
+  m_quirkIcon: {fileID: 21300000, guid: 723c202347691264296840af1ff3d44b, type: 3}
+  incompatible: []
+  m_minCooldown: 20
+  m_maxCooldown: 40
+  m_armorReplenishText:
+    en: Armor Recharged
+    kr: "\uAC11\uC637 \uCDA9\uC804 \uC644\uB8CC"
+  m_armorUseText:
+    en: Armor Used
+    kr: "\uAC11\uC637 \uC0AC\uC6A9"
+  m_indicateColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}

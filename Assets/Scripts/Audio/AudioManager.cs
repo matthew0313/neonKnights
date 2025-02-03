@@ -19,13 +19,17 @@ public class AudioManager : MonoBehaviour
     }
     Pooler<AudioSource> audioSourcePool = new(() =>
     {
-        return new GameObject("PlayingAudio").AddComponent<AudioSource>();
-    });
+        AudioSource tmp = new GameObject("PlayingAudio").AddComponent<AudioSource>();
+        tmp.playOnAwake = false;
+        return tmp;
+    }, 999999, 0);
     List<PlayingAudio> playing = new(), addQueue = new(), removeQueue = new();
     public PlayingAudio PlaySound(Sound sound)
     {
         if (sound.clip == null) return null;
         PlayingAudio tmp = new(sound, audioSourcePool.GetObject());
+        tmp.source.time = 0.0f;
+        tmp.source.Play();
         playing.Add(tmp);
         return tmp;
     }

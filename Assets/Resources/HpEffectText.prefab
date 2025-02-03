@@ -95,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -168,5 +168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   resistColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  nullifiedColor: {r: 0, g: 0, b: 0, a: 0}
   disappearTime: 0.5
   moveRange: 100

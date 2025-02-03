@@ -10,6 +10,7 @@ public class InventorySlotUI : MonoBehaviour
     [Header("Main")]
     [SerializeField] RawImage icon;
     [SerializeField] TMP_Text count;
+    [SerializeField] Image emptyImage;
 
     [Header("Bar")]
     [SerializeField] GameObject bar;
@@ -29,7 +30,7 @@ public class InventorySlotUI : MonoBehaviour
         OnItemChange();
         OnCountChange();
     }
-    void OnItemChange()
+    protected virtual void OnItemChange()
     {
         if(displaying is INumberDisplayed)
         {
@@ -43,10 +44,12 @@ public class InventorySlotUI : MonoBehaviour
             icon.texture = displaying.render;
             //icon.sprite = displaying.data.icon;
             icon.gameObject.SetActive(true);
+            if(emptyImage != null) emptyImage.gameObject.SetActive(false);
         }
         else
         {
             icon.gameObject.SetActive(false);
+            if (emptyImage != null) emptyImage.gameObject.SetActive(true);
         }
 
         if (displaying is IBarDisplayed)

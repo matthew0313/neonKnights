@@ -41,6 +41,7 @@ public abstract class Item
     }
     public virtual AnimationType heldAnimation => AnimationType.None;
     public virtual RotateMode rotateMode => RotateMode.Free;
+    public virtual bool canDrop => true;
     public virtual LangText GetName() => data.itemName;
     public virtual LangText GetDescription() => data.description;
     public Item(ItemData data)

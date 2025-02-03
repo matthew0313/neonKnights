@@ -33,22 +33,30 @@ public class Quirk_Shielding : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as Item).onWield += (Player wielder) =>
+        if(target is EquipmentItem)
         {
-            if (!added)
-            {
-                wielder.hpComp.maxShield += shieldBonus;
-                added = true;
-            }
-        };
-        (target as Item).onUnwield += (Player wielder) =>
+            (target as EquipmentItem).onEquip += AddShield;
+            (target as EquipmentItem).onUnequip += RemoveShield;
+            if((target as EquipmentItem).equipper != null) AddShield((target as EquipmentItem).equipper);
+        }
+        else
         {
-            if (added)
-            {
-                wielder.hpComp.maxShield -= shieldBonus;
-                added = false;
-            }
-        };
+            (target as Item).onWield += AddShield;
+            (target as Item).onUnwield += RemoveShield;
+            if ((target as Item).wielder != null) AddShield((target as Item).wielder);
+        }
+    }
+    void AddShield(Player wielder)
+    {
+        if (added) return;
+        added = true;
+        wielder.hpComp.maxShield += shieldBonus;
+    }
+    void RemoveShield(Player wielder)
+    {
+        if (!added) return;
+        added = false;
+        wielder.hpComp.maxShield -= shieldBonus;
     }
     public override void SetRandom()
     {
@@ -58,8 +66,8 @@ public class Quirk_Shielding : Quirk
     {
         return new LangText()
         {
-            en = $"+{shieldBonus} shield when held",
-            kr = $"들고 있으면 +{shieldBonus} 실드"
+            en = $"+{shieldBonus} shield when {(target is EquipmentItem ? "equipped" : "held")}",
+            kr = $"{(target is EquipmentItem ? "입고" : "들고")} 있으면 +{shieldBonus} 실드"
         };
     }
     public override void Save(DataUnit data)

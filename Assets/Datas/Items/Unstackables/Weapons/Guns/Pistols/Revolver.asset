@@ -24,7 +24,7 @@ MonoBehaviour:
   m_prefab: {fileID: 3660711220158609357, guid: a2e94145b1d0c18429c244adbe96d123,
     type: 3}
   m_fireSound:
-    clip: {fileID: 8300000, guid: 34a6e000a638a8b41b40b7c8ed67eaa8, type: 3}
+    clip: {fileID: 8300000, guid: 3ae6dd3365df52b49867142abf503cef, type: 3}
     volume: 1
   m_reloadSound:
     clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player_Inventory : Inventory
@@ -14,10 +15,14 @@ public class Player_Inventory : Inventory
 
     internal InventorySlot equippedSlot;
     internal int equippedSlotIndex = -1;
-    internal Item equipped;
-
-    public Action<Item> onEquippedItemChange;
     public Action onEquippedSlotChange;
+
+    internal Item equipped;
+    public Action<Item> onEquippedItemChange;
+
+    internal InventorySlot chestplateSlot = new InventorySlot((Item item) => item == null || item is ChestplateItem);
+    internal ChestplateItem chestplate;
+    public Action<ChestplateItem> onChestplateChange;
 
     public bool canSwapSlot = true;
     public void OnAwake()
@@ -25,11 +30,14 @@ public class Player_Inventory : Inventory
         Init();
         origin = GetComponent<Player>();
         ChangeEquipSlot(0);
+
+        chestplateSlot.onItemChange += OnChestplateSlotUpdate;
     }
     public void OnStart()
     {
         for (int i = 0; i < Mathf.Min(startContents.Length, slotCount); i++)
         {
+            if (startContents[i].data == null || startContents[i].count <= 0) continue; 
             slots[i].SetItem(startContents[i].data.Create());
             slots[i].count = startContents[i].count;
         }
@@ -38,6 +46,7 @@ public class Player_Inventory : Inventory
     {
         SlotChangeCheckUpdate();
         if (equipped != null) equipped.OnWieldUpdate();
+        if (chestplate != null) chestplate.OnEquipUpdate();
     }
 
     const float rapidSlotChangePressTime = 0.5f;
@@ -136,5 +145,16 @@ public class Player_Inventory : Inventory
     public void DropItem(Item item, int count)
     {
 
+    }
+    void OnChestplateSlotUpdate()
+    {
+        ChangeChestplate(chestplateSlot.item as ChestplateItem);
+    }
+    void ChangeChestplate(ChestplateItem item)
+    {
+        if (chestplate != null) chestplate.OnUnequip(origin);
+        chestplate = item;
+        onChestplateChange?.Invoke(chestplate);
+        if (chestplate != null) chestplate.OnEquip(origin);
     }
 }
