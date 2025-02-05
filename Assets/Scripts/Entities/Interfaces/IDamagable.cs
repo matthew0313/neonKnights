@@ -29,8 +29,10 @@ public struct DamageInfo
 }
 public struct DamageReceivedInfo
 {
-    public float receivedDamageTotal => receivedDamage + receivedShieldDamage;
     public float receivedDamage, receivedShieldDamage;
+    public float receivedDamageTotal => receivedDamage + receivedShieldDamage;
+
     public bool fatal;
+
     public bool isWeakPointHit, isResistPointHit;
 }

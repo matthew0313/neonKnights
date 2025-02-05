@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9075cef2b8b1dc4e90fa24222530687, type: 3}
+  m_Name: Kevlar Jacket
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Kevlar Jacket
+    kr: "\uCF00\uBE14\uB7EC \uC7AC\uD0B7"
+  m_description:
+    en: A sturdy bulletproof kevlar jacket.
+    kr: "\uBC29\uD0C4 \uCE90\uBE14\uB7EC \uC7AC\uD0B7\uC785\uB2C8\uB2E4."
+  m_model: {fileID: 0}
+  m_category: 0
+  m_healthBoost: 30

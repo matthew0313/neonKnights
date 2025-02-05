@@ -25,7 +25,7 @@ public class Player_Camera : MonoBehaviour
                 SetRot(Mathf.Clamp(rotX + Input.GetAxis("Mouse Y") * -1 * rotateSpeed * Settings.cameraSensitivity, minRotX, maxRotX), rotY + Input.GetAxis("Mouse X") * rotateSpeed * Settings.cameraSensitivity);
             }
         }
-        if (canZoomCamera)
+        if (canZoomCamera && UIScanner.ScanUI().Count <= 0)
         {
             SetZoom(camAnchor.armLength + Input.mouseScrollDelta.y * -1 * zoomSpeed * Settings.cameraSensitivity);
         }

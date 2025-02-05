@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
 
 
 #if UNITY_EDITOR
@@ -72,6 +70,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
     public bool invincible = false;
     public bool dead { get; private set; } = false;
 
+    public Action<DamageInfoWrap> modifyDamageTaken;
     public Action<DamageReceivedInfo> onDamage;
     public Action<float> onHeal;
     public Action onHpChange;
@@ -106,7 +105,14 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
     public float damageTakenMultiplier { get; set; } = 1.0f;
     public virtual DamageReceivedInfo GetDamage(DamageInfo damage)
     {
-        if (dead) return new() { receivedDamage = 0 };
+        if (dead || invincible) return new() { receivedDamage = 0 };
+
+        DamageInfoWrap wrap = new() { info = damage };
+        modifyDamageTaken?.Invoke(wrap);
+        damage = wrap.info;
+
+        if (damage.amount <= 0) return new() { receivedDamage = 0 };
+
         shieldRegenCounter = 0.0f;
         float amountLeft = damage.amount * damageTakenMultiplier;
         DamageReceivedInfo info = new();
@@ -272,4 +278,8 @@ public class HpCompSaveData
 {
     public float hp, shield;
     public List<DataUnit> aliments = new();
+}
+public class DamageInfoWrap
+{
+    public DamageInfo info;
 }

@@ -16,7 +16,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     Player_Inventory player;
 
     [Header("Description")]
-    [SerializeField] GameObject describer;
+    [SerializeField] RectTransform describer;
     [SerializeField] TMP_Text itemName;
     [SerializeField] GameObject itemCategory;
     [SerializeField] TMP_Text itemCategoryText, itemDesc;
@@ -60,7 +60,7 @@ public class InventorySlotUIHandler : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                List<RaycastResult> results = UIScanner.ScanUI();
                 foreach (var i in results)
                 {
                     if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
@@ -75,7 +75,7 @@ public class InventorySlotUIHandler : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                List<RaycastResult> results = UIScanner.ScanUI();
                 foreach (var i in results)
                 {
                     if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
@@ -98,7 +98,7 @@ public class InventorySlotUIHandler : MonoBehaviour
             grabbingSlotUI.transform.position = Input.mousePosition;
             if (Input.GetMouseButtonDown(0))
             {
-                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                List<RaycastResult> results = UIScanner.ScanUI();
                 bool slotHit = false;
                 foreach (var i in results)
                 {
@@ -122,7 +122,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                         }
                     }
                 }
-                if (!slotHit)
+                if (!slotHit && grabbingSlot.item.canDrop)
                 {
                     //DropItem(grabbingSlot.item, grabbingSlot.count);
                     //grabbingSlot.SetItem(null);
@@ -130,18 +130,18 @@ public class InventorySlotUIHandler : MonoBehaviour
             }
             else if(grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(1))
             {
-                List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+                List<RaycastResult> results = UIScanner.ScanUI();
                 bool slotHit = false;
                 foreach (var i in results)
                 {
                     if (i.gameObject.TryGetComponent(out InventorySlotUI slot))
                     {
                         slotHit = true;
-                        grabbingSlot.count -= 1 - slot.origin.Insert(grabbingSlot.item, 1);
+                        grabbingSlot.count -= 1 - slot.origin.Insert(grabbingSlot.item.Copy(), 1);
                         break;
                     }
                 }
-                if (!slotHit)
+                if (!slotHit && grabbingSlot.item.canDrop)
                 {
                     //DropItem(grabbingSlot.item.Copy(), 1);
                     //grabbingSlot.count--;
@@ -154,15 +154,17 @@ public class InventorySlotUIHandler : MonoBehaviour
     {
         if (grabbingSlot.item == null)
         {
-            List<RaycastResult> results = UIScanner.ScanUI(Input.mousePosition);
+            List<RaycastResult> results = UIScanner.ScanUI();
             bool detected = false;
             foreach (var i in results)
             {
                 if (i.gameObject.TryGetComponent(out InventorySlotUI slot) && slot.origin.item != null)
                 {
                     detected = true;
-                    describer.transform.position = Input.mousePosition;
                     if (slot.origin.item != describing) Describe(slot.origin.item);
+                    Debug.Log(Input.mousePosition);
+                    describer.pivot = new Vector2((Input.mousePosition.x < Screen.width / 2.0f ? 0.0f : 1.0f), (Input.mousePosition.y < Screen.height / 2.0f ? 0.0f : 1.0f));
+                    describer.position = Input.mousePosition;
                     describer.gameObject.SetActive(true);
                     break;
                 }

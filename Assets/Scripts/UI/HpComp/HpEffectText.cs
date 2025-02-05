@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(TMP_Text), typeof(RainbowText))]
 public class HpEffectText : PooledPrefab<HpEffectText>
 {
-    [SerializeField] Color normalColor, resistColor;
+    [SerializeField] Color normalColor, resistColor, nullifiedColor;
     [SerializeField] float disappearTime = 0.5f, moveRange = 100.0f;
     TMP_Text text;
     RainbowText rainbow;
@@ -21,9 +21,18 @@ public class HpEffectText : PooledPrefab<HpEffectText>
     }
     public void Set(Vector3 position, DamageReceivedInfo info)
     {
-        rainbow.enabled = info.isWeakPointHit;
-        this.text.text = (Mathf.Round(info.receivedDamageTotal * 10.0f) / 10.0f).ToString();
-        this.text.color = (info.isResistPointHit ? resistColor : normalColor);
+        if(info.receivedDamageTotal <= 0)
+        {
+            rainbow.enabled = false;
+            this.text.text = "0";
+            this.text.color = nullifiedColor;
+        }
+        else
+        {
+            rainbow.enabled = info.isWeakPointHit;
+            this.text.text = (Mathf.Round(info.receivedDamageTotal * 10.0f) / 10.0f).ToString();
+            this.text.color = (info.isResistPointHit ? resistColor : normalColor);
+        }
 
         transform.SetParent(MainCanvas.Instance.transform);
 

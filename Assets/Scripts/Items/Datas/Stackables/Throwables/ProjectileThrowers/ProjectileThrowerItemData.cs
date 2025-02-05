@@ -44,4 +44,18 @@ public abstract class ProjectileThrowerItem : ThrowableItem
         projectile.Set(OnHit, data.blastRadius, dir * data.throwForce, data.whatToHit, data.effect);
     }
     protected abstract void OnHit(GameObject hit);
+    public override IEnumerable<LangText> GetStats()
+    {
+        yield return new()
+        {
+            en = $"Throw Force: {data.throwForce}",
+            kr = $"던지는 힘: {data.throwForce}"
+        };
+        yield return new()
+        {
+            en = $"Effect Radius: {data.blastRadius}",
+            kr = $"효과 범위: {data.blastRadius}"
+        };
+        foreach (var i in base.GetStats()) yield return i;
+    }
 }

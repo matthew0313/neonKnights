@@ -19,15 +19,16 @@ MonoBehaviour:
     en: A compact and highly accurate submachine gun widely used by special forces.
     kr: "\uCF64\uD329\uD2B8\uD558\uACE0 \uC815\uD655\uB3C4\uAC00 \uB192\uC740 \uAE30\uAD00\uB2E8\uCD1D\uC73C\uB85C
       \uD2B9\uC218\uBD80\uB300\uC5D0\uC11C \uB9CE\uC774 \uC0AC\uC6A9\uB429\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 1204132164249223649, guid: 73485a909d21542488fc07c1cb6ae582, type: 3}
   m_category: 11
-  m_prefab: {fileID: 0}
+  m_prefab: {fileID: 1049074893347532957, guid: ec9f8528d41aa344f86b0ceab1169055,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 751322907c12af549ad9f0e4cbd07c66, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8ae3050755e28cb459820e40d46f1d5e, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 1
@@ -39,7 +40,8 @@ MonoBehaviour:
   m_baseReloadTime: 5
   m_baseReserve: 200
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 5832811861654171486, guid: 2c06104e19f1c3440810962b4e457acd,
+    type: 3}
   m_baseBulletSpeed: 15
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
