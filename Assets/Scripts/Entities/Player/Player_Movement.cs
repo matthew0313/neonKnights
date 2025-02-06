@@ -38,13 +38,13 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] TrailRenderer slideTrail;
 
     [Header("Rotate")]
-    [SerializeField] Transform rotator;
+    [SerializeField] Transform m_rotator;
     [SerializeField] internal float rotateSpeed = 1.0f;
+    public Transform rotator => m_rotator;
 
     [Header("Debug")]
     [SerializeField] string FSMPath;
 
-    float m_speedMultiplier = 1.0f;
     public float speedMultiplier => origin.statistics.speedMultiplier;
     public float speed => moveSpeed * speedMultiplier;
 

@@ -146,6 +146,31 @@ public abstract class Item
                 en = "Potion",
                 kr = "포션"
             };
+            case ItemCategory.Throwable: return new LangText()
+            {
+                en = "Throwable",
+                kr = "투척 아이템"
+            };
+            case ItemCategory.Equipment: return new LangText()
+            {
+                en = "Equipment",
+                kr = "장비품"
+            };
+            case ItemCategory.Chestplate: return new LangText()
+            {
+                en = "Chestplate",
+                kr = "흉갑"
+            };
+            case ItemCategory.Accessory: return new LangText()
+            {
+                en = "Accessory",
+                kr = "장신구"
+            };
+            case ItemCategory.Melee: return new LangText()
+            {
+                en = "Melee",
+                kr = "근접 무기"
+            };
             default: return new LangText()
             {
                 en = "???",
@@ -177,5 +202,10 @@ public enum ItemCategory
     SniperRifle = 1<<4,
     Shotgun = 1<<5,
     Consumable = 1<<6,
-    Potion = 1<<7
+    Potion = 1<<7,
+    Throwable = 1<<8,
+    Equipment = 1<<9,
+    Chestplate = 1<<10,
+    Accessory = 1<<11,
+    Melee = 1<<12
 }

@@ -11,7 +11,7 @@ public class InventoryTab : Tab
     [Header("Slots")]
     [SerializeField] Transform slotAnchor;
     [SerializeField] InventorySlotUI slotPrefab;
-    [SerializeField] InventorySlotUI chestplateSlot;
+    [SerializeField] InventorySlotUI chestplateSlot, accessory1Slot, accessory2Slot;
 
     List<InventorySlotUI> slots = new();
     Player_Inventory player;
@@ -21,6 +21,8 @@ public class InventoryTab : Tab
         player.onSlotCountChange += UpdateSlotCount;
         UpdateSlotCount();
         chestplateSlot.Set(player.chestplateSlot);
+        accessory1Slot.Set(player.accessorySlot1);
+        accessory2Slot.Set(player.accessorySlot2);
     }
     void UpdateSlotCount()
     {

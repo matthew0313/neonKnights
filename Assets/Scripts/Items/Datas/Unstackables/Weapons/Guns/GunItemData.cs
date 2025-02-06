@@ -310,7 +310,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                         }
                         DamageReceivedInfo damageReceivedInfo = target.GetDamage(damageInfo.damage);
                         onShotDamageGive?.Invoke(shot, damageReceivedInfo, hit);
-                        shot.damageGiven = true;
                         if (pierce <= 0)
                         {
                             dist = hit.distance;
@@ -427,7 +426,6 @@ public class GunShot
 {
     public GunFire origin;
     public List<GameObject> hit = new();
-    public bool damageGiven = false;
 }
 public class GunAmmoRefillInfo
 {
