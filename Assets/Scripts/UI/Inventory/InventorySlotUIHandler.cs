@@ -162,7 +162,6 @@ public class InventorySlotUIHandler : MonoBehaviour
                 {
                     detected = true;
                     if (slot.origin.item != describing) Describe(slot.origin.item);
-                    Debug.Log(Input.mousePosition);
                     describer.pivot = new Vector2((Input.mousePosition.x < Screen.width / 2.0f ? 0.0f : 1.0f), (Input.mousePosition.y < Screen.height / 2.0f ? 0.0f : 1.0f));
                     describer.position = Input.mousePosition;
                     describer.gameObject.SetActive(true);

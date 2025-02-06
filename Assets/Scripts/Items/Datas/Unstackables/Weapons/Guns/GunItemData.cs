@@ -389,6 +389,11 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
             en = $"Dropoff: {bulletDropoffPercentage}%",
             kr = $"탄 투하: {bulletDropoffPercentage}%"
         };
+        yield return new()
+        {
+            en = $"Weight: {weight}",
+            kr = $"무게: {weight}"
+        };
     }
 }
 public enum GunFireSource

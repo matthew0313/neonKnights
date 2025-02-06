@@ -9,9 +9,11 @@ public abstract class MeleeItemData : WeaponItemData
     [Header("Melee")]
     [SerializeField] float m_baseDamage;
     [SerializeField] int m_baseMaxHits = 1;
+    [SerializeField] float m_baseWeight;
     [SerializeField] Sound m_slashSound, m_hitSound;
     public float baseDamage => m_baseDamage;
     public int baseMaxHits => m_baseMaxHits;
+    public float baseWeight => m_baseWeight;
     public Sound slashSound => m_slashSound;
     public Sound hitSound => m_hitSound;
 }
@@ -24,9 +26,11 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
         this.data = data;
         damage = data.baseDamage;
         maxHits = data.baseMaxHits;
+        weight = data.baseWeight;
     }
     public float damage { get; set; }
     public int maxHits;
+    public float weight;
 
     string prevName;
     public override void OnWield(Player wielder)
@@ -35,6 +39,7 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
         weapon.hitbox.onTriggerEnter += OnTriggerEnter;
         wielder.animation.onSlashStart += OnSlashStart;
         wielder.animation.onComboEnd += OnComboEnd;
+        wielder.movement.moveSpeed -= weight;
     }
     public Action<MeleeSlash, MeleeGiveDamageInfo> modifySlashDamageGiven;
 
@@ -60,6 +65,7 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
         weapon.hitbox.onTriggerEnter -= OnTriggerEnter;
         wielder.animation.onSlashStart -= OnSlashStart;
         wielder.animation.onComboEnd -= OnComboEnd;
+        wielder.movement.moveSpeed += weight;
     }
     MeleeSlash currentSlash = null;
     void OnSlashStart()
@@ -129,6 +135,11 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
         {
             en = $"Max Hits: {maxHits}",
             kr = $"광역 히트 수: {maxHits}"
+        };
+        yield return new()
+        {
+            en = $"Weight: {weight}",
+            kr = $"무게: {weight}"
         };
     }
 }

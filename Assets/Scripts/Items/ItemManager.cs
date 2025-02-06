@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour
     public float itemRenderSpaceRotation = 0.0f;
     public void AddItem(Item item)
     {
+        Debug.Log(item.data.name);
         addQueue.Add(item);
     }
     public void RemoveItem(Item item)
@@ -39,11 +40,11 @@ public class ItemManager : MonoBehaviour
         foreach(var i in addQueue)
         {
             items.Add(i);
-        }
+        } addQueue.Clear();
         foreach(var i in removeQueue)
         {
             items.Remove(i);
-        }
+        } removeQueue.Clear();
         itemRenderSpaceRotation += Time.deltaTime * itemRenderRotateSpeed;
         if (itemRenderSpaceRotation > 360.0f) itemRenderSpaceRotation -= 360.0f;
     }

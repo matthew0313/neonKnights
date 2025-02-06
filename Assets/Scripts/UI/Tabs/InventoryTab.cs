@@ -26,7 +26,6 @@ public class InventoryTab : Tab
     }
     void UpdateSlotCount()
     {
-        Debug.Log(player.slotCount);
         int i;
         for(i = 0 ; i < player.slotCount - Player_Inventory.beltLength; i++)
         {

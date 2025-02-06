@@ -133,8 +133,8 @@ public class Quirk_Spooling : Quirk
         */
         return new LangText()
         {
-            en = $"-{data.MinMultiplier * 100f}% Firerate on continuous fire",
-            kr = $"연속 사격 시 발사주기 -{data.MinMultiplier * 100f}%"
+            en = $"{data.MinMultiplier * 100f}% Firerate on continuous fire",
+            kr = $"연속 사격 시 발사주기 {data.MinMultiplier * 100f}%"
         };
     }
 
