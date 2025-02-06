@@ -49,9 +49,4 @@ public abstract class Quirk
     {
         return data.Create();
     }
-
-    internal void OnQuirkRemove(IQuirkable target)
-    {
-        throw new NotImplementedException();
-    }
 }
