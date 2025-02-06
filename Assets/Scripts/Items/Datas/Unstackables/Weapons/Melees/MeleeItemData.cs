@@ -1,0 +1,163 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public abstract class MeleeItemData : WeaponItemData
+{
+    [Header("Melee")]
+    [SerializeField] float m_baseDamage;
+    [SerializeField] int m_baseMaxHits = 1;
+    [SerializeField] Sound m_slashSound, m_hitSound;
+    public float baseDamage => m_baseDamage;
+    public int baseMaxHits => m_baseMaxHits;
+    public Sound slashSound => m_slashSound;
+    public Sound hitSound => m_hitSound;
+}
+public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
+{
+    new public Melee weapon => base.weapon as Melee;
+    new public readonly MeleeItemData data;
+    public MeleeItem(MeleeItemData data) : base(data)
+    {
+        this.data = data;
+        damage = data.baseDamage;
+        maxHits = data.baseMaxHits;
+    }
+    public float damage { get; set; }
+    public int maxHits;
+
+    string prevName;
+    public override void OnWield(Player wielder)
+    {
+        base.OnWield(wielder);
+        prevName = weapon.gameObject.name;
+        weapon.gameObject.name = "HeldMelee";
+        weapon.hitbox.onTriggerEnter += OnTriggerEnter;
+        wielder.animation.onSlashStart += OnSlashStart;
+        wielder.animation.onComboEnd += OnComboEnd;
+    }
+    public Action<MeleeSlash, MeleeGiveDamageInfo> modifySlashDamage;
+
+    public Action<MeleeSlash> onSlashStart, onSlashEnd;
+    public Action<MeleeSlash, DamageReceivedInfo> onSlashDamageGive;
+    public override void OnWieldUpdate()
+    {
+        base.OnWieldUpdate();
+        if(Input.GetMouseButtonDown(0) && UIScanner.ScanUI().Count <= 0)
+        {
+            wielder.animation.TriggerSlash();
+        }
+    }
+    public override void OnUnwield(Player wielder)
+    {
+        base.OnUnwield(wielder);
+        if (currentSlash != null)
+        {
+            onSlashEnd?.Invoke(currentSlash);
+            currentSlash = null;
+        }
+        weapon.gameObject.name = prevName;
+        weapon.hitbox.onTriggerEnter -= OnTriggerEnter;
+        wielder.animation.onSlashStart -= OnSlashStart;
+        wielder.animation.onComboEnd -= OnComboEnd;
+    }
+    MeleeSlash currentSlash = null;
+    void OnSlashStart()
+    {
+        Debug.Log("SlashStart");
+        if(currentSlash != null)
+        {
+            onSlashEnd?.Invoke(currentSlash);
+        }
+        currentSlash = new MeleeSlash()
+        {
+            info = new()
+            {
+                damage = damage * wielder.statistics.damageMultiplier,
+                maxHits = maxHits
+            }
+        };
+        AudioManager.Instance.PlaySound(data.slashSound);
+        onSlashStart?.Invoke(currentSlash);
+    }
+    void OnComboEnd()
+    {
+        if (currentSlash != null)
+        {
+            onSlashEnd?.Invoke(currentSlash);
+            currentSlash = null;
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (currentSlash == null || wielder == null) return;
+        if (currentSlash.hitCount >= currentSlash.info.maxHits) return;
+
+        GameObject hitObject = (other.attachedRigidbody != null ? other.attachedRigidbody.gameObject : other.gameObject);
+        if(hitObject.TryGetComponent(out Point point))
+        {
+            if (currentSlash.hit.Contains(point.pointOf)) return;
+            else currentSlash.hit.Add(point.pointOf);
+        }
+        else
+        {
+            if (currentSlash.hit.Contains(hitObject)) return;
+            else currentSlash.hit.Add(hitObject);
+        }
+        if (hitObject.TryGetComponent(out IDamagable tmp))
+        {
+            MeleeGiveDamageInfo info = new()
+            {
+                damage = currentSlash.info.damage * wielder.statistics.damageMultiplier,
+                hitObject = hitObject
+            };
+            modifySlashDamage?.Invoke(currentSlash, info);
+            DamageReceivedInfo received = tmp.GetDamage(info.damage);
+            onSlashDamageGive?.Invoke(currentSlash, received);
+            currentSlash.hitCount++;
+            AudioManager.Instance.PlaySound(data.hitSound);
+        }
+    }
+    public virtual IEnumerable<LangText> GetStats()
+    {
+        yield return new()
+        {
+            en = $"Damage: {damage}",
+            kr = $"대미지: {damage}"
+        };
+        yield return new()
+        {
+            en = $"Max Hits: {maxHits}",
+            kr = $"광역 히트 수: {maxHits}"
+        };
+    }
+}
+public class MeleeSlashInfo
+{
+    public float damage;
+    public int maxHits;
+}
+public class MeleeSlash
+{
+    public MeleeSlashInfo info;
+    public int hitCount = 0;
+    public List<GameObject> hit = new();
+}
+public class MeleeGiveDamageInfo
+{
+    public DamageInfo damage;
+    public GameObject hitObject;
+}
+[System.Serializable]
+public struct MeleeComboElement
+{
+    [SerializeField] float m_baseDamage;
+
+    [SerializeField] float m_hitboxStartTime;
+    [SerializeField] float m_hitboxEndTime;
+
+    [SerializeField] float m_nextComboStartTime;
+    [SerializeField] float m_endTime;
+}

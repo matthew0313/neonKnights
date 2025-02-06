@@ -83,4 +83,12 @@ public abstract class ThrowableItem : StackableItem, IBarDisplayed, IReloadDispl
             kr = $"쿨타임: {data.cooldown}s"
         };
     }
+    public override void Delete()
+    {
+        base.Delete();
+        if(m_throwable != null)
+        {
+            MonoBehaviour.Destroy(m_throwable);
+        }
+    }
 }

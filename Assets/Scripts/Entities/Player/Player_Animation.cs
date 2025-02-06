@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class Player_Animation : MonoBehaviour
         anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
+        AssignMeleeCallbacks();
     }
     void OnEquippedItemChange(Item item)
     {
@@ -52,6 +54,28 @@ public class Player_Animation : MonoBehaviour
     {
         anim.SetTrigger(throwID);
     }
+    readonly int slashID = Animator.StringToHash("Slash");
+    readonly int comboID = Animator.StringToHash("Combo");
+    public Action onSlashStart, onComboEnd;
+    void AssignMeleeCallbacks()
+    {
+        foreach(var i in anim.GetBehaviours<MeleeSlashBehaviour>())
+        {
+            i.onSlashStart += () => { onSlashStart?.Invoke(); };
+        }
+        foreach(var i in anim.GetBehaviours<MeleeComboEndBehaviour>())
+        {
+            i.onComboEnd += () => { onComboEnd?.Invoke(); };
+        }
+    }
+    public void TriggerSlash()
+    {
+        anim.SetTrigger(slashID);
+    }
+    public int GetComboIndex()
+    {
+        return anim.GetInteger(comboID);
+    }
 }
 public enum AnimationType
 {
@@ -61,5 +85,6 @@ public enum AnimationType
     SniperRifle = 3,
     Shotgun = 4,
     Potion = 5,
-    Throwable = 6
+    Throwable = 6,
+    Knife = 7
 }

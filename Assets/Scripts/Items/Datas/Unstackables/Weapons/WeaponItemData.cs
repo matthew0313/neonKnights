@@ -83,7 +83,10 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
     public override void Delete()
     {
         base.Delete();
-        MonoBehaviour.Destroy(weapon);
+        if(m_weapon != null)
+        {
+            MonoBehaviour.Destroy(m_weapon);
+        }
     }
     public IEnumerable<Quirk> GetQuirks()
     {

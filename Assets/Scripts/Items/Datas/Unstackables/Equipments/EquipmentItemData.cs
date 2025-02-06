@@ -40,4 +40,13 @@ public abstract class EquipmentItem : UnstackableItem, IStatDisplayed, IQuirkabl
     {
         foreach (var i in quirks) yield return i;
     }
+    public override Item Copy()
+    {
+        EquipmentItem tmp = base.Copy() as EquipmentItem;
+        foreach(var i in quirks)
+        {
+            (i as IQuirkable).AddQuirk(i.Copy());
+        }
+        return tmp;
+    }
 }

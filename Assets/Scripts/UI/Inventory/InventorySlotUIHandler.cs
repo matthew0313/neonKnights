@@ -231,17 +231,19 @@ public class InventorySlotUIHandler : MonoBehaviour
         if (item is IQuirkDisplayed)
         {
             int index = 0;
+            int tot = 0;
             foreach (var i in (item as IQuirkDisplayed).GetQuirks())
             {
                 if (itemQuirkList.Count <= index) itemQuirkList.Add(Instantiate(itemQuirkPrefab, itemQuirkAnchor));
                 itemQuirkList[index].gameObject.SetActive(true);
                 itemQuirkList[index++].Set(i);
+                tot++;
             }
             for (; index < itemQuirkList.Count; index++)
             {
                 itemQuirkList[index].gameObject.SetActive(false);
             }
-            itemQuirkAnchor.gameObject.SetActive(index > 0);
+            itemQuirkAnchor.gameObject.SetActive(tot > 0);
         }
         else itemQuirkAnchor.gameObject.SetActive(false);
         if(item is QuirkShard_Item)

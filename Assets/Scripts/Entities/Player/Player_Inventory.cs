@@ -24,6 +24,11 @@ public class Player_Inventory : Inventory
     internal ChestplateItem chestplate;
     public Action<ChestplateItem> onChestplateChange;
 
+    internal InventorySlot accessorySlot1 = new InventorySlot((Item item) => item == null || item is AccessoryItem);
+    internal InventorySlot accessorySlot2 = new InventorySlot((Item item) => item == null || item is AccessoryItem);
+    internal AccessoryItem accessory1, accessory2;
+    public Action<AccessoryItem> onAccessory1Change, onAccessory2Change;
+
     public bool canSwapSlot = true;
     public void OnAwake()
     {
@@ -32,6 +37,8 @@ public class Player_Inventory : Inventory
         ChangeEquipSlot(0);
 
         chestplateSlot.onItemChange += OnChestplateSlotUpdate;
+        accessorySlot1.onItemChange += OnAccessorySlot1Update;
+        accessorySlot2.onItemChange += OnAccessorySlot2Update;
     }
     public void OnStart()
     {
@@ -47,6 +54,8 @@ public class Player_Inventory : Inventory
         SlotChangeCheckUpdate();
         if (equipped != null) equipped.OnWieldUpdate();
         if (chestplate != null) chestplate.OnEquipUpdate();
+        if (accessory1 != null) accessory1.OnEquipUpdate();
+        if (accessory2 != null) accessory2.OnEquipUpdate();
     }
 
     const float rapidSlotChangePressTime = 0.5f;
@@ -156,5 +165,27 @@ public class Player_Inventory : Inventory
         chestplate = item;
         onChestplateChange?.Invoke(chestplate);
         if (chestplate != null) chestplate.OnEquip(origin);
+    }
+    void OnAccessorySlot1Update()
+    {
+        ChangeAccessory1(accessorySlot1.item as AccessoryItem);
+    }
+    void OnAccessorySlot2Update()
+    {
+        ChangeAccessory2(accessorySlot2.item as AccessoryItem);
+    }
+    void ChangeAccessory1(AccessoryItem item)
+    {
+        if (accessory1 != null) accessory1.OnUnequip(origin);
+        accessory1 = item;
+        onAccessory1Change?.Invoke(accessory1);
+        if (accessory1 != null) accessory1.OnEquip(origin);
+    }
+    void ChangeAccessory2(AccessoryItem item)
+    {
+        if (accessory2 != null) accessory2.OnUnequip(origin);
+        accessory2 = item;
+        onAccessory2Change?.Invoke(accessory2);
+        if (accessory2 != null) accessory2.OnEquip(origin);
     }
 }

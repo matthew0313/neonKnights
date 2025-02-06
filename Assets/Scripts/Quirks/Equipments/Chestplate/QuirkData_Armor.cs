@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -91,5 +92,21 @@ public class Quirk_Armor : Quirk
             en = $"Nullifies 1 damage every {cooldown}s",
             kr = $"{cooldown}초마다 대미지 1회 무효화"
         };
+    }
+    public override void Save(DataUnit data)
+    {
+        base.Save(data);
+        data.floats["cooldown"] = cooldown;
+    }
+    public override void Load(DataUnit data)
+    {
+        base.Load(data);
+        data.floats.TryGetValue("cooldown", out cooldown);
+    }
+    public override Quirk Copy()
+    {
+        Quirk_Armor tmp =  base.Copy() as Quirk_Armor;
+        tmp.cooldown = cooldown;
+        return tmp;
     }
 }
