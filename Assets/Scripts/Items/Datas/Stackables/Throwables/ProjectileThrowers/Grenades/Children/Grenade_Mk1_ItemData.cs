@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Grenade Mk1", menuName = "Scriptables/Items/Stackables/Throwables/Projectile Throwers/Grenades/Grenade Mk1", order = 0)]
