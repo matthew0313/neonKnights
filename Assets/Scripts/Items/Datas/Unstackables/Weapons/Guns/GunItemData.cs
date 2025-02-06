@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 public abstract class GunItemData : WeaponItemData
 {
@@ -86,6 +87,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public float bulletDropoffPercentage;
     public float weight = 0;
     public HitEffect hitEffect;
+
+    public Character owner ;
 
     public Action onNumberUpdate { get; set; }
     int m_mag;
@@ -335,6 +338,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         }
     }
     public Action<GunAmmoRefillInfo> modifyAmmoRefilled, onAmmoRefill;
+    internal object characterController;
+
     public void RefillAmmo(GunAmmoRefillInfo info)
     {
         modifyAmmoRefilled?.Invoke(info);
