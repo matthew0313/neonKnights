@@ -44,4 +44,10 @@ public class Revolver_Item : PistolItem, IScopeAttachable
         tmp.scope.gameObject.SetActive(scopeAttached);
         return tmp;
     }
+    public override Item Copy()
+    {
+        Revolver_Item tmp = base.Copy() as Revolver_Item;
+        tmp.scopeAttached = scopeAttached;
+        return tmp;
+    }
 }

@@ -25,9 +25,12 @@ MonoBehaviour:
     type: 3}
   m_baseDamage: 25
   m_baseMaxHits: 1
+  m_baseWeight: 0
   m_slashSound:
     clip: {fileID: 8300000, guid: 5c0408550e118854a8463205e3cf285f, type: 3}
     volume: 1
   m_hitSound:
     clip: {fileID: 8300000, guid: 273ef4dd27ce57345a26c2db664d1d3d, type: 3}
     volume: 1
+  m_curseDamageMultiplier: 300
+  m_curseSelfDamage: 5

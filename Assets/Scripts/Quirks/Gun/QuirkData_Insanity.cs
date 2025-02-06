@@ -38,8 +38,8 @@ public class Quirk_Insanity : Quirk
     {
         return new LangText()
         {
-            en = $"-{data.damageReductionPercentage} Damage +{data.fireRateBonusPercentage}% FireRate",
-            kr = $"-{data.damageReductionPercentage} 대미지 +{data.fireRateBonusPercentage}% 발사주기"
+            en = $"-{data.damageReductionPercentage}% Damage -{data.fireRateBonusPercentage}% FireRate",
+            kr = $"-{data.damageReductionPercentage}% 대미지 -{data.fireRateBonusPercentage}% 발사주기"
         };
     }
 }

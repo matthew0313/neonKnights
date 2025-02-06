@@ -17,7 +17,7 @@ public class QuirkData_Slowing : QuirkData
     public float maxSlowPercentage => m_maxSlowPercentage;
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target) && target is GunItem;
+        return base.IsAddable(target) && (target is GunItem || target is MeleeItem);
     }
     public override Quirk Create()
     {
@@ -35,7 +35,8 @@ public class Quirk_Slowing : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as GunItem).onShotHit += OnShotHit;
+        if (target is GunItem tmp) tmp.onShotHit += OnShotHit;
+        else if (target is MeleeItem tmp2) tmp2.onSlashHit += OnSlashHit;
     }
     public override void SetRandom()
     {
@@ -44,6 +45,16 @@ public class Quirk_Slowing : Quirk
     void OnShotHit(GunShot shot, GunHitInfo info)
     {
         if(info.hitObject.TryGetComponent(out IAlimentable tmp))
+        {
+            if (UnityEngine.Random.Range(0.0f, 100.0f) <= slowChance)
+            {
+                tmp.ApplyAliment(new Aliment_Slowed(UnityEngine.Random.Range(data.minSlowPercentage, data.maxSlowPercentage), 3.0f));
+            }
+        }
+    }
+    void OnSlashHit(MeleeSlash slash, GameObject hitObject)
+    {
+        if (hitObject.TryGetComponent(out IAlimentable tmp))
         {
             if (UnityEngine.Random.Range(0.0f, 100.0f) <= slowChance)
             {

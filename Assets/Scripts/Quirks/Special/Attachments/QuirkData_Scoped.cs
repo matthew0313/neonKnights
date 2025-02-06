@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_Scoped", menuName = "Scriptables/Quirks/Attachments/Scoped", order = 0)]
+[CreateAssetMenu(fileName = "Quirk_Scoped", menuName = "Scriptables/Quirks/Special/Attachments/Scoped", order = 0)]
 public class QuirkData_Scoped : QuirkData
 {
     public override bool IsAddable(IQuirkable target)

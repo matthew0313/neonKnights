@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class QuirkData_Dazing : QuirkData
     public float maxStunChance => m_maxStunChance;
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target) && target is GunItem;
+        return base.IsAddable(target) && (target is GunItem || target is MeleeItem);
     }
     public override Quirk Create()
     {
@@ -32,16 +33,28 @@ public class Quirk_Dazing : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as GunItem).onShotHit += (GunShot shot, GunHitInfo info) =>
+        if (target is GunItem tmp) tmp.onShotHit += OnShotHit;
+        else if (target is MeleeItem tmp2) tmp2.onSlashHit += OnSlashHit;
+    }
+    void OnShotHit(GunShot shot, GunHitInfo info)
+    {
+        if (info.hitObject.TryGetComponent<WeakPoint>(out _))
         {
-            if (info.hitObject.TryGetComponent<WeakPoint>(out _))
+            if (info.hitObject.TryGetComponent(out IAlimentable tmp))
             {
-                if(info.hitObject.TryGetComponent(out IAlimentable tmp))
-                {
-                    if (UnityEngine.Random.Range(0.0f, 100.0f) <= stunChance) tmp.ApplyAliment(new Aliment_Stunned(1.0f));
-                }
+                if (UnityEngine.Random.Range(0.0f, 100.0f) <= stunChance) tmp.ApplyAliment(new Aliment_Stunned(1.0f));
             }
-        };
+        }
+    }
+    void OnSlashHit(MeleeSlash slash, GameObject hitObject)
+    {
+        if (hitObject.TryGetComponent<WeakPoint>(out _))
+        {
+            if (hitObject.TryGetComponent(out IAlimentable tmp))
+            {
+                if (UnityEngine.Random.Range(0.0f, 100.0f) <= stunChance) tmp.ApplyAliment(new Aliment_Stunned(1.0f));
+            }
+        }
     }
     public override void SetRandom()
     {

@@ -14,7 +14,7 @@ public class QuirkData_BruteForce : QuirkData
     public float maxDamageBonusPercentage => m_maxDamageBonusPercentage;
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target) && target is GunItem;
+        return base.IsAddable(target) && (target is GunItem || target is MeleeItem);
     }
     public override Quirk Create()
     {
@@ -32,11 +32,16 @@ public class Quirk_BruteForce : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as GunItem).modifyShotDamageGiven += ModifyShotDamageGiven;
+        if (target is GunItem tmp) tmp.modifyShotDamageGiven += ModifyShotDamageGiven;
+        else if (target is MeleeItem tmp2) tmp2.modifySlashDamageGiven += ModifySlashDamageGiven;
     }
     void ModifyShotDamageGiven(GunShot shot, GunGiveDamageInfo info)
     {
         if (info.hit.hitObject.TryGetComponent(out ResistPoint tmp)) info.damage.amount *= (100.0f + damageBonusPercentage) / 100.0f;
+    }
+    void ModifySlashDamageGiven(MeleeSlash slash, MeleeGiveDamageInfo info)
+    {
+        if (info.hitObject.TryGetComponent(out ResistPoint tmp)) info.damage.amount *= (100.0f + damageBonusPercentage) / 100.0f;
     }
     public override void SetRandom()
     {

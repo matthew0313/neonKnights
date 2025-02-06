@@ -16,9 +16,9 @@ MonoBehaviour:
     en: Insanity
     kr: "\uAD11\uAE30"
   m_quirkDescription:
-    en: Greatly increases FireRate, at the price of reduced damage.
+    en: Greatly decreases FireRate, at the price of reduced damage.
     kr: "\uB300\uBBF8\uC9C0\uB97C \uB300\uAC00\uB85C \uBC1C\uC0AC\uC8FC\uAE30\uB97C
-      \uD06C\uAC8C \uC0C1\uC2B9\uC2DC\uD0B5\uB2C8\uB2E4."
+      \uD06C\uAC8C \uB0AE\uCDA5\uB2C8\uB2E4."
   m_quirkColor: {r: 0.44096088, g: 0, b: 1, a: 0}
   m_quirkIcon: {fileID: 21300000, guid: 69fbbdc290cc37c41b73a61024fea98a, type: 3}
   incompatible: []

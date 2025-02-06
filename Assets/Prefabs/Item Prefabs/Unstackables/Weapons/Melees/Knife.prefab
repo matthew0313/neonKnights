@@ -141,6 +141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hitbox: {fileID: 8142034257734373613}
+  mesh: {fileID: 1942047968908023128}
+  normalMaterial: {fileID: 2100000, guid: 6b3bbe013c95de3439c2968e08e4c9ec, type: 2}
+  cursedMaterial: {fileID: 2100000, guid: 9e005d9cded25734c91de20c8217831d, type: 2}
 --- !u!1001 &2814149147674144395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204,11 +207,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 368968456077719979, guid: 99368785c06dcf348ba246b95731624a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99368785c06dcf348ba246b95731624a, type: 3}
+--- !u!23 &1942047968908023128 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4467104551515585491, guid: 99368785c06dcf348ba246b95731624a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2814149147674144395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8623244470688346730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5811392383193914593, guid: 99368785c06dcf348ba246b95731624a,

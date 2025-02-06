@@ -15,7 +15,7 @@ public class QuirkData_Swift : QuirkData
     
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target) && target is GunItem;
+        return base.IsAddable(target);
     }
     public override Quirk Create()
     {
@@ -27,7 +27,7 @@ public class Quirk_Swift : Quirk
 {
     new public readonly QuirkData_Swift data;
     private float speedIncrease;
-    private GunItem gunItem;
+    private Item item;
     
     public Quirk_Swift(QuirkData_Swift data) : base(data)
     {
@@ -44,16 +44,16 @@ public class Quirk_Swift : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        if (target is GunItem gun)
+        if (target is Item tmp)
         {
-            gunItem = gun;
+            item = tmp;
             /*if (gunItem.wielder != null && gunItem.wielder.movement != null)
             {
                 gunItem.wielder.movement.moveSpeed *= (1.0f + speedIncrease / 100.0f);
             }*/
-            gunItem.onWield += OnWield;
-            gunItem.onUnwield += OnUnwield;
-            if (gunItem.wielder != null) OnWield(gunItem.wielder);
+            item.onWield += OnWield;
+            item.onUnwield += OnUnwield;
+            if (item.wielder != null) OnWield(item.wielder);
         }
     }
     bool added = false;
