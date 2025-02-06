@@ -35,8 +35,8 @@ MonoBehaviour:
   m_baseDamage: 12
   m_baseFireRate: 0.2
   m_baseRange: 25
-  m_baseSpread: 2
-  m_baseMagSize: 12
+  m_baseSpread: 1.5
+  m_baseMagSize: 6
   m_baseReloadTime: 2
   m_baseReserve: 300
   m_baseShotCount: 1

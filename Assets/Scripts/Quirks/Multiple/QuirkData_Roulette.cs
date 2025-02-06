@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_Roulette", menuName = "Scriptables/Quirks/Guns/Roulette", order = 0)]
+[CreateAssetMenu(fileName = "Quirk_Roulette", menuName = "Scriptables/Quirks/Multiple/Roulette", order = 0)]
 public class QuirkData_Roulette : QuirkData
 {
     [Header("Roulette")]
@@ -20,7 +20,7 @@ public class QuirkData_Roulette : QuirkData
     public Color positiveEffectTextColor => m_positiveEffectTextColor;
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target) && target is GunItem;
+        return base.IsAddable(target) && (target is GunItem || target is MeleeItem);
     }
     public override Quirk Create()
     {
@@ -39,12 +39,23 @@ public class Quirk_Roulette : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as GunItem).modifyShotDamageGiven += ModifyShotDamageGiven;
-        (target as GunItem).onWield += OnWield;
-        (target as GunItem).onWieldUpdate += OnWieldUpdate;
+        if(target is GunItem)
+        {
+            (target as GunItem).modifyShotDamageGiven += ModifyShotDamageGiven;
+        }
+        else if(target is MeleeItem)
+        {
+            (target as MeleeItem).modifySlashDamageGiven += ModifySlashDamageGiven;
+        }
+        (target as Item).onWield += OnWield;
+        (target as Item).onWieldUpdate += OnWieldUpdate;
     }
     float counter = 0.0f;
     void ModifyShotDamageGiven(GunShot shot, GunGiveDamageInfo info)
+    {
+        info.damage.amount *= (100.0f + currentBonus) / 100.0f;
+    }
+    void ModifySlashDamageGiven(MeleeSlash slash, MeleeGiveDamageInfo info)
     {
         info.damage.amount *= (100.0f + currentBonus) / 100.0f;
     }
@@ -65,7 +76,7 @@ public class Quirk_Roulette : Quirk
     void Roulette()
     {
         currentBonus = UnityEngine.Random.Range(-rouletteRange, rouletteRange);
-        TextIndicator.Indicate((target as GunItem).wielder.transform.position, new LangText()
+        TextIndicator.Indicate((target as Item).wielder.transform.position, new LangText()
         {
             en = $"Roulette {Mathf.Round(currentBonus)}% damage",
             kr = $"룰렛 {Mathf.Round(currentBonus)}% 대미지"
@@ -89,11 +100,13 @@ public class Quirk_Roulette : Quirk
     {
         base.Save(data);
         data.floats["rouletteRange"] = rouletteRange;
+        data.floats["rouletteInterval"] = rouletteInterval;
     }
     public override void Load(DataUnit data)
     {
         base.Load(data);
         data.floats.TryGetValue("rouletteRange", out rouletteRange);
+        data.floats.TryGetValue("rouletteInterval", out rouletteInterval);
     }
     public override Quirk Copy()
     {

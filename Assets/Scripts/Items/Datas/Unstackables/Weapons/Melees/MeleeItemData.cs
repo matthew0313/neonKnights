@@ -32,15 +32,14 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
-        prevName = weapon.gameObject.name;
-        weapon.gameObject.name = "HeldMelee";
         weapon.hitbox.onTriggerEnter += OnTriggerEnter;
         wielder.animation.onSlashStart += OnSlashStart;
         wielder.animation.onComboEnd += OnComboEnd;
     }
-    public Action<MeleeSlash, MeleeGiveDamageInfo> modifySlashDamage;
+    public Action<MeleeSlash, MeleeGiveDamageInfo> modifySlashDamageGiven;
 
     public Action<MeleeSlash> onSlashStart, onSlashEnd;
+    public Action<MeleeSlash, GameObject> onSlashHit;
     public Action<MeleeSlash, DamageReceivedInfo> onSlashDamageGive;
     public override void OnWieldUpdate()
     {
@@ -58,7 +57,6 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
             onSlashEnd?.Invoke(currentSlash);
             currentSlash = null;
         }
-        weapon.gameObject.name = prevName;
         weapon.hitbox.onTriggerEnter -= OnTriggerEnter;
         wielder.animation.onSlashStart -= OnSlashStart;
         wielder.animation.onComboEnd -= OnComboEnd;
@@ -66,7 +64,6 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
     MeleeSlash currentSlash = null;
     void OnSlashStart()
     {
-        Debug.Log("SlashStart");
         if(currentSlash != null)
         {
             onSlashEnd?.Invoke(currentSlash);
@@ -106,6 +103,7 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
             if (currentSlash.hit.Contains(hitObject)) return;
             else currentSlash.hit.Add(hitObject);
         }
+        onSlashHit?.Invoke(currentSlash, hitObject);
         if (hitObject.TryGetComponent(out IDamagable tmp))
         {
             MeleeGiveDamageInfo info = new()
@@ -113,7 +111,7 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
                 damage = currentSlash.info.damage * wielder.statistics.damageMultiplier,
                 hitObject = hitObject
             };
-            modifySlashDamage?.Invoke(currentSlash, info);
+            modifySlashDamageGiven?.Invoke(currentSlash, info);
             DamageReceivedInfo received = tmp.GetDamage(info.damage);
             onSlashDamageGive?.Invoke(currentSlash, received);
             currentSlash.hitCount++;
