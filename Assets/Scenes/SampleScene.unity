@@ -6450,20 +6450,16 @@ MonoBehaviour:
     count: 1
   - data: {fileID: 11400000, guid: 8b998961fc23ba84894a66f30598c427, type: 2}
     count: 1
-  - data: {fileID: 0}
-    count: 0
-  - data: {fileID: 0}
-    count: 0
+  - data: {fileID: 11400000, guid: 135efa88795ab9e44ba79bb5416958c1, type: 2}
+    count: 1
+  - data: {fileID: 11400000, guid: 66eb3659f366fd5458be812dffd56065, type: 2}
+    count: 1
   - data: {fileID: 11400000, guid: 9b6431ef7f69555409106a193b285c61, type: 2}
     count: 1
   - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
     count: 10
   - data: {fileID: 11400000, guid: 14bd363afcdc1a34d9aa187291c67f27, type: 2}
     count: 10
-  - data: {fileID: 11400000, guid: 135efa88795ab9e44ba79bb5416958c1, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 66eb3659f366fd5458be812dffd56065, type: 2}
-    count: 1
   itemDropForce: 10
   canSwapSlot: 1
 --- !u!114 &1382173700
