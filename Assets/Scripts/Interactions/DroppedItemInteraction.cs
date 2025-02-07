@@ -6,6 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(DroppedItem))]
 public class DroppedItemInteraction : Interaction
 {
+    public override LangText interactionName => new()
+    {
+        en = $"Pick up{(origin.slot.count > 1 ? $" ({origin.slot.count})" : null)}",
+        kr = $"줍기{(origin.slot.count > 1 ? $" ({origin.slot.count})" : null)}"
+    };
+
     DroppedItem m_origin;
     DroppedItem origin
     {

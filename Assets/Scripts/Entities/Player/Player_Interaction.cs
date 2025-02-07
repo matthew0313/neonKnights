@@ -29,7 +29,7 @@ public class Player_Interaction : MonoBehaviour
             // 최상위 상호작용 표시
             interactionText.gameObject.SetActive(true);
             interactionText.transform.position = Camera.main.WorldToScreenPoint(interactions[0].transform.position);
-            interactionText.text = $"[E] {interactions[0].interactionName}";
+            interactionText.text = $"[E] {interactions[0].interactionName.text}";
 
             // E키로 상호작용 실행
             if (InputManager.GetInteractInput())

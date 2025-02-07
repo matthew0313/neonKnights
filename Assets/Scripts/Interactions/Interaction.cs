@@ -5,8 +5,7 @@ using UnityEngine;
 
 public abstract class Interaction : MonoBehaviour
 {
-    [SerializeField] string m_interactionName;
-    public string interactionName => m_interactionName;
+    public abstract LangText interactionName { get; }
 
     bool isAdded;
     protected Player player { get; private set; }
