@@ -20,6 +20,10 @@ public class InventorySlotUI : MonoBehaviour
     [SerializeField] GameObject number;
     [SerializeField] TMP_Text numberText;
 
+    [Header("Appliables")]
+    [SerializeField] Image canApply;
+    [SerializeField] Image cannotApply;
+
     Item displaying;
     public InventorySlot origin { get; private set; }
     public void Set(InventorySlot origin)
@@ -54,7 +58,7 @@ public class InventorySlotUI : MonoBehaviour
 
         if (displaying is IBarDisplayed)
         {
-            OnBarUpdate();
+            BarUpdate();
         }
         else bar.SetActive(false);
 
@@ -65,6 +69,7 @@ public class InventorySlotUI : MonoBehaviour
             OnNumberUpdate();
         }
         else number.SetActive(false);
+        AppliableStateUpdate();
     }
     void OnCountChange()
     {
@@ -77,15 +82,17 @@ public class InventorySlotUI : MonoBehaviour
             count.text = $"{origin.count}{origin.item.data.unit}";
             count.gameObject.SetActive(true);
         }
+        AppliableStateUpdate();
     }
     void LateUpdate()
     {
         if (displaying is IBarDisplayed)
         {
-            OnBarUpdate();
+            BarUpdate();
         }
+        AppliableStateUpdate();
     }
-    void OnBarUpdate()
+    void BarUpdate()
     {
         bar.gameObject.SetActive((displaying as IBarDisplayed).barDisplay);
         barScaler.transform.localScale = new Vector2((displaying as IBarDisplayed).barFill, 1.0f);
@@ -94,6 +101,20 @@ public class InventorySlotUI : MonoBehaviour
     void OnNumberUpdate()
     {
         numberText.text = (displaying as INumberDisplayed).numberText;
+    }
+    void AppliableStateUpdate()
+    {
+        if(origin.item != null && InventorySlotUIHandler.Instance != null && InventorySlotUIHandler.Instance.grabbingSlot.item is IApplied tmp)
+        {
+            bool appliable = tmp.IsAppliableTo(origin.item);
+            canApply.gameObject.SetActive(appliable);
+            cannotApply.gameObject.SetActive(!appliable); 
+        }
+        else
+        {
+            canApply.gameObject.SetActive(false);
+            cannotApply.gameObject.SetActive(false);
+        }
     }
     private void OnDestroy()
     {

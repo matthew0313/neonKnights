@@ -24,6 +24,10 @@ public class QuirkShard_Item : StackableItem, IApplied
         this.data = data;
     }
     public QuirkData quirkShardOf => data.shardOf;
+    public bool IsAppliableTo(Item item)
+    {
+        return item is IQuirkable tmp && quirkShardOf.IsAddable(tmp);
+    }
     public void ApplyTo(Item appliedTo)
     {
         if (quirkShardOf == null || !(appliedTo is IQuirkable)) return;

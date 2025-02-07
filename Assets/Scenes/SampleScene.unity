@@ -3172,7 +3172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbingSlotUI: {fileID: 922703191}
-  grabMode: 0
   describer: {fileID: 456795851}
   itemName: {fileID: 845003310}
   itemCategory: {fileID: 968056376}
@@ -10913,6 +10912,11 @@ PrefabInstance:
       value: InventorySlotUI
       objectReference: {fileID: 0}
     - target: {fileID: 7776307335922668451, guid: fda1e57b188d94b41a2add3942bc0cb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917116736826974327, guid: fda1e57b188d94b41a2add3942bc0cb4,
         type: 3}
       propertyPath: m_IsActive
       value: 0

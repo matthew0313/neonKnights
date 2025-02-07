@@ -11,8 +11,10 @@ using Unity.VisualScripting;
 
 public class InventorySlotUIHandler : MonoBehaviour
 {
+    public static InventorySlotUIHandler Instance { get; private set; }
+    public InventorySlotUIHandler() => Instance = this;
+
     [SerializeField] InventorySlotUI grabbingSlotUI;
-    public InventoryGrabMode grabMode = InventoryGrabMode.Click;
     Player_Inventory player;
 
     [Header("Description")]
@@ -39,11 +41,10 @@ public class InventorySlotUIHandler : MonoBehaviour
     readonly int endColorID = Shader.PropertyToID("_End_Color");
 
 
-    InventorySlot grabbingSlot;
+    public InventorySlot grabbingSlot { get; } = new();
     bool grabbing => grabbingSlot.item != null;
     private void Awake()
     {
-        grabbingSlot = new InventorySlot();
         grabbingSlotUI.Set(grabbingSlot);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
         quirkShardBackImage.material = new Material(quirkShardBackImage.material);
@@ -128,7 +129,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                     //grabbingSlot.SetItem(null);
                 }
             }
-            else if(grabMode == InventoryGrabMode.Click && Input.GetMouseButtonDown(1))
+            else if(Input.GetMouseButtonDown(1))
             {
                 List<RaycastResult> results = UIScanner.ScanUI();
                 bool slotHit = false;

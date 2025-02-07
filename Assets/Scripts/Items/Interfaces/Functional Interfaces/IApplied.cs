@@ -6,5 +6,6 @@ using UnityEngine.UI;
 
 public interface IApplied
 {
+    public bool IsAppliableTo(Item item);
     public void ApplyTo(Item item);
 }
