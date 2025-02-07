@@ -11,6 +11,7 @@ public class Player_Inventory : Inventory
     public Transform equipAnchor => m_equipAnchor;
 
     [SerializeField] ItemDataIntPair[] startContents;
+    [SerializeField] float itemDropForce = 4.0f;
     public const int beltLength = 6;
 
     internal InventorySlot equippedSlot;
@@ -153,7 +154,9 @@ public class Player_Inventory : Inventory
     }
     public void DropItem(Item item, int count)
     {
-
+        DroppedItem tmp = DroppedItem.Create(item, count);
+        tmp.transform.position = transform.position;
+        tmp.rb.AddForce(origin.movement.rotator.forward * itemDropForce, ForceMode.VelocityChange);
     }
     void OnChestplateSlotUpdate()
     {

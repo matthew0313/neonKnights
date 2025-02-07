@@ -9,20 +9,20 @@ public abstract class Interaction : MonoBehaviour
     public string interactionName => m_interactionName;
 
     bool isAdded;
-    Player_Interaction player;
-    private void Awake()
+    protected Player player { get; private set; }
+    private void OnEnable()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Interaction>();
+        if(player == null) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     private void Update()
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
         
-        if(distance <= player.interactionRange && !isAdded)
+        if(distance <= player.interaction.interactionRange && !isAdded)
         {
             AddInteraction();
         }
-        else if(distance > player.interactionRange && isAdded)
+        else if(distance > player.interaction.interactionRange && isAdded)
         {
             RemoveInteraction();
         }
@@ -31,13 +31,13 @@ public abstract class Interaction : MonoBehaviour
     {
         if (isAdded) return;
         isAdded = true;
-        player.AddInteraction(this);
+        player.interaction.AddInteraction(this);
     }
     protected void RemoveInteraction()
     {
         if (!isAdded) return;
         isAdded = false;
-        player.RemoveInteraction(this);
+        player.interaction.RemoveInteraction(this);
     }
     public abstract void OnInteract();
 }

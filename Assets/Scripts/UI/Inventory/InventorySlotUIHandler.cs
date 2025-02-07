@@ -125,8 +125,8 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit && grabbingSlot.item.canDrop)
                 {
-                    //DropItem(grabbingSlot.item, grabbingSlot.count);
-                    //grabbingSlot.SetItem(null);
+                    DropItem(grabbingSlot.item, grabbingSlot.count);
+                    grabbingSlot.count = 0;
                 }
             }
             else if(Input.GetMouseButtonDown(1))
@@ -144,8 +144,8 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit && grabbingSlot.item.canDrop)
                 {
-                    //DropItem(grabbingSlot.item.Copy(), 1);
-                    //grabbingSlot.count--;
+                    DropItem(grabbingSlot.item.Copy(), 1);
+                    grabbingSlot.count--;
                 }
             }
         }
@@ -171,8 +171,20 @@ public class InventorySlotUIHandler : MonoBehaviour
             }
             if (!detected)
             {
-                describing = null;
-                describer.gameObject.SetActive(false);
+                RaycastHit hit;
+                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0f, LayerMask.GetMask("DroppedItem"));
+                if(hit.transform != null && hit.transform.TryGetComponent(out DroppedItem droppedItem))
+                {
+                    if (droppedItem.slot.item != describing) Describe(droppedItem.slot.item);
+                    describer.pivot = new Vector2((Input.mousePosition.x < Screen.width / 2.0f ? 0.0f : 1.0f), (Input.mousePosition.y < Screen.height / 2.0f ? 0.0f : 1.0f));
+                    describer.position = Input.mousePosition;
+                    describer.gameObject.SetActive(true);
+                }
+                else
+                {
+                    describing = null;
+                    describer.gameObject.SetActive(false);
+                }
             }
         }
         else
