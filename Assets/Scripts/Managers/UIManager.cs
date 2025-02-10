@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
     [Header("Tabs")]
     [SerializeField] InventoryTab inventoryTab;
     Tab currentOpenTab = null;
+
+    [Header("Pause")]
+    [SerializeField] RectTransform pauseTab;
     private void Awake()
     {
         inventoryTab.OnAwake();
