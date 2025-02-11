@@ -118,7 +118,11 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
                 hitObject = hitObject
             };
             modifySlashDamageGiven?.Invoke(currentSlash, info);
-            DamageReceivedInfo received = tmp.GetDamage(info.damage);
+            DamageReceivedInfo received = tmp.GetDamage(new()
+            {
+                amount = info.damage,
+                source = wielder
+            });
             onSlashDamageGive?.Invoke(currentSlash, received);
             currentSlash.hitCount++;
             AudioManager.Instance.PlaySound(data.hitSound);

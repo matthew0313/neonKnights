@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0507fa422e963fe488938e63366dac69, type: 3}
+  m_Name: Quirk_Hungry
+  m_EditorClassIdentifier: 
+  m_quirkName:
+    en: Hungry
+    kr: "\uBC30\uACE0\uD508"
+  m_quirkDescription:
+    en: Gun may use additional ammo to deal bonus damage.
+    kr: "\uCD1D\uC774 \uC885\uC885 \uD0C4\uD658\uC744 \uB354 \uC18C\uBE44\uD574 \uCD94\uAC00
+      \uB300\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4."
+  m_quirkColor: {r: 0.99608874, g: 0.5424528, b: 1, a: 0}
+  m_quirkIcon: {fileID: 21300000, guid: 6ed0bf7d2a54abd4fbeb21cec9509e61, type: 3}
+  incompatible: []
+  m_minDamageBonus: 100
+  m_maxDamageBonus: 120
+  m_bulletConsumeChance: 60
+  m_maxBulletConsumed: 3

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_BruteForce", menuName = "Scriptables/Quirks/Guns/BruteForce", order = 0)]
+[CreateAssetMenu(fileName = "Quirk_BruteForce", menuName = "Scriptables/Quirks/Multiple/BruteForce", order = 0)]
 public class QuirkData_BruteForce : QuirkData
 {
     [Header("BruteForce")]

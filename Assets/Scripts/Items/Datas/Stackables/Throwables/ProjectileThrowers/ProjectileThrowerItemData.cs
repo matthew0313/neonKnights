@@ -41,9 +41,9 @@ public abstract class ProjectileThrowerItem : ThrowableItem
         dir.Normalize();
 
         Debug.DrawLine(throwable.transform.position, throwable.transform.position + dir * data.throwForce, Color.yellow, 30.0f);
-        projectile.Set(OnHit, data.blastRadius, dir * data.throwForce, data.whatToHit, data.effect);
+        projectile.Set(GetOnHit(), data.blastRadius, dir * data.throwForce, data.whatToHit, data.effect);
     }
-    protected abstract void OnHit(GameObject hit);
+    protected abstract Action<GameObject> GetOnHit();
     public override IEnumerable<LangText> GetStats()
     {
         yield return new()

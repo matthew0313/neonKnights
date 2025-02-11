@@ -10,7 +10,7 @@ public class WeakPoint : Point, IDamagable, IHealable, IAlimentable
 
     public DamageReceivedInfo GetDamage(DamageInfo damage)
     {
-        damage.amount *= weakPointMultiplier;
+        if(!damage.ignorePointMultiplier) damage.amount *= weakPointMultiplier;
         damage.isWeakPointHit = true;
         return weakPointOf.GetDamage(damage);
     }

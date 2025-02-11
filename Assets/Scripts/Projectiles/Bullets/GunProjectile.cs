@@ -60,13 +60,15 @@ public class GunProjectile : Bullet
     }*/
     GunItem gun;
     GunShot shot;
+    Player shooter;
     int pierceLeft;
 
     GunFireInfo fireInfo => shot.origin.fireInfo;
-    public void Set(GunItem gun, GunShot shot)
+    public void Set(GunItem gun, GunShot shot, Player shooter)
     {
         this.gun = gun;
         this.shot = shot;
+        this.shooter = shooter;
         pierceLeft = fireInfo.pierce;
     }
     float counter = 0.0f;
@@ -100,7 +102,11 @@ public class GunProjectile : Bullet
                 hit = hit
             };
             gun.modifyShotDamageGiven?.Invoke(shot, damageInfo);
-            gun.onShotDamageGive?.Invoke(shot, target.GetDamage(damageInfo.damage), hit);
+            gun.onShotDamageGive?.Invoke(shot, target.GetDamage(new()
+            {
+                amount = damageInfo.damage,
+                source = shooter
+            }), hit);
             shot.hit.Add(hit.hitObject);
             if (pierceLeft <= 0)
             {

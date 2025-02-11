@@ -712,7 +712,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7107741960340248834}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.72, y: 1.62, z: -11.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -775,6 +775,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 8842329122693154525}
   detectRange: 30
+  detectionRate: 10
+  detectionLowerRate: 5
+  detectionRequired: 10
+  maxDetection: 100
   runSpeed: 5
   rotateSpeed: 10
   bashHitbox: {fileID: 4246838990898304234}
@@ -802,6 +806,7 @@ MonoBehaviour:
   m_maxShield: 0
   m_alimentEffectAnchor: {fileID: 6428298227700554316}
   invincible: 0
+  hitDetection: 50
 --- !u!95 &8842329122693154525
 Animator:
   serializedVersion: 7

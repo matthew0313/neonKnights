@@ -5,7 +5,7 @@ using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_Dazing", menuName = "Scriptables/Quirks/Guns/Dazing", order = 0)]
+[CreateAssetMenu(fileName = "Quirk_Dazing", menuName = "Scriptables/Quirks/Multiple/Dazing", order = 0)]
 public class QuirkData_Dazing : QuirkData
 {
     [Header("Dazing")]
