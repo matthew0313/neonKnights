@@ -5,10 +5,14 @@ using UnityEngine.Timeline;
 public class TimelinePlayBehaviour : StateMachineBehaviour
 {
     [SerializeField] TimelineAsset timeline;
-    public Action<TimelineAsset> playTimeline;
+    [SerializeField] bool progressOnFinish = false;
+    readonly int progressID = Animator.StringToHash("Progress");
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playTimeline?.Invoke(timeline);
+        CutsceneManager.Instance.PlayTimeline(timeline, () =>
+        {
+            if (progressOnFinish) animator.SetTrigger(progressID);
+        });
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

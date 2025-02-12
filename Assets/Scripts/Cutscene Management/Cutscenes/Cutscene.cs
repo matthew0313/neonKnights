@@ -3,42 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
+
+[RequireComponent(typeof(Animator))]
 public class Cutscene : MonoBehaviour
 {
-    [SerializeField] Animator anim;
-    [SerializeField] PlayableDirector director;
+    Animator anim;
+    readonly int playID = Animator.StringToHash("Play");
     private void Awake()
     {
-        foreach(var i in anim.GetBehaviours<TimelinePlayBehaviour>())
-        {
-            i.playTimeline += PlayTimeline;
-        }
-        foreach(var i in anim.GetBehaviours<CutsceneFinishBehaviour>())
-        {
-            i.finishCutscene += FinishCutscene;
-        }
-    }
-    readonly int playID = Animator.StringToHash("Play");
-    readonly int progressID = Animator.StringToHash("Progress");
-    private void Update()
-    {
-        if(director.playableAsset != null && director.state == PlayState.Paused)
-        {
-            anim.SetTrigger(progressID);
-        }
+        anim = GetComponent<Animator>();
     }
     public virtual void Play()
     {
-        enabled = true;
         anim.SetTrigger(playID);
     }
-    void PlayTimeline(TimelineAsset timeline)
+}
+#if UNITY_EDITOR
+[CustomEditor(typeof(Cutscene))]
+public class Cutscene_Editor : Editor
+{
+    public override void OnInspectorGUI()
     {
-        director.Play(timeline);
-    }
-    void FinishCutscene()
-    {
-        enabled = false;
+        base.OnInspectorGUI();
+        if (GUILayout.Button("Start Cutscene")) CutsceneManager.Instance.StartCutscene(target as Cutscene);
     }
 }
+#endif

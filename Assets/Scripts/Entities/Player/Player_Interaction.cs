@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class Player_Interaction : MonoBehaviour
+public class Player_Interaction : MonoBehaviour, ICutsceneCallbackReceiver
 {
     [SerializeField] TMP_Text interactionText;
     [SerializeField] float m_interactionRange;
     public float interactionRange => m_interactionRange;
 
     List<Interaction> interactions = new List<Interaction>();
+    bool cutscenePaused = false;
     public void OnUpdate()
     {
         if (interactions.Count > 0)
         {
+            if (cutscenePaused) return;
             Vector3 mousePos = Input.mousePosition;
             
             interactions.Sort((a, b) =>
@@ -57,5 +59,16 @@ public class Player_Interaction : MonoBehaviour
         {
             interactions.Remove(interaction);
         }
+    }
+
+    public void OnCutsceneStart()
+    {
+        cutscenePaused = true;
+        interactionText.gameObject.SetActive(false);
+    }
+
+    public void OnCutsceneEnd()
+    {
+        cutscenePaused = false;
     }
 }

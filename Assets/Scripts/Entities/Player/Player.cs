@@ -34,6 +34,7 @@ public class Player : Entity, IDamageSource
     private void Start()
     {
         inventory.OnStart();
+        animation.OnStart();
     }
     private void Update()
     {

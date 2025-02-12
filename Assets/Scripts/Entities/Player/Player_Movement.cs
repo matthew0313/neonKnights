@@ -7,7 +7,7 @@ using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player_Movement : MonoBehaviour
+public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 {
     Player origin;
 
@@ -101,13 +101,16 @@ public class Player_Movement : MonoBehaviour
         if (item == null) rotateMode = RotateMode.Free;
         else rotateMode = item.rotateMode;
     }
+    bool cutscenePaused = false;
     public void OnUpdate()
     {
+        if (cutscenePaused) return;
         topLayer.OnStateUpdate();
         Rotate();
     }
     public void OnFixedUpdate()
     {
+        if (cutscenePaused) return;
         topLayer.OnStateFixedUpdate();
     }
     void Rotate()
@@ -148,6 +151,18 @@ public class Player_Movement : MonoBehaviour
         }
         yield return new WaitForSeconds(endLag);
         dashing = false;
+    }
+
+    public void OnCutsceneStart()
+    {
+        cutscenePaused = true;
+        rb.isKinematic = true;
+    }
+
+    public void OnCutsceneEnd()
+    {
+        cutscenePaused = false;
+        rb.isKinematic = false;
     }
 
     class MoveFSMVals : FSMVals

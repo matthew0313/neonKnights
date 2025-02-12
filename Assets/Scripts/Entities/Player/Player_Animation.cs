@@ -1,18 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Animations;
 using UnityEngine;
+using UnityEngine.Playables;
 
 [RequireComponent(typeof(Animator))]
 public class Player_Animation : MonoBehaviour
 {
-    internal Animator anim;
+    Animator anim;
+    [SerializeField] RuntimeAnimatorController controller;
+
+    [Header("Clips")]
+    [SerializeField] AnimationClip itemPickClip;
+
     Player origin;
+    new ControllerClipBlendSystem animation;
     public void OnAwake()
     {
         anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
+    }
+    public void OnStart()
+    {
+        animation = new ControllerClipBlendSystem(anim, controller);
+        anim.Rebind();
         AssignMeleeCallbacks();
     }
     void OnEquippedItemChange(Item item)
@@ -33,26 +46,26 @@ public class Player_Animation : MonoBehaviour
     readonly int fireID = Animator.StringToHash("Fire");
     public void TriggerFire()
     {
-        anim.SetTrigger(fireID);
+        animation.GetController().SetTrigger(fireID);
     }
     readonly int reloadID = Animator.StringToHash("Reload");
     public void TriggerReload()
     {
-        anim.SetTrigger(reloadID);
+        animation.GetController().SetTrigger(reloadID);
     }
     readonly int drinkStartID = Animator.StringToHash("DrinkStart"), drinkEndID = Animator.StringToHash("DrinkEnd");
     public void TriggerDrinkStart()
     {
-        anim.SetTrigger(drinkStartID);
+        animation.GetController().SetTrigger(drinkStartID);
     }
     public void TriggerDrinkEnd()
     {
-        anim.SetTrigger(drinkEndID);
+        animation.GetController().SetTrigger(drinkEndID);
     }
     readonly int throwID = Animator.StringToHash("Throw");
     public void TriggerThrow()
     {
-        anim.SetTrigger(throwID);
+        animation.GetController().SetTrigger(throwID);
     }
     readonly int slashID = Animator.StringToHash("Slash");
     readonly int comboID = Animator.StringToHash("Combo");
@@ -70,11 +83,19 @@ public class Player_Animation : MonoBehaviour
     }
     public void TriggerSlash()
     {
-        anim.SetTrigger(slashID);
+        animation.GetController().SetTrigger(slashID);
     }
     public int GetComboIndex()
     {
-        return anim.GetInteger(comboID);
+        return animation.GetController().GetInteger(comboID);
+    }
+    public void Play_ItemPick()
+    {
+        animation.PlayOneShot(itemPickClip);
+    }
+    private void OnDestroy()
+    {
+        animation.Destroy();
     }
 }
 public enum AnimationType

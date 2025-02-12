@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class CutsceneFinishBehaviour : StateMachineBehaviour
 {
-    public Action finishCutscene;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        finishCutscene?.Invoke();
+        CutsceneManager.Instance.FinishCutscene();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
