@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Shielder_HpComp))]
 public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
 {
-    Shielder_HpComp hpComp;
-    [SerializeField] Animator anim;
-    [SerializeField] float detectRange;
-
     [Header("RunningTowards")]
     [SerializeField] float runSpeed;
     [SerializeField] float rotateSpeed;
@@ -34,15 +31,15 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         base.Awake();
         rb = GetComponent<Rigidbody>();
-        hpComp = GetComponent<Shielder_HpComp>();
         topLayer = new Shielder_TopLayer(this, new ShielderFSMVals());
 #if UNITY_EDITOR
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
 #endif
         topLayer.OnStateEnter();
     }
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         topLayer.OnStateUpdate();
     }
     private void FixedUpdate()
@@ -57,7 +54,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         public Shielder_TopLayer(Shielder origin, ShielderFSMVals values) : base(origin, values)
         {
-            defaultState = new EnemyIdle<Shielder, ShielderFSMVals>(origin, this, () => origin.detectRange, () => ChangeState("Detected"));
+            defaultState = new EnemyIdle<Shielder, ShielderFSMVals>(origin, this, "Detected");
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this));
             AddState("Stunned", new EnemyAwait<Shielder, ShielderFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
@@ -67,19 +64,14 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             base.OnStateUpdate();
             if (origin.stunned) ChangeState("Stunned");
         }
-        class Detected : Layer<Shielder, ShielderFSMVals>
+        class Detected : EnemyDetected<Shielder, ShielderFSMVals>
         {
-            public Detected(Shielder origin, Layer<Shielder, ShielderFSMVals> parent) : base(origin, parent)
+            public Detected(Shielder origin, Layer<Shielder, ShielderFSMVals> parent) : base(origin, parent, "Idle")
             {
                 defaultState = new RunningTowards(origin, this);
                 AddState("RunningTowards", defaultState);
                 AddState("Bashing", new Bashing(origin, this));
                 AddState("Cooldown", new EnemyWait<Shielder, ShielderFSMVals>(origin, this, () => origin.bashCooldown, () => ChangeState("RunningTowards")));
-            }
-            public override void OnStateUpdate()
-            {
-                base.OnStateUpdate();
-                if (Vector3.Distance(origin.player.transform.position, origin.transform.position) > origin.detectRange || origin.player.statistics.canBeDetected == false) parentLayer.ChangeState("Idle");
             }
             class RunningTowards : State<Shielder, ShielderFSMVals>
             {
@@ -129,7 +121,6 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                     {
 
                     }
-                    readonly int chargingID = Animator.StringToHash("Charging");
                     float counter = 0.0f;
                     public override void OnStateEnter()
                     {
@@ -189,7 +180,11 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                         if(hit.TryGetComponent(out IDamagable tmp))
                         {
                             origin.rb.linearVelocity = new Vector3(0.0f, origin.rb.linearVelocity.y, 0.0f);
-                            tmp.GetDamage(origin.bashDamage);
+                            tmp.GetDamage(new()
+                            {
+                                amount = origin.bashDamage * origin.damageMultiplier,
+                                source = origin
+                            });
                             parentLayer.parentLayer.ChangeState("Cooldown");
                         }
                     }

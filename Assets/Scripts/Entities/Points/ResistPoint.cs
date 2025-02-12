@@ -10,7 +10,7 @@ public class ResistPoint : Point, IDamagable, IHealable, IAlimentable
 
     public DamageReceivedInfo GetDamage(DamageInfo damage)
     {
-        damage.amount *= resistPointMultiplier;
+        if(!damage.ignorePointMultiplier) damage.amount *= resistPointMultiplier;
         damage.isResistPointHit = true;
         return resistPointOf.GetDamage(damage);
     }

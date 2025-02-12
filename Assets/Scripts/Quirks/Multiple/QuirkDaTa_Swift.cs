@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_Swift", menuName = "Scriptables/Quirks/Guns/Swift", order = 1)]
+[CreateAssetMenu(fileName = "Quirk_Swift", menuName = "Scriptables/Quirks/Multiple/Swift", order = 1)]
 public class QuirkData_Swift : QuirkData
 {
     [Header("Speed Boost")]

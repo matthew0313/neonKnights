@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.Playables;
 
-[CreateAssetMenu(fileName = "Quirk_EagleEyed", menuName = "Scriptables/Quirks/Guns/EagleEyed", order = 0)]
+[CreateAssetMenu(fileName = "Quirk_EagleEyed", menuName = "Scriptables/Quirks/Multiple/EagleEyed", order = 0)]
 public class QuirkData_EagleEyed : QuirkData
 {
     [Header("EagleEyed")]

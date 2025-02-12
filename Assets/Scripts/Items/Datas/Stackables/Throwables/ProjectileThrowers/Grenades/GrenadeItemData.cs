@@ -15,10 +15,17 @@ public abstract class GrenadeItem : ProjectileThrowerItem
     {
         this.data = data;
     }
-
-    protected override void OnHit(GameObject hit)
+    protected override Action<GameObject> GetOnHit()
     {
-        if (hit.TryGetComponent(out IDamagable tmp)) tmp.GetDamage(data.damage);
+        Player wielder = base.wielder;
+        return (GameObject hit) =>
+        {
+            if (hit.TryGetComponent(out IDamagable tmp)) tmp.GetDamage(new()
+            {
+                amount = data.damage,
+                source = wielder
+            });
+        };
     }
     public override IEnumerable<LangText> GetStats()
     {

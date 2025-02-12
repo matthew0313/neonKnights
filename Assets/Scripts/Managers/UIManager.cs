@@ -1,18 +1,33 @@
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, ICutsceneCallbackReceiver
 {
     public static UIManager Instance { get; private set; }
     public UIManager()
     {
         Instance = this;
     }
+    [Header("Cutscene")]
+    [SerializeField] GameObject defaultUI;
+    public void OnCutsceneStart()
+    {
+        defaultUI.SetActive(false);
+    }
+
+    public void OnCutsceneEnd()
+    {
+        defaultUI.SetActive(true);
+    }
 
     [Header("Tabs")]
     [SerializeField] InventoryTab inventoryTab;
     Tab currentOpenTab = null;
+
+    [Header("Pause")]
+    [SerializeField] RectTransform pauseTab;
     private void Awake()
     {
         inventoryTab.OnAwake();

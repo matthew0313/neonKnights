@@ -10,10 +10,12 @@ public interface IDamagable
 public struct DamageInfo
 {
     public float amount;
+    public IDamageSource source;
 
     public bool ignoreShield;
     
     public bool isWeakPointHit, isResistPointHit;
+    public bool ignorePointMultiplier;
 
     public static implicit operator float(DamageInfo info)
     {

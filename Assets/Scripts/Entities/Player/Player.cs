@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Player_Movement), typeof(Player_Inventory), typeof(Player_Animation))]
 [RequireComponent(typeof(Player_Statistics), typeof(Player_HpComp), typeof(Player_Camera))]
 [RequireComponent(typeof(Player_Cooldowns), typeof(Player_Interaction))]
-public class Player : Entity
+public class Player : Entity, IDamageSource
 {
     internal Player_Movement movement;
     internal Player_Inventory inventory;
@@ -34,6 +34,7 @@ public class Player : Entity
     private void Start()
     {
         inventory.OnStart();
+        animation.OnStart();
     }
     private void Update()
     {

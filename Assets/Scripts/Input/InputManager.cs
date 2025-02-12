@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] KeyCode interactKey = KeyCode.E;
 
     [SerializeField] KeyCode inventoryTabKey = KeyCode.Tab;
+    [SerializeField] KeyCode pauseKey = KeyCode.Escape;
     private void Awake()
     {
         DontDestroyOnLoad(this);
@@ -84,6 +85,10 @@ public class InputManager : MonoBehaviour
     public static bool GetInventoryTabInput()
     {
         return Input.GetKeyDown(instance.inventoryTabKey);
+    }
+    public static bool GetPauseInput()
+    {
+        return Input.GetKeyDown(instance.pauseKey);
     }
 }
 public enum SlotChangeInput

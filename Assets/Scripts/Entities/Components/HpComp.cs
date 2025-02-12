@@ -76,7 +76,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
     public Action onHpChange;
     public Action onDeath, onRevive;
     public Action onAlimentUpdate;
-    void Awake()
+    protected virtual void Awake()
     {
         hp = maxHp;
         shield = maxShield;

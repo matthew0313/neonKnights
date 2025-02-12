@@ -254,7 +254,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                 GunProjectile bul = fireInfo.bullet.Instantiate() as GunProjectile;
                 bul.transform.position = fireInfo.startPos;
                 bul.transform.forward = Quaternion.Euler(UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread), UnityEngine.Random.Range(-fireInfo.spread, fireInfo.spread)) * fireInfo.dir;
-                bul.Set(this, shots[i]);
+                bul.Set(this, shots[i], wielder);
             }
         }
         else if(fireInfo.bullet is HitscanEffect)
