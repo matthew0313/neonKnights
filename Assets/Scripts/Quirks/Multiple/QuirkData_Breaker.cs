@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quirk_BruteForce", menuName = "Scriptables/Quirks/Multiple/BruteForce", order = 0)]
-public class QuirkData_BruteForce : QuirkData
+[CreateAssetMenu(fileName = "Quirk_Breaker", menuName = "Scriptables/Quirks/Multiple/Breaker", order = 0)]
+public class QuirkData_Breaker : QuirkData
 {
-    [Header("BruteForce")]
+    [Header("Breaker")]
     [SerializeField] float m_minDamageBonusPercentage;
     [SerializeField] float m_maxDamageBonusPercentage;
     public float minDamageBonusPercentage => m_minDamageBonusPercentage;
@@ -18,13 +18,13 @@ public class QuirkData_BruteForce : QuirkData
     }
     public override Quirk Create()
     {
-        return new Quirk_BruteForce(this);
+        return new Quirk_Breaker(this);
     }
 }
-public class Quirk_BruteForce : Quirk
+public class Quirk_Breaker : Quirk
 {
-    new public readonly QuirkData_BruteForce data;
-    public Quirk_BruteForce(QuirkData_BruteForce data) : base(data)
+    new public readonly QuirkData_Breaker data;
+    public Quirk_Breaker(QuirkData_Breaker data) : base(data)
     {
         this.data = data;
     }
@@ -52,7 +52,7 @@ public class Quirk_BruteForce : Quirk
         return new LangText()
         {
             en = $"+{damageBonusPercentage}% damage to resist",
-            kr = $"+{damageBonusPercentage}% 방어 포인트 대미지"
+            kr = $"+{damageBonusPercentage}% 내성 포인트 대미지"
         };
     }
     public override void Save(DataUnit data)
@@ -67,7 +67,7 @@ public class Quirk_BruteForce : Quirk
     }
     public override Quirk Copy()
     {
-        Quirk_BruteForce tmp = base.Copy() as Quirk_BruteForce;
+        Quirk_Breaker tmp = base.Copy() as Quirk_Breaker;
         tmp.damageBonusPercentage = damageBonusPercentage;
         return tmp;
     }

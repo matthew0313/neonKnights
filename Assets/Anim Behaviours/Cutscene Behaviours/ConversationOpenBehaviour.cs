@@ -5,9 +5,11 @@ using UnityEngine.Timeline;
 public class ConversationOpenBehaviour : StateMachineBehaviour
 {
     [SerializeField] ConversationSegment segment;
+    [SerializeField] bool progress = true;
+    readonly int progressID = Animator.StringToHash("Progress");
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        CutsceneManager.Instance.OpenConversation(segment);
+        CutsceneManager.Instance.OpenConversation(segment, () => { if (progress) animator.SetTrigger(progressID); });
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -33,6 +35,8 @@ public class ConversationSegment
 {
     [SerializeField] string m_talker;
     [SerializeField][TextArea] string m_text;
+    [SerializeField] bool m_skippable = true;
     public string talker => m_talker;
     public string text => m_text;
+    public bool skippable => m_skippable;
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using System.Text;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -19,6 +21,11 @@ public class CutsceneManager : MonoBehaviour
     CutsceneManager_UI UIs;
 
     [SerializeField] PlayableDirector director;
+
+    [Header("Talk")]
+    [SerializeField] float talkInterval;
+    [SerializeField] float talkLongInterval;
+
     Cutscene playing;
     private void Awake()
     {
@@ -35,6 +42,7 @@ public class CutsceneManager : MonoBehaviour
         }
 
         UIs.ShowEdgeUI();
+        playing.Play();
     }
     public void FinishCutscene()
     {
@@ -45,6 +53,7 @@ public class CutsceneManager : MonoBehaviour
             i.OnCutsceneEnd();
         }
 
+        if (conversationOpen) CloseConversation();
         UIs.HideEdgeUI();
     }
     CoroutineHandle playingTimeline;
@@ -60,17 +69,74 @@ public class CutsceneManager : MonoBehaviour
         onFinish?.Invoke();
     }
 
+    CoroutineHandle conversation;
+    CoroutineHandle conversationTyping;
     bool conversationOpen = false;
-    public void OpenConversation(ConversationSegment segment)
+    public void OpenConversation(ConversationSegment segment, Action onProgress, bool autoPass = false)
     {
         if (!conversationOpen)
         {
             conversationOpen = true;
+            UIs.ShowConversationUI();
         }
+        Timing.KillCoroutines(conversation);
+        conversation = Timing.RunCoroutine(Conversation(segment, onProgress, autoPass));
+    }
+    IEnumerator<float> Conversation(ConversationSegment segment, Action onProgress, bool autoPass)
+    {
+        UIs.SetTalkerText(segment.talker);
+        UIs.SetTalkContentText(string.Empty);
+
+        bool typing = true;
+        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text, () => typing = false));
+
+        while (typing)
+        {
+            yield return Timing.WaitForOneFrame;
+            if (Input.GetMouseButtonDown(0))
+            {
+                yield return Timing.WaitForOneFrame;
+                UIs.SetTalkContentText(segment.text);
+                break;
+            }
+        }
+        Timing.KillCoroutines(conversationTyping);
+        if(!autoPass) while(!Input.GetMouseButtonDown(0)) yield return Timing.WaitForOneFrame;
+        onProgress?.Invoke();
+    }
+    IEnumerator<float> ConversationTyping(string text, Action onFinish)
+    {
+        StringBuilder sb = new();
+        for(int i = 0; i < text.Length; i++)
+        {
+            sb.Append(text[i]);
+            UIs.SetTalkContentText(sb.ToString());
+
+            if (text[i] == '.' || text[i] == ',' || text[i] == '!' || text[i] == '?') yield return Timing.WaitForSeconds(talkLongInterval);
+            else yield return Timing.WaitForSeconds(talkInterval);
+        }
+        onFinish?.Invoke();
     }
     public void CloseConversation()
     {
+        if (!conversationOpen) return;
+        conversationOpen = false;
+        UIs.HideConversationUI();
+    }
+    public void OpenConversationChoice(ConversationChoiceSegment segment, Action<int> onSelect)
+    {
+        if (!conversationOpen)
+        {
+            onSelect?.Invoke(0);
+            return;
+        }
 
+        UIs.ShowChoice(segment, onSelect);
+    }
+    private void OnDestroy()
+    {
+        Timing.KillCoroutines(playingTimeline);
+        Timing.KillCoroutines(conversationTyping);
     }
 }
 #if UNITY_EDITOR
