@@ -204,4 +204,11 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver
     {
         inCutscene = false;
     }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        if (chestplate != null) chestplate.Delete();
+        if (accessory1 != null) accessory1.Delete();
+        if (accessory2 != null) accessory2.Delete();
+    }
 }

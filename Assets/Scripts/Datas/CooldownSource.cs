@@ -12,5 +12,5 @@ public class CooldownSource : ScriptableObject
     }
     public float startCooldown { get; private set; } = 1.0f;
     public float cooldownLeft = 0.0f;
-    public bool isOnCooldown => cooldownLeft > 0.0f;
+    public bool isOnCooldown => cooldownLeft > 0.1f;
 }

@@ -142,13 +142,14 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "\uB05D"
+  m_Name: "\uB05D, \uCE74\uBA54\uB77C \uC870\uC815, \uC18C\uB9AC \uC7AC\uC0DD"
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours:
   - {fileID: 4924559152226698975}
   - {fileID: -8864643829686955483}
+  - {fileID: -3196274951759774730}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -286,6 +287,21 @@ MonoBehaviour:
     m_text: "\uC9DC\uC7A5\uBA74\uC774 \uC88B\uC740\uB370."
     m_skippable: 1
   progress: 1
+--- !u!114 &-3196274951759774730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c47c91e6df1e454ea9b2294ea58dc9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  played:
+    clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
+    volume: 1
 --- !u!1102 &-2586181141210041139
 AnimatorState:
   serializedVersion: 6
@@ -663,13 +679,14 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "\uB300\uD654 \uB3C4\uC785"
+  m_Name: "\uB300\uD654 \uB3C4\uC785, \uC18C\uB9AC \uC7AC\uC0DD"
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5878660878914420937}
   m_StateMachineBehaviours:
   - {fileID: 7522872122171095685}
+  - {fileID: 7648428009057532770}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -982,6 +999,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &7648428009057532770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c47c91e6df1e454ea9b2294ea58dc9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  played:
+    clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
+    volume: 1
 --- !u!114 &8415809724028567936
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -281,6 +281,10 @@ public class InventorySlotUIHandler : MonoBehaviour
             grabbingSlot.count = 0;
         }
     }
+    private void OnDestroy()
+    {
+        if (grabbingSlot.item != null) grabbingSlot.item.Delete();
+    }
 }
 public enum InventoryGrabMode
 {

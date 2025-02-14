@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using Unity.Cinemachine;
+using UnityEngine.Events;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -32,10 +34,11 @@ public class Cutscene : MonoBehaviour
 
         cinemachineCameras[cameraIndex].Priority = priority;
     }
-    public virtual void Play()
+    public void Play()
     {
         anim.SetTrigger(playID);
     }
+    public virtual void End() { }
 }
 #if UNITY_EDITOR
 [CustomEditor(typeof(Cutscene))]

@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 public class Player_HpComp : HpComp, ICutsceneCallbackReceiver
 {
+    [SerializeField] GameOverCutscene gameOverCutscene;
     bool undamagable = false;
     public void OnCutsceneEnd()
     {
@@ -16,8 +17,16 @@ public class Player_HpComp : HpComp, ICutsceneCallbackReceiver
     }
     public override DamageReceivedInfo GetDamage(DamageInfo damage)
     {
-        if (undamagable) return new() { receivedDamage = 0 };
-        else return base.GetDamage(damage);
+        DamageReceivedInfo info;
+        if (undamagable) info = new() { receivedDamage = 0 };
+        else info = base.GetDamage(damage);
+
+        if(dead)
+        {
+            CutsceneManager.Instance.StartCutscene(gameOverCutscene);
+        }
+
+        return info;
     }
 }
 #if UNITY_EDITOR

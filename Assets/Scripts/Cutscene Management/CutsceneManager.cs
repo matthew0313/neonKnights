@@ -47,6 +47,8 @@ public class CutsceneManager : MonoBehaviour
     public void FinishCutscene()
     {
         if (playing == null) return;
+
+        playing.End();
         playing = null;
         foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
