@@ -26,8 +26,8 @@ public class Player : Entity, IDamageSource
         cooldowns = GetComponent<Player_Cooldowns>();
         interaction = GetComponent<Player_Interaction>();
         movement.OnAwake();
-        inventory.OnAwake();
         animation.OnAwake();
+        inventory.OnAwake();
         camera.OnAwake();
         cooldowns.OnAwake();
     }

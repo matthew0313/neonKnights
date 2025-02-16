@@ -19,15 +19,16 @@ MonoBehaviour:
     en: ' An Italian pistol famous for its smooth shooting and durability.'
     kr: "\uBD80\uB4DC\uB7EC\uC6B4 \uC0AC\uACA9\uACFC \uB192\uC740 \uB0B4\uAD6C\uC131\uC73C\uB85C
       \uC720\uBA85\uD55C \uC774\uD0C8\uB9AC\uC544 \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 929799830366845223, guid: 8d98b60202be94d40b23a7d5b8eb68eb, type: 3}
   m_category: 7
-  m_prefab: {fileID: 0}
+  m_prefab: {fileID: -4908320136860748459, guid: 6c58927b4b0b03847b3eeadda6d8c5f2,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 7bd2b763a20d06a4897a6d25b5057b86, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0
@@ -39,7 +40,8 @@ MonoBehaviour:
   m_baseReloadTime: 3
   m_baseReserve: 300
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 60

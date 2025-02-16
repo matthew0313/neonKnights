@@ -19,15 +19,16 @@ MonoBehaviour:
     en: 'A classic .45 caliber pistol that has been in use for over a century. '
     kr: "100\uB144 \uB118\uAC8C \uC0AC\uB791\uBC1B\uC544\uC628 .45\uAD6C\uACBD\uC758
       \uD074\uB798\uC2DD \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 4495184816382438680, guid: ca702bf0a861f9147bb0e3fe2da81dd4, type: 3}
   m_category: 7
-  m_prefab: {fileID: 0}
+  m_prefab: {fileID: 6450601925692401414, guid: ef7b4157e995a2e4a82a766c89d2daee,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 953ce12389726674186bf1cdb6191132, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0

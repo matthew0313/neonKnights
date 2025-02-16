@@ -125,6 +125,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: vfx_Slash_v3_03
       objectReference: {fileID: 0}
+    - target: {fileID: 3885894058673853953, guid: 56d06fdca1abe7c47a85f5cee4fc353c,
+        type: 3}
+      propertyPath: m_Asset
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: 410b83831c4218a419f110496f1a72a2,
+        type: 3}
     - target: {fileID: 3885894058673853955, guid: 56d06fdca1abe7c47a85f5cee4fc353c,
         type: 3}
       propertyPath: m_LocalPosition.x

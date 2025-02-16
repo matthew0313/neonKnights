@@ -46,26 +46,26 @@ public class Player_Animation : MonoBehaviour
     readonly int fireID = Animator.StringToHash("Fire");
     public void TriggerFire()
     {
-        animation.GetController().SetTrigger(fireID);
+        anim.SetTrigger(fireID);
     }
     readonly int reloadID = Animator.StringToHash("Reload");
     public void TriggerReload()
     {
-        animation.GetController().SetTrigger(reloadID);
+        anim.SetTrigger(reloadID);
     }
     readonly int drinkStartID = Animator.StringToHash("DrinkStart"), drinkEndID = Animator.StringToHash("DrinkEnd");
     public void TriggerDrinkStart()
     {
-        animation.GetController().SetTrigger(drinkStartID);
+        anim.SetTrigger(drinkStartID);
     }
     public void TriggerDrinkEnd()
     {
-        animation.GetController().SetTrigger(drinkEndID);
+        anim.SetTrigger(drinkEndID);
     }
     readonly int throwID = Animator.StringToHash("Throw");
     public void TriggerThrow()
     {
-        animation.GetController().SetTrigger(throwID);
+        anim.SetTrigger(throwID);
     }
     readonly int slashID = Animator.StringToHash("Slash");
     readonly int comboID = Animator.StringToHash("Combo");
@@ -83,11 +83,11 @@ public class Player_Animation : MonoBehaviour
     }
     public void TriggerSlash()
     {
-        animation.GetController().SetTrigger(slashID);
+        anim.SetTrigger(slashID);
     }
     public int GetComboIndex()
     {
-        return animation.GetController().GetInteger(comboID);
+        return anim.GetInteger(comboID);
     }
     public void Play_ItemPick()
     {

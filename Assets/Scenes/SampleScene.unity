@@ -654,6 +654,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513adb9457c5cd94998d14843adb2165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &149500963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3853527120658459963, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 419390941}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cd1412b30519a4682aa53c48f6f9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &151692112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1073,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216120201}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &224997963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3853527120658459963, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 677693311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cd1412b30519a4682aa53c48f6f9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &254895189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,7 +2019,7 @@ PrefabInstance:
     - target: {fileID: 7107741960340248834, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2378,6 +2402,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &479791259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3853527120658459963, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4562394883829384586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cd1412b30519a4682aa53c48f6f9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &505016376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633584669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3165,7 +3201,7 @@ PrefabInstance:
     - target: {fileID: 7107741960340248834, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5437,7 +5473,7 @@ GameObject:
   - component: {fileID: 1109419328}
   - component: {fileID: 1109419329}
   m_Layer: 0
-  m_Name: Cutscenes
+  m_Name: CutsceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5649,6 +5685,7 @@ GameObject:
   - component: {fileID: 1130678980}
   - component: {fileID: 1130678981}
   - component: {fileID: 1130678982}
+  - component: {fileID: 1130678983}
   m_Layer: 0
   m_Name: TestCutscene
   m_TagString: Untagged
@@ -5664,7 +5701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130678979}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5707,6 +5744,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1130678983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130678979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d3f9ca15ba27149908d5fdb62efe39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 479791259}
+  - {fileID: 224997963}
+  - {fileID: 149500963}
+  triggered: {fileID: 1130678981}
 --- !u!1 &1144040957
 GameObject:
   m_ObjectHideFlags: 0
@@ -7663,7 +7717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c571495f417cabf40b4d4b6aaf4191b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSlotCount: 16
+  defaultSlotCount: 36
   m_equipAnchor: {fileID: 918935058}
   startContents:
   - data: {fileID: 11400000, guid: a78b81e055be3804e953f436035a70f4, type: 2}
@@ -7678,12 +7732,40 @@ MonoBehaviour:
     count: 1
   - data: {fileID: 11400000, guid: 66eb3659f366fd5458be812dffd56065, type: 2}
     count: 1
+  - data: {fileID: 11400000, guid: af3da6330668cef47bf16bd0ae2c686c, type: 2}
+    count: 1
+  - data: {fileID: 11400000, guid: da07b205676dd0b47b041c113862a404, type: 2}
+    count: 1
   - data: {fileID: 11400000, guid: 9b6431ef7f69555409106a193b285c61, type: 2}
     count: 1
   - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
     count: 10
   - data: {fileID: 11400000, guid: 14bd363afcdc1a34d9aa187291c67f27, type: 2}
     count: 10
+  - data: {fileID: 11400000, guid: d56ef04ef4227af439b05fac0d7e2654, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: d0891a392eb17434090acca683177e37, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: 87cb8828d9616cc44b7aa9a625ec9d41, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: f935ed7c16e52154cabd851999736d6b, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: a58b5845add789743a9df36c40eb71e6, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: 9409ec2e0a361ca40a5e6cc94bbeb95b, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: f6482fe4d0e6c18428eb05dc6726e884, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: e42e6047b63c46644a1384c783af827b, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: 64915ca15b7f9ea45a7630b1fe0f7fef, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: 622c423749aecb94dbef337669a82ffb, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: 340a874d3ecb5544d8a735750fd5822e, type: 2}
+    count: 30
+  - data: {fileID: 11400000, guid: 340a874d3ecb5544d8a735750fd5822e, type: 2}
+    count: 30
   itemDropForce: 10
   canSwapSlot: 1
 --- !u!114 &1382173700
@@ -12564,7 +12646,7 @@ PrefabInstance:
     - target: {fileID: 7107741960340248834, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
