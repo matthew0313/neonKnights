@@ -5470,11 +5470,8 @@ GameObject:
   - component: {fileID: 1109419325}
   - component: {fileID: 1109419324}
   - component: {fileID: 1109419327}
-<<<<<<< HEAD
-=======
   - component: {fileID: 1109419328}
   - component: {fileID: 1109419329}
->>>>>>> 38ee08d4cd1bd1155f6108486fca1ee04196c439
   m_Layer: 0
   m_Name: CutsceneManager
   m_TagString: Untagged
@@ -5525,11 +5522,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   director: {fileID: 1109419324}
-<<<<<<< HEAD
-=======
   talkInterval: 0.05
   talkLongInterval: 0.25
->>>>>>> 38ee08d4cd1bd1155f6108486fca1ee04196c439
 --- !u!4 &1109419326
 Transform:
   m_ObjectHideFlags: 0
@@ -5560,12 +5554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   edgeMoveTime: 0.5
-<<<<<<< HEAD
-  upEdge: {fileID: 0}
-  downEdge: {fileID: 0}
-  conversationUIAppearTime: 0.25
-  conversationUI: {fileID: 0}
-=======
   upEdge: {fileID: 426802259}
   downEdge: {fileID: 16574197}
   conversationUIAppearTime: 0.25
@@ -5686,7 +5674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 1
->>>>>>> 38ee08d4cd1bd1155f6108486fca1ee04196c439
 --- !u!1 &1130678979
 GameObject:
   m_ObjectHideFlags: 0
@@ -9794,7 +9781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1776535078
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9821,7 +9808,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776535077}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -12440,11 +12427,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InventorySlotUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7753376897192757988, guid: fda1e57b188d94b41a2add3942bc0cb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7776307335922668451, guid: fda1e57b188d94b41a2add3942bc0cb4,
         type: 3}
