@@ -4937,6 +4937,7 @@ GameObject:
   - component: {fileID: 1109419326}
   - component: {fileID: 1109419325}
   - component: {fileID: 1109419324}
+  - component: {fileID: 1109419327}
   m_Layer: 0
   m_Name: Cutscenes
   m_TagString: Untagged
@@ -4974,9 +4975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   director: {fileID: 1109419324}
-  edgeMoveTime: 0.5
-  upEdge: {fileID: 426802259}
-  downEdge: {fileID: 16574197}
 --- !u!4 &1109419326
 Transform:
   m_ObjectHideFlags: 0
@@ -4993,6 +4991,23 @@ Transform:
   - {fileID: 1130678980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1109419327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109419323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13245913477c4cf4dad227a8232879cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edgeMoveTime: 0.5
+  upEdge: {fileID: 0}
+  downEdge: {fileID: 0}
+  conversationUIAppearTime: 0.25
+  conversationUI: {fileID: 0}
 --- !u!1 &1130678979
 GameObject:
   m_ObjectHideFlags: 0
@@ -8843,7 +8858,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776535077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -11463,6 +11478,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InventorySlotUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753376897192757988, guid: fda1e57b188d94b41a2add3942bc0cb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7776307335922668451, guid: fda1e57b188d94b41a2add3942bc0cb4,
         type: 3}
