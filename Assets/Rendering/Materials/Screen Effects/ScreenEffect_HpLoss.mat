@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ScreenEffect_HpLoss
-  m_Shader: {fileID: -6465566751694194690, guid: 533d70132233bab49a97bd97bc94e659,
+  m_Shader: {fileID: -6465566751694194690, guid: 8d997ff422677994b9bb201f8994e29c,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
