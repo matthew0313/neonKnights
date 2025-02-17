@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 
 public abstract class GunItemData : WeaponItemData

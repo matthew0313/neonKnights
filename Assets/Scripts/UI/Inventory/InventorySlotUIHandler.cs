@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -6,9 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Text;
-using UnityEditor.UIElements;
-using Unity.VisualScripting;
-
 public class InventorySlotUIHandler : MonoBehaviour
 {
     public static InventorySlotUIHandler Instance { get; private set; }
@@ -280,6 +276,10 @@ public class InventorySlotUIHandler : MonoBehaviour
             DropItem(grabbingSlot.item, grabbingSlot.count);
             grabbingSlot.count = 0;
         }
+    }
+    private void OnDestroy()
+    {
+        if (grabbingSlot.item != null) grabbingSlot.item.Delete();
     }
 }
 public enum InventoryGrabMode

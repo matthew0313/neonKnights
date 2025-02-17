@@ -82,6 +82,7 @@ public abstract class Item
     public virtual void Delete()
     {
         ItemManager.Instance.RemoveItem(this);
+        renderSpace.Release();
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }

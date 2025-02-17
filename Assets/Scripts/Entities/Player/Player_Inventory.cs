@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player_Inventory : Inventory
+public class Player_Inventory : Inventory, ICutsceneCallbackReceiver
 {
     Player origin;
     [SerializeField] Transform m_equipAnchor;
@@ -52,6 +52,8 @@ public class Player_Inventory : Inventory
     }
     public void OnUpdate()
     {
+        if (inCutscene) return;
+
         SlotChangeCheckUpdate();
         if (equipped != null) equipped.OnWieldUpdate();
         if (chestplate != null) chestplate.OnEquipUpdate();
@@ -190,5 +192,23 @@ public class Player_Inventory : Inventory
         accessory2 = item;
         onAccessory2Change?.Invoke(accessory2);
         if (accessory2 != null) accessory2.OnEquip(origin);
+    }
+
+    bool inCutscene = false;
+    public void OnCutsceneStart()
+    {
+        inCutscene = true;
+    }
+
+    public void OnCutsceneEnd()
+    {
+        inCutscene = false;
+    }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        if (chestplate != null) chestplate.Delete();
+        if (accessory1 != null) accessory1.Delete();
+        if (accessory2 != null) accessory2.Delete();
     }
 }

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using Unity.Cinemachine;
+using UnityEngine.Events;
+
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,14 +17,28 @@ public class Cutscene : MonoBehaviour
 {
     Animator anim;
     readonly int playID = Animator.StringToHash("Play");
+
+    [SerializeField] CinemachineCamera[] cinemachineCameras;
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        foreach (var i in anim.GetBehaviours<CameraPriorityBehaviour>()) i.setPriority += SetPriority;
     }
-    public virtual void Play()
+    void SetPriority(int cameraIndex, int priority)
+    {
+        if (cameraIndex < 0 || cameraIndex >= cinemachineCameras.Length)
+        {
+            Debug.LogWarning("Invalid camera index");
+            return;
+        }
+
+        cinemachineCameras[cameraIndex].Priority = priority;
+    }
+    public void Play()
     {
         anim.SetTrigger(playID);
     }
+    public virtual void End() { }
 }
 #if UNITY_EDITOR
 [CustomEditor(typeof(Cutscene))]

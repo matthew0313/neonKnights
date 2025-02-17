@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 [RequireComponent(typeof(Collider))]
 public class GunProjectile : Bullet

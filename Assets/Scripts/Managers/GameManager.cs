@@ -19,4 +19,8 @@ public class GameManager : MonoBehaviour
             onPauseToggle?.Invoke();
         }
     }
+    public void GameOver()
+    {
+        GlobalManager.Instance.LoadScene("GameOver");
+    }
 }

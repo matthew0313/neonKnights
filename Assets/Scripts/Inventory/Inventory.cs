@@ -110,6 +110,13 @@ public class Inventory : MonoBehaviour
             slots[i].Load(data.slotSaves[i]);
         }
     }
+    protected virtual void OnDestroy()
+    {
+        foreach(var i in slots)
+        {
+            if (i.item != null) i.item.Delete();
+        }
+    }
 }
 [System.Serializable]
 public class InventorySaveData

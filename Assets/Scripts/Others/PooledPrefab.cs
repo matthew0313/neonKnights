@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class PooledPrefab<T> : MonoBehaviour where T : PooledPrefab<T>
 {
     protected virtual int maxPoolSize => 100;

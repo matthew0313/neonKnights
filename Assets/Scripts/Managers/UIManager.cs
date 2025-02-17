@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour, ICutsceneCallbackReceiver
     {
         Instance = this;
     }
-    [Header("Cutscene")]
     [SerializeField] GameObject defaultUI;
     public void OnCutsceneStart()
     {
@@ -26,8 +25,6 @@ public class UIManager : MonoBehaviour, ICutsceneCallbackReceiver
     [SerializeField] InventoryTab inventoryTab;
     Tab currentOpenTab = null;
 
-    [Header("Pause")]
-    [SerializeField] RectTransform pauseTab;
     private void Awake()
     {
         inventoryTab.OnAwake();

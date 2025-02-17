@@ -1,10 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditorInternal;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
