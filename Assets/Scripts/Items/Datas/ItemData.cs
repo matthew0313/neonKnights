@@ -51,8 +51,6 @@ public abstract class Item
     }
     public virtual bool IsStackable(Item other) => other != null && data == other.data;
     public virtual Item Copy() => data.Create();
-
-    public InventorySlot containedSlot = null;
     public Player wielder { get; private set; }
 
 
@@ -64,6 +62,15 @@ public abstract class Item
     public virtual void Update()
     {
         onUpdate?.Invoke();
+    }
+    public InventorySlot containedSlot { get; private set; } = null;
+    public virtual void OnSlotEnter(InventorySlot slot)
+    {
+        containedSlot = slot;
+    }
+    public virtual void OnSlotExit(InventorySlot slot)
+    {
+        containedSlot = null;
     }
     public virtual void OnWield(Player wielder)
     {
@@ -82,7 +89,7 @@ public abstract class Item
     public virtual void Delete()
     {
         ItemManager.Instance.RemoveItem(this);
-        renderSpace.Release();
+        if(renderSpace != null) renderSpace.Release();
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }

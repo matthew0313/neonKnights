@@ -29,10 +29,10 @@ public class InventorySlotUIHandler : MonoBehaviour
     [SerializeField] QuirkListElement itemQuirkPrefab;
     List<QuirkListElement> itemQuirkList = new();
 
-    [Header("QuirkShardDisplay")]
-    [SerializeField] GameObject quirkShardDisplay;
-    [SerializeField] Image quirkShardBackImage;
-    [SerializeField] TMP_Text quirkShardQuirkDesc;
+    [Header("QuirkApplierDisplay")]
+    [SerializeField] GameObject quirkApplierDisplay;
+    [SerializeField] Image quirkApplierBackImage;
+    [SerializeField] TMP_Text quirkApplierQuirkDesc;
     readonly int startColorID = Shader.PropertyToID("_Start_Color");
     readonly int endColorID = Shader.PropertyToID("_End_Color");
 
@@ -43,7 +43,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     {
         grabbingSlotUI.Set(grabbingSlot);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
-        quirkShardBackImage.material = new Material(quirkShardBackImage.material);
+        quirkApplierBackImage.material = new Material(quirkApplierBackImage.material);
     }
     private void Update()
     {
@@ -254,16 +254,16 @@ public class InventorySlotUIHandler : MonoBehaviour
             itemQuirkAnchor.gameObject.SetActive(tot > 0);
         }
         else itemQuirkAnchor.gameObject.SetActive(false);
-        if(item is QuirkShard_Item)
+        if(item is QuirkApplierItem)
         {
-            QuirkShard_Item tmp = item as QuirkShard_Item;
-            Color tmp2 = tmp.quirkShardOf.quirkColor;
-            quirkShardDisplay.SetActive(true);
-            quirkShardBackImage.material.SetColor(startColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 1.0f));
-            quirkShardBackImage.material.SetColor(endColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 0.0f));
-            quirkShardQuirkDesc.text = $"[{tmp.quirkShardOf.quirkName.text}]: {tmp.quirkShardOf.quirkDescription.text}";
+            QuirkApplierItem tmp = item as QuirkApplierItem;
+            Color tmp2 = tmp.data.appliedQuirk.quirkColor;
+            quirkApplierDisplay.SetActive(true);
+            quirkApplierBackImage.material.SetColor(startColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 1.0f));
+            quirkApplierBackImage.material.SetColor(endColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 0.0f));
+            quirkApplierQuirkDesc.text = $"[{tmp.data.appliedQuirk.quirkName.text}]: {tmp.data.appliedQuirk.quirkDescription.text}";
         }
-        else quirkShardDisplay.SetActive(false);
+        else quirkApplierDisplay.SetActive(false);
     }
     void DropItem(Item item, int count)
     {

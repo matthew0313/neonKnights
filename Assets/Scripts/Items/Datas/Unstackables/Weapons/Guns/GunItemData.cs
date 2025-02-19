@@ -84,8 +84,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public float weight = 0;
     public HitEffect hitEffect;
 
-    public Character owner ;
-
     public Action onNumberUpdate { get; set; }
     int m_mag;
 
@@ -339,7 +337,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public void RefillAmmo(GunAmmoRefillInfo info)
     {
         modifyAmmoRefilled?.Invoke(info);
-        reserveLeft = Mathf.Min(reserveLeft + info.amount, reserve);
+
+        reserveLeft = Mathf.Min(reserveLeft + Mathf.CeilToInt(reserve * info.refillPercentage / 100.0f), reserve);
         onAmmoRefill?.Invoke(info);
     }
     public string numberText => $"{mag}/{reserveLeft}";
@@ -435,7 +434,7 @@ public class GunShot
 }
 public class GunAmmoRefillInfo
 {
-    public int amount;
+    public float refillPercentage;
 }
 public struct GunShotEndInfo
 {

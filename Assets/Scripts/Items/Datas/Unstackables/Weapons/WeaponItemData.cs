@@ -76,7 +76,7 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
         WeaponItem tmp = base.Copy() as WeaponItem;
         foreach(var i in quirks)
         {
-            tmp.quirks.Add(i.Copy());
+            (tmp as IQuirkable).AddQuirk(i.Copy());
         }
         return tmp;
     }
