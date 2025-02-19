@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
         {
             for(int i = m_slotCount; i < value; i++)
             {
-                InventorySlot tmp = new InventorySlot();
+                InventorySlot tmp = new InventorySlot(this);
                 tmp.onCountChange += () => { onInventoryUpdate?.Invoke(tmp.item); };
                 slots.Add(tmp);
             }

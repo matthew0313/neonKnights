@@ -779,6 +779,7 @@ MonoBehaviour:
   detectionLowerRate: 5
   detectionRequired: 10
   maxDetection: 100
+  detection: 0
   runSpeed: 5
   rotateSpeed: 10
   bashHitbox: {fileID: 4246838990898304234}
@@ -807,6 +808,7 @@ MonoBehaviour:
   m_alimentEffectAnchor: {fileID: 6428298227700554316}
   invincible: 0
   hitDetection: 50
+  loot: {fileID: 11400000, guid: eb93087d2b3b6b445a41330194297cb4, type: 2}
 --- !u!95 &8842329122693154525
 Animator:
   serializedVersion: 7
