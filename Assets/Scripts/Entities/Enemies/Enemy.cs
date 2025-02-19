@@ -36,7 +36,7 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
     }
     protected virtual void Update()
     {
-        if(Vector3.Distance(transform.position, player.transform.position) <= detectRange)
+        if(Vector3.Distance(transform.position, player.transform.position) <= detectRange && !Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, Vector3.Distance(player.transform.position, transform.position), LayerMask.GetMask("Map")))
         {
             detection = Mathf.Min(detection + detectionRate * Time.deltaTime, maxDetection);
         }

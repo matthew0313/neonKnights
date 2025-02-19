@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody), typeof(Shielder_HpComp))]
+[RequireComponent(typeof(Rigidbody), typeof(Shielder_HpComp), typeof(NavMeshAgent))]
 public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
 {
+
     [Header("RunningTowards")]
-    [SerializeField] float runSpeed;
     [SerializeField] float rotateSpeed;
 
     [Header("Bashing")]
@@ -18,6 +19,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] float bashCooldown;
     [SerializeField] float bashDamage;
     Rigidbody rb;
+    NavMeshAgent agent;
 
     [Header("Debug")]
     [SerializeField] string FSMPath;
@@ -31,6 +33,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         base.Awake();
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
         topLayer = new Shielder_TopLayer(this, new ShielderFSMVals());
 #if UNITY_EDITOR
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
@@ -84,18 +87,20 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateEnter();
                     origin.anim.SetBool(runningID, true);
+                    origin.agent.isStopped = false;
                 }
                 public override void OnStateUpdate()
                 {
                     base.OnStateUpdate();
-
+                    /*
                     Vector3 dir = (origin.player.transform.position - origin.transform.position).normalized;
                     origin.rb.linearVelocity = new Vector3(0.0f, origin.rb.linearVelocity.y, 0.0f) + new Vector3(dir.x, 0.0f, dir.z) * origin.runSpeed * origin.speedMultiplier;
 
                     float deg = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
                     origin.transform.rotation = Quaternion.Slerp(origin.transform.rotation, Quaternion.Euler(0, deg, 0), origin.bashRotateSpeed * Time.deltaTime);
-
-                    if (Vector3.Distance(origin.player.transform.position, origin.transform.position) < origin.dashStartRange)
+                    */
+                    origin.agent.SetDestination(origin.player.transform.position);
+                    if (Vector3.Distance(origin.player.transform.position, origin.transform.position) < origin.dashStartRange && !Physics.Raycast(origin.transform.position, (origin.player.transform.position - origin.transform.position).normalized, Vector2.Distance(origin.player.transform.position, origin.transform.position), LayerMask.GetMask("Map")))
                     {
                         parentLayer.ChangeState("Bashing");
                     }
@@ -104,6 +109,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateExit();
                     origin.anim.SetBool(runningID, false);
+                    origin.agent.isStopped = true;
                 }
             }
             class Bashing : Layer<Shielder, ShielderFSMVals>
