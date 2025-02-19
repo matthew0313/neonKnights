@@ -104,7 +104,7 @@ public class InventorySlotUI : MonoBehaviour
     }
     void AppliableStateUpdate()
     {
-        if(origin.item != null && InventorySlotUIHandler.Instance != null && InventorySlotUIHandler.Instance.grabbingSlot.item is IApplied tmp)
+        if(origin.item != null && InventorySlotUIHandler.Instance != null && InventorySlotUIHandler.Instance.grabbingSlot.item != null && InventorySlotUIHandler.Instance.grabbingSlot.item is IApplied tmp)
         {
             bool appliable = tmp.IsAppliableTo(origin.item);
             canApply.gameObject.SetActive(appliable);

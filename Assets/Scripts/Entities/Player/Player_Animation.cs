@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 [RequireComponent(typeof(Animator))]
-public class Player_Animation : MonoBehaviour
+public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
 {
     Animator anim;
     [SerializeField] RuntimeAnimatorController controller;
@@ -96,6 +96,16 @@ public class Player_Animation : MonoBehaviour
     private void OnDestroy()
     {
         animation.Destroy();
+    }
+
+    public void OnCutsceneStart()
+    {
+        animation.Disable();
+    }
+
+    public void OnCutsceneEnd()
+    {
+        animation.Enable();
     }
 }
 public enum AnimationType

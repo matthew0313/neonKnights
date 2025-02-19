@@ -119,7 +119,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                         }
                     }
                 }
-                if (!slotHit && grabbingSlot.item.canDrop)
+                if (!slotHit && grabbingSlot.item.data.canDrop)
                 {
                     DropItem(grabbingSlot.item, grabbingSlot.count);
                     grabbingSlot.count = 0;
@@ -138,7 +138,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                         break;
                     }
                 }
-                if (!slotHit && grabbingSlot.item.canDrop)
+                if (!slotHit && grabbingSlot.item.data.canDrop)
                 {
                     DropItem(grabbingSlot.item.Copy(), 1);
                     grabbingSlot.count--;

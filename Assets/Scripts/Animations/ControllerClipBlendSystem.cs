@@ -31,9 +31,16 @@ public class ControllerClipBlendSystem
 
         playGraph.Play();
     }
+    public void Disable()
+    {
+        topMixer.Pause();
+    }
+    public void Enable()
+    {
+        topMixer.Play();
+    }
     public AnimatorControllerPlayable GetController()
     {
-        Debug.Log(controllerPlayable.IsValid());
         return controllerPlayable;
     }
     public void PlayOneShot(AnimationClip clip, float blendInTime = 0.1f, float blendOutTime = 0.1f)
@@ -104,6 +111,7 @@ public class ControllerClipBlendSystem
     {
         if (playGraph.IsValid())
         {
+            InterruptOneShot();
             playGraph.Destroy();
         }
     }

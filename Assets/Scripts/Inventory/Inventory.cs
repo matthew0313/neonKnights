@@ -47,6 +47,23 @@ public class Inventory : MonoBehaviour
         onInventoryUpdate?.Invoke(item);
         return count;
     }
+    public int TryInsert(Item item, int count)
+    {
+        foreach (var i in slots)
+        {
+            if (i.item != null && i.item.IsStackable(item) && item.IsStackable(i.item))
+            {
+                count = i.TryInsert(item, count);
+                if (count <= 0) return 0;
+            }
+        }
+        for (int i = 0; i < slotCount; i++)
+        {
+            count = slots[i].TryInsert(item.Copy(), count);
+            if (count <= 0) return 0;
+        }
+        return count;
+    }
     public int Search(ItemData data)
     {
         return Search((item) => item.data == data);

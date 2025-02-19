@@ -35,6 +35,21 @@ public class InventorySlot
         }
         return count;
     }
+    public int TryInsert(Item item, int count)
+    {
+        if (this.item == null)
+        {
+            if (CanSetItem(item))
+            {
+                count -= Mathf.Min(item.data.maxStack, this.count + count);
+            }
+        }
+        else if (this.item.IsStackable(item) && item.IsStackable(this.item))
+        {
+            count -= Mathf.Min(this.item.data.maxStack, this.count + count) - this.count;
+        }
+        return count;
+    }
     public bool CanSetItem(Item item)
     {
         if (slotRestriction != null && slotRestriction.Invoke(item) == false) return false;

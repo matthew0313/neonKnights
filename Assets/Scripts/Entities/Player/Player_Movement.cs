@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(CharacterController))]
 public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 {
     Player origin;
 
     [Header("Movement")]
     [SerializeField] internal float moveSpeed;
+    [SerializeField] float gravity = -9.81f;
 
     [Header("Walk")]
     [SerializeField] internal float staminaRegen = 1.0f;
@@ -77,13 +78,17 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     internal bool dashing = false;
     internal bool sliding = false;
     internal RotateMode rotateMode = RotateMode.Free;
+
     Rigidbody rb;
+    CharacterController controller;
+
     TopLayer topLayer;
     public void OnAwake()
     {
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         topLayer = new TopLayer(this, new MoveFSMVals());
 #if UNITY_EDITOR
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
@@ -103,11 +108,25 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         if (cutscenePaused) return;
         topLayer.OnStateUpdate();
         Rotate();
+        GravityUpdate();
     }
     public void OnFixedUpdate()
     {
         if (cutscenePaused) return;
         topLayer.OnStateFixedUpdate();
+    }
+    float downVelocity = 0.0f;
+    void GravityUpdate()
+    {
+        if (controller.isGrounded)
+        {
+            downVelocity = Mathf.Max(0.0f, downVelocity);
+        }
+        else
+        {
+            downVelocity += gravity * Time.deltaTime;
+        }
+        controller.Move(Vector3.up * downVelocity * Time.deltaTime);
     }
     void Rotate()
     {
@@ -141,7 +160,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         {
             counter += Time.deltaTime * speed;
             Vector3 tmp = dir * speed;
-            rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
+            controller.Move(tmp * Time.deltaTime);
+            //rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
             //rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
             yield return null;
         }
@@ -203,7 +223,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 {
                     if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
                     Vector3 tmp = values.moveInput * origin.speed;
-                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                    origin.controller.Move(tmp * Time.deltaTime);
+                    //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
                 }
                 if (InputManager.GetSprintInput() && origin.stamina > 0.0f && values.moveInput.magnitude >= 0.1f)
                 {
@@ -248,7 +269,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 {
                     if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
                     Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
-                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                    origin.controller.Move(tmp * Time.deltaTime);
+                    //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
                 }
                 if (!origin.canMove || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
                 {

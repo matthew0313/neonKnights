@@ -11,10 +11,12 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] LangText m_description;
     [SerializeField] ItemModel m_model;
     [SerializeField] ItemCategory m_category;
+    [SerializeField] bool m_canDrop = true;
     public LangText itemName => m_itemName;
     public LangText description => m_description;
     public ItemModel model => m_model;
     public ItemCategory category => m_category;
+    public bool canDrop => m_canDrop;
     public abstract Item Create();
     public abstract int maxStack { get; }
     public virtual string unit => "x";
@@ -41,7 +43,6 @@ public abstract class Item
     }
     public virtual AnimationType heldAnimation => AnimationType.None;
     public virtual RotateMode rotateMode => RotateMode.Free;
-    public virtual bool canDrop => true;
     public virtual LangText GetName() => data.itemName;
     public virtual LangText GetDescription() => data.description;
     public Item(ItemData data)
@@ -179,6 +180,11 @@ public abstract class Item
                 en = "Melee",
                 kr = "근접 무기"
             };
+            case ItemCategory.KeyItem: return new LangText()
+            {
+                en = "Key Item",
+                kr = "중요함"
+            };
             default: return new LangText()
             {
                 en = "???",
@@ -215,5 +221,6 @@ public enum ItemCategory
     Equipment = 1<<9,
     Chestplate = 1<<10,
     Accessory = 1<<11,
-    Melee = 1<<12
+    Melee = 1<<12,
+    KeyItem = 1<<13,
 }

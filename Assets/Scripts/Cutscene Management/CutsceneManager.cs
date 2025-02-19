@@ -50,6 +50,7 @@ public class CutsceneManager : MonoBehaviour
 
         playing.End();
         playing = null;
+        Timing.KillCoroutines(playingTimeline);
         foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
             i.OnCutsceneEnd();
@@ -67,8 +68,16 @@ public class CutsceneManager : MonoBehaviour
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)
     {
         director.Play(timeline);
+        director.time = 0.0f;
         while (director.state == PlayState.Playing) yield return Timing.WaitForOneFrame;
         onFinish?.Invoke();
+
+        director.time = director.playableAsset.duration;
+        while (true)
+        {
+            yield return Timing.WaitForOneFrame;
+            director.Evaluate();
+        }
     }
 
     CoroutineHandle conversation;
@@ -139,6 +148,7 @@ public class CutsceneManager : MonoBehaviour
     {
         Timing.KillCoroutines(playingTimeline);
         Timing.KillCoroutines(conversationTyping);
+        Timing.KillCoroutines(playingTimeline);
     }
 }
 #if UNITY_EDITOR
