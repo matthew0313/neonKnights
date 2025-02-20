@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f9724641a8f84408595ef11a700948, type: 3}
+  m_Name: Small Ammo Pack
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Small Ammo Pack
+    kr: "\uC18C\uD615 \uD0C4\uD658 \uBCF4\uCDA9 \uD329"
+  m_description:
+    en: Can be used to refill a gun's reserve.
+    kr: "\uD55C \uCD1D\uC758 \uD0C4\uD658\uC744 \uBCF4\uCDA9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  m_model: {fileID: 6187497312137155286, guid: 9dddbaec2de4b6948ae750a1703bf0b6, type: 3}
+  m_category: 64
+  m_canDrop: 1
+  m_maxStack: 10
+  m_unit: x
+  m_ammoRefillPercentage: 12.5
+  m_refillSound:
+    clip: {fileID: 8300000, guid: 35a01031f120c49488e9eedbb4a447a7, type: 3}
+    volume: 1

@@ -11,7 +11,7 @@ public class LockedDoorInteraction : DoorInteraction
     [SerializeField] Sound unlockSound;
 
     bool unlocked = false;
-    public override LangText interactionName => unlocked ? base.interactionName : player.inventory.equipped.data == requiredItem ? new LangText()
+    public override LangText interactionName => unlocked ? base.interactionName : player.inventory.equipped != null && player.inventory.equipped.data == requiredItem ? new LangText()
     {
         en = "Unlock Door",
         kr = "잠금 해제하기"

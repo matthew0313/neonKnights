@@ -24,8 +24,8 @@ public abstract class ItemData : ScriptableObject
 public abstract class Item
 {
     public readonly ItemData data;
-    RenderTexture m_render;
-    ItemRenderSpace renderSpace;
+    RenderTexture m_render = null;
+    ItemRenderSpace renderSpace = null;
     public RenderTexture render
     {
         get
@@ -37,6 +37,7 @@ public abstract class Item
                 renderSpace = ItemRenderSpace.GetSpace();
                 renderSpace.SetTarget(m_render);
                 renderSpace.RenderItem(GetModel());
+                Debug.Log(renderSpace.name + " Create");
             }
             return m_render;
         }
@@ -90,7 +91,12 @@ public abstract class Item
     public virtual void Delete()
     {
         ItemManager.Instance.RemoveItem(this);
-        if(renderSpace != null) renderSpace.Release();
+        if (renderSpace != null)
+        {
+            renderSpace.Release();
+            Debug.Log(renderSpace.name + " Delete");
+        }
+        if (render != null) render.Release();
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }

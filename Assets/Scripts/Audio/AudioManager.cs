@@ -33,6 +33,14 @@ public class AudioManager : MonoBehaviour
         playing.Add(tmp);
         return tmp;
     }
+    private void Awake()
+    {
+        GlobalManager.Instance.onSceneWillLoad += OnSceneWillLoad;
+    }
+    void OnSceneWillLoad()
+    {
+        playing.Clear();
+    }
     void Update()
     {
         foreach(var i in playing)

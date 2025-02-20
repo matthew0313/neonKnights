@@ -11,7 +11,7 @@ public class QuirkData_Drastic : QuirkData
     public int shotCountBonus => m_shotCountBonus;
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target);
+        return base.IsAddable(target) && target is GunItem;
     }
     public override Quirk Create()
     {

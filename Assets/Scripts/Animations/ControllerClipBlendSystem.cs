@@ -33,11 +33,11 @@ public class ControllerClipBlendSystem
     }
     public void Disable()
     {
-        topMixer.Pause();
+        playGraph.Stop();
     }
     public void Enable()
     {
-        topMixer.Play();
+        playGraph.Play();
     }
     public AnimatorControllerPlayable GetController()
     {

@@ -121,7 +121,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                 }
                 if (!slotHit && grabbingSlot.item.data.canDrop)
                 {
-                    DropItem(grabbingSlot.item, grabbingSlot.count);
+                    DropItem(grabbingSlot.item.Copy(), grabbingSlot.count);
                     grabbingSlot.count = 0;
                 }
             }

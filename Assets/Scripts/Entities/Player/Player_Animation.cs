@@ -27,6 +27,7 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
         animation = new ControllerClipBlendSystem(anim, controller);
         anim.Rebind();
         AssignMeleeCallbacks();
+        OnEquippedItemChange(origin.inventory.equipped);
     }
     void OnEquippedItemChange(Item item)
     {

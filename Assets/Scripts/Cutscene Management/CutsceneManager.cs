@@ -50,7 +50,10 @@ public class CutsceneManager : MonoBehaviour
 
         playing.End();
         playing = null;
+
         Timing.KillCoroutines(playingTimeline);
+        director.Stop();
+
         foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
             i.OnCutsceneEnd();
@@ -68,16 +71,22 @@ public class CutsceneManager : MonoBehaviour
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)
     {
         director.Play(timeline);
-        director.time = 0.0f;
+
+        yield return Timing.WaitForOneFrame;
+        yield return Timing.WaitForOneFrame;
+
         while (director.state == PlayState.Playing) yield return Timing.WaitForOneFrame;
         onFinish?.Invoke();
 
-        director.time = director.playableAsset.duration;
+        /*director.timeUpdateMode = DirectorUpdateMode.Manual;
+        director.Play(timeline);
+        director.time = director.playableAsset.duration - 0.01f;
         while (true)
         {
             yield return Timing.WaitForOneFrame;
             director.Evaluate();
-        }
+            Debug.Log("Evaluated");
+        }*/
     }
 
     CoroutineHandle conversation;
@@ -99,7 +108,7 @@ public class CutsceneManager : MonoBehaviour
         UIs.SetTalkContentText(string.Empty);
 
         bool typing = true;
-        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text, () => typing = false));
+        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text, segment.talkSound, () => typing = false));
 
         while (typing)
         {
@@ -115,13 +124,14 @@ public class CutsceneManager : MonoBehaviour
         if(!autoPass) while(!Input.GetMouseButtonDown(0)) yield return Timing.WaitForOneFrame;
         onProgress?.Invoke();
     }
-    IEnumerator<float> ConversationTyping(string text, Action onFinish)
+    IEnumerator<float> ConversationTyping(string text, Sound talkSound, Action onFinish)
     {
         StringBuilder sb = new();
         for(int i = 0; i < text.Length; i++)
         {
             sb.Append(text[i]);
             UIs.SetTalkContentText(sb.ToString());
+            AudioManager.Instance.PlaySound(talkSound);
 
             if (text[i] == '.' || text[i] == ',' || text[i] == '!' || text[i] == '?') yield return Timing.WaitForSeconds(talkLongInterval);
             else yield return Timing.WaitForSeconds(talkInterval);
