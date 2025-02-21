@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-[CreateAssetMenu(fileName = "Weapon LootGen", menuName = "Scriptables/Loot Gens/Weapon")]
-public class WeaponLootGen : LootGen
+[CreateAssetMenu(fileName = "Weapon Random LootGen", menuName = "Scriptables/Loot Gens/Weapon (Random)")]
+public class WeaponRandomLootGen : LootGen
 {
     [Header("Weapon Generation")]
     [SerializeField] WeaponItemData[] weapons;

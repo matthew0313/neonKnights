@@ -83,7 +83,7 @@ public class CutsceneManager_UI : MonoBehaviour
             if (conversationChoices.Count <= i) conversationChoices.Add(Instantiate(conversationChoicePrefab, conversationChoiceAnchor));
 
             conversationChoices[i].Show();
-            conversationChoices[i].text.text = segment.options[i];
+            conversationChoices[i].text.text = segment.options[i].text;
 
             int optionIndex = i;
             conversationChoices[i].onClick = () =>

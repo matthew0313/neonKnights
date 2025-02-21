@@ -33,12 +33,12 @@ public class ConversationOpenBehaviour : StateMachineBehaviour
 [System.Serializable]
 public class ConversationSegment
 {
-    [SerializeField] string m_talker;
-    [SerializeField][TextArea] string m_text;
+    [SerializeField] LangText m_talker;
+    [SerializeField] LangText m_text;
     [SerializeField] Sound m_talkSound;
     [SerializeField] bool m_skippable = true;
-    public string talker => m_talker;
-    public string text => m_text;
+    public LangText talker => m_talker;
+    public LangText text => m_text;
     public Sound talkSound => m_talkSound;
     public bool skippable => m_skippable;
 }

@@ -51,9 +51,6 @@ public class CutsceneManager : MonoBehaviour
         playing.End();
         playing = null;
 
-        Timing.KillCoroutines(playingTimeline);
-        director.Stop();
-
         foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
             i.OnCutsceneEnd();
@@ -77,7 +74,6 @@ public class CutsceneManager : MonoBehaviour
 
         while (director.state == PlayState.Playing) yield return Timing.WaitForOneFrame;
         onFinish?.Invoke();
-
         /*director.timeUpdateMode = DirectorUpdateMode.Manual;
         director.Play(timeline);
         director.time = director.playableAsset.duration - 0.01f;
@@ -104,11 +100,11 @@ public class CutsceneManager : MonoBehaviour
     }
     IEnumerator<float> Conversation(ConversationSegment segment, Action onProgress, bool autoPass)
     {
-        UIs.SetTalkerText(segment.talker);
+        UIs.SetTalkerText(segment.talker.text);
         UIs.SetTalkContentText(string.Empty);
 
         bool typing = true;
-        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text, segment.talkSound, () => typing = false));
+        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text.text, segment.talkSound, () => typing = false));
 
         while (typing)
         {
@@ -116,7 +112,7 @@ public class CutsceneManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 yield return Timing.WaitForOneFrame;
-                UIs.SetTalkContentText(segment.text);
+                UIs.SetTalkContentText(segment.text.text);
                 break;
             }
         }
