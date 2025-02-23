@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
 {
-    protected Animator anim;
 
     [Header("Detection")]
     [SerializeField] float detectRange = 20.0f;
@@ -31,7 +29,6 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        anim = GetComponent<Animator>();
     }
     protected virtual void Update()
     {

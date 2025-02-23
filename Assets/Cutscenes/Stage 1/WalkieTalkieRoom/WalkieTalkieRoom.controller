@@ -259,7 +259,8 @@ MonoBehaviour:
       kr: ???
     m_text:
       en: You can call me 'Assistant' for now.
-      kr: "\uC9C0\uAE08\uC740 \uC77C\uB2E8 '\uC870\uB825\uC790'\uB77C\uACE0 \uBD88\uB7EC\uB77C."
+      kr: "\uC9C0\uAE08\uC740 \uC77C\uB2E8 <color=#FFFF00>\uC870\uB825\uC790</color>\uB77C\uACE0
+        \uBD88\uB7EC\uB77C."
     m_talkSound:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
       volume: 1
@@ -300,7 +301,7 @@ MonoBehaviour:
       kr: "\uC870\uB825\uC790"
     m_text:
       en: They have a Quirk that makes them stronger.
-      kr: "\uC7A5\uBE44\uAC00 \uB354 \uAC15\uB825\uD574\uC9C0\uB294 \uCFFC\uD06C\uAC00
+      kr: "\uC7A5\uBE44\uAC00 \uB354 \uAC15\uB825\uD574\uC9C0\uB294 <b>\uCFFC\uD06C</b>\uAC00
         \uBD99\uC5B4 \uC788\uAE30 \uB54C\uBB38\uC774\uB2E4."
     m_talkSound:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
@@ -1425,7 +1426,7 @@ MonoBehaviour:
       kr: "\uC5D8\uB9AC\uC544\uC2A4"
     m_text:
       en: Hmm... Ok.
-      kr: "\uADF8\uB807\uAD70."
+      kr: "\uD750\uC74C... \uC54C\uC558\uC5B4."
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
       volume: 1

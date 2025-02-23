@@ -18,6 +18,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     [SerializeField] TMP_Text itemName;
     [SerializeField] GameObject itemCategory;
     [SerializeField] TMP_Text itemCategoryText, itemDesc;
+    [SerializeField] GameObject undroppable;
 
     [Header("StatDisplay")]
     [SerializeField] Transform itemStatAnchor;
@@ -264,6 +265,7 @@ public class InventorySlotUIHandler : MonoBehaviour
             quirkApplierQuirkDesc.text = $"[{tmp.data.appliedQuirk.quirkName.text}]: {tmp.data.appliedQuirk.quirkDescription.text}";
         }
         else quirkApplierDisplay.SetActive(false);
+        undroppable.SetActive(!item.data.canDrop);
     }
     void DropItem(Item item, int count)
     {

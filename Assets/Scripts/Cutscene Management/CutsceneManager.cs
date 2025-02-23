@@ -125,17 +125,38 @@ public class CutsceneManager : MonoBehaviour
         if(!autoPass) while(!Input.GetMouseButtonDown(0)) yield return Timing.WaitForOneFrame;
         onProgress?.Invoke();
     }
+    int SearchStringIndex(int start, string text, char search)
+    {
+        for(int i = start; i < text.Length; i++)
+        {
+            if (text[i] == search) return i;
+        }
+        return text.Length;
+    }
     IEnumerator<float> ConversationTyping(string text, Sound talkSound, Action onFinish)
     {
         StringBuilder sb = new();
-        for(int i = 0; i < text.Length; i++)
+        int i = 0;
+        while(i < text.Length)
         {
+            if (text[i] == '<')
+            {
+                int tagStart = i;
+                int tagEnd = SearchStringIndex(tagStart + 1, text, '>');
+                if(tagEnd < text.Length)
+                {
+                    sb.Append(text.Substring(tagStart, tagEnd - tagStart + 1));
+                    i += tagEnd - tagStart + 1;
+                }
+            }
+
             sb.Append(text[i]);
             UIs.SetTalkContentText(sb.ToString());
             AudioManager.Instance.PlaySound(talkSound);
 
             if (text[i] == '.' || text[i] == ',' || text[i] == '!' || text[i] == '?') yield return Timing.WaitForSeconds(talkLongInterval);
             else yield return Timing.WaitForSeconds(talkInterval);
+            i++;
         }
         onFinish?.Invoke();
     }

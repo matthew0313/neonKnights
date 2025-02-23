@@ -155,7 +155,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 public override void OnStateEnter()
                 {
                     base.OnStateEnter();
-                    origin.rotator.rotation = Quaternion.identity;
+                    origin.rotator.localRotation = Quaternion.identity;
                 }
 
                 class Rotating : State<Shielder, ShielderFSMVals>

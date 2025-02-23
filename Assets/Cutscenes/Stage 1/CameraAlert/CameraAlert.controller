@@ -256,8 +256,8 @@ MonoBehaviour:
       kr: '*'
     m_text:
       en: 'Alert: Intruder found in Storage A4F. Commencing Security Protocol.'
-      kr: "\uACBD\uACE0: \uCC3D\uACE0 A4F\uC5D0\uC11C \uCE68\uC785\uC790 \uBC1C\uACAC.
-        \uACBD\uBE44 \uD504\uB85C\uD1A0\uCF5C\uC744 \uC2E4\uD589\uD569\uB2C8\uB2E4."
+      kr: "<color=#FF0000>\uACBD\uACE0: \uCC3D\uACE0 A4F\uC5D0\uC11C \uCE68\uC785\uC790
+        \uBC1C\uACAC. \uACBD\uBE44 \uD504\uB85C\uD1A0\uCF5C\uC744 \uC2E4\uD589\uD569\uB2C8\uB2E4."
     m_talkSound:
       clip: {fileID: 8300000, guid: c4d1a9ca23f999f4c94e275a95ec6c99, type: 3}
       volume: 1
@@ -279,6 +279,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9544bc9fb66f4d4438f3a570e8ea45ec, type: 3}
     volume: 1
   loop: 1
+  soundID: 
 --- !u!1102 &6853153597867190788
 AnimatorState:
   serializedVersion: 6

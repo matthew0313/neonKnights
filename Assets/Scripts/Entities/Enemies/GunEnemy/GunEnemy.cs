@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(GunEnemy_HpComp))]
+[RequireComponent(typeof(Animator))]
 public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable
 {
     [SerializeField] Transform firePoint;
@@ -19,6 +20,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] string FSMPath;
     NavMeshAgent agent;
     Rigidbody rb;
+    Animator anim;
 
     TopLayer topLayer;
     float baseAgentSpeed;
@@ -41,6 +43,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         baseAgentSpeed = agent.speed;
 
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
 
         topLayer = new TopLayer(this, new GunEnemyFSMVals());
 #if UNITY_EDITOR
@@ -53,12 +56,14 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         base.Update();
         topLayer.OnStateUpdate();
     }
+    readonly int attackID = Animator.StringToHash("Attack");
     void Fire()
     {
         EnemyBullet tmp = bullet.Instantiate() as EnemyBullet;
         tmp.transform.position = firePoint.position;
         tmp.transform.rotation = Quaternion.LookRotation((player.transform.position - firePoint.position).normalized);
         tmp.Set(OnBulletHit, bulletSpeed, bulletRange);
+        anim.SetTrigger(attackID);
     }
     protected virtual void OnBulletHit(GameObject hit)
     {
@@ -94,10 +99,12 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 AddState("Backstep", new Backstep(origin, this));
             }
             float attackCounter = 0.0f;
+            readonly int detectedID = Animator.StringToHash("Detected");
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
                 attackCounter = origin.attackInterval;
+                origin.anim.SetBool(detectedID, true);
             }
             public override void OnStateUpdate()
             {
@@ -116,6 +123,11 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                         attackCounter = origin.attackInterval;
                     }
                 }
+            }
+            public override void OnStateExit()
+            {
+                base.OnStateExit();
+                origin.anim.SetBool(detectedID, false);
             }
             class Idle : State<GunEnemy, GunEnemyFSMVals>
             {
@@ -142,11 +154,13 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
 
                 }
+                readonly int movingID = Animator.StringToHash("Moving");
                 public override void OnStateEnter()
                 {
                     base.OnStateEnter();
                     origin.agent.SetDestination(origin.player.transform.position);
                     origin.agent.isStopped = false;
+                    origin.anim.SetBool(movingID, true);
                 }
                 public override void OnStateUpdate()
                 {
@@ -161,6 +175,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateExit();
                     origin.agent.isStopped = true;
+                    origin.anim.SetBool(movingID, false);
                 }
             }
             class Backstep : State<GunEnemy, GunEnemyFSMVals>
@@ -168,6 +183,12 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 public Backstep(GunEnemy origin, Layer<GunEnemy, GunEnemyFSMVals> parent) : base(origin, parent)
                 {
 
+                }
+                readonly int movingID = Animator.StringToHash("Moving");
+                public override void OnStateEnter()
+                {
+                    base.OnStateEnter();
+                    origin.anim.SetBool(movingID, true);
                 }
                 public override void OnStateUpdate()
                 {
@@ -187,6 +208,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateExit();
                     origin.rb.linearVelocity = new Vector3(0.0f, origin.rb.linearVelocity.y, 0.0f);
+                    origin.anim.SetBool(movingID, false);
                 }
             }
         }
