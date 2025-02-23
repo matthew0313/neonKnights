@@ -27,13 +27,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC870\uB825\uC790"
-    m_text: "\uAC04\uC9DC\uC7A5\uC778\uAC00? \uC544\uB2D8 \uADF8\uB0E5 \uC9DC\uC7A5\uC778\uAC00?"
+    m_talker:
+      en: Assistant
+      kr: "\uC870\uB825\uC790"
+    m_text:
+      en: "Which one, \uAC04\uC9DC\uC7A5 or \uADF8\uB0E5 \uC9DC\uC7A5?"
+      kr: "\uAC04\uC9DC\uC7A5\uC778\uAC00? \uC544\uB2D8 \uADF8\uB0E5 \uC9DC\uC7A5\uC778\uAC00?"
+    m_talkSound:
+      clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
+      volume: 1
     m_skippable: 1
   choiceSegment:
     m_options:
-    - "\uAC04\uC9DC\uC7A5"
-    - "\uADF8\uB0E5 \uC9DC\uC7A5"
+    - en: "\uAC04\uC9DC\uC7A5(idk)"
+      kr: "\uAC04\uC9DC\uC7A5"
+    - en: "\uADF8\uB0E5 \uC9DC\uC7A5(im not searching google for this)"
+      kr: "\uADF8\uB0E5 \uC9DC\uC7A5"
 --- !u!114 &-7852399836787089320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -47,8 +56,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC870\uB825\uC790"
-    m_text: "\uB098\uB3C4 \uADF8\uB807\uB2E4."
+    m_talker:
+      en: Assistant
+      kr: "\uC870\uB825\uC790"
+    m_text:
+      en: Same.
+      kr: "\uB098\uB3C4 \uADF8\uB807\uB2E4."
+    m_talkSound:
+      clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1
 --- !u!1102 &-7134903499616869242
@@ -283,8 +299,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC5D8\uB9AC\uC544\uC2A4"
-    m_text: "\uC9DC\uC7A5\uBA74\uC774 \uC88B\uC740\uB370."
+    m_talker:
+      en: Eliath
+      kr: "\uC5D8\uB9AC\uC544\uC2A4"
+    m_text:
+      en: "Well, i prefer \uC9DC\uC7A5\uBA74."
+      kr: "\uC9DC\uC7A5\uBA74\uC774 \uC88B\uC740\uB370."
+    m_talkSound:
+      clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1
 --- !u!114 &-3196274951759774730
@@ -302,6 +325,8 @@ MonoBehaviour:
   played:
     clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
     volume: 1
+  loop: 0
+  soundID: 
 --- !u!1102 &-2586181141210041139
 AnimatorState:
   serializedVersion: 6
@@ -344,8 +369,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC5D8\uB9AC\uC544\uC2A4"
-    m_text: "\uADF8\uB0E5 \uC9DC\uC7A5\uC774 \uC88B\uC544."
+    m_talker:
+      en: Eliath
+      kr: "\uC5D8\uB9AC\uC544\uC2A4"
+    m_text:
+      en: "\uADF8\uB0E5 \uC9DC\uC7A5. (en)"
+      kr: "\uADF8\uB0E5 \uC9DC\uC7A5\uC774 \uC88B\uC740\uB370."
+    m_talkSound:
+      clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1
 --- !u!114 &-2026754495276902746
@@ -361,8 +393,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC870\uB825\uC790"
-    m_text: "\uADF8\uB807\uAD70. \uB098\uB294 \uC9EC\uBF55\uC774 \uC88B\uB2E4."
+    m_talker:
+      en: Assistant
+      kr: "\uC870\uB825\uC790"
+    m_text:
+      en: "I see. I prefer \uC9EC\uBF55."
+      kr: "\uADF8\uB807\uAD70. \uB098\uB294 \uC9EC\uBF55\uC774 \uC88B\uB2E4."
+    m_talkSound:
+      clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1
 --- !u!1101 &-1854190376897904031
@@ -484,14 +523,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC870\uB825\uC790"
-    m_text: "\uADF8\uB7FC \uD558\uB098 \uBB3B\uC9C0. \uC790\uB124\uB294 \uC9DC\uC7A5\uBA74\uC774
-      \uC88B\uC740\uAC00 \uC9EC\uBF55\uC774 \uC88B\uC740\uAC00?"
+    m_talker:
+      en: Assistant
+      kr: "\uC870\uB825\uC790"
+    m_text:
+      en: "Then, let me ask. Which do you prefer, \uC9DC\uC7A5\uBA74 or \uC9EC\uBF55?"
+      kr: "\uADF8\uB7FC \uBB3B\uC9C0. \uC790\uB124\uB294 \uC9DC\uC7A5\uBA74\uC774
+        \uC88B\uB098 \uC9EC\uBF55\uC774 \uC88B\uB098?"
+    m_talkSound:
+      clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
+      volume: 1
     m_skippable: 1
   choiceSegment:
     m_options:
-    - "\uC9DC\uC7A5\uBA74"
-    - "\uC9EC\uBF55"
+    - en: "\uC9DC\uC7A5\uBA74(idk in english)"
+      kr: "\uC9DC\uC7A5\uBA74"
+    - en: "\uC9EC\uBF55(too lazy to search)"
+      kr: "\uC9EC\uBF55"
 --- !u!1101 &-229396183334664011
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -772,8 +820,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC5D8\uB9AC\uC544\uC2A4"
-    m_text: "\uAC04\uC9DC\uC7A5\uC774 \uC88B\uC740\uB370."
+    m_talker:
+      en: Eliath
+      kr: "\uC5D8\uB9AC\uC544\uC2A4"
+    m_text:
+      en: "\uAC04\uC9DC\uC7A5. (en)"
+      kr: "\uAC04\uC9DC\uC7A5\uC774 \uC88B\uC740\uB370."
+    m_talkSound:
+      clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1
 --- !u!1102 &4103455309361299563
@@ -966,9 +1021,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC5D8\uB9AC\uC544\uC2A4"
-    m_text: "\uC774\uBD10 \uC870\uB825\uC790, \uC544\uBB34 \uB9D0\uC774\uB098 \uD55C\uBC88
-      \uD574\uBD10. \uCEF7\uC52C \uD14C\uC2A4\uD2B8\uD558\uAC8C."
+    m_talker:
+      en: Eliath
+      kr: "\uC5D8\uB9AC\uC544\uC2A4"
+    m_text:
+      en: Oi, assistant, Talk bout anything so that i can test this cutscene system
+        out.
+      kr: "\uC57C \uC870\uB825\uC790, \uCEF7\uC52C \uC2DC\uC2A4\uD15C \uD14C\uC2A4\uD2B8\uD558\uAC8C
+        \uC544\uBB34 \uB9D0\uC774\uB098 \uD574\uBD10"
+    m_talkSound:
+      clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1
 --- !u!1102 &7585836185633089513
@@ -1014,6 +1077,8 @@ MonoBehaviour:
   played:
     clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
     volume: 1
+  loop: 0
+  soundID: 
 --- !u!114 &8415809724028567936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1027,7 +1092,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segment:
-    m_talker: "\uC5D8\uB9AC\uC544\uC2A4"
-    m_text: "\uC9EC\uBF55\uC774 \uC88B\uC740\uB370."
+    m_talker:
+      en: Eliath
+      kr: "\uC5D8\uB9AC\uC544\uC2A4"
+    m_text:
+      en: "Well, i prefer \uC9EC\uBF55."
+      kr: "\uC9EC\uBF55\uC774 \uC88B\uC740\uB370."
+    m_talkSound:
+      clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
+      volume: 1
     m_skippable: 1
   progress: 1

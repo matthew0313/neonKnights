@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shielder_Shards
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: d0696fe3ad73b384fa273e9320ff3b1d, type: 2}
-  minAttempt: 1
-  maxAttempt: 3
+  minAttempt: 3
+  maxAttempt: 6

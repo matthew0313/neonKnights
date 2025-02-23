@@ -34,7 +34,7 @@ public class Enemy_HpComp : HpComp
     }
     public override DamageReceivedInfo GetDamage(DamageInfo damage)
     {
-        origin.AddDetection(hitDetection);
+        if(damage.source is Player) origin.AddDetection(hitDetection);
         return base.GetDamage(damage);
     }
 }

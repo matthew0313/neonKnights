@@ -2,14 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody), typeof(GravityCharacterController))]
 public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 {
     Player origin;
 
     [Header("Movement")]
     [SerializeField] internal float moveSpeed;
-    [SerializeField] float gravity = -9.81f;
 
     [Header("Walk")]
     [SerializeField] internal float staminaRegen = 1.0f;
@@ -80,7 +79,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     internal RotateMode rotateMode = RotateMode.Free;
 
     Rigidbody rb;
-    CharacterController controller;
+    GravityCharacterController controller;
 
     TopLayer topLayer;
     public void OnAwake()
@@ -88,7 +87,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         rb = GetComponent<Rigidbody>();
-        controller = GetComponent<CharacterController>();
+        controller = GetComponent<GravityCharacterController>();
         topLayer = new TopLayer(this, new MoveFSMVals());
 #if UNITY_EDITOR
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
@@ -108,25 +107,11 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         if (cutscenePaused) return;
         topLayer.OnStateUpdate();
         Rotate();
-        GravityUpdate();
     }
     public void OnFixedUpdate()
     {
         if (cutscenePaused) return;
         topLayer.OnStateFixedUpdate();
-    }
-    float downVelocity = 0.0f;
-    void GravityUpdate()
-    {
-        if (controller.isGrounded)
-        {
-            downVelocity = Mathf.Max(0.0f, downVelocity);
-        }
-        else
-        {
-            downVelocity += gravity * Time.deltaTime;
-        }
-        controller.Move(Vector3.up * downVelocity * Time.deltaTime);
     }
     void Rotate()
     {
@@ -156,11 +141,10 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         dashing = true;
         dir.Normalize();
         float counter = 0.0f;
-        while (counter < distance)
+        while (counter * speed < distance)
         {
-            counter += Time.deltaTime * speed;
-            Vector3 tmp = dir * speed;
-            controller.Move(tmp * Time.deltaTime);
+            counter += Time.deltaTime;
+            controller.Move(dir * speed * Time.deltaTime);
             //rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
             //rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
             yield return null;

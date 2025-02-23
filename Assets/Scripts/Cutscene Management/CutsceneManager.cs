@@ -51,6 +51,9 @@ public class CutsceneManager : MonoBehaviour
         playing.End();
         playing = null;
 
+        Timing.KillCoroutines(playingTimeline);
+        director.Stop();
+
         foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
             i.OnCutsceneEnd();
@@ -63,6 +66,8 @@ public class CutsceneManager : MonoBehaviour
     public void PlayTimeline(TimelineAsset timeline, Action onFinish = null)
     {
         Timing.KillCoroutines(playingTimeline);
+        director.Stop();
+
         playingTimeline = Timing.RunCoroutine(PlayingTimeline(timeline, onFinish));
     }
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)

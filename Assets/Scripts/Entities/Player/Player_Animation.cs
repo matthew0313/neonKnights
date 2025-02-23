@@ -40,6 +40,7 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
     readonly int moveYID = Animator.StringToHash("MoveY");
     public void OnUpdate()
     {
+        //if (inCutscene) return;
         anim.SetBool(movingID, origin.movement.relativeMoveInput.magnitude > 0.1f);
         anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
         anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
@@ -98,14 +99,19 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
     {
         animation.Destroy();
     }
-
+    //bool inCutscene = false;
     public void OnCutsceneStart()
     {
+        //inCutscene = true;
+        //anim.SetBool(movingID, false);
+        //anim.SetInteger(animationTypeID, 0);
         animation.Disable();
     }
 
     public void OnCutsceneEnd()
     {
+        //inCutscene = false;
+        //OnEquippedItemChange(origin.inventory.equipped);
         animation.Enable();
     }
 }
