@@ -249,7 +249,7 @@ MonoBehaviour:
   detection: 0
   firePoint: {fileID: 4742265406283280591}
   bullet: {fileID: 4397348359431735770, guid: 50f095c70ad86a149b6f33b18d3a50b9, type: 3}
-  attackInterval: 2
+  attackInterval: 1
   bulletDamage: 5
   bulletSpeed: 10
   bulletRange: 20
@@ -257,6 +257,10 @@ MonoBehaviour:
   maxDistance: 20
   minDistance: 5
   backstepSpeed: 2
+  shotCount: 1
+  spread: 0
+  magSize: 0
+  reloadTime: 3
   FSMPath: 
 --- !u!1 &7381321589065056130
 GameObject:

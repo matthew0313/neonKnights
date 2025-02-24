@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: RotateClip
   m_EditorClassIdentifier: 
   template:
-    targetEulers: {x: 0, y: 270, z: 0}
+    targetEulers: {x: 0, y: 90, z: 0}
     rotateCurve:
       serializedVersion: 2
       m_Curve:

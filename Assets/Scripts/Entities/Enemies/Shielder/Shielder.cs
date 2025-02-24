@@ -111,11 +111,11 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
 
                 }
-                readonly int runningID = Animator.StringToHash("Running");
+                readonly int movingID = Animator.StringToHash("Moving");
                 public override void OnStateEnter()
                 {
                     base.OnStateEnter();
-                    origin.anim.SetBool(runningID, true);
+                    origin.anim.SetBool(movingID, true);
                     origin.agent.isStopped = false;
                 }
                 public override void OnStateUpdate()
@@ -140,7 +140,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 public override void OnStateExit()
                 {
                     base.OnStateExit();
-                    origin.anim.SetBool(runningID, false);
+                    origin.anim.SetBool(movingID, false);
                     origin.agent.isStopped = true;
                 }
             }

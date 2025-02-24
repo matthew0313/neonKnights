@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using MEC;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(GunEnemy_HpComp))]
 [RequireComponent(typeof(Animator))]
@@ -15,6 +16,10 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] float rotateSpeed = 4.0f;
     [SerializeField] float maxDistance = 20.0f, minDistance = 5.0f;
     [SerializeField] float backstepSpeed = 2.0f;
+    [SerializeField] int shotCount = 1;
+    [SerializeField] float spread = 0.0f;
+    [SerializeField] int magSize;
+    [SerializeField] float reloadTime = 3.0f;
 
     [Header("Debug")]
     [SerializeField] string FSMPath;
@@ -35,9 +40,11 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         }
     }
     public float damageMultiplier { get; set; } = 1.0f;
+    int mag = 0;
     protected override void Awake()
     {
         base.Awake();
+        mag = magSize;
         agent = GetComponent<NavMeshAgent>();
         agent.updateUpAxis = false;
         baseAgentSpeed = agent.speed;
@@ -59,11 +66,30 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     readonly int attackID = Animator.StringToHash("Attack");
     void Fire()
     {
-        EnemyBullet tmp = bullet.Instantiate() as EnemyBullet;
-        tmp.transform.position = firePoint.position;
-        tmp.transform.rotation = Quaternion.LookRotation((player.transform.position - firePoint.position).normalized);
-        tmp.Set(OnBulletHit, bulletSpeed, bulletRange);
+        for(int i = 0; i < shotCount; i++)
+        {
+            EnemyBullet tmp = bullet.Instantiate() as EnemyBullet;
+            tmp.transform.position = firePoint.position;
+            tmp.transform.rotation = Quaternion.LookRotation((player.transform.position - firePoint.position).normalized) * Quaternion.Euler(UnityEngine.Random.Range(-spread, spread), UnityEngine.Random.Range(-spread, spread), 0.0f);
+            tmp.Set(OnBulletHit, bulletSpeed, bulletRange);
+        }
         anim.SetTrigger(attackID);
+    }
+    readonly int reloadID = Animator.StringToHash("Reload");
+    bool reloading = false;
+    CoroutineHandle reloadCoroutine;
+    void Reload()
+    {
+        if (reloading) return;
+        reloading = true;
+        anim.SetTrigger(reloadID);
+        reloadCoroutine = Timing.RunCoroutine(Reloading());
+    }
+    IEnumerator<float> Reloading()
+    {
+        yield return Timing.WaitForSeconds(reloadTime);
+        mag = magSize;
+        reloading = false;
     }
     protected virtual void OnBulletHit(GameObject hit)
     {
@@ -77,9 +103,13 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         return !Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, Vector3.Distance(transform.position, player.transform.position), LayerMask.GetMask("Map"));
     }
+    void OnDestroy()
+    {
+        Timing.KillCoroutines(reloadCoroutine);
+    }
     class GunEnemyFSMVals : FSMVals
     {
-
+        public float attackCounter = 0.0f;
     }
     class TopLayer : TopLayer<GunEnemy, GunEnemyFSMVals>
     {
@@ -88,6 +118,11 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             defaultState = new EnemyIdle<GunEnemy, GunEnemyFSMVals>(origin, this, "Detected");
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this, "Idle"));
+        }
+        public override void OnStateUpdate()
+        {
+            base.OnStateUpdate();
+            if (values.attackCounter > 0.0f) values.attackCounter -= Time.deltaTime;
         }
         class Detected : EnemyDetected<GunEnemy, GunEnemyFSMVals>
         {
@@ -98,12 +133,10 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 AddState("Approach", new Approach(origin, this));
                 AddState("Backstep", new Backstep(origin, this));
             }
-            float attackCounter = 0.0f;
             readonly int detectedID = Animator.StringToHash("Detected");
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
-                attackCounter = origin.attackInterval;
                 origin.anim.SetBool(detectedID, true);
             }
             public override void OnStateUpdate()
@@ -114,14 +147,25 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 float deg = Mathf.Atan2(tmp.x, tmp.z) * Mathf.Rad2Deg;
                 origin.transform.rotation = Quaternion.Slerp(origin.transform.rotation, Quaternion.Euler(0, deg, 0), origin.rotateSpeed * Time.deltaTime);
 
-                if (attackCounter > 0.0f) attackCounter -= Time.deltaTime;
-                if(attackCounter <= 0.0f)
+                if (origin.ScanPlayer())
                 {
-                    if(origin.ScanPlayer())
+                    if(values.attackCounter <= 0.0f)
                     {
-                        origin.Fire();
-                        attackCounter = origin.attackInterval;
+                        if(origin.mag > 0)
+                        {
+                            origin.mag--;
+                            origin.Fire();
+                            values.attackCounter = origin.attackInterval;
+                        }
+                        else
+                        {
+                            if (!origin.reloading) origin.Reload();
+                        }
                     }
+                }
+                else
+                {
+                    if (origin.mag <= origin.magSize / 2 && !origin.reloading) origin.Reload();
                 }
             }
             public override void OnStateExit()
