@@ -3,55 +3,87 @@ using UnityEngine;
 
 public class MeleeSlashBehaviour : StateMachineBehaviour
 {
-    Player player;
-
-    [SerializeField] int comboIndex;
+    [Header("Slash")]
+    [SerializeField] int comboIndex = 0;
+    [SerializeField] float slashStartTime = 0.0f, slashEndTime = 1.0f;
 
     [Header("Effect")]
     [SerializeField] SlashEffect effect;
     [SerializeField] float effectStartInterval;
     [SerializeField] Vector3 pos, rot;
+    Transform effectAnchor;
 
-    public Action onSlashStart;
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    readonly int comboID = Animator.StringToHash("Combo");
+    public Action<int> onSlashStart;
+    public Action<int> onSlashEnd;
+    SlashState state;
 
     bool effectPlayed = false;
     float counter = 0.0f;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (player == null) animator.TryGetComponent(out player);
-        animator.SetInteger(comboID, comboIndex);
-        onSlashStart?.Invoke();
+        if(effectAnchor == null)
+        {
+            if (animator.TryGetComponent(out SlashEffectAnchorLocator locator))
+            {
+                effectAnchor = locator.slashEffectAnchor;
+            }
+            else effectAnchor = animator.transform;
+        }
         counter = 0.0f;
         effectPlayed = false;
+        state = SlashState.NotStarted;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        counter += Time.deltaTime;
         if (!effectPlayed)
         {
-            counter += Time.deltaTime;
             if (counter >= effectStartInterval)
             {
                 effectPlayed = true;
-                if (effect != null && player != null)
+                if (effect != null && effectAnchor != null)
                 {
                     SlashEffect tmp = effect.Instantiate();
-                    tmp.transform.SetParent(player.movement.rotator, false);
+                    tmp.transform.SetParent(effectAnchor, false);
                     tmp.transform.localPosition = pos;
                     tmp.transform.localRotation = Quaternion.Euler(rot);
                 }
             }
         }
-    }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+        switch (state)
+        {
+            case SlashState.NotStarted:
+                if(counter >= slashStartTime)
+                {
+                    state = SlashState.Slashing;
+                    onSlashStart?.Invoke(comboIndex);
+                }
+                break;
+            case SlashState.Slashing:
+                if(counter >= slashEndTime)
+                {
+                    state = SlashState.Ended;
+                    onSlashEnd?.Invoke(comboIndex);
+                }
+                break;
+        }
+    }
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if(state == SlashState.Slashing)
+        {
+            onSlashEnd?.Invoke(comboIndex);
+        }
+    }
+    enum SlashState
+    {
+        NotStarted,
+        Slashing,
+        Ended
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

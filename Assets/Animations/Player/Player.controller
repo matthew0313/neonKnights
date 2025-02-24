@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 0
+  slashStartTime: 0.25
+  slashEndTime: 1
   effect: {fileID: 3902135265232634539, guid: 7eefe5ab3cdfc694e9b1150942053dc9, type: 3}
   effectStartInterval: 0.25
   pos: {x: 0, y: 0.92, z: 0.35}
@@ -886,6 +888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 0
+  slashStartTime: 0
+  slashEndTime: 1
   effect: {fileID: 0}
   effectStartInterval: 0
   pos: {x: 0, y: 0, z: 0}
@@ -1066,6 +1070,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 1
+  slashStartTime: 0.25
+  slashEndTime: 1
   effect: {fileID: 3902135265232634539, guid: 7eefe5ab3cdfc694e9b1150942053dc9, type: 3}
   effectStartInterval: 0.25
   pos: {x: 0, y: 0.92, z: 0.23}
@@ -2239,6 +2245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 1
+  slashStartTime: 0.16
+  slashEndTime: 1
   effect: {fileID: 7916895230301998553, guid: c6ea06c38d23d4c4daaeb31cf2bcc642, type: 3}
   effectStartInterval: 0.16
   pos: {x: 0.178, y: 0.79, z: 0.896}
@@ -2874,6 +2882,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 0
+  slashStartTime: 0.25
+  slashEndTime: 1
   effect: {fileID: 7916895230301998553, guid: c6ea06c38d23d4c4daaeb31cf2bcc642, type: 3}
   effectStartInterval: 0.25
   pos: {x: 0.178, y: 0.79, z: 0.896}

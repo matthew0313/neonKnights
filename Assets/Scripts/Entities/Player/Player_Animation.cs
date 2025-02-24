@@ -70,26 +70,19 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
         anim.SetTrigger(throwID);
     }
     readonly int slashID = Animator.StringToHash("Slash");
-    readonly int comboID = Animator.StringToHash("Combo");
-    public Action onSlashStart, onComboEnd;
+    public Action<int> onSlashStart;
+    public Action<int> onSlashEnd;
     void AssignMeleeCallbacks()
     {
         foreach(var i in anim.GetBehaviours<MeleeSlashBehaviour>())
         {
-            i.onSlashStart += () => { onSlashStart?.Invoke(); };
-        }
-        foreach(var i in anim.GetBehaviours<MeleeComboEndBehaviour>())
-        {
-            i.onComboEnd += () => { onComboEnd?.Invoke(); };
+            i.onSlashStart += (int comboIndex) => onSlashStart?.Invoke(comboIndex);
+            i.onSlashEnd += (int comboIndex) => onSlashEnd?.Invoke(comboIndex);
         }
     }
     public void TriggerSlash()
     {
         anim.SetTrigger(slashID);
-    }
-    public int GetComboIndex()
-    {
-        return anim.GetInteger(comboID);
     }
     public void Play_ItemPick()
     {

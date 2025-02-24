@@ -20,6 +20,7 @@ MonoBehaviour:
     kr: "\uBE44\uAD50\uC801 \uC57D\uD55C \uD68C\uBCF5 \uD3EC\uC158\uC785\uB2C8\uB2E4."
   m_model: {fileID: 250608228334481033, guid: c44f014eea1ed8e4782d08e778ff78f8, type: 3}
   m_category: 0
+  m_canDrop: 1
   m_maxStack: 64
   m_unit: x
   m_drinkingSound:
@@ -33,4 +34,4 @@ MonoBehaviour:
   m_cooldown: 20
   m_cooldownSource: {fileID: 11400000, guid: df55e7332e5d96a49940ba16973322f8, type: 2}
   m_cooldownBarColor: {r: 1, g: 0, b: 0, a: 1}
-  m_healAmount: 5
+  m_healAmount: 30
