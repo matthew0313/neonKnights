@@ -224517,6 +224517,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4705269097895731202, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7107741960340248834, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
         type: 3}
       propertyPath: m_Name
@@ -230701,79 +230706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSlotCount: 36
   m_equipAnchor: {fileID: 1059957032}
-  startContents:
-  - data: {fileID: 11400000, guid: a78b81e055be3804e953f436035a70f4, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: a0575691e94d5344f8dc53fa9f2e4a33, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 4b98c85d3184a4848bf011ff19d57fbf, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 8b998961fc23ba84894a66f30598c427, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 135efa88795ab9e44ba79bb5416958c1, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 66eb3659f366fd5458be812dffd56065, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: af3da6330668cef47bf16bd0ae2c686c, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: efa021a86c35ee5429d2277c8526373b, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 9b6431ef7f69555409106a193b285c61, type: 2}
-    count: 1
-  - data: {fileID: 11400000, guid: 45fe9972391e0c943b8d3c3c27aecf70, type: 2}
-    count: 10
-  - data: {fileID: 11400000, guid: 14bd363afcdc1a34d9aa187291c67f27, type: 2}
-    count: 10
-  - data: {fileID: 11400000, guid: 19b2e4def306cd94f825bf3ff4ac93a3, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: ae6d8695bf6d28e41806ee4c99241a12, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 8b445e32bb34f024789b8616648aa0dd, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 9611d137dda97404a9a7636e44f79551, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: c3dc2316c27abf7468b772f74291e549, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: d91dd19a80a92be438221661d36bf82b, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 63d22a1e1a5a77b458d1cbf1aca35309, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 41385d810cf144249980e66e94dc2d8b, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 0067702ce0ebc364188e107b36512f89, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 6f08d11dfa678db458da04cdec284bc2, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 111abcabfb2083448b4b7765fa5e6e87, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 7662af74c0eacf842aba403c0b5aa05f, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 3a8d595a81c313e49a014272236135f4, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 6e6c2e13e432b784cb903a8ce8f17559, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 14439d4f3ec95d8448ee7188163c976a, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 39609815c324005468b355998956b508, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 717f0ea5fa2f88b449576609e3a995bf, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 67b4240bbc351b5488f585fac2219d14, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 8ec9b2a259fdae34cb9708d233edfbe7, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 03981bf493ac4c64a8eec0808bf6e199, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: c866f561a1354e04c9e7cdab86b9f52d, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 03981bf493ac4c64a8eec0808bf6e199, type: 2}
-    count: 3
-  - data: {fileID: 11400000, guid: 58f689c175c203c49b5c4af2aed98bba, type: 2}
-    count: 10
-  - data: {fileID: 11400000, guid: b797edb898ddfe64ca4ecab727f9aeba, type: 2}
-    count: 10
-  - data: {fileID: 11400000, guid: d5949c354f5876642a4dc2c9d7fb418e, type: 2}
-    count: 10
+  startContents: []
   itemDropForce: 10
   canSwapSlot: 1
 --- !u!114 &1049112367
@@ -379509,7 +379442,7 @@ Animator:
   m_GameObject: {fileID: 1742912312}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d19c3dc195160cb47ad24e6275c8cd19, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
