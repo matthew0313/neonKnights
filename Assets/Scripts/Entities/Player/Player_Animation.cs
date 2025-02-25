@@ -5,10 +5,9 @@ using UnityEngine.Animations;
 using UnityEngine;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(Animator))]
 public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
 {
-    Animator anim;
+    [SerializeField] Animator anim;
     [SerializeField] RuntimeAnimatorController controller;
 
     [Header("Clips")]
