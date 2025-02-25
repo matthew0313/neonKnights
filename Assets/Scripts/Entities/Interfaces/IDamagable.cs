@@ -17,6 +17,8 @@ public struct DamageInfo
     public bool isWeakPointHit, isResistPointHit;
     public bool ignorePointMultiplier;
 
+    public bool dontPlayMotion;
+
     public static implicit operator float(DamageInfo info)
     {
         return info.amount;
@@ -37,4 +39,6 @@ public struct DamageReceivedInfo
     public bool fatal;
 
     public bool isWeakPointHit, isResistPointHit;
+
+    public bool dontPlayMotion;
 }

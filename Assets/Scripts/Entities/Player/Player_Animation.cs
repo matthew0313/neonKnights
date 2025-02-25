@@ -12,14 +12,16 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
 
     [Header("Clips")]
     [SerializeField] AnimationClip itemPickClip;
+    [SerializeField] AnimationClip hurtClip;
 
     Player origin;
     new ControllerClipBlendSystem animation;
     public void OnAwake()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
+        origin.hpComp.onDamage += OnDamage;
     }
     public void OnStart()
     {
@@ -33,14 +35,23 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
         if (item == null) anim.SetInteger(animationTypeID, (int)AnimationType.None);
         else anim.SetInteger(animationTypeID, (int)item.heldAnimation);
     }
+    void OnDamage(DamageReceivedInfo info)
+    {
+        if (!info.dontPlayMotion) animation.PlayOneShot(hurtClip);
+    }
     readonly int animationTypeID = Animator.StringToHash("AnimationType");
     readonly int movingID = Animator.StringToHash("Moving");
+    readonly int runningID = Animator.StringToHash("Running");
+    readonly int dashingID = Animator.StringToHash("Dashing");
+    readonly int slidingID = Animator.StringToHash("Sliding");
     readonly int moveXID = Animator.StringToHash("MoveX");
     readonly int moveYID = Animator.StringToHash("MoveY");
     public void OnUpdate()
     {
-        //if (inCutscene) return;
-        anim.SetBool(movingID, origin.movement.relativeMoveInput.magnitude > 0.1f);
+        anim.SetBool(movingID, origin.movement.moving);
+        anim.SetBool(runningID, origin.movement.running);
+        anim.SetBool(dashingID, origin.movement.dashing);
+        anim.SetBool(slidingID, origin.movement.sliding);
         anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
         anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
     }
