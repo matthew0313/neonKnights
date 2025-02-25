@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy_HpComp))]
 public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
 {
-    [SerializeField] protected Animator anim;
-    internal HpComp hpComp { get; private set; }
 
     [Header("Detection")]
     [SerializeField] float detectRange = 20.0f;
@@ -32,11 +29,10 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        hpComp = GetComponent<Enemy_HpComp>();
     }
     protected virtual void Update()
     {
-        if(Vector3.Distance(transform.position, player.transform.position) <= detectRange)
+        if(Vector3.Distance(transform.position, player.transform.position) <= detectRange && !Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, Vector3.Distance(player.transform.position, transform.position), LayerMask.GetMask("Map")))
         {
             detection = Mathf.Min(detection + detectionRate * Time.deltaTime, maxDetection);
         }
@@ -79,51 +75,6 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
             {
                 parentLayer.ChangeState(idleState);
             }
-        }
-    }
-    protected class EnemyWait<T, ValT> : State<T, ValT> where ValT : FSMVals where T : Enemy
-    {
-        readonly Func<float> waitTimeGetter;
-        readonly Action afterWait;
-        public EnemyWait(T origin, Layer<T, ValT> parent, Func<float> waitTimeGetter, Action afterWait) : base(origin, parent)
-        {
-            this.waitTimeGetter = waitTimeGetter;
-            this.afterWait = afterWait;
-        }
-        float counter = 0.0f;
-        public override void OnStateEnter()
-        {
-            base.OnStateEnter();
-            counter = waitTimeGetter.Invoke();
-        }
-        public override void OnStateUpdate()
-        {
-            base.OnStateUpdate();
-            counter -= Time.deltaTime;
-            if(counter <= 0.0f)
-            {
-                afterWait?.Invoke();
-            }
-        }
-        public override void OnStateExit()
-        {
-            base.OnStateExit();
-            counter = 0.0f;
-        }
-    }
-    protected class EnemyAwait<T, ValT> : State<T, ValT> where ValT : FSMVals where T : Enemy
-    {
-        readonly Func<bool> promise;
-        readonly Action onTrue;
-        public EnemyAwait(T origin, Layer<T, ValT> parent, Func<bool> promise, Action onTrue) : base(origin, parent)
-        {
-            this.promise = promise;
-            this.onTrue = onTrue;
-        }
-        public override void OnStateUpdate()
-        {
-            base.OnStateUpdate();
-            if (promise.Invoke()) onTrue?.Invoke();
         }
     }
 }

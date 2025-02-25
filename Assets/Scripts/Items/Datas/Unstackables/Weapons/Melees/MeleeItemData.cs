@@ -36,9 +36,9 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
-        weapon.hitbox.onTriggerEnter += OnTriggerEnter;
+        weapon.hitbox.onTriggerStay += OnTriggerStay;
         wielder.animation.onSlashStart += OnSlashStart;
-        wielder.animation.onComboEnd += OnComboEnd;
+        wielder.animation.onSlashEnd += OnSlashEnd;
         wielder.movement.moveSpeed -= weight;
     }
     public Action<MeleeSlash, MeleeGiveDamageInfo> modifySlashDamageGiven;
@@ -62,20 +62,23 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
             onSlashEnd?.Invoke(currentSlash);
             currentSlash = null;
         }
-        weapon.hitbox.onTriggerEnter -= OnTriggerEnter;
+        weapon.hitbox.onTriggerStay -= OnTriggerStay;
         wielder.animation.onSlashStart -= OnSlashStart;
-        wielder.animation.onComboEnd -= OnComboEnd;
+        wielder.animation.onSlashEnd -= OnSlashEnd;
         wielder.movement.moveSpeed += weight;
     }
     MeleeSlash currentSlash = null;
-    void OnSlashStart()
+    List<Collider> checkedColliders = new();
+    void OnSlashStart(int comboIndex)
     {
         if(currentSlash != null)
         {
             onSlashEnd?.Invoke(currentSlash);
         }
+        checkedColliders.Clear();
         currentSlash = new MeleeSlash()
         {
+            comboIndex = comboIndex,
             info = new()
             {
                 damage = damage * wielder.statistics.damageMultiplier,
@@ -85,18 +88,21 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
         AudioManager.Instance.PlaySound(data.slashSound);
         onSlashStart?.Invoke(currentSlash);
     }
-    void OnComboEnd()
+    void OnSlashEnd(int comboIndex)
     {
-        if (currentSlash != null)
+        if (currentSlash != null && currentSlash.comboIndex == comboIndex)
         {
             onSlashEnd?.Invoke(currentSlash);
             currentSlash = null;
         }
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (currentSlash == null || wielder == null) return;
         if (currentSlash.hitCount >= currentSlash.info.maxHits) return;
+
+        if (checkedColliders.Contains(other)) return;
+        checkedColliders.Add(other);
 
         GameObject hitObject = (other.attachedRigidbody != null ? other.attachedRigidbody.gameObject : other.gameObject);
         if(hitObject.TryGetComponent(out Point point))
@@ -154,6 +160,8 @@ public class MeleeSlashInfo
 }
 public class MeleeSlash
 {
+    public int comboIndex;
+
     public MeleeSlashInfo info;
     public int hitCount = 0;
     public List<GameObject> hit = new();

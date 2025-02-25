@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f9724641a8f84408595ef11a700948, type: 3}
+  m_Name: Large Ammo Pack
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Large Ammo Pack
+    kr: "\uB300\uD615 \uD0C4\uD658 \uBCF4\uCDA9 \uD329"
+  m_description:
+    en: Can be used to refill a gun's reserve.
+    kr: "\uD55C \uCD1D\uC758 \uD0C4\uD658\uC744 \uBCF4\uCDA9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  m_model: {fileID: 6514864028790265047, guid: 3e8b39e53d64bb142823d1c318c089a7, type: 3}
+  m_category: 64
+  m_canDrop: 1
+  m_maxStack: 10
+  m_unit: x
+  m_ammoRefillPercentage: 50
+  m_refillSound:
+    clip: {fileID: 8300000, guid: 35a01031f120c49488e9eedbb4a447a7, type: 3}
+    volume: 1

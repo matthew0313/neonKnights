@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MEC;
 public abstract class PotionItemData : StackableItemData
 {
     [Header("Sound Effects")]
@@ -48,7 +49,9 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
     public Color barColor => data.cooldownBarColor;
     public bool reloading => barDisplay;
     public float reloadProgress => barFill;
-    IEnumerator drinking = null;
+
+    CoroutineHandle drinkingCoroutine;
+    bool drinking = false;
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
@@ -59,20 +62,22 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
     {
         base.OnWieldUpdate();
         if (data.cooldownSource.isOnCooldown) return;
-        if (Input.GetMouseButtonDown(0) && drinking == null)
+        if (Input.GetMouseButtonDown(0) && !drinking)
         {
-            drinking = Drinking();
-            ItemManager.Instance.StartCoroutine(drinking);
+            drinkingCoroutine = Timing.RunCoroutine(Drinking());
         }
     }
     PlayingAudio drinkingSound;
-    IEnumerator Drinking()
+    IEnumerator<float> Drinking()
     {
+        drinking = true;
         drinkingSound = AudioManager.Instance.PlaySound(data.drinkingSound).Loop();
         wielder.animation.TriggerDrinkStart();
-        yield return new WaitForSeconds(data.drinkTime);
+
+        yield return Timing.WaitForSeconds(data.drinkTime);
+
+        drinking = false;
         wielder.animation.TriggerDrinkEnd();
-        drinking = null;
         drinkingSound.Stop();
         AudioManager.Instance.PlaySound(data.drinkSound);
         OnDrink();
@@ -84,12 +89,15 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
     public override void OnUnwield(Player wielder)
     {
         base.OnUnwield(wielder);
-        if(drinking != null)
-        {
-            drinkingSound.Stop();
-            ItemManager.Instance.StopCoroutine(drinking);
-        }
+        Timing.KillCoroutines(drinkingCoroutine);
+        drinking = false;
         potion.gameObject.SetActive(false);
+    }
+    public override void Delete()
+    {
+        base.Delete();
+        Timing.KillCoroutines(drinkingCoroutine);
+        drinking = false;
     }
     public virtual IEnumerable<LangText> GetStats()
     {

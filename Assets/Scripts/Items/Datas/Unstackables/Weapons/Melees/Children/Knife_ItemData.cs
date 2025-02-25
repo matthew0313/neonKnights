@@ -50,7 +50,11 @@ public class Knife_Item : MeleeItem, ICurseable
     }
     void Curse_OnSlashDamageGive(MeleeSlash slash, DamageReceivedInfo info)
     {
-        wielder.hpComp.GetDamage(data.curseSelfDamage);
+        wielder.hpComp.GetDamage(new()
+        {
+            amount = data.curseSelfDamage,
+            dontPlayMotion = true
+        });
     }
     public LangText curseEffectDesc => new()
     {

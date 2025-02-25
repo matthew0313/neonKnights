@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbcda47cedd0c64c9271e4d19942b11, type: 3}
+  m_Name: Quirk Shard
+  m_EditorClassIdentifier: 
+  choices:
+  - {fileID: 11400000, guid: ae6d8695bf6d28e41806ee4c99241a12, type: 2}
+  - {fileID: 11400000, guid: d91dd19a80a92be438221661d36bf82b, type: 2}
+  - {fileID: 11400000, guid: 63d22a1e1a5a77b458d1cbf1aca35309, type: 2}
+  - {fileID: 11400000, guid: 0067702ce0ebc364188e107b36512f89, type: 2}
+  - {fileID: 11400000, guid: 6f08d11dfa678db458da04cdec284bc2, type: 2}
+  - {fileID: 11400000, guid: 7662af74c0eacf842aba403c0b5aa05f, type: 2}
+  - {fileID: 11400000, guid: 3a8d595a81c313e49a014272236135f4, type: 2}
+  - {fileID: 11400000, guid: 14439d4f3ec95d8448ee7188163c976a, type: 2}
+  - {fileID: 11400000, guid: 8ec9b2a259fdae34cb9708d233edfbe7, type: 2}
+  - {fileID: 11400000, guid: 111abcabfb2083448b4b7765fa5e6e87, type: 2}
+  - {fileID: 11400000, guid: 19b2e4def306cd94f825bf3ff4ac93a3, type: 2}
+  - {fileID: 11400000, guid: 717f0ea5fa2f88b449576609e3a995bf, type: 2}
+  - {fileID: 11400000, guid: ccb147105c8e7b642aa9ef9c96fddac7, type: 2}
+  - {fileID: 11400000, guid: 8b445e32bb34f024789b8616648aa0dd, type: 2}
+  - {fileID: 11400000, guid: c3dc2316c27abf7468b772f74291e549, type: 2}
+  - {fileID: 11400000, guid: 41385d810cf144249980e66e94dc2d8b, type: 2}
+  - {fileID: 11400000, guid: 6e6c2e13e432b784cb903a8ce8f17559, type: 2}
+  - {fileID: 11400000, guid: 39609815c324005468b355998956b508, type: 2}
+  - {fileID: 11400000, guid: 67b4240bbc351b5488f585fac2219d14, type: 2}
+  - {fileID: 11400000, guid: 03981bf493ac4c64a8eec0808bf6e199, type: 2}
+  - {fileID: 11400000, guid: c866f561a1354e04c9e7cdab86b9f52d, type: 2}
+  - {fileID: 11400000, guid: 9611d137dda97404a9a7636e44f79551, type: 2}
+  minCount: 1
+  maxCount: 1

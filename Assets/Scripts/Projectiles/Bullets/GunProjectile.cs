@@ -1,6 +1,4 @@
 using UnityEngine;
-
-[RequireComponent(typeof(Collider))]
 public class GunProjectile : Bullet
 {
     /*float speed = 20.0f;
@@ -85,8 +83,17 @@ public class GunProjectile : Bullet
             hitPos = transform.position,
             hitDir = transform.forward
         };
-        if (shot.hit.Contains(hit.hitObject)) return;
-        gun.onShotHit(shot, hit);
+        if(hit.hitObject.TryGetComponent(out HitPoint point))
+        {
+            if (shot.hit.Contains(point.pointOf)) return;
+            shot.hit.Add(point.pointOf);
+        }
+        else
+        {
+            if (shot.hit.Contains(hit.hitObject)) return;
+            shot.hit.Add(hit.hitObject);
+        }
+        gun.onShotHit?.Invoke(shot, hit);
         if(hit.hitObject.TryGetComponent(out IDamagable target))
         {
             GunGiveDamageInfo damageInfo = new()

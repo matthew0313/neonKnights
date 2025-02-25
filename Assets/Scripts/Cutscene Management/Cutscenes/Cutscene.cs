@@ -19,10 +19,12 @@ public class Cutscene : MonoBehaviour
     readonly int playID = Animator.StringToHash("Play");
 
     [SerializeField] CinemachineCamera[] cinemachineCameras;
-    private void Awake()
+    [SerializeField] UnityEvent[] events;
+    protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
         foreach (var i in anim.GetBehaviours<CameraPriorityBehaviour>()) i.setPriority += SetPriority;
+        foreach (var i in anim.GetBehaviours<EvokeEventBehaviour>()) i.invokeEvent += InvokeEvent;
     }
     void SetPriority(int cameraIndex, int priority)
     {
@@ -33,6 +35,15 @@ public class Cutscene : MonoBehaviour
         }
 
         cinemachineCameras[cameraIndex].Priority = priority;
+    }
+    void InvokeEvent(int eventIndex)
+    {
+        if(eventIndex < 0 || eventIndex >= events.Length)
+        {
+            Debug.LogWarning("Invalid event index");
+            return;
+        }
+        events[eventIndex].Invoke();
     }
     public void Play()
     {

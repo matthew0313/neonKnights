@@ -21,6 +21,7 @@ MonoBehaviour:
       \uD2B9\uC218\uBD80\uB300\uC5D0\uC11C \uB9CE\uC774 \uC0AC\uC6A9\uB429\uB2C8\uB2E4."
   m_model: {fileID: 1204132164249223649, guid: 73485a909d21542488fc07c1cb6ae582, type: 3}
   m_category: 11
+  m_canDrop: 1
   m_prefab: {fileID: 1049074893347532957, guid: ec9f8528d41aa344f86b0ceab1169055,
     type: 3}
   m_fireSound:

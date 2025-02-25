@@ -21,18 +21,21 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver
     internal Item equipped;
     public Action<Item> onEquippedItemChange;
 
-    internal InventorySlot chestplateSlot = new InventorySlot((Item item) => item == null || item is ChestplateItem);
+    internal InventorySlot chestplateSlot;
     internal ChestplateItem chestplate;
     public Action<ChestplateItem> onChestplateChange;
 
-    internal InventorySlot accessorySlot1 = new InventorySlot((Item item) => item == null || item is AccessoryItem);
-    internal InventorySlot accessorySlot2 = new InventorySlot((Item item) => item == null || item is AccessoryItem);
+    internal InventorySlot accessorySlot1;
+    internal InventorySlot accessorySlot2;
     internal AccessoryItem accessory1, accessory2;
     public Action<AccessoryItem> onAccessory1Change, onAccessory2Change;
 
     public bool canSwapSlot = true;
     public void OnAwake()
     {
+        chestplateSlot = new InventorySlot(this) { slotRestriction = (Item item) => item == null || item is ChestplateItem };
+        accessorySlot1 = new InventorySlot(this) { slotRestriction = (Item item) => item == null || item is AccessoryItem };
+        accessorySlot2 = new InventorySlot(this) { slotRestriction = (Item item) => item == null || item is AccessoryItem };
         Init();
         origin = GetComponent<Player>();
         ChangeEquipSlot(0);

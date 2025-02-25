@@ -24,7 +24,7 @@ MonoBehaviour:
   m_category: 4097
   m_prefab: {fileID: -8486058908459522370, guid: 274f66be82776484fb3399cee8a19a40,
     type: 3}
-  m_baseDamage: 40
+  m_baseDamage: 30
   m_baseMaxHits: 2
   m_baseWeight: 3.5
   m_slashSound:

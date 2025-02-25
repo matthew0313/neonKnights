@@ -50,6 +50,10 @@ public class CutsceneManager : MonoBehaviour
 
         playing.End();
         playing = null;
+
+        Timing.KillCoroutines(playingTimeline);
+        director.Stop();
+
         foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
             i.OnCutsceneEnd();
@@ -62,13 +66,28 @@ public class CutsceneManager : MonoBehaviour
     public void PlayTimeline(TimelineAsset timeline, Action onFinish = null)
     {
         Timing.KillCoroutines(playingTimeline);
+        director.Stop();
+
         playingTimeline = Timing.RunCoroutine(PlayingTimeline(timeline, onFinish));
     }
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)
     {
         director.Play(timeline);
+
+        yield return Timing.WaitForOneFrame;
+        yield return Timing.WaitForOneFrame;
+
         while (director.state == PlayState.Playing) yield return Timing.WaitForOneFrame;
         onFinish?.Invoke();
+        /*director.timeUpdateMode = DirectorUpdateMode.Manual;
+        director.Play(timeline);
+        director.time = director.playableAsset.duration - 0.01f;
+        while (true)
+        {
+            yield return Timing.WaitForOneFrame;
+            director.Evaluate();
+            Debug.Log("Evaluated");
+        }*/
     }
 
     CoroutineHandle conversation;
@@ -86,11 +105,11 @@ public class CutsceneManager : MonoBehaviour
     }
     IEnumerator<float> Conversation(ConversationSegment segment, Action onProgress, bool autoPass)
     {
-        UIs.SetTalkerText(segment.talker);
+        UIs.SetTalkerText(segment.talker.text);
         UIs.SetTalkContentText(string.Empty);
 
         bool typing = true;
-        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text, () => typing = false));
+        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text.text, segment.talkSound, () => typing = false));
 
         while (typing)
         {
@@ -98,7 +117,7 @@ public class CutsceneManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 yield return Timing.WaitForOneFrame;
-                UIs.SetTalkContentText(segment.text);
+                UIs.SetTalkContentText(segment.text.text);
                 break;
             }
         }
@@ -106,16 +125,38 @@ public class CutsceneManager : MonoBehaviour
         if(!autoPass) while(!Input.GetMouseButtonDown(0)) yield return Timing.WaitForOneFrame;
         onProgress?.Invoke();
     }
-    IEnumerator<float> ConversationTyping(string text, Action onFinish)
+    int SearchStringIndex(int start, string text, char search)
+    {
+        for(int i = start; i < text.Length; i++)
+        {
+            if (text[i] == search) return i;
+        }
+        return text.Length;
+    }
+    IEnumerator<float> ConversationTyping(string text, Sound talkSound, Action onFinish)
     {
         StringBuilder sb = new();
-        for(int i = 0; i < text.Length; i++)
+        int i = 0;
+        while(i < text.Length)
         {
+            if (text[i] == '<')
+            {
+                int tagStart = i;
+                int tagEnd = SearchStringIndex(tagStart + 1, text, '>');
+                if(tagEnd < text.Length)
+                {
+                    sb.Append(text.Substring(tagStart, tagEnd - tagStart + 1));
+                    i += tagEnd - tagStart + 1;
+                }
+            }
+
             sb.Append(text[i]);
             UIs.SetTalkContentText(sb.ToString());
+            AudioManager.Instance.PlaySound(talkSound);
 
             if (text[i] == '.' || text[i] == ',' || text[i] == '!' || text[i] == '?') yield return Timing.WaitForSeconds(talkLongInterval);
             else yield return Timing.WaitForSeconds(talkInterval);
+            i++;
         }
         onFinish?.Invoke();
     }
@@ -139,6 +180,7 @@ public class CutsceneManager : MonoBehaviour
     {
         Timing.KillCoroutines(playingTimeline);
         Timing.KillCoroutines(conversationTyping);
+        Timing.KillCoroutines(playingTimeline);
     }
 }
 #if UNITY_EDITOR

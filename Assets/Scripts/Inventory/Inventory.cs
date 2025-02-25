@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
         {
             for(int i = m_slotCount; i < value; i++)
             {
-                InventorySlot tmp = new InventorySlot();
+                InventorySlot tmp = new InventorySlot(this);
                 tmp.onCountChange += () => { onInventoryUpdate?.Invoke(tmp.item); };
                 slots.Add(tmp);
             }
@@ -45,6 +45,23 @@ public class Inventory : MonoBehaviour
             if (count <= 0) return 0;
         }
         onInventoryUpdate?.Invoke(item);
+        return count;
+    }
+    public int TryInsert(Item item, int count)
+    {
+        foreach (var i in slots)
+        {
+            if (i.item != null && i.item.IsStackable(item) && item.IsStackable(i.item))
+            {
+                count = i.TryInsert(item, count);
+                if (count <= 0) return 0;
+            }
+        }
+        for (int i = 0; i < slotCount; i++)
+        {
+            count = slots[i].TryInsert(item.Copy(), count);
+            if (count <= 0) return 0;
+        }
         return count;
     }
     public int Search(ItemData data)

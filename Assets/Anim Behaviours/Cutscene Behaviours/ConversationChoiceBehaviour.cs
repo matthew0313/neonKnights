@@ -36,6 +36,6 @@ public class ConversationChoiceBehaviour : StateMachineBehaviour
 [System.Serializable]
 public class ConversationChoiceSegment
 {
-    [SerializeField] string[] m_options;
-    public string[] options => m_options;
+    [SerializeField] LangText[] m_options;
+    public LangText[] options => m_options;
 }

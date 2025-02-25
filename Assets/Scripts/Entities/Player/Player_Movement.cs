@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using MEC;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(GravityCharacterController))]
 public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 {
     Player origin;
@@ -73,17 +74,23 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 
     internal bool canMove = true;
 
-    internal bool sprinting = false;
-    internal bool dashing = false;
-    internal bool sliding = false;
-    internal RotateMode rotateMode = RotateMode.Free;
+    public bool moving { get; private set; } = false;
+    public bool running { get; private set; } = false;
+    public bool dashing { get; private set; } = false;
+    public bool sliding { get; private set; } = false;
+
+    RotateMode rotateMode = RotateMode.Free;
+
     Rigidbody rb;
+    GravityCharacterController controller;
+
     TopLayer topLayer;
     public void OnAwake()
     {
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         rb = GetComponent<Rigidbody>();
+        controller = GetComponent<GravityCharacterController>();
         topLayer = new TopLayer(this, new MoveFSMVals());
 #if UNITY_EDITOR
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
@@ -128,25 +135,24 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         }
         rotator.rotation = Quaternion.Slerp(rotator.rotation, Quaternion.Euler(0, -Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg + 90.0f, 0), rotateSpeed * Time.deltaTime);
     }
-    public void Dash(Vector3 dir, float distance, float speed, float endLag)
+    public void Dash(Vector3 dir, float distance, float speed, float endLag, Action onFinish)
     {
-        StartCoroutine(Dashing(dir, distance, speed, endLag));
+        StartCoroutine(Dashing(dir, distance, speed, endLag, onFinish));
     }
-    IEnumerator Dashing(Vector3 dir, float distance, float speed, float endLag)
+    IEnumerator Dashing(Vector3 dir, float distance, float speed, float endLag, Action onFinish)
     {
-        dashing = true;
         dir.Normalize();
         float counter = 0.0f;
-        while (counter < distance)
+        while (counter * speed < distance)
         {
-            counter += Time.deltaTime * speed;
-            Vector3 tmp = dir * speed;
-            rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
+            counter += Time.deltaTime;
+            controller.Move(dir * speed * Time.deltaTime);
+            //rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
             //rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
             yield return null;
         }
         yield return new WaitForSeconds(endLag);
-        dashing = false;
+        onFinish?.Invoke();
     }
 
     public void OnCutsceneStart()
@@ -163,15 +169,16 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 
     class MoveFSMVals : FSMVals
     {
-        public Vector3 moveInput;
+        public Vector3 moveInput = Vector3.zero;
+        public float staminaRegenCounter = 0.0f;
     }
     class TopLayer : TopLayer<Player_Movement, MoveFSMVals>
     {
         public TopLayer(Player_Movement origin, MoveFSMVals values) : base(origin, values)
         {
-            defaultState = new Walking(origin, this);
-            AddState("Walking", defaultState);
-            AddState("Running", new Running(origin, this));
+            defaultState = new Idle(origin, this);
+            AddState("Idle", defaultState);
+            AddState("Moving", new Moving(origin, this));
             AddState("Dashing", new Dashing(origin, this));
             AddState("Sliding", new Sliding(origin, this));
         }
@@ -183,102 +190,149 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
             origin.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
             base.OnStateUpdate();
         }
-        class Walking : State<Player_Movement, MoveFSMVals>
+        class Idle : State<Player_Movement, MoveFSMVals>
         {
-            public Walking(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
+            public Idle(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
             {
 
-            }
-            float staminaRegenCounter = 0.0f;
-            public override void OnStateEnter()
-            {
-                base.OnStateEnter();
-                staminaRegenCounter = 0.0f;
             }
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
-                if (!origin.canMove) return;
-                else
+                if (origin.stamina < origin.maxStamina)
                 {
-                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                    Vector3 tmp = values.moveInput * origin.speed;
-                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
-                }
-                if (InputManager.GetSprintInput() && origin.stamina > 0.0f && values.moveInput.magnitude >= 0.1f)
-                {
-                    parentLayer.ChangeState("Running");
-                    return;
-                }
-                if(InputManager.GetDashInput() && origin.stamina > 0.0f && values.moveInput.magnitude > 0)
-                {
-                    origin.stamina = Mathf.Max(0, origin.stamina - 1.0f);
-                    parentLayer.ChangeState("Dashing");
-                    return;
-                }
-                if(origin.stamina < origin.maxStamina)
-                {
-                    staminaRegenCounter += Time.deltaTime;
-                    if (staminaRegenCounter >= origin.staminaRegenTick)
+                    values.staminaRegenCounter += Time.deltaTime;
+                    if (values.staminaRegenCounter >= origin.staminaRegenTick)
                     {
-                        staminaRegenCounter = 0.0f;
+                        values.staminaRegenCounter = 0.0f;
                         origin.stamina = Mathf.Min(origin.maxStamina, origin.stamina + origin.staminaRegen);
                     }
                 }
-            }
-            public override void OnStateFixedUpdate()
-            {
-                base.OnStateFixedUpdate();
-                if (!origin.canMove) return;
-                //if(values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                //origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.speed * Time.fixedDeltaTime);
+
+                if (values.moveInput.magnitude >= 0.1f) parentLayer.ChangeState("Moving");
             }
         }
-        class Running : State<Player_Movement, MoveFSMVals>
+        class Moving : Layer<Player_Movement, MoveFSMVals>
         {
-            public Running(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
+            public Moving(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
             {
-
+                AddState("Walking", new Walking(origin, this));
+                AddState("Running", new Running(origin, this));
+            }
+            public override void OnStateEnter()
+            {
+                if (InputManager.GetSprintInput() && origin.stamina > 0.0f && values.moveInput.magnitude >= 0.1f)
+                {
+                    currentState = states["Running"];
+                }
+                else
+                {
+                    currentState = states["Walking"];
+                }
+                currentState.OnStateEnter();
+                origin.moving = true;
             }
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
-                origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
-                if (origin.canMove)
+                if (values.moveInput.magnitude < 0.1f) parentLayer.ChangeState("Idle");
+            }
+            public override void OnStateExit()
+            {
+                base.OnStateExit();
+                origin.moving = false;
+            }
+            class Walking : State<Player_Movement, MoveFSMVals>
+            {
+                public Walking(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
                 {
-                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                    Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
-                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+
                 }
-                if (!origin.canMove || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
+                public override void OnStateUpdate()
                 {
-                    parentLayer.ChangeState("Walking");
-                    return;
-                }
-                if (InputManager.GetDashInput())
-                {
-                    if(origin.stamina > 1.0f)
-                    {
-                        origin.stamina = Mathf.Max(0.0f, origin.stamina - 2.0f);
-                        parentLayer.ChangeState("Sliding");
-                        return;
-                    }
+                    base.OnStateUpdate();
+                    if (!origin.canMove) return;
                     else
                     {
-                        origin.stamina = Mathf.Max(0.0f, origin.stamina - 1.0f);
-                        parentLayer.ChangeState("Dashing");
+                        if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                        Vector3 tmp = values.moveInput * origin.speed;
+                        origin.controller.Move(tmp * Time.deltaTime);
+                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                    }
+                    if (InputManager.GetSprintInput() && origin.stamina > 0.0f)
+                    {
+                        parentLayer.ChangeState("Running");
                         return;
+                    }
+                    if (InputManager.GetDashInput() && origin.stamina > 0.0f)
+                    {
+                        origin.stamina = Mathf.Max(0, origin.stamina - 1.0f);
+                        parentLayer.parentLayer.ChangeState("Dashing");
+                        return;
+                    }
+                    if (origin.stamina < origin.maxStamina)
+                    {
+                        values.staminaRegenCounter += Time.deltaTime;
+                        if (values.staminaRegenCounter >= origin.staminaRegenTick)
+                        {
+                            values.staminaRegenCounter = 0.0f;
+                            origin.stamina = Mathf.Min(origin.maxStamina, origin.stamina + origin.staminaRegen);
+                        }
                     }
                 }
             }
-            public override void OnStateFixedUpdate()
+            class Running : State<Player_Movement, MoveFSMVals>
             {
-                base.OnStateFixedUpdate();
-                if (!origin.canMove) return;
-                //if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                //origin.rb.MovePosition(origin.rb.position + values.moveInput * origin.speed * origin.sprintMultiplier * Time.fixedDeltaTime);
+                public Running(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
+                {
+
+                }
+                public override void OnStateEnter()
+                {
+                    base.OnStateEnter();
+                    values.staminaRegenCounter = 0.0f;
+                    origin.running = true;
+                }
+                public override void OnStateUpdate()
+                {
+                    base.OnStateUpdate();
+                    origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
+                    if (origin.canMove)
+                    {
+                        if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                        Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
+                        origin.controller.Move(tmp * Time.deltaTime);
+                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                    }
+                    if (!origin.canMove || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
+                    {
+                        parentLayer.ChangeState("Walking");
+                        return;
+                    }
+                    if (InputManager.GetDashInput())
+                    {
+                        if (origin.stamina > 1.0f)
+                        {
+                            origin.stamina = Mathf.Max(0.0f, origin.stamina - 2.0f);
+                            parentLayer.ChangeState("Sliding");
+                            return;
+                        }
+                        else
+                        {
+                            origin.stamina = Mathf.Max(0.0f, origin.stamina - 1.0f);
+                            parentLayer.ChangeState("Dashing");
+                            return;
+                        }
+                    }
+                }
+                public override void OnStateExit()
+                {
+                    base.OnStateExit();
+                    origin.running = false;
+                }
             }
         }
+        
         class Dashing : State<Player_Movement, MoveFSMVals>
         {
             public Dashing(Player_Movement origin, Layer<Player_Movement, MoveFSMVals> parent) : base(origin, parent)
@@ -288,20 +342,19 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
+                origin.dashing = true;
+                values.staminaRegenCounter = 0.0f;
+
                 Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
                 Vector3 move = values.moveInput;
                 if (move.magnitude == 0) move = camFront;
-                origin.Dash(move, origin.dashDistance, origin.dashSpeed, origin.dashEndlag);
+                origin.Dash(move, origin.dashDistance, origin.dashSpeed, origin.dashEndlag, () => parentLayer.ChangeState("Idle"));
                 origin.dashTrail.emitting = true;
-            }
-            public override void OnStateUpdate()
-            {
-                base.OnStateUpdate();
-                if (origin.dashing == false) parentLayer.ChangeState("Walking");
             }
             public override void OnStateExit()
             {
                 base.OnStateExit();
+                origin.dashing = false;
                 origin.dashTrail.emitting = false;
             }
         }
@@ -314,23 +367,21 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
             public override void OnStateEnter()
             {
                 base.OnStateEnter();
+                origin.sliding = true;
+                values.staminaRegenCounter = 0.0f;
+
                 Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
                 Vector3 move = values.moveInput;
                 if (move.magnitude == 0) move = camFront;
-                origin.Dash(move, origin.slideDistance, origin.slideSpeed, origin.slideEndlag);
+                origin.Dash(move, origin.slideDistance, origin.slideSpeed, origin.slideEndlag, () => parentLayer.ChangeState("Idle"));
                 origin.slideTrail.emitting = true;
                 origin.sliding = true;
-            }
-            public override void OnStateUpdate()
-            {
-                base.OnStateUpdate();
-                if (origin.dashing == false) parentLayer.ChangeState("Walking");
             }
             public override void OnStateExit()
             {
                 base.OnStateExit();
-                origin.slideTrail.emitting = false;
                 origin.sliding = false;
+                origin.slideTrail.emitting = false;
             }
         }
     }

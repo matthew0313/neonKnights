@@ -136,6 +136,7 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
         }
         info.isWeakPointHit = damage.isWeakPointHit;
         info.isResistPointHit = damage.isResistPointHit;
+        info.dontPlayMotion = damage.dontPlayMotion;
         onDamage?.Invoke(info);
         if (dying) Die();
         return info;

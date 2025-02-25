@@ -19,15 +19,17 @@ MonoBehaviour:
     en: A large pistol that uses powerful .50 caliber ammunition.
     kr: "\uAC15\uB825\uD55C .50\uAD6C\uACBD \uD0C4\uC57D\uC744 \uC0AC\uC6A9\uD558\uB294
       \uB300\uD615 \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 2813722199639916935, guid: 6ac939b4d0ff032479026b366bcc2fca, type: 3}
   m_category: 7
-  m_prefab: {fileID: 0}
+  m_canDrop: 1
+  m_prefab: {fileID: 4101579735199054563, guid: ccf042565404a774e986b4dbd17f0cf0,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 1bb663f5d33443c48b8a16062503e3eb, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0
@@ -39,7 +41,8 @@ MonoBehaviour:
   m_baseReloadTime: 2
   m_baseReserve: 300
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50

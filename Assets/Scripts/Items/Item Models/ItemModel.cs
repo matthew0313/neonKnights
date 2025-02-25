@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class ItemModel : PooledPrefab<ItemModel>
+public class ItemModel : PooledPrefab<ItemModel>
 {
 
 }

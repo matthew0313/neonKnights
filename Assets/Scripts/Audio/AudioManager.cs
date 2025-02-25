@@ -33,6 +33,14 @@ public class AudioManager : MonoBehaviour
         playing.Add(tmp);
         return tmp;
     }
+    private void Awake()
+    {
+        GlobalManager.Instance.onSceneWillLoad += OnSceneWillLoad;
+    }
+    void OnSceneWillLoad()
+    {
+        playing.Clear();
+    }
     void Update()
     {
         foreach(var i in playing)
@@ -46,9 +54,14 @@ public class AudioManager : MonoBehaviour
         }
         removeQueue.Clear();
     }
-    public void RemoveAudio(PlayingAudio audio)
+    public void StopAudio(PlayingAudio audio)
     {
         removeQueue.Add(audio);
+    }
+    public void StopAudio(string id)
+    {
+        if (id == string.Empty) return;
+        playing.Find(audio => audio.id == id)?.Stop();
     }
 }
 public static class PlayingAudioManagement
@@ -75,6 +88,12 @@ public static class PlayingAudioManagement
         audio.Update();
         return audio;
     }
+    public static PlayingAudio SetID(this PlayingAudio audio, string id)
+    {
+        if (audio == null) return null;
+        audio.id = id;
+        return audio;
+    }
 }
 public class PlayingAudio
 {
@@ -96,6 +115,8 @@ public class PlayingAudio
     public bool distanceControl = false;
     public Func<Vector3> locationGetter;
     public float maxDistance = 30;
+
+    public string id = string.Empty;
     public void Update()
     {
         if (!source.isPlaying)
@@ -111,7 +132,7 @@ public class PlayingAudio
     {
         if (removed) return;
         removed = true;
-        AudioManager.Instance.RemoveAudio(this);
+        AudioManager.Instance.StopAudio(this);
     }
 }
 [System.Serializable]

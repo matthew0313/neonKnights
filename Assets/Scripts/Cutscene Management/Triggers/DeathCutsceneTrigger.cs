@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathCutsceneTrigger : MonoBehaviour
+public class DeathCutsceneTrigger : CutsceneTrigger
 {
     [SerializeField] HpComp[] targets;
-    [SerializeField] Cutscene triggered;
+
     private void Awake()
     {
         foreach (var i in targets) i.onDeath += OnTargetDeath;
@@ -23,7 +23,7 @@ public class DeathCutsceneTrigger : MonoBehaviour
         }
         if (allDead)
         {
-            CutsceneManager.Instance.StartCutscene(triggered);
+            TriggerCutscene();
         }
     }
 }

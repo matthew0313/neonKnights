@@ -14,6 +14,7 @@ public class Player_Interaction : MonoBehaviour, ICutsceneCallbackReceiver
     bool cutscenePaused = false;
     public void OnUpdate()
     {
+        if(interactions.Count > 0) interactions.RemoveAll(interaction => interaction.enabled == false);
         if (interactions.Count > 0)
         {
             if (cutscenePaused) return;

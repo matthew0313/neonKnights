@@ -37,7 +37,11 @@ public class Quirk_OneMag : Quirk
         (target as GunItem).reserve = 0;
         (target as GunItem).mag += bonus;
         (target as GunItem).reserveLeft = 0;
-        (target as GunItem).onAmmoRefill += (GunAmmoRefillInfo info) => { (target as GunItem).mag += info.amount; };
+        (target as GunItem).onAmmoRefill += OnAmmoRefill;
+    }
+    void OnAmmoRefill(GunAmmoRefillInfo info)
+    {
+        (target as GunItem).mag = Mathf.Min((target as GunItem).magSize, (target as GunItem).mag + Mathf.CeilToInt((target as GunItem).magSize * info.refillPercentage / 100.0f));
     }
     public override void SetRandom()
     {

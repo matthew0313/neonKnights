@@ -11,7 +11,12 @@ public class InventorySlot
     public Item item { get; private set; }
     int m_count = 0;
     public InventorySlot() { }
-    public InventorySlot(Func<Item, bool> slotRestriction) => this.slotRestriction = slotRestriction;
+
+    public readonly Inventory dedicatedInventory;
+    public InventorySlot(Inventory dedicatedInventory)
+    {
+        this.dedicatedInventory = dedicatedInventory;
+    }
     public int Insert(Item item, int count)
     {
         if (this.item == null)
@@ -30,6 +35,21 @@ public class InventorySlot
         }
         return count;
     }
+    public int TryInsert(Item item, int count)
+    {
+        if (this.item == null)
+        {
+            if (CanSetItem(item))
+            {
+                count -= Mathf.Min(item.data.maxStack, this.count + count);
+            }
+        }
+        else if (this.item.IsStackable(item) && item.IsStackable(this.item))
+        {
+            count -= Mathf.Min(this.item.data.maxStack, this.count + count) - this.count;
+        }
+        return count;
+    }
     public bool CanSetItem(Item item)
     {
         if (slotRestriction != null && slotRestriction.Invoke(item) == false) return false;
@@ -38,9 +58,7 @@ public class InventorySlot
     public bool SetItem(Item item)
     {
         if (!CanSetItem(item)) return false;
-        this.item = item;
-        if(this.item != null) this.item.containedSlot = this;
-        onItemChange?.Invoke();
+        ForcedSetItem(item);
         return true;
     }
     public bool Swap(InventorySlot slot)
@@ -56,8 +74,16 @@ public class InventorySlot
     }
     public void ForcedSetItem(Item item)
     {
+        if(this.item != null)
+        {
+            this.item.OnSlotExit(this);
+        }
         this.item = item;
-        if (this.item != null) this.item.containedSlot = this;
+        if (this.item != null)
+        {
+            this.item.OnSlotEnter(this);
+        }
+
         onItemChange?.Invoke();
     }
     public int count

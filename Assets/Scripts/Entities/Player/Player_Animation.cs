@@ -5,41 +5,53 @@ using UnityEngine.Animations;
 using UnityEngine;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(Animator))]
-public class Player_Animation : MonoBehaviour
+public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
 {
-    Animator anim;
+    [SerializeField] Animator anim;
     [SerializeField] RuntimeAnimatorController controller;
 
     [Header("Clips")]
     [SerializeField] AnimationClip itemPickClip;
+    [SerializeField] AnimationClip hurtClip;
 
     Player origin;
     new ControllerClipBlendSystem animation;
     public void OnAwake()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
+        origin.hpComp.onDamage += OnDamage;
     }
     public void OnStart()
     {
         animation = new ControllerClipBlendSystem(anim, controller);
         anim.Rebind();
         AssignMeleeCallbacks();
+        OnEquippedItemChange(origin.inventory.equipped);
     }
     void OnEquippedItemChange(Item item)
     {
         if (item == null) anim.SetInteger(animationTypeID, (int)AnimationType.None);
         else anim.SetInteger(animationTypeID, (int)item.heldAnimation);
     }
+    void OnDamage(DamageReceivedInfo info)
+    {
+        if (!info.dontPlayMotion) animation.PlayOneShot(hurtClip);
+    }
     readonly int animationTypeID = Animator.StringToHash("AnimationType");
     readonly int movingID = Animator.StringToHash("Moving");
+    readonly int runningID = Animator.StringToHash("Running");
+    readonly int dashingID = Animator.StringToHash("Dashing");
+    readonly int slidingID = Animator.StringToHash("Sliding");
     readonly int moveXID = Animator.StringToHash("MoveX");
     readonly int moveYID = Animator.StringToHash("MoveY");
     public void OnUpdate()
     {
-        anim.SetBool(movingID, origin.movement.relativeMoveInput.magnitude > 0.1f);
+        anim.SetBool(movingID, origin.movement.moving);
+        anim.SetBool(runningID, origin.movement.running);
+        anim.SetBool(dashingID, origin.movement.dashing);
+        anim.SetBool(slidingID, origin.movement.sliding);
         anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
         anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
     }
@@ -68,26 +80,19 @@ public class Player_Animation : MonoBehaviour
         anim.SetTrigger(throwID);
     }
     readonly int slashID = Animator.StringToHash("Slash");
-    readonly int comboID = Animator.StringToHash("Combo");
-    public Action onSlashStart, onComboEnd;
+    public Action<int> onSlashStart;
+    public Action<int> onSlashEnd;
     void AssignMeleeCallbacks()
     {
         foreach(var i in anim.GetBehaviours<MeleeSlashBehaviour>())
         {
-            i.onSlashStart += () => { onSlashStart?.Invoke(); };
-        }
-        foreach(var i in anim.GetBehaviours<MeleeComboEndBehaviour>())
-        {
-            i.onComboEnd += () => { onComboEnd?.Invoke(); };
+            i.onSlashStart += (int comboIndex) => onSlashStart?.Invoke(comboIndex);
+            i.onSlashEnd += (int comboIndex) => onSlashEnd?.Invoke(comboIndex);
         }
     }
     public void TriggerSlash()
     {
         anim.SetTrigger(slashID);
-    }
-    public int GetComboIndex()
-    {
-        return anim.GetInteger(comboID);
     }
     public void Play_ItemPick()
     {
@@ -96,6 +101,21 @@ public class Player_Animation : MonoBehaviour
     private void OnDestroy()
     {
         animation.Destroy();
+    }
+    //bool inCutscene = false;
+    public void OnCutsceneStart()
+    {
+        //inCutscene = true;
+        //anim.SetBool(movingID, false);
+        //anim.SetInteger(animationTypeID, 0);
+        animation.Disable();
+    }
+
+    public void OnCutsceneEnd()
+    {
+        //inCutscene = false;
+        //OnEquippedItemChange(origin.inventory.equipped);
+        animation.Enable();
     }
 }
 public enum AnimationType

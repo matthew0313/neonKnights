@@ -8412,7 +8412,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614977}
   m_ExposedName: ParticlesSize
   m_Exposed: 1
-  m_Order: 35
+  m_Order: 34
   m_Category: STRETCHED PARTICLES
   m_Min:
     m_Type:
@@ -8731,7 +8731,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614988}
   m_ExposedName: ParticlesSpeed
   m_Exposed: 1
-  m_Order: 34
+  m_Order: 33
   m_Category: STRETCHED PARTICLES
   m_Min:
     m_Type:
@@ -11595,7 +11595,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615132}
   m_ExposedName: FloatingParticlesLifetime
   m_Exposed: 1
-  m_Order: 36
+  m_Order: 35
   m_Category: FLOATING PARTICLES
   m_Min:
     m_Type:
@@ -11815,7 +11815,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615138}
   m_ExposedName: FloatingParticlesRadius
   m_Exposed: 1
-  m_Order: 37
+  m_Order: 36
   m_Category: FLOATING PARTICLES
   m_Min:
     m_Type:
@@ -11896,7 +11896,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615140}
   m_ExposedName: FloatingParticlesArc
   m_Exposed: 1
-  m_Order: 38
+  m_Order: 37
   m_Category: FLOATING PARTICLES
   m_Min:
     m_Type:
@@ -11979,7 +11979,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615142}
   m_ExposedName: FloatingParticlesSpeed
   m_Exposed: 1
-  m_Order: 39
+  m_Order: 38
   m_Category: FLOATING PARTICLES
   m_Min:
     m_Type:
@@ -12199,7 +12199,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615148}
   m_ExposedName: FloatingParticlesTurbulence
   m_Exposed: 1
-  m_Order: 40
+  m_Order: 39
   m_Category: FLOATING PARTICLES
   m_Min:
     m_Type:
@@ -12419,7 +12419,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615154}
   m_ExposedName: FloatingParticlesSize
   m_Exposed: 1
-  m_Order: 41
+  m_Order: 40
   m_Category: FLOATING PARTICLES
   m_Min:
     m_Type:

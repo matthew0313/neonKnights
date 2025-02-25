@@ -5,9 +5,12 @@ using UnityEngine.Timeline;
 public class PlaySoundBehaviour : StateMachineBehaviour
 {
     [SerializeField] Sound played;
+    [SerializeField] bool loop = false;
+    [SerializeField] string soundID = string.Empty;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        AudioManager.Instance.PlaySound(played);
+        PlayingAudio tmp = AudioManager.Instance.PlaySound(played).SetID(soundID);
+        if (loop) tmp.Loop();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

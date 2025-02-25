@@ -18,6 +18,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     [SerializeField] TMP_Text itemName;
     [SerializeField] GameObject itemCategory;
     [SerializeField] TMP_Text itemCategoryText, itemDesc;
+    [SerializeField] GameObject undroppable;
 
     [Header("StatDisplay")]
     [SerializeField] Transform itemStatAnchor;
@@ -29,10 +30,10 @@ public class InventorySlotUIHandler : MonoBehaviour
     [SerializeField] QuirkListElement itemQuirkPrefab;
     List<QuirkListElement> itemQuirkList = new();
 
-    [Header("QuirkShardDisplay")]
-    [SerializeField] GameObject quirkShardDisplay;
-    [SerializeField] Image quirkShardBackImage;
-    [SerializeField] TMP_Text quirkShardQuirkDesc;
+    [Header("QuirkApplierDisplay")]
+    [SerializeField] GameObject quirkApplierDisplay;
+    [SerializeField] Image quirkApplierBackImage;
+    [SerializeField] TMP_Text quirkApplierQuirkDesc;
     readonly int startColorID = Shader.PropertyToID("_Start_Color");
     readonly int endColorID = Shader.PropertyToID("_End_Color");
 
@@ -43,7 +44,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     {
         grabbingSlotUI.Set(grabbingSlot);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
-        quirkShardBackImage.material = new Material(quirkShardBackImage.material);
+        quirkApplierBackImage.material = new Material(quirkApplierBackImage.material);
     }
     private void Update()
     {
@@ -119,9 +120,9 @@ public class InventorySlotUIHandler : MonoBehaviour
                         }
                     }
                 }
-                if (!slotHit && grabbingSlot.item.canDrop)
+                if (!slotHit && grabbingSlot.item.data.canDrop)
                 {
-                    DropItem(grabbingSlot.item, grabbingSlot.count);
+                    DropItem(grabbingSlot.item.Copy(), grabbingSlot.count);
                     grabbingSlot.count = 0;
                 }
             }
@@ -138,7 +139,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                         break;
                     }
                 }
-                if (!slotHit && grabbingSlot.item.canDrop)
+                if (!slotHit && grabbingSlot.item.data.canDrop)
                 {
                     DropItem(grabbingSlot.item.Copy(), 1);
                     grabbingSlot.count--;
@@ -254,16 +255,17 @@ public class InventorySlotUIHandler : MonoBehaviour
             itemQuirkAnchor.gameObject.SetActive(tot > 0);
         }
         else itemQuirkAnchor.gameObject.SetActive(false);
-        if(item is QuirkShard_Item)
+        if(item is QuirkApplierItem)
         {
-            QuirkShard_Item tmp = item as QuirkShard_Item;
-            Color tmp2 = tmp.quirkShardOf.quirkColor;
-            quirkShardDisplay.SetActive(true);
-            quirkShardBackImage.material.SetColor(startColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 1.0f));
-            quirkShardBackImage.material.SetColor(endColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 0.0f));
-            quirkShardQuirkDesc.text = $"[{tmp.quirkShardOf.quirkName.text}]: {tmp.quirkShardOf.quirkDescription.text}";
+            QuirkApplierItem tmp = item as QuirkApplierItem;
+            Color tmp2 = tmp.data.appliedQuirk.quirkColor;
+            quirkApplierDisplay.SetActive(true);
+            quirkApplierBackImage.material.SetColor(startColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 1.0f));
+            quirkApplierBackImage.material.SetColor(endColorID, new Color(tmp2.r, tmp2.g, tmp2.b, 0.0f));
+            quirkApplierQuirkDesc.text = $"[{tmp.data.appliedQuirk.quirkName.text}]: {tmp.data.appliedQuirk.quirkDescription.text}";
         }
-        else quirkShardDisplay.SetActive(false);
+        else quirkApplierDisplay.SetActive(false);
+        undroppable.SetActive(!item.data.canDrop);
     }
     void DropItem(Item item, int count)
     {

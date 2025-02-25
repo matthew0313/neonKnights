@@ -23,7 +23,7 @@ public class DroppedItemInteraction : Interaction
     public override void OnInteract()
     {
         player.animation.Play_ItemPick();
-        origin.slot.count = player.inventory.Insert(origin.slot.item, origin.slot.count);
+        origin.slot.count = player.inventory.Insert(origin.slot.item.Copy(), origin.slot.count);
     }
     private void OnDisable()
     {

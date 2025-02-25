@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5260520081244613551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d46e943d19588b4faa6267ab43d9f45, type: 3}
+  m_Script: {fileID: 11500000, guid: 66d8f8effbc96df41ae730ad4b23d09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   disappearTime: 0.1
@@ -104,6 +104,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
