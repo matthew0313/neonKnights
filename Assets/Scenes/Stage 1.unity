@@ -232697,6 +232697,7 @@ GameObject:
   - component: {fileID: 1049112362}
   - component: {fileID: 1049112361}
   - component: {fileID: 1049112371}
+  - component: {fileID: 1049112372}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -232818,7 +232819,7 @@ MonoBehaviour:
   anim: {fileID: 1909666903}
   controller: {fileID: 9100000, guid: fe753c12e69377c4aa4e194ddd3486d3, type: 2}
   itemPickClip: {fileID: 7400016, guid: 5eaab4c94e2c4224dbde8bf202505a4f, type: 3}
-  hurtClip: {fileID: 7400000, guid: 208fe917d9b9c3647be92e3a2408726b, type: 2}
+  hurtClip: {fileID: 0}
 --- !u!114 &1049112366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232943,6 +232944,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84fa2b454cb72d41a4d54785ecdbb2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1049112372
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049112357}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1049271969
 PrefabInstance:
   m_ObjectHideFlags: 0
