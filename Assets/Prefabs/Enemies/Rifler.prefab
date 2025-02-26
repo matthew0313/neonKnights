@@ -261,6 +261,13 @@ MonoBehaviour:
   spread: 3
   magSize: 30
   reloadTime: 3
+  fireSound:
+    clip: {fileID: 8300000, guid: 751322907c12af549ad9f0e4cbd07c66, type: 3}
+    volume: 1
+  reloadSound:
+    clip: {fileID: 8300000, guid: 8ae3050755e28cb459820e40d46f1d5e, type: 3}
+    volume: 1
+  soundDistance: 50
   FSMPath: 
 --- !u!1 &7381321589065056130
 GameObject:

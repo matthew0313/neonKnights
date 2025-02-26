@@ -10,6 +10,8 @@ public class Slasher : Enemy
     [SerializeField] TriggerCallbacks swordHitbox;
     [SerializeField] float slashTriggerDistance;
     [SerializeField] float slashDamage;
+    [SerializeField] Sound slashSound, hitSound;
+    [SerializeField] float soundDistance = 20.0f;
 
     [Header("Debug")]
     [SerializeField] string FSMPath;
@@ -44,6 +46,7 @@ public class Slasher : Enemy
     List<Collider> checkedColliders = new();
     void OnSlashStart(int comboIndex)
     {
+        AudioManager.Instance.PlaySound(slashSound).SetDist(() => transform.position, soundDistance);
         currentSlash = new();
         checkedColliders.Clear();
     }
@@ -63,6 +66,7 @@ public class Slasher : Enemy
 
         if(other.TryGetComponent(out IDamagable tmp))
         {
+            AudioManager.Instance.PlaySound(hitSound).SetDist(() => transform.position, soundDistance);
             tmp.GetDamage(slashDamage);
         }
     }

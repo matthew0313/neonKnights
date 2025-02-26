@@ -72,6 +72,7 @@ public static class PlayingAudioManagement
         audio.distanceControl = true;
         audio.locationGetter = locationGetter;
         audio.maxDistance = maxDistance;
+        audio.lastLocation = locationGetter.Invoke();
         audio.Update();
         return audio;
     }
@@ -114,6 +115,7 @@ public class PlayingAudio
 
     public bool distanceControl = false;
     public Func<Vector3> locationGetter;
+    public Vector3 lastLocation;
     public float maxDistance = 30;
 
     public string id = string.Empty;
@@ -125,7 +127,20 @@ public class PlayingAudio
             return;
         }
         source.volume = Settings.volume * sound.volume * volume;
-        if(distanceControl) source.volume *= Mathf.Max(0.0f, (1.0f - Vector3.Distance(locationGetter.Invoke(), Camera.main.transform.position) / maxDistance));
+        if (distanceControl)
+        {
+            Vector3 pos;
+            try
+            {
+                pos = locationGetter.Invoke();
+            }
+            catch
+            {
+                pos = lastLocation;
+            }
+            source.volume *= Mathf.Max(0.0f, (1.0f - Vector3.Distance(pos, Camera.main.transform.position) / maxDistance));
+            lastLocation = pos;
+        }
     }
     bool removed = false;
     public void Stop()

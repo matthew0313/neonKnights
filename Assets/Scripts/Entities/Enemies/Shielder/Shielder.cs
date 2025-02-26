@@ -20,6 +20,8 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] float bashRunSpeed, bashRunDistance;
     [SerializeField] float bashCooldown;
     [SerializeField] float bashDamage;
+    [SerializeField] Sound bashHitSound;
+    [SerializeField] float soundDistance = 30.0f;
     Rigidbody rb;
     NavMeshAgent agent;
     Animator anim;
@@ -223,6 +225,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                         GameObject hit = other.attachedRigidbody == null ? other.gameObject : other.attachedRigidbody.gameObject;
                         if(hit.TryGetComponent(out IDamagable tmp))
                         {
+                            AudioManager.Instance.PlaySound(origin.bashHitSound).SetDist(() => origin.transform.position, origin.soundDistance);
                             tmp.GetDamage(new()
                             {
                                 amount = origin.bashDamage * origin.damageMultiplier,

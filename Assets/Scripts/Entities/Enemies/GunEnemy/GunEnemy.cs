@@ -20,6 +20,8 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] float spread = 0.0f;
     [SerializeField] int magSize;
     [SerializeField] float reloadTime = 3.0f;
+    [SerializeField] Sound fireSound, reloadSound;
+    [SerializeField] float soundDistance = 50.0f;
 
     [Header("Debug")]
     [SerializeField] string FSMPath;
@@ -66,6 +68,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     readonly int attackID = Animator.StringToHash("Attack");
     void Fire()
     {
+        AudioManager.Instance.PlaySound(fireSound).SetDist(() => transform.position, soundDistance);
         for(int i = 0; i < shotCount; i++)
         {
             EnemyBullet tmp = bullet.Instantiate() as EnemyBullet;
@@ -81,6 +84,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     void Reload()
     {
         if (reloading) return;
+        AudioManager.Instance.PlaySound(reloadSound).SetDist(() => transform.position, soundDistance);
         reloading = true;
         anim.SetTrigger(reloadID);
         reloadCoroutine = Timing.RunCoroutine(Reloading());

@@ -77,7 +77,7 @@ public class CutsceneManager : MonoBehaviour
         yield return Timing.WaitForOneFrame;
         yield return Timing.WaitForOneFrame;
 
-        while (director.state == PlayState.Playing) yield return Timing.WaitForOneFrame;
+        while (director.state == PlayState.Playing && director.time < director.playableAsset.duration - 0.2f) yield return Timing.WaitForOneFrame;
         onFinish?.Invoke();
         /*director.timeUpdateMode = DirectorUpdateMode.Manual;
         director.Play(timeline);

@@ -17,9 +17,8 @@ MonoBehaviour:
       en: Assistant
       kr: "\uC870\uB825\uC790"
     m_text:
-      en: They have a Quirk that makes them stronger.
-      kr: "\uC774 \uC55E\uC5D0\uB294 \uB85C\uBD07\uB4E4\uC774 \uC788\uC5B4 \uB110
-        \uBCF8\uB2E4\uBA74 \uACF5\uACA9\uD560\uAC70\uC57C"
+      en: There are robots ahead.
+      kr: "\uC55E\uC5D0 \uB85C\uBD07\uB4E4\uC774 \uC788\uAD70."
     m_talkSound:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
       volume: 1
@@ -57,7 +56,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4047041376241976966}
   m_Solo: 0
@@ -67,7 +69,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -89,8 +91,14 @@ MonoBehaviour:
       en: Assistant
       kr: "\uC870\uB825\uC790"
     m_text:
-      en: Alright, first, this robot rushes towards you with their shield.
-      kr: "\uADF8\uB798 \uBA3C\uC800 \uC800 \uB85C\uBD07\uC740 \uB3CC\uC9C4\uC744\uD574"
+      en: There are melee robots on the front row. Shielders will rush towards you
+        with their shield. Aim for the weak point on their back after they rush.
+        Watch out for slasher's attacks, they pack quite a punch.
+      kr: "\uC55E\uCABD\uC5D0\uB294 \uADFC\uC811 \uB85C\uBD07\uB4E4\uC774 \uC788\uAD70.
+        \uBC29\uD328\uBCD1\uB4E4\uC740 \uB110 \uBCF4\uBA74 \uB3CC\uC9C4\uD574 \uC62C
+        \uAC70\uB2E4. \uB188\uB4E4\uC774 \uB3CC\uC9C4\uD55C \uB4A4\uC5D0 \uB4F1\uC5D0
+        \uC788\uB294 \uC57D\uC810\uC744 \uB178\uB824. \uAC80 \uB85C\uBD07\uC758 \uACF5\uACA9\uC740
+        \uAC15\uB825\uD558\uB2C8 \uC870\uC2EC\uD558\uACE0."
     m_talkSound:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
       volume: 1
@@ -103,7 +111,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -565681162769402142}
   m_Solo: 0
@@ -113,7 +124,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -125,7 +136,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: How so?
+  m_Name: Whats up
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -153,7 +164,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1948403564096640279}
   m_Solo: 0
@@ -163,7 +177,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -175,7 +189,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 898293770625799359}
   m_Solo: 0
@@ -185,7 +202,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -207,13 +224,27 @@ MonoBehaviour:
       en: Eliath
       kr: "\uC5D8\uB9AC\uC544\uC2A4"
     m_text:
-      en: Okay then let's go
-      kr: "\uC54C\uACA0\uC5B4 \uADF8\uB7FC \uAC04\uB2E4!"
+      en: Alright. Here i go.
+      kr: "\uC54C\uACA0\uC5B4, \uADF8\uB7FC \uAC04\uB2E4."
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
       volume: 1
     m_skippable: 1
   progress: 1
+--- !u!114 &-3508621896712294968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c941715200837428693e17691e2df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeline: {fileID: 11400000, guid: 01c93ad8e7ae30d44a7083f7e784f651, type: 2}
+  progressOnFinish: 0
 --- !u!1102 &-2845929488971522980
 AnimatorState:
   serializedVersion: 6
@@ -221,7 +252,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Quirk?
+  m_Name: What robots?
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -249,7 +280,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2845929488971522980}
   m_Solo: 0
@@ -259,7 +293,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -313,7 +347,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
       volume: 1
     m_skippable: 1
-  progress: 0
+  progress: 1
 --- !u!114 &-2262816110122534813
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,9 +365,15 @@ MonoBehaviour:
       en: Assistant
       kr: "\uC870\uB825\uC790"
     m_text:
-      en: And this robot will shoot you.
-      kr: "\uADF8\uB9AC\uACE0 \uC774 \uB85C\uBD07\uC740 \uB108\uC5D0\uAC8C \uCD1D\uC744
-        \uBC1C\uC0AC\uD560\uAC70\uC57C"
+      en: And there are ranged robots on the back row. These robots will shoot bullets
+        at you. Fairly dodgable far away, but not up close. If you plan to use your
+        knife, then aim for when they're reloading.
+      kr: "\uADF8\uB9AC\uACE0 \uB4B7\uCABD\uC5D0\uB294 \uC6D0\uAC70\uB9AC \uB85C\uBD07\uB4E4\uC774
+        \uC788\uB124. \uC598\uB124\uB4E4\uC740 \uB108\uB97C \uD5A5\uD574 \uCD1D\uC744
+        \uC3E0 \uAC70\uC57C. \uBA40\uB9AC\uC11C\uB294 \uCDA9\uBD84\uD788 \uD53C\uD560
+        \uB9CC \uD558\uC9C0\uB9CC \uAC00\uAE4C\uC774\uC5D0\uC120 \uC5B4\uB824\uC6CC.
+        \uB098\uC774\uD504\uB97C \uC4F8 \uC0DD\uAC01\uC774\uB77C\uBA74 \uC7AC\uC7A5\uC804
+        \uD560 \uB54C\uB97C \uB178\uB824."
     m_talkSound:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
       volume: 1
@@ -346,7 +386,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7402329914257600582}
   m_Solo: 0
@@ -356,7 +399,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -382,13 +425,14 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: What are quirks 0
+  m_Name: Gunners
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6423664733673553269}
   m_StateMachineBehaviours:
   - {fileID: -2262816110122534813}
+  - {fileID: -3508621896712294968}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -494,7 +538,7 @@ MonoBehaviour:
       en: Eliath
       kr: "\uC5D8\uB9AC\uC544\uC2A4"
     m_text:
-      en: why?
+      en: Anything wrong?
       kr: "\uC65C \uADF8\uB798?"
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
@@ -519,7 +563,7 @@ MonoBehaviour:
       kr: "\uC5D8\uB9AC\uC544\uC2A4"
     m_text:
       en: What robots?
-      kr: "\uBB34\uC2A8 \uB85C\uBD07\uB4E4?"
+      kr: "\uBB34\uC2A8 \uB85C\uBD07\uB4E4\uC774 \uC788\uB294\uB370?"
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
       volume: 1
@@ -560,7 +604,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Progress
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8668631754258283833}
   m_Solo: 0
@@ -570,7 +617,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -582,7 +629,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: They have quirk
+  m_Name: Robots ahead
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -603,6 +650,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &4111458547943360935
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c941715200837428693e17691e2df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeline: {fileID: 11400000, guid: ac2b9353a011a8640b2b4ceaacb556f6, type: 2}
+  progressOnFinish: 0
 --- !u!1107 &4705961601883288237
 AnimatorStateMachine:
   serializedVersion: 6
@@ -707,7 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: ffb2627a5e0c53546b9467415e75aa17, type: 2}
-  progressOnFinish: 1
+  progressOnFinish: 0
 --- !u!1102 &8668631754258283833
 AnimatorState:
   serializedVersion: 6
@@ -715,13 +776,14 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: What are quirks
+  m_Name: Shielders
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7849343960049605710}
   m_StateMachineBehaviours:
   - {fileID: -8190963508672620962}
+  - {fileID: 4111458547943360935}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

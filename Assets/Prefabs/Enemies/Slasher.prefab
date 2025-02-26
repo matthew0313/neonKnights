@@ -251,6 +251,13 @@ MonoBehaviour:
   swordHitbox: {fileID: 444726151569261283}
   slashTriggerDistance: 3
   slashDamage: 10
+  slashSound:
+    clip: {fileID: 8300000, guid: 621437b2fb8e7ef4fbecb600728f63e8, type: 3}
+    volume: 1
+  hitSound:
+    clip: {fileID: 8300000, guid: 05fdb883453aae345b21b8880e82737c, type: 3}
+    volume: 1
+  soundDistance: 20
   FSMPath: 
 --- !u!114 &5968516947109292520
 MonoBehaviour:
