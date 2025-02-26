@@ -128,5 +128,6 @@ public enum AnimationType
     Potion = 5,
     Throwable = 6,
     Knife = 7,
-    Sword = 8
+    Sword = 8,
+    Axe = 9
 }
