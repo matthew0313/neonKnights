@@ -21,13 +21,15 @@ MonoBehaviour:
       \uB300\uC804\uC5D0\uC11C \uC0C1\uC9D5\uC801\uC778 \uAE30\uAD00\uB2E8\uCD1D\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 11
-  m_prefab: {fileID: 0}
+  m_canDrop: 1
+  m_prefab: {fileID: 3421825771076159304, guid: a9932bdd5cc3e4189bbe4f3e8af35f3b,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 0692d219635c0499db8b1edc057b4bc6, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8ae3050755e28cb459820e40d46f1d5e, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 1

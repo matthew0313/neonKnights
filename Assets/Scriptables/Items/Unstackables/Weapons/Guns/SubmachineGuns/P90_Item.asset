@@ -21,13 +21,15 @@ MonoBehaviour:
       \uC720\uBA85\uD55C PDW\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 11
-  m_prefab: {fileID: 0}
+  m_canDrop: 1
+  m_prefab: {fileID: 5808800621595574030, guid: 690c2e2a31fe449bda53fdd456e406d6,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 0692d219635c0499db8b1edc057b4bc6, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 8ae3050755e28cb459820e40d46f1d5e, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 1

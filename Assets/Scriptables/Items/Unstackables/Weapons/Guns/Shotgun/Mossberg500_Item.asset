@@ -19,15 +19,17 @@ MonoBehaviour:
     en: Known for its durability and reliability as a pump-action shotgun.
     kr: "\uB0B4\uAD6C\uC131\uACFC \uC2E0\uB8B0\uC131\uC73C\uB85C \uC720\uBA85\uD55C
       \uD38C\uD504 \uC561\uC158 \uC0F7\uAC74\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 979218419037281822, guid: 0d0d027c640494c89b33c2768bc6eb0c, type: 3}
   m_category: 35
-  m_prefab: {fileID: 0}
+  m_canDrop: 1
+  m_prefab: {fileID: -8425700911044116549, guid: 7af2dafd81f6f43f7aa96eff2c15922f,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 0692d219635c0499db8b1edc057b4bc6, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: ba58b57413cd542ee95c9a697e9900cf, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0
