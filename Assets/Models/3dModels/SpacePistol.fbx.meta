@@ -8,27 +8,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glass
-    second: {fileID: 2100000, guid: fa9f39bd1c619044a919296c75510ab1, type: 2}
+    second: {fileID: 2100000, guid: 356308546a247104086f4669a2685625, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: body
-    second: {fileID: 2100000, guid: 8f35e3a40db4602488e436bab3fe7611, type: 2}
+    second: {fileID: 2100000, guid: 7f2aa7cc9823ac9459e71ca94e84363c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: grey
-    second: {fileID: 2100000, guid: 22e0128f1f14c09468ee1bb1d659691e, type: 2}
+    second: {fileID: 2100000, guid: 7538a6b874f770c428c8d0060f45cc17, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: metal
-    second: {fileID: 2100000, guid: a1c6ff9b765de67448d1260ee143cb0e, type: 2}
+    second: {fileID: 2100000, guid: 9d2018d5a262b564999ab06c71d0ec55, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: screws
-    second: {fileID: 2100000, guid: d36bd148b9b44084db86d0a8ace1c00a, type: 2}
+    second: {fileID: 2100000, guid: 7f8c617acc9d94b42bf81fcb2b993058, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
