@@ -35,6 +35,7 @@ public class RotateBehaviour : PlayableBehaviour
         {
             firstFramePlayed = false;
             if (!Application.isPlaying) target.rotation = Quaternion.Euler(startEulers);
+            else target.rotation = Quaternion.Euler(targetEulers);
         }
     }
 }

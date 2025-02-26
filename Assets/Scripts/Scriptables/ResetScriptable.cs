@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class ResetScriptable : ScriptableObject
 {
@@ -17,6 +18,10 @@ public abstract class ResetScriptable : ScriptableObject
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void ResetInstances()
     {
-        foreach (var i in instances) i.OnReset();
+        foreach (var i in instances)
+        {
+            i.OnReset();
+            SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => { i.OnReset(); };
+        }
     }
 }

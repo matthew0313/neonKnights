@@ -6,6 +6,7 @@ using UnityEngine;
 public class ItemRenderSpace : PooledPrefab<ItemRenderSpace>
 {
     [SerializeField] Camera camera;
+    [SerializeField] float cameraUpdateTickRate = 0.1f;
     [SerializeField] Transform itemAnchor;
     ItemModel rendering;
 
@@ -32,8 +33,15 @@ public class ItemRenderSpace : PooledPrefab<ItemRenderSpace>
         item.transform.SetParent(itemAnchor, false);
         item.transform.localPosition = Vector3.zero;
     }
+    float cameraUpdateCounter = 0.0f;
     private void Update()
     {
         itemAnchor.transform.rotation = Quaternion.Euler(ItemManager.Instance.itemRenderSpaceRotation, 90.0f, 90.0f);
+        cameraUpdateCounter += Time.deltaTime;
+        if(cameraUpdateCounter >= cameraUpdateTickRate)
+        {
+            camera.Render();
+            cameraUpdateCounter = 0.0f;
+        }
     }
 }

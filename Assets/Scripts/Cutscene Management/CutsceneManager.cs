@@ -73,11 +73,13 @@ public class CutsceneManager : MonoBehaviour
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)
     {
         director.Play(timeline);
+        bool finished = false;
+        Action<PlayableDirector> tmp = (PlayableDirector director) => finished = true;
 
-        yield return Timing.WaitForOneFrame;
-        yield return Timing.WaitForOneFrame;
+        director.stopped += tmp;
+        while (!finished) yield return Timing.WaitForOneFrame;
+        director.stopped -= tmp;
 
-        while (director.state == PlayState.Playing && director.time < director.playableAsset.duration - 0.2f) yield return Timing.WaitForOneFrame;
         onFinish?.Invoke();
         /*director.timeUpdateMode = DirectorUpdateMode.Manual;
         director.Play(timeline);

@@ -20,6 +20,7 @@ public class Cutscene : MonoBehaviour
 
     [SerializeField] CinemachineCamera[] cinemachineCameras;
     [SerializeField] UnityEvent[] events;
+    [SerializeField] UnityEvent onCutsceneFinish;
     protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
@@ -49,7 +50,10 @@ public class Cutscene : MonoBehaviour
     {
         anim.SetTrigger(playID);
     }
-    public virtual void End() { }
+    public virtual void End()
+    {
+        onCutsceneFinish?.Invoke();
+    }
 }
 #if UNITY_EDITOR
 [CustomEditor(typeof(Cutscene))]
