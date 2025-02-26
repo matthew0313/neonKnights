@@ -90,6 +90,7 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
     {
         base.OnUnwield(wielder);
         Timing.KillCoroutines(drinkingCoroutine);
+        drinkingSound?.Stop();
         drinking = false;
         potion.gameObject.SetActive(false);
     }

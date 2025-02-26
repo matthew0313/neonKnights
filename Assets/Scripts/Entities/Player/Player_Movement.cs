@@ -148,8 +148,6 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         {
             counter += Time.deltaTime;
             controller.Move(dir * speed * Time.deltaTime);
-            //rb.linearVelocity = new Vector3(tmp.x, rb.linearVelocity.y, tmp.z);
-            //rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
             yield return null;
         }
         yield return new WaitForSeconds(endLag);
@@ -160,6 +158,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     {
         cutscenePaused = true;
         rb.isKinematic = true;
+        topLayer.ChangeState("Idle");
+        relativeMoveInput = Vector3.zero;
     }
 
     public void OnCutsceneEnd()
@@ -171,6 +171,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     class MoveFSMVals : FSMVals
     {
         public Vector3 moveInput = Vector3.zero;
+        public Vector3 relativeMoveInput = Vector3.zero;
         public float staminaRegenCounter = 0.0f;
     }
     class TopLayer : TopLayer<Player_Movement, MoveFSMVals>
@@ -188,7 +189,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
             Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
             Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
             values.moveInput = camFront * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
-            origin.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
+            values.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
             base.OnStateUpdate();
         }
         class Idle : State<Player_Movement, MoveFSMVals>
@@ -236,6 +237,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
+                origin.relativeMoveInput = values.relativeMoveInput;
                 if (values.moveInput.magnitude < 0.1f) parentLayer.ChangeState("Idle");
             }
             public override void OnStateExit()
@@ -252,7 +254,11 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 public override void OnStateUpdate()
                 {
                     base.OnStateUpdate();
-                    if (!origin.canMove) return;
+                    if (!origin.canMove)
+                    {
+                        parentLayer.ChangeState("Idle");
+                        return;
+                    }
                     else
                     {
                         if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
@@ -345,6 +351,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 base.OnStateEnter();
                 origin.dashing = true;
                 values.staminaRegenCounter = 0.0f;
+                origin.relativeMoveInput = values.relativeMoveInput;
 
                 Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
                 Vector3 move = values.moveInput;
@@ -370,6 +377,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 base.OnStateEnter();
                 origin.sliding = true;
                 values.staminaRegenCounter = 0.0f;
+                origin.relativeMoveInput = values.relativeMoveInput;
 
                 Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
                 Vector3 move = values.moveInput;

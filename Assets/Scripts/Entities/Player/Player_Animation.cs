@@ -55,6 +55,7 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
         anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
         anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
     }
+
     readonly int fireID = Animator.StringToHash("Fire");
     public void TriggerFire()
     {
@@ -108,14 +109,14 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
         //inCutscene = true;
         //anim.SetBool(movingID, false);
         //anim.SetInteger(animationTypeID, 0);
-        animation.Disable();
+        //animation.Disable();
     }
 
     public void OnCutsceneEnd()
     {
         //inCutscene = false;
         //OnEquippedItemChange(origin.inventory.equipped);
-        animation.Enable();
+        //animation.Enable();
     }
 }
 public enum AnimationType

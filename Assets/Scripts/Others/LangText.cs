@@ -22,6 +22,6 @@ public struct LangText
 [System.Serializable]
 public enum Language
 {
-    English,
-    Korean
+    English = 0,
+    Korean = 1
 }

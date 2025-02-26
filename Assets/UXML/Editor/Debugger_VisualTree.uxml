@@ -2,6 +2,7 @@
     <Style src="project://database/Assets/UXML/StyleSheet/Editor.uss?fileID=7433441132597879392&amp;guid=ea9f58a809fac4e45ba5a9a3dd3ea0fc&amp;type=3#Editor" />
     <engine:VisualElement class="Area" style="flex-grow: 1;">
         <engine:Label text="Settings" class="Title" />
+        <editor:PropertyField label="Apply Start Language" binding-path="applyStartLanguage" />
         <editor:PropertyField label="Start Language" binding-path="startLanguage" />
     </engine:VisualElement>
     <engine:VisualElement class="Area" style="flex-grow: 1;">

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Debugger : MonoBehaviour
 {
+    [SerializeField] bool applyStartLanguage = false;
     [SerializeField] Language startLanguage = Language.English;
     [SerializeField] QuirkData addingQuirk;
     [SerializeField] ItemData givingItem;
@@ -9,7 +10,7 @@ public class Debugger : MonoBehaviour
     Player player;
     private void Awake()
     {
-        Settings.language = startLanguage;
+        if(applyStartLanguage) Settings.language = startLanguage;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     public void AddQuirk()
