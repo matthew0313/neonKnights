@@ -89,7 +89,7 @@ MonoBehaviour:
       en: Assistant
       kr: "\uC870\uB825\uC790"
     m_text:
-      en: Qirks are special modifications applied to various gears.
+      en: Alright, first, this robot rushes towards you with their shield.
       kr: "\uADF8\uB798 \uBA3C\uC800 \uC800 \uB85C\uBD07\uC740 \uB3CC\uC9C4\uC744\uD574"
     m_talkSound:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
@@ -313,7 +313,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: d308f47766f0d5140877619784c405f9, type: 3}
       volume: 1
     m_skippable: 1
-  progress: 1
+  progress: 0
 --- !u!114 &-2262816110122534813
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
       en: Assistant
       kr: "\uC870\uB825\uC790"
     m_text:
-      en: Qirks are special modifications applied to various gears.
+      en: And this robot will shoot you.
       kr: "\uADF8\uB9AC\uACE0 \uC774 \uB85C\uBD07\uC740 \uB108\uC5D0\uAC8C \uCD1D\uC744
         \uBC1C\uC0AC\uD560\uAC70\uC57C"
     m_talkSound:
@@ -437,19 +437,6 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!114 &312150242516872262
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c271a076aea35dd478fa332b3dc92c57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventIndex: 0
 --- !u!114 &549389650626233887
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,8 +518,8 @@ MonoBehaviour:
       en: Eliath
       kr: "\uC5D8\uB9AC\uC544\uC2A4"
     m_text:
-      en: Quirk?
-      kr: "\uB85C\uBD07?"
+      en: What robots?
+      kr: "\uBB34\uC2A8 \uB85C\uBD07\uB4E4?"
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
       volume: 1
@@ -551,7 +538,6 @@ AnimatorState:
   m_Transitions: []
   m_StateMachineBehaviours:
   - {fileID: 549389650626233887}
-  - {fileID: 312150242516872262}
   - {fileID: -1388022896896204082}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -637,7 +623,7 @@ AnimatorStateMachine:
     m_Position: {x: 790, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4047041376241976966}
-    m_Position: {x: 450, y: 360, z: 0}
+    m_Position: {x: 430, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2845929488971522980}
     m_Position: {x: 770, y: 350, z: 0}
