@@ -10,6 +10,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 
     [Header("Movement")]
     [SerializeField] internal float moveSpeed;
+    [SerializeField] float baseMovespeedMultiplier = 1.0f;
 
     [Header("Walk")]
     [SerializeField] internal float staminaRegen = 1.0f;
@@ -43,7 +44,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     [SerializeField] string FSMPath;
 
     public float speedMultiplier => origin.statistics.speedMultiplier;
-    public float speed => moveSpeed * speedMultiplier;
+    public float speed => moveSpeed * baseMovespeedMultiplier * speedMultiplier;
 
     float m_stamina = 2.0f;
     internal float stamina
@@ -314,13 +315,13 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                         if (origin.stamina > 1.0f)
                         {
                             origin.stamina = Mathf.Max(0.0f, origin.stamina - 2.0f);
-                            parentLayer.ChangeState("Sliding");
+                            parentLayer.parentLayer.ChangeState("Sliding");
                             return;
                         }
                         else
                         {
                             origin.stamina = Mathf.Max(0.0f, origin.stamina - 1.0f);
-                            parentLayer.ChangeState("Dashing");
+                            parentLayer.parentLayer.ChangeState("Dashing");
                             return;
                         }
                     }
