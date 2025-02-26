@@ -19,15 +19,17 @@ MonoBehaviour:
     en: A precision-engineered pistol widely used by police and military forces.
     kr: "\uACBD\uCC30\uACFC \uAD70\uB300\uC5D0\uC11C \uB110\uB9AC \uC0AC\uC6A9\uB418\uB294
       \uC815\uBC00 \uC81C\uC791\uB41C \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 1687456862931557983, guid: 4b7a664a842a1f6468abe64fbb373db2, type: 3}
   m_category: 7
-  m_prefab: {fileID: 0}
+  m_canDrop: 1
+  m_prefab: {fileID: 3514586858778494429, guid: dbd5e02a97fb2514495e7c18b7e69b99,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: c6c2eda023eca4d4ab60d67ca0add93b, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 0e6b05465336c42eb869b9539ec3102c, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0

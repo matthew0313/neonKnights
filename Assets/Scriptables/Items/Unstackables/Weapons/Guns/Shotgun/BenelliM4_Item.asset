@@ -19,15 +19,18 @@ MonoBehaviour:
     en: A semi-automatic shotgun designed for military and tactical use.
     kr: "\uBC18\uC790\uB3D9 \uC0F7\uAC74\uC73C\uB85C, \uAD70\uC0AC\uC6A9 \uBC0F \uC804\uC220\uC801
       \uBAA9\uC801\uC73C\uB85C \uC124\uACC4\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: -2009069250572574541, guid: f0f8ccaf3b62a46c1be7ae3c1f003b53,
+    type: 3}
   m_category: 35
-  m_prefab: {fileID: 0}
+  m_canDrop: 1
+  m_prefab: {fileID: 1736615218308195557, guid: 4336afd1c23174449af20abf6ead38d8,
+    type: 3}
   m_fireSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 0692d219635c0499db8b1edc057b4bc6, type: 3}
+    volume: 1
   m_reloadSound:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: ba58b57413cd542ee95c9a697e9900cf, type: 3}
+    volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0

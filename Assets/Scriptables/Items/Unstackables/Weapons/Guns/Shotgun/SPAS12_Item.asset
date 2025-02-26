@@ -25,10 +25,17 @@ MonoBehaviour:
   m_canDrop: 1
   m_prefab: {fileID: 909336882581031919, guid: 4320536d6769a45128d4c3942471c799, type: 3}
   m_fireSound:
+<<<<<<< HEAD
+    clip: {fileID: 8300000, guid: 64e4fc086b843b84394c992f3c97b4eb, type: 3}
+    volume: 1
+  m_reloadSound:
+    clip: {fileID: 8300000, guid: 449d79bf29234409daf8ce504e50df55, type: 3}
+=======
     clip: {fileID: 0}
     volume: 1
   m_reloadSound:
     clip: {fileID: 0}
+>>>>>>> e4e341bae16aea56e1848cb4d23574b0c7960c29
     volume: 1
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
