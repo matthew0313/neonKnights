@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7275117046328767728
 Transform:
   m_ObjectHideFlags: 0
@@ -296,5 +296,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 3913909007671085364}
-  cameraUpdateTickRate: 1
+  cameraUpdateTickRate: 0.25
   itemAnchor: {fileID: 6400112150185228860}

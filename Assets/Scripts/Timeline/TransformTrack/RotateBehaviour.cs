@@ -11,6 +11,7 @@ public class RotateBehaviour : PlayableBehaviour
 {
     [SerializeField] Vector3 targetEulers;
     [SerializeField] AnimationCurve rotateCurve;
+    [SerializeField] bool local = false;
     Transform target;
     Vector3 startEulers;
     bool firstFramePlayed = false;
@@ -23,10 +24,17 @@ public class RotateBehaviour : PlayableBehaviour
         this.target = target;
         if (!firstFramePlayed)
         {
-            startEulers = target.rotation.eulerAngles;
+            startEulers = local ? target.localRotation.eulerAngles : target.rotation.eulerAngles;
             firstFramePlayed = true;
         }
-        target.rotation = Quaternion.Slerp(Quaternion.Euler(startEulers), Quaternion.Euler(targetEulers), rotateCurve.Evaluate((float)playable.GetTime() / (float)playable.GetDuration()));
+        if (!local)
+        {
+            target.rotation = Quaternion.Slerp(Quaternion.Euler(startEulers), Quaternion.Euler(targetEulers), rotateCurve.Evaluate((float)playable.GetTime() / (float)playable.GetDuration()));
+        }
+        else
+        {
+            target.localRotation = Quaternion.Slerp(Quaternion.Euler(startEulers), Quaternion.Euler(targetEulers), rotateCurve.Evaluate((float)playable.GetTime() / (float)playable.GetDuration()));
+        }
     }
     public override void OnBehaviourPause(Playable playable, FrameData info)
     {
@@ -34,8 +42,16 @@ public class RotateBehaviour : PlayableBehaviour
         if (firstFramePlayed)
         {
             firstFramePlayed = false;
-            if (!Application.isPlaying) target.rotation = Quaternion.Euler(startEulers);
-            else target.rotation = Quaternion.Euler(targetEulers);
+            if (!Application.isPlaying)
+            {
+                if (!local) target.rotation = Quaternion.Euler(startEulers);
+                else target.localRotation = Quaternion.Euler(startEulers);
+            }
+            else
+            {
+                if(!local) target.rotation = Quaternion.Euler(targetEulers);
+                else target.localRotation = Quaternion.Euler(targetEulers);
+            }
         }
     }
 }

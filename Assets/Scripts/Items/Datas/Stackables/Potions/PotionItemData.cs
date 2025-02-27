@@ -62,7 +62,7 @@ public abstract class PotionItem : Item, IBarDisplayed, IStatDisplayed, IReloadD
     {
         base.OnWieldUpdate();
         if (data.cooldownSource.isOnCooldown) return;
-        if (Input.GetMouseButtonDown(0) && !drinking)
+        if (Input.GetMouseButtonDown(0) && !drinking && UIScanner.ScanUI().Count <= 0)
         {
             drinkingCoroutine = Timing.RunCoroutine(Drinking());
         }
