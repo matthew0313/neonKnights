@@ -34,7 +34,7 @@ public abstract class ThrowableItem : StackableItem, IBarDisplayed, IReloadDispl
     {
         this.data = data;
     }
-    public override RotateMode rotateMode => RotateMode.MouseLocked;
+    public override RotateMode rotateMode => RotateMode.CameraLocked;
     public override AnimationType heldAnimation => AnimationType.Throwable;
     public bool barDisplay => data.cooldownSource.isOnCooldown;
     public float barFill => 1.0f - data.cooldownSource.cooldownLeft / data.cooldownSource.startCooldown;

@@ -31,7 +31,7 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
     {
         this.data = data;
     }
-    public override RotateMode rotateMode => RotateMode.MouseLocked;
+    public override RotateMode rotateMode => RotateMode.CameraLocked;
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);

@@ -120,14 +120,15 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     void Rotate()
     {
         Vector2 rot = Vector2.zero;
-        if (rotateMode == RotateMode.MouseLocked)
+        if (rotateMode == RotateMode.CameraLocked)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             float height = transform.position.y - ray.origin.y;
             Vector3 end = ray.origin + ray.direction * (height / ray.direction.y);
             Vector2 pos1 = new Vector2(transform.position.x, transform.position.z);
             Vector2 pos2 = new Vector2(end.x, end.z);
-            rot = pos2 - pos1;
+            rot = pos2 - pos1;*/
+            rot = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
             lastLookedDir = new Vector3(rot.x, 0.0f, rot.y);
         }
         else if (rotateMode == RotateMode.Free)
@@ -398,5 +399,5 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 public enum RotateMode
 {
     Free,
-    MouseLocked
+    CameraLocked
 }

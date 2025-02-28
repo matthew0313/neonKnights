@@ -2,45 +2,53 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MEC;
+using TMPro.EditorUtilities;
 
 [RequireComponent(typeof(GlobalManager_UI))]
 public class GlobalManager : MonoBehaviour
 {
-    GlobalManager_UI UIs;
-    static GlobalManager instance;
-    public static GlobalManager Instance
+    public static GlobalManager Instance { get; private set; }
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Initialize()
     {
-        get
-        {
-            if(instance == null)
-            {
-                instance = Instantiate(Resources.Load<GlobalManager>("GlobalManager"));
-                DontDestroyOnLoad(instance);
-            }
-            return instance;
-        }
+        Instance = Instantiate(Resources.Load<GlobalManager>("GlobalManager"));
+        DontDestroyOnLoad(Instance);
     }
+
+    GlobalManager_UI UIs;
     public Action onSceneWillLoad;
-    AsyncOperation sceneLoading;
     private void Awake()
     {
         UIs = GetComponent<GlobalManager_UI>();
-    }
-    private void Update()
-    {
-        if (sceneLoading != null) UIs.SetLoadingProgress(sceneLoading.progress);
+        SaveManager.Instance.Load("Settings.json", (data) =>
+        {
+            if (data != null)
+            {
+                Settings.Load(JsonUtility.FromJson<SettingsSave>(data));
+            }
+        });
     }
     public void LoadScene(string sceneName)
     {
         onSceneWillLoad?.Invoke();
+        Timing.RunCoroutine(LoadingScene(sceneName));
+    }
+    IEnumerator<float> LoadingScene(string sceneName)
+    {
         UIs.ShowLoadingUI();
         AsyncOperation tmp = SceneManager.LoadSceneAsync(sceneName);
-        tmp.completed += (AsyncOperation operation) =>
-        {
-            UIs.HideLoadingUI();
-            sceneLoading = null;
-        };
         UIs.SetLoadingProgress(0.0f);
-        sceneLoading = tmp;
+        while (!tmp.isDone)
+        {
+            UIs.SetLoadingProgress(tmp.progress);
+            yield return Timing.WaitForOneFrame;
+        }
+        UIs.HideLoadingUI();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveManager.Instance.Save("Settings.json", JsonUtility.ToJson(Settings.Save()));
     }
 }

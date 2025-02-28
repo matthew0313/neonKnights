@@ -99,6 +99,10 @@ public class Player_Animation : MonoBehaviour
     {
         animation.PlayOneShot(itemPickClip);
     }
+    private void OnDestroy()
+    {
+        animation.Destroy();
+    }
 }
 public enum AnimationType
 {

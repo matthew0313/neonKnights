@@ -7,16 +7,16 @@ public class Player_Camera : MonoBehaviour, ICutsceneCallbackReceiver
 {
     [SerializeField] new CinemachineCamera camera;
 
-    [SerializeField] Transform camAnchor;
+    [SerializeField] Transform camAnchor, springAnchor;
     [SerializeField] float rotateSpeed = 1.0f, zoomSpeed = 1.0f;
-    [SerializeField] float minCameraDist = 1.0f, maxCameraDist = 10.0f;
+    [SerializeField] float minSpringLength = 1.0f, maxSpringLength = 10.0f;
     [SerializeField] float minRotX, maxRotX;
     [SerializeField] bool YReverse = true;
     [SerializeField] LayerMask blockingMask;
 
     [SerializeField] bool controlled = true;
 
-    float armLength = 3.0f;
+    float springLength = 3.0f;
     float rotX, rotY;
     public void OnAwake()
     {
@@ -25,20 +25,24 @@ public class Player_Camera : MonoBehaviour, ICutsceneCallbackReceiver
     }
     public void OnUpdate()
     {
-        if (controlled)
+        if (controlled && !GameManager.Instance.paused)
         {
-            if (Input.GetMouseButton(1))
+            if (Cursor.lockState == CursorLockMode.Locked)
             {
                 SetRot(Mathf.Clamp(rotX + Input.GetAxis("Mouse Y") * -1 * rotateSpeed * Settings.cameraSensitivity * (YReverse ? -1.0f : 1.0f), minRotX, maxRotX), rotY + Input.GetAxis("Mouse X") * rotateSpeed * Settings.cameraSensitivity);
             }
-            if(UIScanner.ScanUI().Count <= 0) SetZoom(armLength + Input.mouseScrollDelta.y * -1 * zoomSpeed * Settings.cameraSensitivity);
+            if(UIScanner.ScanUI().Count <= 0) SetSpringLength(springLength + Input.mouseScrollDelta.y * -1 * zoomSpeed * Settings.cameraSensitivity);
 
-            if (Physics.Raycast(camAnchor.transform.position, camAnchor.transform.forward, out RaycastHit hit, armLength, blockingMask))
-            {
-                camera.transform.position = hit.point;
-            }
-            else camera.transform.position = camAnchor.transform.position + camAnchor.transform.forward * armLength;
+            UpdateSpring();
         }
+    }
+    void UpdateSpring()
+    {
+        if (Physics.Raycast(springAnchor.transform.position, springAnchor.transform.forward, out RaycastHit hit, springLength, blockingMask))
+        {
+            camera.transform.position = hit.point;
+        }
+        else camera.transform.position = springAnchor.transform.position + springAnchor.transform.forward * springLength;
     }
     public void SetRot(float rotX, float rotY)
     {
@@ -46,9 +50,9 @@ public class Player_Camera : MonoBehaviour, ICutsceneCallbackReceiver
         this.rotX = rotX;
         this.rotY = rotY;
     }
-    public void SetZoom(float zoom)
+    public void SetSpringLength(float length)
     {
-        armLength = Mathf.Clamp(zoom, minCameraDist, maxCameraDist);
+        springLength = Mathf.Clamp(length, minSpringLength, maxSpringLength);
     }
 
     public void OnCutsceneStart()

@@ -13,7 +13,7 @@ public class DroppedItemInteraction : Interaction
     };
 
     DroppedItem m_origin;
-    DroppedItem origin
+    public DroppedItem origin
     {
         get
         {

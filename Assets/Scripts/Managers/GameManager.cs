@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameManager() => Instance = this;
 
     public bool paused = false;
-    public Action onPauseToggle;
+    public Action<bool> onPauseToggle;
     private void Update()
     {
         if (InputManager.GetPauseInput())
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
             if (paused) Time.timeScale = 1.0f;
             else Time.timeScale = 0.0f;
             paused = !paused;
-            onPauseToggle?.Invoke();
+            onPauseToggle?.Invoke(paused);
         }
     }
     public void GameOver()
