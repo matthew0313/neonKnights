@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
+public class Player_Animation : MonoBehaviour
 {
     [SerializeField] Animator anim;
     [SerializeField] RuntimeAnimatorController controller;
@@ -95,28 +95,9 @@ public class Player_Animation : MonoBehaviour, ICutsceneCallbackReceiver
     {
         anim.SetTrigger(slashID);
     }
-    public void Play_ItemPick()
+    public void PlayItemPick()
     {
         animation.PlayOneShot(itemPickClip);
-    }
-    private void OnDestroy()
-    {
-        animation.Destroy();
-    }
-    //bool inCutscene = false;
-    public void OnCutsceneStart()
-    {
-        //inCutscene = true;
-        //anim.SetBool(movingID, false);
-        //anim.SetInteger(animationTypeID, 0);
-        //animation.Disable();
-    }
-
-    public void OnCutsceneEnd()
-    {
-        //inCutscene = false;
-        //OnEquippedItemChange(origin.inventory.equipped);
-        //animation.Enable();
     }
 }
 public enum AnimationType

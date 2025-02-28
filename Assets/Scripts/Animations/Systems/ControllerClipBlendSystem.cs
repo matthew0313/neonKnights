@@ -8,6 +8,7 @@ using System;
 public class ControllerClipBlendSystem
 {
     PlayableGraph playGraph;
+    AnimationMixerPlayable toggleMixer;
     AnimationMixerPlayable topMixer;
 
     readonly AnimatorControllerPlayable controllerPlayable;
@@ -19,8 +20,12 @@ public class ControllerClipBlendSystem
         playGraph = PlayableGraph.Create("ControllerClipBlend");
         AnimationPlayableOutput animOutput = AnimationPlayableOutput.Create(playGraph, "Animation", animator);
 
+        toggleMixer = AnimationMixerPlayable.Create(playGraph, 1);
         topMixer = AnimationMixerPlayable.Create(playGraph, 2);
-        animOutput.SetSourcePlayable(topMixer);
+        animOutput.SetSourcePlayable(toggleMixer);
+
+        toggleMixer.ConnectInput(0, topMixer, 0);
+        toggleMixer.SetInputWeight(0, 1.0f);
 
         controllerPlayable = AnimatorControllerPlayable.Create(playGraph, controller);
         topMixer.ConnectInput(0, controllerPlayable, 0);
@@ -33,11 +38,11 @@ public class ControllerClipBlendSystem
     }
     public void Disable()
     {
-        playGraph.Stop();
+        toggleMixer.SetInputWeight(0, 0.0f);
     }
     public void Enable()
     {
-        playGraph.Play();
+        toggleMixer.SetInputWeight(0, 1.0f);
     }
     public AnimatorControllerPlayable GetController()
     {

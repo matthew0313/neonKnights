@@ -24,6 +24,7 @@ public class AmmoPackItem : StackableItem, IApplied, IStatDisplayed
 
     public void ApplyTo(Item item)
     {
+        if (!(item is GunItem)) return;
         (item as GunItem).RefillAmmo(new GunAmmoRefillInfo() { refillPercentage = data.ammoRefillPercentage });
         containedSlot.count--;
         AudioManager.Instance.PlaySound(data.refillSound);

@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7275117046328767728
 Transform:
   m_ObjectHideFlags: 0
@@ -79,8 +79,8 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: e5bedbf680e09e447b8e933d5339f9e2, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
-  m_AllowXRRendering: 1
+  m_AllowXRRendering: 0
   m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -296,4 +296,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 3913909007671085364}
+  cameraUpdateTickRate: 0.25
   itemAnchor: {fileID: 6400112150185228860}

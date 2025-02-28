@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy_HpComp : HpComp
 {
     [Header("Enemy_HpComp")]
     [SerializeField] float hitDetection = 50.0f;
     [SerializeField] LootGen loot;
+
+    [SerializeField] UnityEvent onEnemyDeath;
+
     Enemy origin;
     protected override void Awake()
     {
@@ -31,6 +35,7 @@ public class Enemy_HpComp : HpComp
                 tmp.rb.AddForce(new Vector3(Mathf.Sin(ang) * itemDropForce, itemDropForce, Mathf.Cos(ang) * itemDropForce), ForceMode.VelocityChange);
             }
         }
+        onEnemyDeath?.Invoke();
     }
     public override DamageReceivedInfo GetDamage(DamageInfo damage)
     {

@@ -10,6 +10,7 @@ public class Slasher : Enemy
     [SerializeField] TriggerCallbacks swordHitbox;
     [SerializeField] float slashTriggerDistance;
     [SerializeField] float slashDamage;
+    [SerializeField] float rotateSpeed = 3.0f;
     [SerializeField] Sound slashSound, hitSound;
     [SerializeField] float soundDistance = 20.0f;
 
@@ -104,7 +105,10 @@ public class Slasher : Enemy
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
-                if(Vector3.Distance(origin.transform.position, origin.player.transform.position) <= origin.slashTriggerDistance)
+                Vector3 tmp = origin.player.transform.position - origin.transform.position;
+                float deg = Mathf.Atan2(tmp.x, tmp.z) * Mathf.Rad2Deg;
+                origin.transform.rotation = Quaternion.Slerp(origin.transform.rotation, Quaternion.Euler(0, deg, 0), origin.rotateSpeed * Time.deltaTime);
+                if (Vector3.Distance(origin.transform.position, origin.player.transform.position) <= origin.slashTriggerDistance)
                 {
                     origin.anim.SetTrigger(slashID);
                 }

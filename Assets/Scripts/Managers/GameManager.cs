@@ -23,4 +23,8 @@ public class GameManager : MonoBehaviour
     {
         GlobalManager.Instance.LoadScene("GameOver");
     }
+    public void StageClear()
+    {
+        GlobalManager.Instance.LoadScene("Title");
+    }
 }

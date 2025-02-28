@@ -11,6 +11,7 @@ public class MoveToBehaviour : PlayableBehaviour
 {
     [SerializeField] Vector3 targetPos;
     [SerializeField] AnimationCurve moveCurve;
+    [SerializeField] bool local = false;
     Transform target;
     Vector3 startPos;
     bool firstFramePlayed = false;
@@ -23,10 +24,17 @@ public class MoveToBehaviour : PlayableBehaviour
         this.target = target;
         if (!firstFramePlayed)
         {
-            startPos = target.position;
+            startPos = local ? target.localPosition : target.position;
             firstFramePlayed = true;
         }
-        target.position = Vector3.Lerp(startPos, targetPos, moveCurve.Evaluate((float)playable.GetTime() / (float)playable.GetDuration()));
+        if (!local)
+        {
+            target.position = Vector3.Lerp(startPos, targetPos, moveCurve.Evaluate((float)playable.GetTime() / (float)playable.GetDuration()));
+        }
+        else
+        {
+            target.localPosition = Vector3.Lerp(startPos, targetPos, moveCurve.Evaluate((float)playable.GetTime() / (float)playable.GetDuration()));
+        }
     }
     public override void OnBehaviourPause(Playable playable, FrameData info)
     {
@@ -34,7 +42,16 @@ public class MoveToBehaviour : PlayableBehaviour
         if (firstFramePlayed)
         {
             firstFramePlayed = false;
-            if (!Application.isPlaying) target.transform.position = startPos;
+            if (!Application.isPlaying)
+            {
+                if (!local) target.position = startPos;
+                else target.localPosition = startPos;
+            }
+            else
+            {
+                if (!local) target.position = targetPos;
+                else target.localPosition = targetPos;
+            }
         }
     }
 }

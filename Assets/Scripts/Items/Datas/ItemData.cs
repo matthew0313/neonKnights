@@ -96,7 +96,7 @@ public abstract class Item
             renderSpace.Release();
             Debug.Log(renderSpace.name + " Delete");
         }
-        if (render != null) render.Release();
+        if (m_render != null) m_render.Release();
     }
     public virtual void Save(DataUnit data) { }
     public virtual void Load(DataUnit data) { }
