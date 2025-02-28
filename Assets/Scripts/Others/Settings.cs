@@ -33,7 +33,7 @@ public static class Settings
     public static float cameraSensitivity;
     public static bool cameraYReverse;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     static void ResetToDefaults()
     {
         language = Language.Korean;
@@ -43,6 +43,7 @@ public static class Settings
     }
     public static void Load(SettingsSave save)
     {
+        Debug.Log(save.language);
         language = save.language;
         volume = save.volume;
         cameraSensitivity = save.cameraSensitivity;
