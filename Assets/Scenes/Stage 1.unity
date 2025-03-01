@@ -1030,6 +1030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
+      propertyPath: id.value
+      value: 9e9f8cd6-cb34-480f-ad91-5de3310a4289
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
       propertyPath: bashDamage
       value: 5
       objectReference: {fileID: 0}
@@ -37387,6 +37392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slasher (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: 6c145e3d-71f9-40fa-9ddd-8a3e292f6944
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43288,6 +43298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
+      propertyPath: id.value
+      value: 94c99f85-db3a-4ee5-9d63-209e76d704c3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
       propertyPath: bashDamage
       value: 5
       objectReference: {fileID: 0}
@@ -43975,6 +43990,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slasher
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: 813eebcf-f32a-496c-8872-725519401123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -107127,6 +107147,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
+      propertyPath: id.value
+      value: c05e0b88-ca9a-4c23-9a06-086e0e873473
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
       propertyPath: bashDamage
       value: 5
       objectReference: {fileID: 0}
@@ -113349,6 +113374,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slasher (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: a25969b7-1d92-4d01-9c97-d8b8a1f11f09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -128281,6 +128311,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shielder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
+      propertyPath: id.value
+      value: fbecdf4a-1090-4a48-ac3e-625d7bd99ca3
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
@@ -143611,6 +143646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slasher (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: 387795b1-8a1c-4385-abab-94bf81b9f5b7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -163842,6 +163882,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
+      propertyPath: id.value
+      value: b7645da1-0f45-4e44-a53b-17ee5c1fce80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
       propertyPath: bulletDamage
       value: 2.5
       objectReference: {fileID: 0}
@@ -174615,6 +174660,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 87010804}
     m_Modifications:
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
+      propertyPath: id.value
+      value: 4ae0b9c7-bb03-4c05-8059-9f23719c8d10
+      objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
       propertyPath: bulletDamage
@@ -202300,6 +202350,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
+      propertyPath: id.value
+      value: 26c51497-6d15-4b6b-b755-e7735421caca
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
       propertyPath: bulletDamage
       value: 2.5
       objectReference: {fileID: 0}
@@ -206497,6 +206552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slasher (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: 2e8e4a12-6264-4455-bbc5-db03bad4e771
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -215902,6 +215962,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
+      propertyPath: id.value
+      value: 431bd147-3660-476c-b5f7-cec9cb2bb173
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
       propertyPath: bulletDamage
       value: 2.5
       objectReference: {fileID: 0}
@@ -221404,6 +221469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_maxShield
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
+        type: 3}
+      propertyPath: id.value
+      value: 4cec5935-21a2-480a-95de-a8a9cfff0f0f
       objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
         type: 3}
@@ -226987,6 +227057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
+      propertyPath: id.value
+      value: 2784430f-f4c6-4447-9058-cd7e27cfa645
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
       propertyPath: bashDamage
       value: 5
       objectReference: {fileID: 0}
@@ -230317,6 +230392,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 87010804}
     m_Modifications:
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
+      propertyPath: id.value
+      value: 1347119b-a5ae-4300-98f6-4c11ba1c90cb
+      objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
       propertyPath: bulletDamage
@@ -247281,6 +247361,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slasher (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: c815a63f-c8c2-4930-8edc-0de0103950c6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -252872,6 +252957,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
+      propertyPath: id.value
+      value: fc206518-d6e8-4220-8d33-ab779250cc8f
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
       propertyPath: bulletDamage
       value: 2.5
       objectReference: {fileID: 0}
@@ -256388,6 +256478,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_maxShield
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
+        type: 3}
+      propertyPath: id.value
+      value: dc1d7a25-36bc-46b3-9b79-a076b154b3ff
       objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
         type: 3}
@@ -270705,7 +270800,31 @@ MonoBehaviour:
       m_Calls: []
   onCutsceneFinish:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1316572167}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StageClear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1316572167}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: NextStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1248231691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282904,7 +283023,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1313433126}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
+  m_PlayableAsset: {fileID: 11400000, guid: 07d65fc9d1506eb44ab89e040b48cb46, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -311835,6 +311954,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slasher (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: d4a56e2d-8490-451c-a486-2f5335ec3c75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -312697,6 +312821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slasher (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114819667504766012, guid: 4fcb7582300f4ad44b63535e224cf6d0,
+        type: 3}
+      propertyPath: id.value
+      value: be034d80-24a7-4b7f-8035-f46f10a4fb11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -315321,6 +315450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shielder (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
+      propertyPath: id.value
+      value: 6be524b8-cf07-48fd-a51d-ec575ac7017a
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
@@ -335107,6 +335241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
+      propertyPath: id.value
+      value: f99db89d-637a-44ae-b864-bfb027e25d21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
       propertyPath: bashDamage
       value: 5
       objectReference: {fileID: 0}
@@ -343275,6 +343414,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 87010804}
     m_Modifications:
+    - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
+        type: 3}
+      propertyPath: id.value
+      value: f56768f2-5731-4aa6-a9e1-9e1d0d2ee71e
+      objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: c6e98be7478ee72408aab67922c315a7,
         type: 3}
       propertyPath: bulletDamage
@@ -377551,6 +377695,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
         type: 3}
+      propertyPath: id.value
+      value: 54ae800c-f267-418a-9022-e85035e64708
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
+        type: 3}
       propertyPath: bulletDamage
       value: 0.5
       objectReference: {fileID: 0}
@@ -384927,6 +385076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_maxShield
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
+        type: 3}
+      propertyPath: id.value
+      value: 885c1cad-eb33-4e67-8729-342629876d6e
       objectReference: {fileID: 0}
     - target: {fileID: 2395274036931451199, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
         type: 3}
@@ -448191,7 +448345,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000000098874535, y: 0.071858615, z: 0.0000000011551327,
     w: -0.9974148}
-  m_LocalPosition: {x: -194.99106, y: -5.298, z: 25.978165}
+  m_LocalPosition: {x: -82.9012, y: 1.4311304, z: -16.153131}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -456145,6 +456299,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
         type: 3}
+      propertyPath: id.value
+      value: f02e43b8-3a83-4436-b270-0d789aff35bd
+      objectReference: {fileID: 0}
+    - target: {fileID: 7807449614983624347, guid: 5b8227c44eb635c4ca24354fae14e0e0,
+        type: 3}
       propertyPath: bashDamage
       value: 5
       objectReference: {fileID: 0}
@@ -457383,17 +457542,17 @@ PrefabInstance:
     - target: {fileID: 3048501439858768529, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -196.02
+      value: -83.930145
       objectReference: {fileID: 0}
     - target: {fileID: 3048501439858768529, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.923
+      value: 0.80613047
       objectReference: {fileID: 0}
     - target: {fileID: 3048501439858768529, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.85
+      value: -14.281295
       objectReference: {fileID: 0}
     - target: {fileID: 3048501439858768529, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
@@ -457463,7 +457622,7 @@ PrefabInstance:
     - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7998628
+      value: 0.6758918
       objectReference: {fileID: 0}
     - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
@@ -457473,7 +457632,7 @@ PrefabInstance:
     - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6001829
+      value: -0.73700094
       objectReference: {fileID: 0}
     - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}

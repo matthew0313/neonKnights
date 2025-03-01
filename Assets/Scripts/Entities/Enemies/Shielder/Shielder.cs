@@ -69,6 +69,12 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         topLayer.OnStateFixedUpdate();
     }
+    public override void Load(SaveData data)
+    {
+        agent.enabled = false;
+        base.Load(data);
+        agent.enabled = true;
+    }
     class ShielderFSMVals : FSMVals
     {
 

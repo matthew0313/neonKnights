@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
+public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, ISavable
 {
+    [Header("Saving")]
+    [SerializeField] SaveID id;
 
     [Header("Detection")]
     [SerializeField] float detectRange = 20.0f;
@@ -44,6 +46,26 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver
     public void AddDetection(float amount)
     {
         detection = Mathf.Min(detection + amount, maxDetection);
+    }
+    public virtual void Save(SaveData data)
+    {
+        data.enemies[id.value] = new();
+        data.enemies[id.value].bools["enabled"] = enabled;
+        data.enemies[id.value].floats["detection"] = detection;
+        data.enemies[id.value].floats["posX"] = transform.position.x;
+        data.enemies[id.value].floats["posY"] = transform.position.y;
+        data.enemies[id.value].floats["posZ"] = transform.position.z;
+        data.enemies[id.value].floats["rotY"] = transform.rotation.eulerAngles.y;
+    }
+    public virtual void Load(SaveData data)
+    {
+        if (data.enemies.TryGetValue(id.value, out DataUnit tmp))
+        {
+            enabled = tmp.bools["enabled"];
+            detection = tmp.floats["detection"];
+            transform.position = new Vector3(tmp.floats["posX"], tmp.floats["posY"], tmp.floats["posZ"]);
+            transform.rotation = Quaternion.Euler(0.0f, tmp.floats["rotY"], 0.0f);
+        }
     }
     protected class EnemyIdle<T, ValT> : State<T, ValT> where ValT : FSMVals where T : Enemy
     {

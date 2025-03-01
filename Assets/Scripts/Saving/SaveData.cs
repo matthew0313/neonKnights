@@ -7,4 +7,5 @@ public class SaveData
     public DataUnit playerData = new();
     public SerializableDictionary<string, DataUnit> mapElements = new();
     public SerializableDictionary<string, DataUnit> cutsceneTriggers = new();
+    public SerializableDictionary<string, DataUnit> enemies = new();
 }

@@ -12,7 +12,7 @@ public class Enemy_HpComp : HpComp
 
     [SerializeField] UnityEvent onEnemyDeath;
 
-    Enemy origin;
+    protected Enemy origin;
     protected override void Awake()
     {
         base.Awake();

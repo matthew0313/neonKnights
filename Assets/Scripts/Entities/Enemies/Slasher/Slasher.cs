@@ -71,6 +71,12 @@ public class Slasher : Enemy
             tmp.GetDamage(slashDamage);
         }
     }
+    public override void Load(SaveData data)
+    {
+        agent.enabled = false;
+        base.Load(data);
+        agent.enabled = true;
+    }
     class EnemySlash
     {
         public int comboIndex;

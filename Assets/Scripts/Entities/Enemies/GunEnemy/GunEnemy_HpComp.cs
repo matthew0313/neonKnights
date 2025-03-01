@@ -8,6 +8,6 @@ public class GunEnemy_HpComp : Enemy_HpComp
     protected override void OnDeath()
     {
         base.OnDeath();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
