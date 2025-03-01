@@ -47,11 +47,11 @@ public class Quirk_Energizing : Quirk
     }
     void AddStamina(Player player)
     {
-        player.movement.stamina += staminaBonus;
+        player.movement.maxStamina += staminaBonus;
     }
     void RemoveStamina(Player player)
     {
-        player.movement.stamina -= staminaBonus;
+        player.movement.maxStamina -= staminaBonus;
     }
     public override void SetRandom()
     {

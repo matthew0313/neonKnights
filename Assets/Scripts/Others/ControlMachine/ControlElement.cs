@@ -19,6 +19,8 @@ public class ControlElement
         get => m_enabled;
         set
         {
+            if(m_enabled == value) return;
+
             m_enabled = value;
             onElementUpdate?.Invoke();
         }
@@ -29,6 +31,8 @@ public class ControlElement
         get => m_priority;
         set
         {
+            if (m_priority == value) return;
+
             m_priority = value;
             onElementUpdate?.Invoke();
         }

@@ -20,7 +20,7 @@ public class VolumeSlider : MonoBehaviour
     void OnVolumeChange()
     {
         slider.value = Settings.volume;
-        valueText.text = $"{Settings.volume * 100}%";
+        valueText.text = $"{Mathf.Round(Settings.volume * 100)}%";
     }
     void SetVolume(float value)
     {

@@ -20,7 +20,7 @@ public class CameraSensitivitySlider : MonoBehaviour
     void OnCameraSensitivityChange()
     {
         slider.value = Settings.cameraSensitivity;
-        valueText.text = $"{Settings.cameraSensitivity * 100}%";
+        valueText.text = $"{Mathf.Round(Settings.cameraSensitivity * 100)}%";
     }
     void SetCameraSensitivity(float value)
     {

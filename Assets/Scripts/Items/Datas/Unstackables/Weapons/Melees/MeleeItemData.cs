@@ -105,11 +105,9 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
     void OnTriggerStay(Collider other)
     {
         if (currentSlash == null || wielder == null) return;
-        if (currentSlash.hitCount >= currentSlash.info.maxHits) return;
 
         if (checkedColliders.Contains(other)) return;
         checkedColliders.Add(other);
-
         GameObject hitObject = (other.attachedRigidbody != null ? other.attachedRigidbody.gameObject : other.gameObject);
         if(hitObject.TryGetComponent(out Point point))
         {
@@ -122,7 +120,7 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
             else currentSlash.hit.Add(hitObject);
         }
         onSlashHit?.Invoke(currentSlash, hitObject);
-        if (hitObject.TryGetComponent(out IDamagable tmp))
+        if (currentSlash.hitCount < currentSlash.info.maxHits && hitObject.TryGetComponent(out IDamagable tmp))
         {
             MeleeGiveDamageInfo info = new()
             {

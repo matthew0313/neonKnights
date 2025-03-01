@@ -68,6 +68,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         set
         {
             m_maxStamina = value;
+            m_stamina = Mathf.Min(stamina, maxStamina);
             onStaminaChange?.Invoke();
         }
     }
@@ -86,6 +87,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
     GravityCharacterController controller;
 
     TopLayer topLayer;
+
+    public ControlMachine canMoveControl { get; private set; }
     public void OnAwake()
     {
         origin = GetComponent<Player>();
@@ -97,6 +100,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
 #endif
         topLayer.OnStateEnter();
+
+        canMoveControl = new ControlMachine(() => canMove = true);
     }
     Vector3 lastLookedDir = Vector3.forward;
     internal Vector3 relativeMoveInput { get; private set; } = Vector3.forward;
@@ -153,6 +158,11 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         {
             counter += Time.deltaTime;
             controller.Move(dir * speed * Time.deltaTime);
+            if (!canMove)
+            {
+                onFinish?.Invoke();
+                yield break;
+            }
             yield return null;
         }
         yield return new WaitForSeconds(endLag);
@@ -263,7 +273,13 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
             }
             public override void OnStateUpdate()
             {
+                if (!origin.canMove)
+                {
+                    parentLayer.ChangeState("Idle");
+                    return;
+                }
                 base.OnStateUpdate();
+
                 origin.relativeMoveInput = values.relativeMoveInput;
                 if (values.moveInput.magnitude < 0.1f) parentLayer.ChangeState("Idle");
             }
@@ -281,18 +297,10 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
                 public override void OnStateUpdate()
                 {
                     base.OnStateUpdate();
-                    if (!origin.canMove)
-                    {
-                        parentLayer.ChangeState("Idle");
-                        return;
-                    }
-                    else
-                    {
-                        if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                        Vector3 tmp = values.moveInput * origin.speed;
-                        origin.controller.Move(tmp * Time.deltaTime);
-                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
-                    }
+                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                    Vector3 tmp = values.moveInput * origin.speed;
+                    origin.controller.Move(tmp * Time.deltaTime);
+
                     if (InputManager.GetSprintInput() && origin.stamina > 0.0f)
                     {
                         parentLayer.ChangeState("Running");
@@ -331,14 +339,12 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
                 {
                     base.OnStateUpdate();
                     origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
-                    if (origin.canMove)
-                    {
-                        if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                        Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
-                        origin.controller.Move(tmp * Time.deltaTime);
-                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
-                    }
-                    if (!origin.canMove || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
+
+                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                    Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
+                    origin.controller.Move(tmp * Time.deltaTime);
+
+                    if (!InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
                     {
                         parentLayer.ChangeState("Walking");
                         return;

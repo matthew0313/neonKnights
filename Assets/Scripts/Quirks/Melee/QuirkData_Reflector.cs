@@ -36,6 +36,9 @@ public class Quirk_Reflector : Quirk
         if(hit.TryGetComponent(out EnemyBullet bullet))
         {
             bullet.Reflect();
+            bullet.damage *= 10.0f;
+            bullet.speed *= 2.0f;
+            bullet.transform.rotation = Quaternion.LookRotation((target as MeleeItem).wielder.movement.rotator.forward);
             AudioManager.Instance.PlaySound(data.reflectSound);
         }
     }

@@ -43,16 +43,16 @@ public class AudioManager : MonoBehaviour
     }
     void Update()
     {
-        foreach(var i in addQueue)
+        foreach(var i in playing)
+        {
+            i.Update();
+        }
+        foreach (var i in addQueue)
         {
             i.source.Play();
             playing.Add(i);
         }
         addQueue.Clear();
-        foreach(var i in playing)
-        {
-            i.Update();
-        }
         foreach (var i in removeQueue)
         {
             audioSourcePool.ReleaseObject(i.source);
@@ -79,7 +79,6 @@ public static class PlayingAudioManagement
         audio.locationGetter = locationGetter;
         audio.maxDistance = maxDistance;
         audio.lastLocation = locationGetter.Invoke();
-        audio.Update();
         return audio;
     }
     public static PlayingAudio Loop(this PlayingAudio audio)
@@ -92,7 +91,6 @@ public static class PlayingAudioManagement
     {
         if (audio == null) return null;
         audio.volume = volume;
-        audio.source.volume = Settings.volume * audio.sound.volume * audio.volume;
         return audio;
     }
     public static PlayingAudio SetID(this PlayingAudio audio, string id)
