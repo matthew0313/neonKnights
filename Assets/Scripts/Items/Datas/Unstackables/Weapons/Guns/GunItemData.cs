@@ -184,8 +184,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                             hitEffect = hitEffect
                         };
 
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        if (Physics.Raycast(ray, out RaycastHit hit, 100.0f))
+                        Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2.0f, Screen.height / 2.0f));
+                        if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, LayerMask.GetMask("Map", "Enemy")))
                         {
                             fireInfo.dir = hit.point - fireInfo.startPos;
                         }

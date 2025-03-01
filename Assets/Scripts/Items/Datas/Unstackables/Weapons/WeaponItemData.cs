@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,12 +49,13 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
     public override void Save(DataUnit data)
     {
         base.Save(data);
-        List<QuirkSave> quirkSaves = new();
+        QuirkSaveList quirkSaves = new();
         foreach(var i in quirks)
         {
             QuirkSave tmp = new();
             tmp.data = i.data;
             i.Save(tmp.save);
+            quirkSaves.list.Add(tmp);
         }
         data.strings["quirks"] = JsonUtility.ToJson(quirkSaves);
     }
@@ -62,8 +64,8 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
         base.Load(data);
         if(data.strings.TryGetValue("quirks", out string tmp))
         {
-            List<QuirkSave> quirkSaves = JsonUtility.FromJson<List<QuirkSave>>(tmp);
-            foreach(var i in quirkSaves)
+            QuirkSaveList quirkSaves = JsonUtility.FromJson<QuirkSaveList>(tmp);
+            foreach(var i in quirkSaves.list)
             {
                 Quirk quirk = i.data.Create();
                 quirk.Load(i.save);
@@ -92,6 +94,11 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
     {
         foreach (var i in quirks) yield return i;
     }
+}
+[System.Serializable]
+public class QuirkSaveList
+{
+    public List<QuirkSave> list = new();
 }
 [System.Serializable]
 public class QuirkSave

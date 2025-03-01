@@ -38,7 +38,18 @@ public class Quirk_Reflector : Quirk
             bullet.Reflect();
             bullet.damage *= 10.0f;
             bullet.speed *= 2.0f;
-            bullet.transform.rotation = Quaternion.LookRotation((target as MeleeItem).wielder.movement.rotator.forward);
+            Vector3 dir;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2.0f, Screen.height / 2.0f));
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100.0f, LayerMask.GetMask("Map", "Enemy")))
+            {
+                dir = hitInfo.point - bullet.transform.position;
+            }
+            else
+            {
+                dir = ray.origin + ray.direction * 100.0f - bullet.transform.position;
+            }
+            dir.Normalize();
+            bullet.transform.rotation = Quaternion.LookRotation(dir);
             AudioManager.Instance.PlaySound(data.reflectSound);
         }
     }

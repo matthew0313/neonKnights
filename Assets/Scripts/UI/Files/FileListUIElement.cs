@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class FileListUIElement : MonoBehaviour
 {
@@ -43,9 +44,9 @@ public class FileListUIElement : MonoBehaviour
             fileInfo.text = new LangText()
             {
                 en = $"Stage {GlobalManager.Instance.saves[fileIndex].stageIndex}\n" +
-                $"Times played: {Mathf.Round(GlobalManager.Instance.saves[fileIndex].timesPlayed)}",
+                $"Times played: {GetTimeCode(GlobalManager.Instance.saves[fileIndex].timesPlayed)}",
                 kr = $"스테이지 {GlobalManager.Instance.saves[fileIndex].stageIndex}\n" +
-                $"플레이 시간: {Mathf.Round(GlobalManager.Instance.saves[fileIndex].timesPlayed)}"
+                $"플레이 시간: {GetTimeCode(GlobalManager.Instance.saves[fileIndex].timesPlayed)}"
             }.text;
             loadButton.gameObject.SetActive(true);
         }
@@ -64,5 +65,10 @@ public class FileListUIElement : MonoBehaviour
         {
             saveButton.gameObject.SetActive(false);
         }
+    }
+    string GetTimeCode(float time)
+    {
+        TimeSpan span = TimeSpan.FromSeconds(time);
+        return span.ToString(@"hh\:mm\:ss");
     }
 }

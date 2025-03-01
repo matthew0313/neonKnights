@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player_Inventory : Inventory, ICutsceneCallbackReceiver
+public class Player_Inventory : Inventory, ICutsceneCallbackReceiver, ISavable
 {
     Player origin;
     [SerializeField] Transform m_equipAnchor;
@@ -213,5 +213,18 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver
         if (chestplate != null) chestplate.Delete();
         if (accessory1 != null) accessory1.Delete();
         if (accessory2 != null) accessory2.Delete();
+    }
+
+    public void Save(SaveData data)
+    {
+        data.playerData.strings["inventory"] = JsonUtility.ToJson(Save());
+    }
+
+    public void Load(SaveData data)
+    {
+        if(data.playerData.strings.TryGetValue("inventory", out string tmp))
+        {
+            Load(JsonUtility.FromJson<InventorySaveData>(tmp));
+        }
     }
 }

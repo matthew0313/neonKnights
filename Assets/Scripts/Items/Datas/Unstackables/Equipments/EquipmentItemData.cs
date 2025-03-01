@@ -40,6 +40,33 @@ public abstract class EquipmentItem : UnstackableItem, IStatDisplayed, IQuirkabl
     {
         foreach (var i in quirks) yield return i;
     }
+    public override void Save(DataUnit data)
+    {
+        base.Save(data);
+        QuirkSaveList quirkSaves = new();
+        foreach (var i in quirks)
+        {
+            QuirkSave tmp = new();
+            tmp.data = i.data;
+            i.Save(tmp.save);
+            quirkSaves.list.Add(tmp);
+        }
+        data.strings["quirks"] = JsonUtility.ToJson(quirkSaves);
+    }
+    public override void Load(DataUnit data)
+    {
+        base.Load(data);
+        if (data.strings.TryGetValue("quirks", out string tmp))
+        {
+            QuirkSaveList quirkSaves = JsonUtility.FromJson<QuirkSaveList>(tmp);
+            foreach (var i in quirkSaves.list)
+            {
+                Quirk quirk = i.data.Create();
+                quirk.Load(i.save);
+                (this as IQuirkable).AddQuirk(quirk);
+            }
+        }
+    }
     public override Item Copy()
     {
         EquipmentItem tmp = base.Copy() as EquipmentItem;

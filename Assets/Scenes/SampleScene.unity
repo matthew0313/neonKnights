@@ -643,6 +643,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifler
       objectReference: {fileID: 0}
+    - target: {fileID: 7107741960340248834, guid: 33162d2e770f6654c8fa80c0e3e9fe67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

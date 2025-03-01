@@ -20,7 +20,7 @@ MonoBehaviour:
     kr: "\uADFC\uC811 \uBB34\uAE30\uAC00 \uC801 \uD0C4\uD658\uC744 \uBC18\uC0AC\uD558\uB294
       \uB2A5\uB825\uC744 \uAC16\uC2B5\uB2C8\uB2E4."
   m_quirkColor: {r: 1, g: 0.8378445, b: 0, a: 0}
-  m_quirkIcon: {fileID: 0}
+  m_quirkIcon: {fileID: 21300000, guid: e2dee919f510642469a3c5cc27d215ed, type: 3}
   incompatible: []
   m_reflectSound:
     clip: {fileID: 8300000, guid: 47ed1192c87ed4d44b547e267dff5383, type: 3}

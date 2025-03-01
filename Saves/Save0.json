@@ -1,6 +1,6 @@
 {
     "stageIndex": 1,
-    "timesPlayed": 25.300880432128908,
+    "timesPlayed": 31.08367919921875,
     "playerData": {
         "m_integers": {
             "content": []
@@ -8,8 +8,20 @@
         "m_floats": {
             "content": [
                 {
+                    "key": "cameraRotX",
+                    "value": -17.756526947021486
+                },
+                {
+                    "key": "cameraRotY",
+                    "value": -0.19384516775608064
+                },
+                {
+                    "key": "cameraSpringLength",
+                    "value": 3.0
+                },
+                {
                     "key": "posX",
-                    "value": -192.5572509765625
+                    "value": -194.15261840820313
                 },
                 {
                     "key": "posY",
@@ -17,11 +29,11 @@
                 },
                 {
                     "key": "posZ",
-                    "value": 28.222158432006837
+                    "value": 23.309083938598634
                 },
                 {
                     "key": "rotY",
-                    "value": 352.0585021972656
+                    "value": 180.13465881347657
                 }
             ]
         },
@@ -29,11 +41,86 @@
             "content": []
         },
         "m_strings": {
-            "content": []
+            "content": [
+                {
+                    "key": "inventory",
+                    "value": "{\"slotSaves\":[{\"item\":{\"instanceID\":48376},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48166},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":19.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0}]}"
+                },
+                {
+                    "key": "cooldowns",
+                    "value": "{\"cooldowns\":[]}"
+                }
+            ]
         }
     },
     "mapElements": {
         "content": [
+            {
+                "key": "91767f43-0de0-49c3-b306-8fb24d71e05f",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "active",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "419b915e-5979-4c19-91eb-4e0e67f61ae7",
+                "value": {
+                    "m_integers": {
+                        "content": [
+                            {
+                                "key": "index",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "posX",
+                                "value": -180.1007843017578
+                            },
+                            {
+                                "key": "posY",
+                                "value": -6.920000076293945
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 39.289451599121097
+                            },
+                            {
+                                "key": "counter",
+                                "value": 0.0
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "arrived",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
             {
                 "key": "fc3994f4-7a60-492b-ad0b-eaaa6d47284f",
                 "value": {
@@ -57,7 +144,95 @@
                 }
             },
             {
-                "key": "419b915e-5979-4c19-91eb-4e0e67f61ae7",
+                "key": "fa844687-850a-4584-a2f4-d57401ed5376",
+                "value": {
+                    "m_integers": {
+                        "content": [
+                            {
+                                "key": "index",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "posX",
+                                "value": -176.3000030517578
+                            },
+                            {
+                                "key": "posY",
+                                "value": -7.239999771118164
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 47.5
+                            },
+                            {
+                                "key": "counter",
+                                "value": 0.14721451699733735
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "arrived",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "50f7edd1-d296-437e-ab49-d39902707ce7",
+                "value": {
+                    "m_integers": {
+                        "content": [
+                            {
+                                "key": "index",
+                                "value": 2
+                            }
+                        ]
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "posX",
+                                "value": -193.63710021972657
+                            },
+                            {
+                                "key": "posY",
+                                "value": -7.234000205993652
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 47.795814514160159
+                            },
+                            {
+                                "key": "counter",
+                                "value": 0.0
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "arrived",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "d10b55b8-c79e-43fa-a4d2-9988210df93b",
                 "value": {
                     "m_integers": {
                         "content": [
@@ -71,15 +246,59 @@
                         "content": [
                             {
                                 "key": "posX",
-                                "value": -181.37110900878907
+                                "value": -191.9615020751953
                             },
                             {
                                 "key": "posY",
-                                "value": -6.920000076293945
+                                "value": -7.234000205993652
                             },
                             {
                                 "key": "posZ",
-                                "value": 39.302921295166019
+                                "value": 54.042293548583987
+                            },
+                            {
+                                "key": "counter",
+                                "value": 0.0
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "arrived",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "4806527a-ba04-4ae7-ae95-2b5619c2c5f3",
+                "value": {
+                    "m_integers": {
+                        "content": [
+                            {
+                                "key": "index",
+                                "value": 3
+                            }
+                        ]
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "posX",
+                                "value": -193.96949768066407
+                            },
+                            {
+                                "key": "posY",
+                                "value": -6.928999900817871
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 60.828556060791019
                             },
                             {
                                 "key": "counter",
@@ -123,50 +342,6 @@
                 }
             },
             {
-                "key": "d10b55b8-c79e-43fa-a4d2-9988210df93b",
-                "value": {
-                    "m_integers": {
-                        "content": [
-                            {
-                                "key": "index",
-                                "value": 0
-                            }
-                        ]
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "posX",
-                                "value": -191.9679718017578
-                            },
-                            {
-                                "key": "posY",
-                                "value": -7.234000205993652
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 54.81637954711914
-                            },
-                            {
-                                "key": "counter",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "arrived",
-                                "value": false
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
                 "key": "03b9caa7-66e3-46dd-852c-83d11a75cbde",
                 "value": {
                     "m_integers": {
@@ -191,167 +366,13 @@
                         "content": []
                     }
                 }
-            },
-            {
-                "key": "fa844687-850a-4584-a2f4-d57401ed5376",
-                "value": {
-                    "m_integers": {
-                        "content": [
-                            {
-                                "key": "index",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "posX",
-                                "value": -170.0500030517578
-                            },
-                            {
-                                "key": "posY",
-                                "value": -7.239999771118164
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 54.849998474121097
-                            },
-                            {
-                                "key": "counter",
-                                "value": 0.8019744157791138
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "arrived",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "50f7edd1-d296-437e-ab49-d39902707ce7",
-                "value": {
-                    "m_integers": {
-                        "content": [
-                            {
-                                "key": "index",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "posX",
-                                "value": -194.16419982910157
-                            },
-                            {
-                                "key": "posY",
-                                "value": -7.234000205993652
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 46.391666412353519
-                            },
-                            {
-                                "key": "counter",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "arrived",
-                                "value": false
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "4806527a-ba04-4ae7-ae95-2b5619c2c5f3",
-                "value": {
-                    "m_integers": {
-                        "content": [
-                            {
-                                "key": "index",
-                                "value": 2
-                            }
-                        ]
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "posX",
-                                "value": -182.97999572753907
-                            },
-                            {
-                                "key": "posY",
-                                "value": -6.928999900817871
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 60.779998779296878
-                            },
-                            {
-                                "key": "counter",
-                                "value": 0.2488771229982376
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "arrived",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "91767f43-0de0-49c3-b306-8fb24d71e05f",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "active",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
             }
         ]
     },
     "cutsceneTriggers": {
         "content": [
             {
-                "key": "c5be5f21-66c4-41d8-bbe3-93df479103cf",
+                "key": "6adfb500-90b4-4641-9907-c82abeb55b4c",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -363,11 +384,11 @@
                         "content": [
                             {
                                 "key": "triggered",
-                                "value": false
+                                "value": true
                             },
                             {
                                 "key": "locked",
-                                "value": true
+                                "value": false
                             }
                         ]
                     },
@@ -377,33 +398,7 @@
                 }
             },
             {
-                "key": "d9af5f8b-fd36-4cbb-94e9-b521d148d299",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "triggered",
-                                "value": false
-                            },
-                            {
-                                "key": "locked",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "78d46e56-5528-41b6-a1fe-153e1ce6a3f0",
+                "key": "67fe7beb-e87c-40c6-9be1-bb4ff4cc1ad8",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -451,7 +446,7 @@
                 }
             },
             {
-                "key": "67fe7beb-e87c-40c6-9be1-bb4ff4cc1ad8",
+                "key": "78d46e56-5528-41b6-a1fe-153e1ce6a3f0",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -477,7 +472,7 @@
                 }
             },
             {
-                "key": "6adfb500-90b4-4641-9907-c82abeb55b4c",
+                "key": "d9af5f8b-fd36-4cbb-94e9-b521d148d299",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -489,11 +484,37 @@
                         "content": [
                             {
                                 "key": "triggered",
-                                "value": true
+                                "value": false
                             },
                             {
                                 "key": "locked",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "c5be5f21-66c4-41d8-bbe3-93df479103cf",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "triggered",
                                 "value": false
+                            },
+                            {
+                                "key": "locked",
+                                "value": true
                             }
                         ]
                     },

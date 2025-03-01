@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Cinemachine;
 
-public class Player_Camera : MonoBehaviour, ICutsceneCallbackReceiver
+public class Player_Camera : MonoBehaviour, ICutsceneCallbackReceiver, ISavable
 {
     [SerializeField] new CinemachineCamera camera;
 
@@ -63,5 +63,22 @@ public class Player_Camera : MonoBehaviour, ICutsceneCallbackReceiver
     public void OnCutsceneEnd()
     {
         controlled = true;
+    }
+
+    public void Save(SaveData data)
+    {
+        data.playerData.floats["cameraRotX"] = rotX;
+        data.playerData.floats["cameraRotY"] = rotY;
+        data.playerData.floats["cameraSpringLength"] = springLength;
+    }
+
+    public void Load(SaveData data)
+    {
+        float rotX, rotY, springLength;
+        data.playerData.floats.TryGetValue("cameraRotX", out rotX);
+        data.playerData.floats.TryGetValue("cameraRotY", out rotY);
+        data.playerData.floats.TryGetValue("cameraSpringLength", out springLength);
+        SetRot(rotX, rotY);
+        SetSpringLength(springLength);
     }
 }
