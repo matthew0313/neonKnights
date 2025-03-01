@@ -17,24 +17,24 @@ public abstract class CutsceneTrigger : MonoBehaviour, ISavable
     protected void TriggerCutscene()
     {
         if (triggered || locked) return;
+        Debug.Log("CutsceneTrigger");
         triggered = true;
         CutsceneManager.Instance.StartCutscene(cutscene);
     }
     public void Load(SaveData data)
     {
-        if (!saveTriggerState) return;
-        data.cutsceneTriggers[id.value] = new();
-        data.cutsceneTriggers[id.value].bools["triggered"] = triggered;
-        data.cutsceneTriggers[id.value].bools["locked"] = locked;
+        Debug.Log(name);
+        if (data.cutsceneTriggers.TryGetValue(id.value, out DataUnit tmp))
+        {
+            if (saveTriggerState && tmp.bools.TryGetValue("triggered", out bool tmp1)) triggered = tmp1;
+            if (tmp.bools.TryGetValue("locked", out bool tmp2)) locked = tmp2;
+        }
     }
 
     public void Save(SaveData data)
     {
-        if (!saveTriggerState) return;
-        if (data.cutsceneTriggers.TryGetValue(id.value, out DataUnit tmp))
-        {
-            if (tmp.bools.TryGetValue("triggered", out bool tmp1)) triggered = tmp1;
-            if (tmp.bools.TryGetValue("locked", out bool tmp2)) locked = tmp2;
-        }
+        data.cutsceneTriggers[id.value] = new();
+        if(saveTriggerState) data.cutsceneTriggers[id.value].bools["triggered"] = triggered;
+        data.cutsceneTriggers[id.value].bools["locked"] = locked;
     }
 }

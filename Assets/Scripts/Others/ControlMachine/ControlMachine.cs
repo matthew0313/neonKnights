@@ -25,7 +25,6 @@ public class ControlMachine
 
             return b.priority.CompareTo(a.priority);
         });
-        Debug.Log("Updated");
         if (controls.Count > 0 && controls[0].enabled) controls[0].onControlGain.Invoke();
         else defaultControl?.Invoke();
     }

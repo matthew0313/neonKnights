@@ -22,6 +22,11 @@ public class GravityCharacterController : MonoBehaviour
     private void OnEnable()
     {
         downVelocity = 0.0f;
+        origin.enabled = true;
+    }
+    private void OnDisable()
+    {
+        origin.enabled = false;
     }
     void Update()
     {

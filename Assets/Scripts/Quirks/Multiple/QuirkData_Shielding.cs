@@ -14,7 +14,7 @@ public class QuirkData_Shielding : QuirkData
     public float maxShieldBonus => m_maxShieldBonus;
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target);
+        return base.IsAddable(target) && (target is WeaponItem || target is EquipmentItem);
     }
     public override Quirk Create()
     {
@@ -33,17 +33,17 @@ public class Quirk_Shielding : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        if(target is EquipmentItem)
+        if(target is EquipmentItem equipment)
         {
-            (target as EquipmentItem).onEquip += AddShield;
-            (target as EquipmentItem).onUnequip += RemoveShield;
-            if((target as EquipmentItem).equipper != null) AddShield((target as EquipmentItem).equipper);
+            equipment.onEquip += AddShield;
+            equipment.onUnequip += RemoveShield;
+            if(equipment.equipper != null) AddShield((target as EquipmentItem).equipper);
         }
-        else
+        else if(target is WeaponItem weapon)
         {
-            (target as Item).onWield += AddShield;
-            (target as Item).onUnwield += RemoveShield;
-            if ((target as Item).wielder != null) AddShield((target as Item).wielder);
+            weapon.onWield += AddShield;
+            weapon.onUnwield += RemoveShield;
+            if (weapon.wielder != null) AddShield((target as Item).wielder);
         }
     }
     void AddShield(Player wielder)

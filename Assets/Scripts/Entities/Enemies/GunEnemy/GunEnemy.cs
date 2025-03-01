@@ -74,7 +74,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             EnemyBullet tmp = bullet.Instantiate() as EnemyBullet;
             tmp.transform.position = firePoint.position;
             tmp.transform.rotation = Quaternion.LookRotation((player.transform.position - firePoint.position).normalized) * Quaternion.Euler(UnityEngine.Random.Range(-spread, spread), UnityEngine.Random.Range(-spread, spread), 0.0f);
-            tmp.Set(OnBulletHit, bulletSpeed, bulletRange);
+            tmp.Set(bulletDamage * damageMultiplier, bulletSpeed, bulletRange);
         }
         anim.SetTrigger(attackID);
     }
@@ -94,10 +94,6 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         yield return Timing.WaitForSeconds(reloadTime);
         mag = magSize;
         reloading = false;
-    }
-    protected virtual void OnBulletHit(GameObject hit)
-    {
-        if (hit.TryGetComponent(out IDamagable tmp)) tmp.GetDamage(bulletDamage * damageMultiplier);
     }
     float GetPlayerDist()
     {

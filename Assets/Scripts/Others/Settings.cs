@@ -30,8 +30,29 @@ public static class Settings
     }
     public static Action onVolumeChange;
 
-    public static float cameraSensitivity;
-    public static bool cameraYReverse;
+    static float m_cameraSensitivity;
+    public static float cameraSensitivity
+    {
+        get => m_cameraSensitivity;
+        set
+        {
+            m_cameraSensitivity = value;
+            onCameraSensitivityChange?.Invoke();
+        }
+    }
+    public static Action onCameraSensitivityChange;
+
+    static bool m_cameraYReverse;
+    public static bool cameraYReverse
+    {
+        get => m_cameraYReverse;
+        set
+        {
+            m_cameraYReverse = value;
+            onCameraYReverseChange?.Invoke();
+        }
+    }
+    public static Action onCameraYReverseChange;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     static void ResetToDefaults()

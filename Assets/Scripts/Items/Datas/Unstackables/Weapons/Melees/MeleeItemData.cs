@@ -66,6 +66,12 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
         wielder.animation.onSlashStart -= OnSlashStart;
         wielder.animation.onSlashEnd -= OnSlashEnd;
         wielder.movement.moveSpeed += weight;
+
+        if(currentSlash != null)
+        {
+            onSlashEnd?.Invoke(currentSlash);
+            currentSlash = null;
+        }
     }
     MeleeSlash currentSlash = null;
     List<Collider> checkedColliders = new();

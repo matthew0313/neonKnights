@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 public class AudioManager : MonoBehaviour
 {
     static AudioManager instance;
@@ -29,8 +30,7 @@ public class AudioManager : MonoBehaviour
         if (sound.clip == null) return null;
         PlayingAudio tmp = new(sound, audioSourcePool.GetObject());
         tmp.source.time = 0.0f;
-        tmp.source.Play();
-        playing.Add(tmp);
+        addQueue.Add(tmp);
         return tmp;
     }
     private void Awake()
@@ -43,6 +43,12 @@ public class AudioManager : MonoBehaviour
     }
     void Update()
     {
+        foreach(var i in addQueue)
+        {
+            i.source.Play();
+            playing.Add(i);
+        }
+        addQueue.Clear();
         foreach(var i in playing)
         {
             i.Update();
@@ -86,7 +92,7 @@ public static class PlayingAudioManagement
     {
         if (audio == null) return null;
         audio.volume = volume;
-        audio.Update();
+        audio.source.volume = Settings.volume * audio.sound.volume * audio.volume;
         return audio;
     }
     public static PlayingAudio SetID(this PlayingAudio audio, string id)
@@ -105,8 +111,6 @@ public class PlayingAudio
         source.time = 0;
         source.loop = false;
         source.clip = sound.clip;
-        source.volume = sound.volume;
-        source.Play();
     }
     public readonly Sound sound;
     public readonly AudioSource source;

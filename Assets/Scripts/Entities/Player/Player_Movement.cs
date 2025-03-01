@@ -4,7 +4,7 @@ using UnityEngine;
 using MEC;
 
 [RequireComponent(typeof(Rigidbody), typeof(GravityCharacterController))]
-public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
+public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavable
 {
     Player origin;
 
@@ -106,6 +106,10 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         else rotateMode = item.rotateMode;
     }
     bool cutscenePaused = false;
+    public void OnStart()
+    {
+        controller.enabled = true;
+    }
     public void OnUpdate()
     {
         if (cutscenePaused) return;
@@ -167,6 +171,28 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     {
         cutscenePaused = false;
         rb.isKinematic = false;
+    }
+
+    public void Save(SaveData data)
+    {
+        data.playerData.floats["posX"] = transform.position.x;
+        data.playerData.floats["posY"] = transform.position.y;
+        data.playerData.floats["posZ"] = transform.position.z;
+        data.playerData.floats["rotY"] = rotator.eulerAngles.y;
+        Debug.Log("MoveSave");
+    }
+
+    public void Load(SaveData data)
+    {
+        float posX, posY, posZ, rotY;
+        data.playerData.floats.TryGetValue("posX", out posX);
+        data.playerData.floats.TryGetValue("posY", out posY);
+        data.playerData.floats.TryGetValue("posZ", out posZ);
+        data.playerData.floats.TryGetValue("rotY", out rotY);
+        controller.enabled = false;
+        transform.position = new Vector3(posX, posY, posZ);
+        controller.enabled = true;
+        rotator.rotation = Quaternion.Euler(0.0f, rotY, 0.0f);
     }
 
     class MoveFSMVals : FSMVals
