@@ -255,7 +255,8 @@ MonoBehaviour:
       en: '*'
       kr: '*'
     m_text:
-      en: 'Alert: Intruder found in Storage A4F. Commencing Security Protocol.'
+      en: '<color=#FF0000>Alert: Intruder found in Storage A4F. Commencing Security
+        Protocol.'
       kr: "<color=#FF0000>\uACBD\uACE0: \uCC3D\uACE0 A4F\uC5D0\uC11C \uCE68\uC785\uC790
         \uBC1C\uACAC. \uACBD\uBE44 \uD504\uB85C\uD1A0\uCF5C\uC744 \uC2E4\uD589\uD569\uB2C8\uB2E4."
     m_talkSound:

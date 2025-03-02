@@ -12,6 +12,8 @@ public class Player_Interaction : MonoBehaviour, ICutsceneCallbackReceiver
 
     List<Interaction> interactions = new List<Interaction>();
     bool cutscenePaused = false;
+
+    public Interaction selectedInteraction { get; private set; } = null;
     public void OnUpdate()
     {
         if(interactions.Count > 0) interactions.RemoveAll(interaction => interaction.enabled == false);
@@ -29,19 +31,22 @@ public class Player_Interaction : MonoBehaviour, ICutsceneCallbackReceiver
                 return distanceA.CompareTo(distanceB);
             });
 
+            selectedInteraction = interactions[0];
+
             // 최상위 상호작용 표시
             interactionText.gameObject.SetActive(true);
-            interactionText.transform.position = Camera.main.WorldToScreenPoint(interactions[0].transform.position);
-            interactionText.text = $"[E] {interactions[0].interactionName.text}";
+            interactionText.transform.position = Camera.main.WorldToScreenPoint(selectedInteraction.transform.position);
+            interactionText.text = $"[E] {selectedInteraction.interactionName.text}";
 
             // E키로 상호작용 실행
             if (InputManager.GetInteractInput())
             {
-                interactions[0].OnInteract();
+                selectedInteraction.OnInteract();
             }
         }
         else
         {
+            selectedInteraction = null;
             interactionText.gameObject.SetActive(false);
         }
     }

@@ -15,9 +15,10 @@ public class ControllerClipBlendSystem
 
     AnimationClipPlayable oneShotPlayable;
     CoroutineHandle oneShotBlendIn, oneShotBlendOut;
-    public ControllerClipBlendSystem(Animator animator, RuntimeAnimatorController controller)
+    public ControllerClipBlendSystem(Animator animator, RuntimeAnimatorController controller, DirectorUpdateMode updateMode = DirectorUpdateMode.GameTime)
     {
         playGraph = PlayableGraph.Create("ControllerClipBlend");
+        playGraph.SetTimeUpdateMode(updateMode);
         AnimationPlayableOutput animOutput = AnimationPlayableOutput.Create(playGraph, "Animation", animator);
 
         toggleMixer = AnimationMixerPlayable.Create(playGraph, 1);

@@ -33,6 +33,7 @@ public class Player : Entity, IDamageSource
     }
     private void Start()
     {
+        movement.OnStart();
         inventory.OnStart();
         animation.OnStart();
     }

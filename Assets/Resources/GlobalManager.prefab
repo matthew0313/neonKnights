@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3513688963422081192}
   - component: {fileID: 6863395626016973811}
   m_Layer: 0
-  m_Name: Image
+  m_Name: LoadingBlack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7529072667384602708}
+  m_Father: {fileID: 6694849591653555052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingUI: {fileID: 5293758592003433967}
+  loadingBlack: {fileID: 6863395626016973811}
   loadingBar: {fileID: 1113564712122804656}
 --- !u!114 &5974077897674955878
 MonoBehaviour:
@@ -242,6 +243,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2770069089631111923}
   - {fileID: 7529072667384602708}
   m_Father: {fileID: 5815933308869459663}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -341,7 +343,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2770069089631111923}
   - {fileID: 7491328996562404030}
   - {fileID: 8291996767123789502}
   m_Father: {fileID: 6694849591653555052}

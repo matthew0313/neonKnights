@@ -4,7 +4,7 @@ using UnityEngine;
 using MEC;
 
 [RequireComponent(typeof(Rigidbody), typeof(GravityCharacterController))]
-public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
+public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavable
 {
     Player origin;
 
@@ -68,6 +68,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         set
         {
             m_maxStamina = value;
+            m_stamina = Mathf.Min(stamina, maxStamina);
             onStaminaChange?.Invoke();
         }
     }
@@ -86,6 +87,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     GravityCharacterController controller;
 
     TopLayer topLayer;
+
+    public ControlMachine canMoveControl { get; private set; }
     public void OnAwake()
     {
         origin = GetComponent<Player>();
@@ -97,6 +100,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         topLayer.onFSMChange += () => { FSMPath = topLayer.GetFSMPath(); };
 #endif
         topLayer.OnStateEnter();
+
+        canMoveControl = new ControlMachine(() => canMove = true);
     }
     Vector3 lastLookedDir = Vector3.forward;
     internal Vector3 relativeMoveInput { get; private set; } = Vector3.forward;
@@ -106,6 +111,10 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         else rotateMode = item.rotateMode;
     }
     bool cutscenePaused = false;
+    public void OnStart()
+    {
+        controller.enabled = true;
+    }
     public void OnUpdate()
     {
         if (cutscenePaused) return;
@@ -120,14 +129,15 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     void Rotate()
     {
         Vector2 rot = Vector2.zero;
-        if (rotateMode == RotateMode.MouseLocked)
+        if (rotateMode == RotateMode.CameraLocked)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             float height = transform.position.y - ray.origin.y;
             Vector3 end = ray.origin + ray.direction * (height / ray.direction.y);
             Vector2 pos1 = new Vector2(transform.position.x, transform.position.z);
             Vector2 pos2 = new Vector2(end.x, end.z);
-            rot = pos2 - pos1;
+            rot = pos2 - pos1;*/
+            rot = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
             lastLookedDir = new Vector3(rot.x, 0.0f, rot.y);
         }
         else if (rotateMode == RotateMode.Free)
@@ -148,6 +158,11 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
         {
             counter += Time.deltaTime;
             controller.Move(dir * speed * Time.deltaTime);
+            if (!canMove)
+            {
+                onFinish?.Invoke();
+                yield break;
+            }
             yield return null;
         }
         yield return new WaitForSeconds(endLag);
@@ -166,6 +181,28 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
     {
         cutscenePaused = false;
         rb.isKinematic = false;
+    }
+
+    public void Save(SaveData data)
+    {
+        data.playerData.floats["posX"] = transform.position.x;
+        data.playerData.floats["posY"] = transform.position.y;
+        data.playerData.floats["posZ"] = transform.position.z;
+        data.playerData.floats["rotY"] = rotator.eulerAngles.y;
+        Debug.Log("MoveSave");
+    }
+
+    public void Load(SaveData data)
+    {
+        float posX, posY, posZ, rotY;
+        data.playerData.floats.TryGetValue("posX", out posX);
+        data.playerData.floats.TryGetValue("posY", out posY);
+        data.playerData.floats.TryGetValue("posZ", out posZ);
+        data.playerData.floats.TryGetValue("rotY", out rotY);
+        controller.enabled = false;
+        transform.position = new Vector3(posX, posY, posZ);
+        controller.enabled = true;
+        rotator.rotation = Quaternion.Euler(0.0f, rotY, 0.0f);
     }
 
     class MoveFSMVals : FSMVals
@@ -236,7 +273,13 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
             }
             public override void OnStateUpdate()
             {
+                if (!origin.canMove)
+                {
+                    parentLayer.ChangeState("Idle");
+                    return;
+                }
                 base.OnStateUpdate();
+
                 origin.relativeMoveInput = values.relativeMoveInput;
                 if (values.moveInput.magnitude < 0.1f) parentLayer.ChangeState("Idle");
             }
@@ -254,18 +297,10 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 public override void OnStateUpdate()
                 {
                     base.OnStateUpdate();
-                    if (!origin.canMove)
-                    {
-                        parentLayer.ChangeState("Idle");
-                        return;
-                    }
-                    else
-                    {
-                        if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                        Vector3 tmp = values.moveInput * origin.speed;
-                        origin.controller.Move(tmp * Time.deltaTime);
-                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
-                    }
+                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                    Vector3 tmp = values.moveInput * origin.speed;
+                    origin.controller.Move(tmp * Time.deltaTime);
+
                     if (InputManager.GetSprintInput() && origin.stamina > 0.0f)
                     {
                         parentLayer.ChangeState("Running");
@@ -304,14 +339,12 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
                 {
                     base.OnStateUpdate();
                     origin.stamina = Mathf.Max(0.0f, origin.stamina - origin.sprintStaminaCost * Time.deltaTime);
-                    if (origin.canMove)
-                    {
-                        if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
-                        Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
-                        origin.controller.Move(tmp * Time.deltaTime);
-                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
-                    }
-                    if (!origin.canMove || !InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
+
+                    if (values.moveInput.magnitude != 0) origin.lastLookedDir = values.moveInput.normalized;
+                    Vector3 tmp = values.moveInput * origin.speed * origin.sprintMultiplier;
+                    origin.controller.Move(tmp * Time.deltaTime);
+
+                    if (!InputManager.GetSprintInput() || values.moveInput.magnitude < 0.1f || origin.stamina <= 0.0f)
                     {
                         parentLayer.ChangeState("Walking");
                         return;
@@ -398,5 +431,5 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver
 public enum RotateMode
 {
     Free,
-    MouseLocked
+    CameraLocked
 }

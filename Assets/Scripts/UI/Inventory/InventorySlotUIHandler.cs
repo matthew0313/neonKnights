@@ -11,7 +11,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     public InventorySlotUIHandler() => Instance = this;
 
     [SerializeField] InventorySlotUI grabbingSlotUI;
-    Player_Inventory player;
+    Player player;
 
     [Header("Description")]
     [SerializeField] RectTransform describer;
@@ -43,7 +43,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     private void Awake()
     {
         grabbingSlotUI.Set(grabbingSlot);
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Inventory>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         quirkApplierBackImage.material = new Material(quirkApplierBackImage.material);
     }
     private void Update()
@@ -168,7 +168,22 @@ public class InventorySlotUIHandler : MonoBehaviour
             }
             if (!detected)
             {
-                RaycastHit hit;
+                if(player.interaction.selectedInteraction is DroppedItemInteraction interaction)
+                {
+                    DroppedItem droppedItem = interaction.origin;
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(droppedItem.transform.position);
+
+                    if (droppedItem.slot.item != describing) Describe(droppedItem.slot.item);
+                    describer.pivot = new Vector2((screenPos.x < Screen.width / 2.0f ? 0.0f : 1.0f), (screenPos.y < Screen.height / 2.0f ? 0.0f : 1.0f));
+                    describer.position = screenPos;
+                    describer.gameObject.SetActive(true);
+                }
+                else
+                {
+                    describing = null;
+                    describer.gameObject.SetActive(false);
+                }
+                /*RaycastHit hit;
                 Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000.0f, LayerMask.GetMask("DroppedItem"));
                 if(hit.transform != null && hit.transform.TryGetComponent(out DroppedItem droppedItem))
                 {
@@ -181,7 +196,7 @@ public class InventorySlotUIHandler : MonoBehaviour
                 {
                     describing = null;
                     describer.gameObject.SetActive(false);
-                }
+                }*/
             }
         }
         else
@@ -192,10 +207,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     }
     void Describe(Item item)
     {
-        if(describing != null)
-        {
-
-        }
+        if (item == null) return;
         describing = item;
         itemName.text = item.GetName().text;
         if (item.data.category != 0)
@@ -269,7 +281,7 @@ public class InventorySlotUIHandler : MonoBehaviour
     }
     void DropItem(Item item, int count)
     {
-        player.DropItem(item, count);
+        player.inventory.DropItem(item, count);
     }
     private void OnDisable()
     {

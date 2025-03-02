@@ -16,12 +16,17 @@ public class Player_Animation : MonoBehaviour
 
     Player origin;
     new ControllerClipBlendSystem animation;
+
+    ControlElement canMoveAnimationControl;
     public void OnAwake()
     {
         //anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
         origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         origin.hpComp.onDamage += OnDamage;
+
+        canMoveAnimationControl = new ControlElement(1, () => origin.movement.canMove = false, false);
+        origin.movement.canMoveControl.AddControls(canMoveAnimationControl);
     }
     public void OnStart()
     {
@@ -46,8 +51,11 @@ public class Player_Animation : MonoBehaviour
     readonly int slidingID = Animator.StringToHash("Sliding");
     readonly int moveXID = Animator.StringToHash("MoveX");
     readonly int moveYID = Animator.StringToHash("MoveY");
+    readonly int canMoveID = Animator.StringToHash("CanMove");
     public void OnUpdate()
     {
+        canMoveAnimationControl.enabled = !anim.GetBool("CanMove");
+
         anim.SetBool(movingID, origin.movement.moving);
         anim.SetBool(runningID, origin.movement.running);
         anim.SetBool(dashingID, origin.movement.dashing);
@@ -98,6 +106,10 @@ public class Player_Animation : MonoBehaviour
     public void PlayItemPick()
     {
         animation.PlayOneShot(itemPickClip);
+    }
+    private void OnDestroy()
+    {
+        animation.Destroy();
     }
 }
 public enum AnimationType

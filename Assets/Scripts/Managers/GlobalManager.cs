@@ -1,46 +1,89 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GlobalManager_UI))]
 public class GlobalManager : MonoBehaviour
 {
-    GlobalManager_UI UIs;
-    static GlobalManager instance;
-    public static GlobalManager Instance
+    public static GlobalManager Instance { get; private set; }
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Initialize()
     {
-        get
-        {
-            if(instance == null)
-            {
-                instance = Instantiate(Resources.Load<GlobalManager>("GlobalManager"));
-                DontDestroyOnLoad(instance);
-            }
-            return instance;
-        }
+        Instance = Instantiate(Resources.Load<GlobalManager>("GlobalManager"));
+        DontDestroyOnLoad(Instance);
     }
+
+    GlobalManager_UI UIs;
     public Action onSceneWillLoad;
-    AsyncOperation sceneLoading;
+
+    public SaveData[] saves { get; private set; }
+    public const int saveSlotCount = 10;
     private void Awake()
     {
         UIs = GetComponent<GlobalManager_UI>();
+        SaveManager.Instance.Load("Settings.json", (data) =>
+        {
+            if (data != null)
+            {
+                Settings.Load(JsonUtility.FromJson<SettingsSave>(data));
+            }
+        });
+        saves = new SaveData[saveSlotCount];
+        for(int i = 0; i < saveSlotCount; i++)
+        {
+            SaveManager.Instance.Load($"Save{i}.json", (data) =>
+            {
+                if (data != null)
+                {
+                    saves[i] = JsonUtility.FromJson<SaveData>(data);
+                }
+            });
+        }
     }
-    private void Update()
+    bool sceneLoading = false;
+    public void LoadScene(string sceneName, Action onLoad = null)
     {
-        if (sceneLoading != null) UIs.SetLoadingProgress(sceneLoading.progress);
+        if (sceneLoading) return;
+        sceneLoading = true;
+        UIs.LoadingBlackShow(() =>
+        {
+            onSceneWillLoad?.Invoke();
+            StartCoroutine(LoadingScene(sceneName, onLoad));
+        });
     }
-    public void LoadScene(string sceneName)
+    IEnumerator LoadingScene(string sceneName, Action onLoad)
     {
-        onSceneWillLoad?.Invoke();
         UIs.ShowLoadingUI();
         AsyncOperation tmp = SceneManager.LoadSceneAsync(sceneName);
-        tmp.completed += (AsyncOperation operation) =>
-        {
-            UIs.HideLoadingUI();
-            sceneLoading = null;
-        };
+        tmp.completed += (op) => onLoad?.Invoke();
         UIs.SetLoadingProgress(0.0f);
-        sceneLoading = tmp;
+        while (!tmp.isDone)
+        {
+            yield return null;
+            UIs.SetLoadingProgress(tmp.progress);
+        }
+        UIs.HideLoadingUI();
+        UIs.LoadingBlackHide();
+        sceneLoading = false;
+    }
+    public void LoadGame(SaveData data)
+    {
+        LoadScene($"Stage {data.stageIndex}", () =>
+        {
+            GameManager.Instance.Load(data);
+        });
+    }
+    public void SaveGame(int slot, SaveData data, Action onSave = null)
+    {
+        if (slot < 0 || slot >= saveSlotCount) return;
+
+        saves[slot] = data;
+        SaveManager.Instance.Save($"Save{slot}.json", JsonUtility.ToJson(data, true), onSave);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveManager.Instance.Save("Settings.json", JsonUtility.ToJson(Settings.Save(), true));
     }
 }

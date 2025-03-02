@@ -56,4 +56,10 @@ public class Quirk_OneMag : Quirk
             kr = $"{convertPercentage}% 탄환 저장량 => 탄창 크기"
         };
     }
+    public override Quirk Copy()
+    {
+        Quirk_OneMag tmp = base.Copy() as Quirk_OneMag;
+        tmp.convertPercentage = convertPercentage;
+        return tmp;
+    }
 }
