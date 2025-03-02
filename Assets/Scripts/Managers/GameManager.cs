@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     const int stageCount = 1;
     [SerializeField] int stageIndex = 1;
     [SerializeField] float timesPlayed = 0.0f;
+    void Awake()
+    {
+        Time.timeScale = 1.0f;
+    }
     public void GameOver()
     {
         GlobalManager.Instance.LoadScene("GameOver");

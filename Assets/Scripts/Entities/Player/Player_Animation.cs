@@ -54,7 +54,7 @@ public class Player_Animation : MonoBehaviour
     readonly int canMoveID = Animator.StringToHash("CanMove");
     public void OnUpdate()
     {
-        canMoveAnimationControl.enabled = anim.GetBool("CanMove");
+        canMoveAnimationControl.enabled = !anim.GetBool("CanMove");
 
         anim.SetBool(movingID, origin.movement.moving);
         anim.SetBool(runningID, origin.movement.running);
