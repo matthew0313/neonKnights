@@ -32,8 +32,10 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
         }
     }
     const int stageCount = 1;
-    [SerializeField] int stageIndex = 1;
+    [SerializeField] int m_stageIndex = 1;
     [SerializeField] float timesPlayed = 0.0f;
+
+    public int stageIndex => m_stageIndex;
     void Awake()
     {
         Time.timeScale = 1.0f;
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     }
     void OnSceneWillLoad()
     {
-        if(canSave) GlobalManager.Instance.SaveGame(0, Save());
+        if(canSave && !isGameOver) GlobalManager.Instance.SaveGame(0, Save());
     }
     public void GameOver()
     {
@@ -99,6 +101,6 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     public void OnCutsceneEnd()
     {
         canSave = true;
-        GlobalManager.Instance.SaveGame(0, Save());
+        if(!isGameOver) GlobalManager.Instance.SaveGame(0, Save());
     }
 }

@@ -29,7 +29,7 @@ public class Enemy_HpComp : HpComp
             looted = true;
             foreach(var i in loot.GetLoot())
             {
-                DroppedItem tmp = DroppedItem.Create(i.item, i.count);
+                DroppedItem tmp = DroppedItem.CreateDroppedItem(i.item, i.count);
                 tmp.transform.position = transform.position;
 
                 float ang = UnityEngine.Random.Range(0.0f, 360.0f);

@@ -77,10 +77,20 @@ public class GlobalManager : MonoBehaviour
     }
     public void LoadGame(SaveData data)
     {
-        LoadScene($"Stage {data.stageIndex}", () =>
+        if(data.stageIndex != -1)
         {
-            GameManager.Instance.Load(data);
-        });
+            LoadScene($"Stage {data.stageIndex}", () =>
+            {
+                GameManager.Instance.Load(data);
+            });
+        }
+        else
+        {
+            LoadScene("SampleScene", () =>
+            {
+                GameManager.Instance.Load(data);
+            });
+        }
     }
     public void SaveGame(int slot, SaveData data, Action onSave = null)
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-public class Player_HpComp : HpComp, ICutsceneCallbackReceiver
+public class Player_HpComp : HpComp, ICutsceneCallbackReceiver, ISavable
 {
     [SerializeField] GameOverCutscene gameOverCutscene;
     bool undamagable = false;
@@ -27,6 +27,19 @@ public class Player_HpComp : HpComp, ICutsceneCallbackReceiver
         }
 
         return info;
+    }
+
+    public void Save(SaveData data)
+    {
+        data.playerData.strings["HpComp"] = JsonUtility.ToJson(Save());
+    }
+
+    public void Load(SaveData data)
+    {
+        if(data.playerData.strings.TryGetValue("HpComp", out string json))
+        {
+            Load(JsonUtility.FromJson<HpCompSaveData>(json));
+        }
     }
 }
 #if UNITY_EDITOR

@@ -48,6 +48,9 @@ public class CutsceneManager : MonoBehaviour
     {
         if (playing == null) return;
 
+        playing.End();
+        playing = null;
+
         Timing.KillCoroutines(playingTimeline);
         director.Stop();
 
@@ -55,9 +58,6 @@ public class CutsceneManager : MonoBehaviour
         {
             i.OnCutsceneEnd();
         }
-
-        playing.End();
-        playing = null;
 
         if (conversationOpen) CloseConversation();
         UIs.HideEdgeUI();
