@@ -43,7 +43,24 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         }
     }
     public float damageMultiplier { get; set; } = 1.0f;
-    public bool stunned { get; set; } = false;
+    bool m_stunned = false;
+    public bool stunned
+    {
+        get => m_stunned;
+        set
+        {
+            m_stunned = value;
+            if (value) topLayer.ChangeState("Stunned");
+        }
+    }
+    private void OnDisable()
+    {
+        agent.enabled = false;
+    }
+    private void OnEnable()
+    {
+        agent.enabled = true;
+    }
 
     TopLayer topLayer;
     float baseAgentSpeed;
@@ -73,7 +90,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         agent.enabled = false;
         base.Load(data);
-        agent.enabled = true;
+        if(enabled) agent.enabled = true;
     }
     class ShielderFSMVals : FSMVals
     {
@@ -87,11 +104,6 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this));
             AddState("Stunned", new FSM_Await<Shielder, ShielderFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
-        }
-        public override void OnStateUpdate()
-        {
-            base.OnStateUpdate();
-            if (origin.stunned) ChangeState("Stunned");
         }
         class Detected : EnemyDetected<Shielder, ShielderFSMVals>
         {

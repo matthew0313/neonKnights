@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, ISavable
 {
     [Header("Saving")]
-    [SerializeField] SaveID id;
+    [SerializeField] protected SaveID id;
 
     [Header("Detection")]
     [SerializeField] float detectRange = 20.0f;
@@ -16,14 +16,14 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, 
     [SerializeField] float maxDetection = 100.0f;
     [SerializeField] protected float detection = 0.0f;
 
-    internal Player player;
+    protected Player player;
 
-    public void OnCutsceneEnd()
+    public virtual void OnCutsceneEnd()
     {
         enabled = true;
     }
 
-    public void OnCutsceneStart()
+    public virtual void OnCutsceneStart()
     {
         enabled = false;
     }
@@ -56,6 +56,11 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, 
         data.enemies[id.value].floats["posY"] = transform.position.y;
         data.enemies[id.value].floats["posZ"] = transform.position.z;
         data.enemies[id.value].floats["rotY"] = transform.rotation.eulerAngles.y;
+        if(TryGetComponent(out Enemy_HpComp hp))
+        {
+            data.enemies[id.value].strings["HpComp"] = JsonUtility.ToJson(hp.Save());
+            data.enemies[id.value].bools["looted"] = hp.looted;
+        }
     }
     public virtual void Load(SaveData data)
     {
@@ -65,6 +70,11 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, 
             detection = tmp.floats["detection"];
             transform.position = new Vector3(tmp.floats["posX"], tmp.floats["posY"], tmp.floats["posZ"]);
             transform.rotation = Quaternion.Euler(0.0f, tmp.floats["rotY"], 0.0f);
+            if (TryGetComponent(out Enemy_HpComp hp))
+            {
+                hp.Load(JsonUtility.FromJson<HpCompSaveData>(tmp.strings["HpComp"]));
+                hp.looted = tmp.bools["looted"];
+            }
         }
     }
     protected class EnemyIdle<T, ValT> : State<T, ValT> where ValT : FSMVals where T : Enemy

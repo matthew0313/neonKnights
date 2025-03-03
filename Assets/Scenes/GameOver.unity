@@ -416,6 +416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aec2570bcab19c459c969bfdf1a8201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeHook:
+  - {fileID: 11400000, guid: 303507d8190d1f94ca4c50dd8676d818, type: 2}
   multiplier: 1
 --- !u!82 &843821805
 AudioSource:

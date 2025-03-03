@@ -34,11 +34,22 @@ public class FileListUIElement : MonoBehaviour
     }
     void SetFileInfo()
     {
-        fileName.text = new LangText()
+        if(fileIndex == 0)
         {
-            en = $"File {fileIndex + 1}",
-            kr = $"{fileIndex + 1}번 파일"
-        }.text;
+            fileName.text = new LangText()
+            {
+                en = $"Auto Save",
+                kr = $"자동 저장"
+            }.text;
+        }
+        else
+        {
+            fileName.text = new LangText()
+            {
+                en = $"File {fileIndex}",
+                kr = $"{fileIndex}번 파일"
+            }.text;
+        }
         if (GlobalManager.Instance.saves[fileIndex] != null)
         {
             fileInfo.text = new LangText()

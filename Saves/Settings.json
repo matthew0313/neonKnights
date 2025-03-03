@@ -1,6 +1,6 @@
 {
     "language": 0,
     "volume": 1.0,
-    "cameraSensitivity": 0.5057832598686218,
-    "cameraYReverse": false
+    "cameraSensitivity": 1.0,
+    "cameraYReverse": true
 }

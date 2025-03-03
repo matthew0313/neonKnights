@@ -17,6 +17,7 @@ public static class Settings
         }
     }
     public static Action onLanguageChange;
+    #region volumes
 
     static float m_volume = 1.0f;
     public static float volume
@@ -29,6 +30,19 @@ public static class Settings
         }
     }
     public static Action onVolumeChange;
+
+    static float m_ambienceVolume = 1.0f;
+    public static float ambienceVolume
+    {
+        get => m_ambienceVolume;
+        set
+        {
+            m_ambienceVolume = value;
+            onAmbienceVolumeChange?.Invoke();
+        }
+    }
+    public static Action onAmbienceVolumeChange;
+    #endregion
 
     static float m_cameraSensitivity;
     public static float cameraSensitivity

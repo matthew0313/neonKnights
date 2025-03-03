@@ -12,6 +12,7 @@ public class GlobalManager : MonoBehaviour
     {
         Instance = Instantiate(Resources.Load<GlobalManager>("GlobalManager"));
         DontDestroyOnLoad(Instance);
+        Time.timeScale = 1.0f;
     }
 
     GlobalManager_UI UIs;
@@ -29,8 +30,15 @@ public class GlobalManager : MonoBehaviour
                 Settings.Load(JsonUtility.FromJson<SettingsSave>(data));
             }
         });
-        saves = new SaveData[saveSlotCount];
-        for(int i = 0; i < saveSlotCount; i++)
+        saves = new SaveData[saveSlotCount + 1];
+        SaveManager.Instance.Load($"AutoSave.json", (data) =>
+        {
+            if (data != null)
+            {
+                saves[0] = JsonUtility.FromJson<SaveData>(data);
+            }
+        });
+        for (int i = 1; i <= saveSlotCount; i++)
         {
             SaveManager.Instance.Load($"Save{i}.json", (data) =>
             {
@@ -79,7 +87,11 @@ public class GlobalManager : MonoBehaviour
         if (slot < 0 || slot >= saveSlotCount) return;
 
         saves[slot] = data;
-        SaveManager.Instance.Save($"Save{slot}.json", JsonUtility.ToJson(data, true), onSave);
+        if (slot == 0)
+        {
+            SaveManager.Instance.Save($"AutoSave.json", JsonUtility.ToJson(data, true), onSave);
+        }
+        else SaveManager.Instance.Save($"Save{slot}.json", JsonUtility.ToJson(data, true), onSave);
     }
 
     private void OnApplicationQuit()

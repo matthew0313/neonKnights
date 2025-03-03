@@ -8,17 +8,28 @@ public class GlobalManager_UI : MonoBehaviour
 {
     [SerializeField] GameObject loadingUI;
     [SerializeField] Image loadingBlack;
+    [SerializeField] FloatHook loadingBlackFadeoutVolumeHook;
     [SerializeField] Transform loadingBar;
     public void LoadingBlackShow(Action onBlackFinish)
     {
         loadingBlack.DOColor(new Color(0, 0, 0, 1), 0.25f).OnComplete(() =>
         {
             onBlackFinish?.Invoke();
-        }).SetUpdate(true);
+            loadingBlackFadeoutVolumeHook.SetValue(0.0f);
+        }).SetUpdate(true).OnUpdate(() =>
+        {
+            loadingBlackFadeoutVolumeHook.SetValue(1.0f - loadingBlack.color.a);
+        });
     }
     public void LoadingBlackHide()
     {
-        loadingBlack.DOColor(new Color(0, 0, 0, 0), 0.25f).SetUpdate(true);
+        loadingBlack.DOColor(new Color(0, 0, 0, 0), 0.25f).SetUpdate(true).OnUpdate(() =>
+        {
+            loadingBlackFadeoutVolumeHook.SetValue(1.0f - loadingBlack.color.a);
+        }).OnComplete(() =>
+        {
+            loadingBlackFadeoutVolumeHook.SetValue(1.0f);
+        });
     }
     public void ShowLoadingUI()
     {

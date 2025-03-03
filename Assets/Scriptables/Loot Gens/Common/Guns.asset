@@ -17,8 +17,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da07b205676dd0b47b041c113862a404, type: 2}
   - {fileID: 11400000, guid: a78b81e055be3804e953f436035a70f4, type: 2}
   - {fileID: 11400000, guid: a0575691e94d5344f8dc53fa9f2e4a33, type: 2}
-  - {fileID: 11400000, guid: 4b98c85d3184a4848bf011ff19d57fbf, type: 2}
+  - {fileID: 11400000, guid: 4098db5348fe4894cb5e15c3802dcb0d, type: 2}
+  - {fileID: 11400000, guid: efa021a86c35ee5429d2277c8526373b, type: 2}
   - {fileID: 11400000, guid: 8b998961fc23ba84894a66f30598c427, type: 2}
+  - {fileID: 11400000, guid: ead93ce63ba3b7d4bb19ea6efe0f3b0a, type: 2}
+  - {fileID: 11400000, guid: 233c6daa68c579f40b2eb5855cc49bdf, type: 2}
+  - {fileID: 11400000, guid: 4b98c85d3184a4848bf011ff19d57fbf, type: 2}
+  - {fileID: 11400000, guid: a5dbe359a621d094fbdd6926d7104567, type: 2}
+  - {fileID: 11400000, guid: 60aa69416d9defc4ba77e6bd4d5cccd6, type: 2}
+  - {fileID: 11400000, guid: da6a1f25b5175684c8435dee69ef2079, type: 2}
   quirks: {fileID: 11400000, guid: 734bb3e0d5543744897e27caf5646442, type: 2}
   minQuirkCount: 0
   maxQuirkCount: 6

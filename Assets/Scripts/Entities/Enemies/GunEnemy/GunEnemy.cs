@@ -7,7 +7,7 @@ using MEC;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(GunEnemy_HpComp))]
 [RequireComponent(typeof(Animator))]
-public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable
+public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
 {
     [SerializeField] Transform firePoint;
     [SerializeField] EnemyBullet bullet;
@@ -42,6 +42,16 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         }
     }
     public float damageMultiplier { get; set; } = 1.0f;
+    bool m_stunned = false;
+    public bool stunned
+    {
+        get => m_stunned;
+        set
+        {
+            m_stunned = value;
+            if (value) topLayer.ChangeState("Stunned");
+        }
+    }
     int mag = 0;
     protected override void Awake()
     {
@@ -111,7 +121,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         agent.enabled = false;
         base.Load(data);
-        agent.enabled = true;
+        if(enabled) agent.enabled = true;
     }
     class GunEnemyFSMVals : FSMVals
     {
@@ -124,6 +134,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             defaultState = new EnemyIdle<GunEnemy, GunEnemyFSMVals>(origin, this, "Detected");
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this, "Idle"));
+            AddState("Stunned", new FSM_Await<GunEnemy, GunEnemyFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
         }
         public override void OnStateUpdate()
         {

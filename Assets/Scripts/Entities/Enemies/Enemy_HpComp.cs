@@ -18,7 +18,7 @@ public class Enemy_HpComp : HpComp
         base.Awake();
         origin = GetComponent<Enemy>();
     }
-    bool looted = false;
+    internal bool looted = false;
     const float itemDropForce = 3.0f;
     protected override void OnDeath()
     {
@@ -26,6 +26,7 @@ public class Enemy_HpComp : HpComp
         if (looted || loot == null) return;
         else
         {
+            looted = true;
             foreach(var i in loot.GetLoot())
             {
                 DroppedItem tmp = DroppedItem.Create(i.item, i.count);
@@ -36,6 +37,16 @@ public class Enemy_HpComp : HpComp
             }
         }
         onEnemyDeath?.Invoke();
+        gameObject.SetActive(false);
+    }
+    protected override void OnLoad()
+    {
+        base.OnLoad();
+        if (dead)
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Dead");
+        }
     }
     public override DamageReceivedInfo GetDamage(DamageInfo damage)
     {

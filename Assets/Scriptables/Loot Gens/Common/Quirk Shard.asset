@@ -35,5 +35,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 03981bf493ac4c64a8eec0808bf6e199, type: 2}
   - {fileID: 11400000, guid: c866f561a1354e04c9e7cdab86b9f52d, type: 2}
   - {fileID: 11400000, guid: 9611d137dda97404a9a7636e44f79551, type: 2}
+  - {fileID: 11400000, guid: 239841ebdff51114397ea8a00e690374, type: 2}
+  - {fileID: 11400000, guid: d1ac9a569a689cc478aad0f9df7b7f99, type: 2}
+  - {fileID: 11400000, guid: 23689c498dce2a349b1115e1c63b06a0, type: 2}
   minCount: 1
   maxCount: 1

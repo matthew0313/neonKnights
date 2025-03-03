@@ -21,6 +21,7 @@ MonoBehaviour:
       \uC800\uACA9\uC18C\uCD1D\uC785\uB2C8\uB2E4."
   m_model: {fileID: 0}
   m_category: 19
+  m_canDrop: 1
   m_prefab: {fileID: 0}
   m_fireSound:
     clip: {fileID: 0}
@@ -39,7 +40,8 @@ MonoBehaviour:
   m_baseReloadTime: 6
   m_baseReserve: 12
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 5
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 0

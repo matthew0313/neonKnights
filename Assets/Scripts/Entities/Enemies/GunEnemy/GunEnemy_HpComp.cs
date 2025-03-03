@@ -5,9 +5,5 @@ using UnityEngine;
 
 public class GunEnemy_HpComp : Enemy_HpComp
 {
-    protected override void OnDeath()
-    {
-        base.OnDeath();
-        gameObject.SetActive(false);
-    }
+
 }

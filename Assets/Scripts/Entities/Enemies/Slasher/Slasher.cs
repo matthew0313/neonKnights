@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator), typeof(NavMeshAgent), typeof(Slasher_HpComp))]
-public class Slasher : Enemy
+public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
 {
     [SerializeField] TriggerCallbacks swordHitbox;
     [SerializeField] float slashTriggerDistance;
@@ -17,14 +17,49 @@ public class Slasher : Enemy
     [Header("Debug")]
     [SerializeField] string FSMPath;
 
+    float m_speedMultiplier = 1.0f;
+    public float speedMultiplier
+    {
+        get
+        {
+            return m_speedMultiplier;
+        }
+        set
+        {
+            agent.speed = baseAgentSpeed * value;
+            m_speedMultiplier = value;
+        }
+    }
+    public float damageMultiplier { get; set; } = 1.0f;
+    bool m_stunned = false;
+    public bool stunned
+    {
+        get => m_stunned;
+        set
+        {
+            m_stunned = value;
+            if (value) topLayer.ChangeState("Stunned");
+        }
+    }
 
     Animator anim;
     NavMeshAgent agent;
     TopLayer topLayer;
+    Slasher_HpComp hp;
+    float baseAgentSpeed = 0.0f;
+    private void OnDisable()
+    {
+        agent.enabled = false;
+    }
+    private void OnEnable()
+    {
+        agent.enabled = true;
+    }
     protected override void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+        baseAgentSpeed = agent.speed;
         anim = GetComponent<Animator>();
         foreach (var i in anim.GetBehaviours<MeleeSlashBehaviour>())
         {
@@ -68,14 +103,14 @@ public class Slasher : Enemy
         if(other.TryGetComponent(out IDamagable tmp))
         {
             AudioManager.Instance.PlaySound(hitSound).SetDist(() => transform.position, soundDistance);
-            tmp.GetDamage(slashDamage);
+            tmp.GetDamage(slashDamage * damageMultiplier);
         }
     }
     public override void Load(SaveData data)
     {
         agent.enabled = false;
         base.Load(data);
-        agent.enabled = true;
+        if(enabled) agent.enabled = true;
     }
     class EnemySlash
     {
@@ -93,6 +128,7 @@ public class Slasher : Enemy
             defaultState = new EnemyIdle<Slasher, SlasherFSMVals>(origin, this, "Detected");
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this, "Idle"));
+            AddState("Stunned", new FSM_Await<Slasher, SlasherFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
         }
         class Detected : EnemyDetected<Slasher, SlasherFSMVals>
         {

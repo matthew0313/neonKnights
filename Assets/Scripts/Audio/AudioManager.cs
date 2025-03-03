@@ -1,23 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 public class AudioManager : MonoBehaviour
 {
-    static AudioManager instance;
-    public static AudioManager Instance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                instance = new GameObject().AddComponent<AudioManager>();
-                DontDestroyOnLoad(instance);
-            }
-            return instance;
-        }
-    }
+    public static AudioManager Instance { get; private set; }
+    public AudioManager() => Instance = this;
+
     Pooler<AudioSource> audioSourcePool = new(() =>
     {
         AudioSource tmp = new GameObject("PlayingAudio").AddComponent<AudioSource>();
@@ -32,14 +20,6 @@ public class AudioManager : MonoBehaviour
         tmp.source.time = 0.0f;
         addQueue.Add(tmp);
         return tmp;
-    }
-    private void Awake()
-    {
-        GlobalManager.Instance.onSceneWillLoad += OnSceneWillLoad;
-    }
-    void OnSceneWillLoad()
-    {
-        playing.Clear();
     }
     void Update()
     {

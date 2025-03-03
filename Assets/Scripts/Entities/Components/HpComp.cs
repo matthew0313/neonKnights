@@ -272,7 +272,10 @@ public class HpComp : MonoBehaviour, IDamagable, IHealable, IAlimentable, IDamag
             tmp.Load(i);
             tmp.AddTo(this);
         }
+        dead = hp <= 0;
+        OnLoad();
     }
+    protected virtual void OnLoad() { }
 }
 [System.Serializable]
 public class HpCompSaveData

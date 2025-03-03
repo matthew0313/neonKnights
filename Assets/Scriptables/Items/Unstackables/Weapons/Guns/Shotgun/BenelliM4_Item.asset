@@ -42,7 +42,8 @@ MonoBehaviour:
   m_baseReloadTime: 2
   m_baseReserve: 200
   m_baseShotCount: 8
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 79
