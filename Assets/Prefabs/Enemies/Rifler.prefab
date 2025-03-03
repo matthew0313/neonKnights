@@ -260,8 +260,8 @@ MonoBehaviour:
   bulletRange: 40
   rotateSpeed: 3
   maxDistance: 25
-  minDistance: 10
-  backstepSpeed: 1
+  minDistance: 5
+  backstepSpeedMultiplier: 0.8
   shotCount: 1
   spread: 3
   magSize: 30
@@ -272,7 +272,7 @@ MonoBehaviour:
   reloadSound:
     clip: {fileID: 8300000, guid: 8ae3050755e28cb459820e40d46f1d5e, type: 3}
     volume: 1
-  soundDistance: 50
+  soundDistance: 35
   FSMPath: 
 --- !u!1 &7381321589065056130
 GameObject:

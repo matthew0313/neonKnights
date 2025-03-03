@@ -55,12 +55,16 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     }
     private void OnDisable()
     {
-        agent.enabled = false;
+        agentCutsceneControl.enabled = true;
     }
     private void OnEnable()
     {
-        agent.enabled = true;
+        agentCutsceneControl.enabled = false;
     }
+
+    ControlMachine agentControlMachine;
+    ControlElement agentChaseControl;
+    ControlElement agentCutsceneControl;
 
     TopLayer topLayer;
     float baseAgentSpeed;
@@ -70,6 +74,12 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         baseAgentSpeed = agent.speed;
+
+        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
+        agentChaseControl = new ControlElement(0, () => agent.isStopped = false, false);
+        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
+        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+
         anim = GetComponent<Animator>();
         topLayer = new TopLayer(this, new ShielderFSMVals());
 #if UNITY_EDITOR
@@ -136,7 +146,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateEnter();
                     origin.anim.SetBool(movingID, true);
-                    origin.agent.isStopped = false;
+                    origin.agentChaseControl.enabled = true;
                 }
                 public override void OnStateUpdate()
                 {
@@ -161,7 +171,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateExit();
                     origin.anim.SetBool(movingID, false);
-                    origin.agent.isStopped = true;
+                    origin.agentChaseControl.enabled = false;
                 }
             }
             class Bashing : Layer<Shielder, ShielderFSMVals>

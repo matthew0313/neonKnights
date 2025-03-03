@@ -32,7 +32,7 @@ public class ConversationChoiceUI : MonoBehaviour
                 text.color = new Color(tmp.r, tmp.g, tmp.b, openMeter);
             }).SetAutoKill(false);
         }
-        tween.OnComplete(null);
+        tween.OnStepComplete(null);
         tween.PlayForward();
     }
     public void Hide()
@@ -41,7 +41,7 @@ public class ConversationChoiceUI : MonoBehaviour
         shown = false;
 
         if (tween == null) return;
-        tween.OnComplete(() => { gameObject.SetActive(false); });
+        tween.OnStepComplete(() => { gameObject.SetActive(false); });
         tween.PlayBackwards();
     }
     public Action onClick;
