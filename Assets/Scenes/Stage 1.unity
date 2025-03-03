@@ -93875,7 +93875,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54abba7fcb9b7344db96ad8cdb7265a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachineCameras: []
+  cinemachineCameras:
+  - {fileID: 1577747803}
   events: []
   onCutsceneStart:
     m_PersistentCalls:
@@ -245011,7 +245012,7 @@ MonoBehaviour:
   locked: 0
   saveTriggerState: 1
   id:
-    value: 546bdeea-ba58-4b89-bcc2-e4ebb7166219
+    value: 4c9aa4ec-76d7-4a35-bee2-608dad12f641
 --- !u!65 &1131370282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -283216,7 +283217,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1313433126}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 87e8dbe640620e84ea72aafc52aa571a, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: c12c34ecb6845a14faa0bfea15bd5080, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -283288,6 +283289,10 @@ PlayableDirector:
     value: {fileID: 1268813854}
   - key: {fileID: -3316940309380212460, guid: 87e8dbe640620e84ea72aafc52aa571a, type: 2}
     value: {fileID: 1313433130}
+  - key: {fileID: -4595693981526347141, guid: ba90fe755d97d214e8d55e56bf9d6efd, type: 2}
+    value: {fileID: 1577747802}
+  - key: {fileID: -4969375653803648816, guid: c12c34ecb6845a14faa0bfea15bd5080, type: 2}
+    value: {fileID: 1577747802}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1313433129
@@ -337468,7 +337473,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.004588463, y: 359.0059, z: 0.5288478}
+  m_LocalEulerAnglesHint: {x: -6.055406, y: 48.28838, z: 338.9472}
 --- !u!4 &1577845057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4698583012580500, guid: 3a7a5e9f02c8fe74897a603d72c7f49f,
