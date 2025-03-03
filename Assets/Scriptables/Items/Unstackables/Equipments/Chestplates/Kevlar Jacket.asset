@@ -18,6 +18,7 @@ MonoBehaviour:
   m_description:
     en: A sturdy bulletproof kevlar jacket.
     kr: "\uBC29\uD0C4 \uCE90\uBE14\uB7EC \uC7AC\uD0B7\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
-  m_category: 0
+  m_model: {fileID: 6661420200080173259, guid: cd985085a0f7e9c4cab313c940ee1074, type: 3}
+  m_category: 512
+  m_canDrop: 1
   m_healthBoost: 30
