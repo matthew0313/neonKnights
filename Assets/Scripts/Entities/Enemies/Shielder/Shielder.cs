@@ -233,7 +233,8 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                     {
                         base.OnStateUpdate();
                         Vector3 tmp = origin.transform.forward * origin.bashRunSpeed * origin.speedMultiplier;
-                        origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                        origin.agent.Move(tmp * Time.deltaTime);
+                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
                         counter += Time.deltaTime * origin.bashRunSpeed * origin.speedMultiplier;
                         if (counter > origin.bashRunDistance)
                         {
