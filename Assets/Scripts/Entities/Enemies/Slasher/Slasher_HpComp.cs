@@ -5,9 +5,5 @@ using UnityEngine;
 
 public class Slasher_HpComp : Enemy_HpComp
 {
-    protected override void OnDeath()
-    {
-        base.OnDeath();
-        gameObject.SetActive(false);
-    }
+
 }

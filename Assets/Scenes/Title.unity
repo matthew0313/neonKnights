@@ -1242,6 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82d4a49dc9fc1d42b770e0871ccc909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hook: {fileID: 11400000, guid: 8100caeccb60e3242b7a404d6cfa9331, type: 2}
   dropdown: {fileID: 932451276}
 --- !u!1 &748975754
 GameObject:
@@ -1544,6 +1545,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6929170910077314715, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.365
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929170910077314715, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929170910077314715, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.365
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929170910077314715, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7723053025182819638, guid: dda04cea708caf74fbcff0ebf10f3f8b,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1560,6 +1581,21 @@ PrefabInstance:
       value: 0.365
       objectReference: {fileID: 0}
     - target: {fileID: 7723053025182819638, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100875658608629020, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.365
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100875658608629020, guid: dda04cea708caf74fbcff0ebf10f3f8b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100875658608629020, guid: dda04cea708caf74fbcff0ebf10f3f8b,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2103,6 +2139,8 @@ GameObject:
   - component: {fileID: 843821800}
   - component: {fileID: 843821799}
   - component: {fileID: 843821803}
+  - component: {fileID: 843821804}
+  - component: {fileID: 843821805}
   m_Layer: 5
   m_Name: TitleUI
   m_TagString: Untagged
@@ -2213,6 +2251,118 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ac65b36a39cb0408066129da8a205b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &843821804
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843821798}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 668d7ad70a7930240aa113c59afca21e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 668d7ad70a7930240aa113c59afca21e, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &843821805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843821798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aec2570bcab19c459c969bfdf1a8201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeHook:
+  - {fileID: 11400000, guid: 303507d8190d1f94ca4c50dd8676d818, type: 2}
+  multiplier: 1
 --- !u!1 &932451274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3380,7 +3530,7 @@ MonoBehaviour:
   korean: "WASD \uC774\uB3D9\nLeftShift \uB2EC\uB9AC\uAE30\n\uC2A4\uD398\uC774\uC2A4\uBC14
     \uB300\uC2DC (\uB2EC\uB9AC\uB294 \uB3C4\uC911 \uC2AC\uB77C\uC774\uB4DC)\nTab\uD0A4
     \uC778\uBCA4\uD1A0\uB9AC (\uC2AC\uB86F\uC744 \uD074\uB9AD\uD574 \uC544\uC774\uD15C
-    \uC9D1\uAE30)"
+    \uC9D1\uAE30)\nESC \uC77C\uC2DC\uC815\uC9C0 \uBA54\uB274"
   english: 'WASD Move
 
     LeftShift Run
@@ -3388,7 +3538,9 @@ MonoBehaviour:
     SpaceBar Dash (slide when running)
 
     Tab
-    Inventory (click slots to grab)'
+    Inventory (click slots to grab)
+
+    ESC Pause Menu'
 --- !u!114 &1643358410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3416,7 +3568,9 @@ MonoBehaviour:
     SpaceBar Dash (slide when running)
 
     Tab
-    Inventory (click slots to grab)'
+    Inventory (click slots to grab)
+
+    ESC Pause Menu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf282596eff8e9d4e922d826b20127e5, type: 2}
   m_sharedMaterial: {fileID: 6418408542199132269, guid: cf282596eff8e9d4e922d826b20127e5,

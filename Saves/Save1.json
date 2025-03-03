@@ -1,6 +1,6 @@
 {
     "stageIndex": 1,
-    "timesPlayed": 338.9127502441406,
+    "timesPlayed": 115.71690368652344,
     "playerData": {
         "m_integers": {
             "content": []
@@ -9,11 +9,11 @@
             "content": [
                 {
                     "key": "cameraRotX",
-                    "value": -19.999740600585939
+                    "value": -35.39982223510742
                 },
                 {
                     "key": "cameraRotY",
-                    "value": 168.2586212158203
+                    "value": -0.9418346285820007
                 },
                 {
                     "key": "cameraSpringLength",
@@ -21,19 +21,19 @@
                 },
                 {
                     "key": "posX",
-                    "value": -52.54328918457031
+                    "value": -92.4747314453125
                 },
                 {
                     "key": "posY",
-                    "value": 0.7949995398521423
+                    "value": 0.5800342559814453
                 },
                 {
                     "key": "posZ",
-                    "value": 33.049617767333987
+                    "value": 34.27456283569336
                 },
                 {
                     "key": "rotY",
-                    "value": 347.3343505859375
+                    "value": 179.7784881591797
                 }
             ]
         },
@@ -43,18 +43,44 @@
         "m_strings": {
             "content": [
                 {
+                    "key": "HpComp",
+                    "value": "{\"hp\":53.0,\"shield\":0.0,\"aliments\":[]}"
+                },
+                {
                     "key": "cooldowns",
                     "value": "{\"cooldowns\":[]}"
                 },
                 {
                     "key": "inventory",
-                    "value": "{\"slotSaves\":[{\"item\":{\"instanceID\":48376},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48166},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":18.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48146},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":49398},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49840},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"extraShotChance\\\",\\\"value\\\":24.100000381469728}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48166},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":22.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49318},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"speedIncrease\\\",\\\"value\\\":32.5}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48368},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48966},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49840},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"extraShotChance\\\",\\\"value\\\":29.799999237060548}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48934},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48402},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"slowChance\\\",\\\"value\\\":18.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49386},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"staminaBonusPercentage\\\",\\\"value\\\":1.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48898},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48918},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49758},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48898},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":49642},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48482},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"rouletteRange\\\",\\\"value\\\":20.0},{\\\"key\\\":\\\"rouletteInterval\\\",\\\"value\\\":4.800000190734863}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48402},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"slowChance\\\",\\\"value\\\":27.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49066},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"shieldBonus\\\",\\\"value\\\":28.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48796},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48166},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":13.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":49230},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48500},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":6},{\"item\":{\"instanceID\":49452},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48458},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":48350},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48260},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48482},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"rouletteRange\\\",\\\"value\\\":41.0},{\\\"key\\\":\\\"rouletteInterval\\\",\\\"value\\\":4.800000190734863}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49066},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"shieldBonus\\\",\\\"value\\\":27.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48620},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":49312},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":49266},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":49846},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":48420},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":49318},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"speedIncrease\\\",\\\"value\\\":25.799999237060548}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48992},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48966},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48174},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48062},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"currentMultiplier\\\",\\\"value\\\":1.0},{\\\"key\\\":\\\"counter\\\",\\\"value\\\":0.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48416},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48688},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48174},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48934},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49840},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"extraShotChance\\\",\\\"value\\\":28.100000381469728}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48916},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"pierceChance\\\",\\\"value\\\":89.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48394},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":48470},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":5},{\"item\":{\"instanceID\":49248},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":48464},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":49212},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":4},{\"item\":{\"instanceID\":48406},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":49816},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48782},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48378},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48420},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48062},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"currentMultiplier\\\",\\\"value\\\":1.0},{\\\"key\\\":\\\"counter\\\",\\\"value\\\":0.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48166},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":17.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":48482},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"rouletteRange\\\",\\\"value\\\":45.0},{\\\"key\\\":\\\"rouletteInterval\\\",\\\"value\\\":6.699999809265137}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49386},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"staminaBonusPercentage\\\",\\\"value\\\":1.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":49598},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":49080},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":49732},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":49554},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":48346},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48554},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":49542},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48166},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":22.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":49524},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":48840},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48368},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0}]}"
+                    "value": "{\"slotSaves\":[{\"item\":{\"instanceID\":48460},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48248},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":11.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":49652},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[{\"key\":\"quirks\",\"value\":\"{\\\"list\\\":[{\\\"data\\\":{\\\"instanceID\\\":48248},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[{\\\"key\\\":\\\"damageBonusPercentage\\\",\\\"value\\\":25.0}]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}},{\\\"data\\\":{\\\"instanceID\\\":49870},\\\"save\\\":{\\\"m_integers\\\":{\\\"content\\\":[]},\\\"m_floats\\\":{\\\"content\\\":[]},\\\"m_bools\\\":{\\\"content\\\":[]},\\\"m_strings\\\":{\\\"content\\\":[]}}}]}\"}]}},\"count\":1},{\"item\":{\"instanceID\":48430},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":48644},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":48754},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":2},{\"item\":{\"instanceID\":49334},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":48558},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":3},{\"item\":{\"instanceID\":49562},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":48478},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":49292},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":1},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0},{\"item\":{\"instanceID\":0},\"data\":{\"m_integers\":{\"content\":[]},\"m_floats\":{\"content\":[]},\"m_bools\":{\"content\":[]},\"m_strings\":{\"content\":[]}},\"count\":0}]}"
                 }
             ]
         }
     },
     "mapElements": {
         "content": [
+            {
+                "key": "fc3994f4-7a60-492b-ad0b-eaaa6d47284f",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "Given",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
             {
                 "key": "419b915e-5979-4c19-91eb-4e0e67f61ae7",
                 "value": {
@@ -70,7 +96,7 @@
                         "content": [
                             {
                                 "key": "posX",
-                                "value": -187.6999969482422
+                                "value": -183.11769104003907
                             },
                             {
                                 "key": "posY",
@@ -78,11 +104,11 @@
                             },
                             {
                                 "key": "posZ",
-                                "value": 39.369998931884769
+                                "value": 39.321414947509769
                             },
                             {
                                 "key": "counter",
-                                "value": 0.6411858797073364
+                                "value": 0.0
                             }
                         ]
                     },
@@ -90,7 +116,77 @@
                         "content": [
                             {
                                 "key": "arrived",
-                                "value": true
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "91767f43-0de0-49c3-b306-8fb24d71e05f",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "active",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "03b9caa7-66e3-46dd-852c-83d11a75cbde",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "Open",
+                                "value": false
+                            },
+                            {
+                                "key": "Unlocked",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "26b3a93c-6114-47b0-8935-f919799ba58f",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "Open",
+                                "value": false
                             }
                         ]
                     },
@@ -114,7 +210,7 @@
                         "content": [
                             {
                                 "key": "posX",
-                                "value": -191.95323181152345
+                                "value": -191.97999572753907
                             },
                             {
                                 "key": "posY",
@@ -122,7 +218,51 @@
                             },
                             {
                                 "key": "posZ",
-                                "value": 53.062931060791019
+                                "value": 56.25
+                            },
+                            {
+                                "key": "counter",
+                                "value": 0.7368344068527222
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "arrived",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "fa844687-850a-4584-a2f4-d57401ed5376",
+                "value": {
+                    "m_integers": {
+                        "content": [
+                            {
+                                "key": "index",
+                                "value": 3
+                            }
+                        ]
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "posX",
+                                "value": -172.3224639892578
+                            },
+                            {
+                                "key": "posY",
+                                "value": -7.239999771118164
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 54.73252868652344
                             },
                             {
                                 "key": "counter",
@@ -144,57 +284,13 @@
                 }
             },
             {
-                "key": "26b3a93c-6114-47b0-8935-f919799ba58f",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "Open",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "91767f43-0de0-49c3-b306-8fb24d71e05f",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "active",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "fa844687-850a-4584-a2f4-d57401ed5376",
+                "key": "50f7edd1-d296-437e-ab49-d39902707ce7",
                 "value": {
                     "m_integers": {
                         "content": [
                             {
                                 "key": "index",
-                                "value": 1
+                                "value": 2
                             }
                         ]
                     },
@@ -202,15 +298,15 @@
                         "content": [
                             {
                                 "key": "posX",
-                                "value": -173.0845947265625
+                                "value": -192.36412048339845
                             },
                             {
                                 "key": "posY",
-                                "value": -7.239999771118164
+                                "value": -7.234000205993652
                             },
                             {
                                 "key": "posZ",
-                                "value": 47.74458694458008
+                                "value": 47.889286041259769
                             },
                             {
                                 "key": "counter",
@@ -238,7 +334,7 @@
                         "content": [
                             {
                                 "key": "index",
-                                "value": 0
+                                "value": 2
                             }
                         ]
                     },
@@ -246,7 +342,7 @@
                         "content": [
                             {
                                 "key": "posX",
-                                "value": -197.00999450683595
+                                "value": -190.24981689453126
                             },
                             {
                                 "key": "posY",
@@ -254,99 +350,7 @@
                             },
                             {
                                 "key": "posZ",
-                                "value": 51.83000183105469
-                            },
-                            {
-                                "key": "counter",
-                                "value": 1.3313871622085572
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "arrived",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "fc3994f4-7a60-492b-ad0b-eaaa6d47284f",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "Given",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "03b9caa7-66e3-46dd-852c-83d11a75cbde",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "Open",
-                                "value": true
-                            },
-                            {
-                                "key": "Unlocked",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "50f7edd1-d296-437e-ab49-d39902707ce7",
-                "value": {
-                    "m_integers": {
-                        "content": [
-                            {
-                                "key": "index",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "posX",
-                                "value": -194.19012451171876
-                            },
-                            {
-                                "key": "posY",
-                                "value": -7.234000205993652
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 44.92958450317383
+                                "value": 60.8121223449707
                             },
                             {
                                 "key": "counter",
@@ -394,6 +398,58 @@
                 }
             },
             {
+                "key": "4c9aa4ec-76d7-4a35-bee2-608dad12f641",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "triggered",
+                                "value": false
+                            },
+                            {
+                                "key": "locked",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
+                "key": "67fe7beb-e87c-40c6-9be1-bb4ff4cc1ad8",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": []
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "triggered",
+                                "value": true
+                            },
+                            {
+                                "key": "locked",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": []
+                    }
+                }
+            },
+            {
                 "key": "78d46e56-5528-41b6-a1fe-153e1ce6a3f0",
                 "value": {
                     "m_integers": {
@@ -420,7 +476,7 @@
                 }
             },
             {
-                "key": "67fe7beb-e87c-40c6-9be1-bb4ff4cc1ad8",
+                "key": "6adfb500-90b4-4641-9907-c82abeb55b4c",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -496,39 +552,13 @@
                         "content": []
                     }
                 }
-            },
-            {
-                "key": "6adfb500-90b4-4641-9907-c82abeb55b4c",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": []
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "triggered",
-                                "value": true
-                            },
-                            {
-                                "key": "locked",
-                                "value": false
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
             }
         ]
     },
     "enemies": {
         "content": [
             {
-                "key": "431bd147-3660-476c-b5f7-cec9cb2bb173",
+                "key": "4ae0b9c7-bb03-4c05-8059-9f23719c8d10",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -541,19 +571,19 @@
                             },
                             {
                                 "key": "posX",
-                                "value": -117.0157699584961
+                                "value": -34.029998779296878
                             },
                             {
                                 "key": "posY",
-                                "value": 0.8029842376708984
+                                "value": 1.0932607650756837
                             },
                             {
                                 "key": "posZ",
-                                "value": -14.901130676269532
+                                "value": 35.95000076293945
                             },
                             {
                                 "key": "rotY",
-                                "value": 0.0
+                                "value": 267.9879150390625
                             }
                         ]
                     },
@@ -562,140 +592,20 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "94c99f85-db3a-4ee5-9d63-209e76d704c3",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
                         "content": [
                             {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -82.6375732421875
-                            },
-                            {
-                                "key": "posY",
-                                "value": -5.97193717956543
-                            },
-                            {
-                                "key": "posZ",
-                                "value": -15.430000305175782
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 287.111328125
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
                             }
                         ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "387795b1-8a1c-4385-abab-94bf81b9f5b7",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -35.790000915527347
-                            },
-                            {
-                                "key": "posY",
-                                "value": 1.1029841899871827
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 34.59000015258789
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 284.10589599609377
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "2784430f-f4c6-4447-9058-cd7e27cfa645",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -92.05364990234375
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.6029844284057617
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 20.638790130615236
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
                     }
                 }
             },
@@ -713,15 +623,15 @@
                             },
                             {
                                 "key": "posX",
-                                "value": -22.918428421020509
+                                "value": -22.917999267578126
                             },
                             {
                                 "key": "posY",
-                                "value": 0.6415081024169922
+                                "value": 0.6415079236030579
                             },
                             {
                                 "key": "posZ",
-                                "value": 1.0910605192184449
+                                "value": 1.090999960899353
                             },
                             {
                                 "key": "rotY",
@@ -734,16 +644,25 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
                     }
                 }
             },
             {
-                "key": "a25969b7-1d92-4d01-9c97-d8b8a1f11f09",
+                "key": "2e8e4a12-6264-4455-bbc5-db03bad4e771",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -756,19 +675,19 @@
                             },
                             {
                                 "key": "posX",
-                                "value": -120.93900299072266
+                                "value": -95.33999633789063
                             },
                             {
                                 "key": "posY",
-                                "value": 1.1029841899871827
+                                "value": 0.9712151885032654
                             },
                             {
                                 "key": "posZ",
-                                "value": -17.29599952697754
+                                "value": -57.45000076293945
                             },
                             {
                                 "key": "rotY",
-                                "value": 0.0
+                                "value": 98.90828704833985
                             }
                         ]
                     },
@@ -777,97 +696,20 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "6be524b8-cf07-48fd-a51d-ec575ac7017a",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
                         "content": [
                             {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -69.89600372314453
-                            },
-                            {
-                                "key": "posY",
-                                "value": 1.0161066055297852
-                            },
-                            {
-                                "key": "posZ",
-                                "value": -59.207000732421878
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 72.28305053710938
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
                             }
                         ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "f56768f2-5731-4aa6-a9e1-9e1d0d2ee71e",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -94.08999633789063
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.6029844284057617
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 14.680000305175782
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
                     }
                 }
             },
@@ -889,11 +731,11 @@
                             },
                             {
                                 "key": "posY",
-                                "value": 0.9208403825759888
+                                "value": 0.9208376407623291
                             },
                             {
                                 "key": "posZ",
-                                "value": -1.1600098609924317
+                                "value": -1.159999966621399
                             },
                             {
                                 "key": "rotY",
@@ -906,11 +748,176 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "94c99f85-db3a-4ee5-9d63-209e76d704c3",
+                "value": {
+                    "m_integers": {
                         "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -82.55000305175781
+                            },
+                            {
+                                "key": "posY",
+                                "value": -5.970219135284424
+                            },
+                            {
+                                "key": "posZ",
+                                "value": -15.430000305175782
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 287.111328125
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "f56768f2-5731-4aa6-a9e1-9e1d0d2ee71e",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 100.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -93.81459045410156
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.6029844284057617
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 19.92148208618164
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 7.450189590454102
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":94.15261840820313,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "431bd147-3660-476c-b5f7-cec9cb2bb173",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -116.73999786376953
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.8029842376708984
+                            },
+                            {
+                                "key": "posZ",
+                                "value": -15.829999923706055
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 0.0
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
                     }
                 }
             },
@@ -949,140 +956,20 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "fc206518-d6e8-4220-8d33-ab779250cc8f",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
                         "content": [
                             {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -28.100988388061525
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.5713448524475098
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 0.12002355605363846
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 76.81212615966797
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
                             }
                         ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "dc1d7a25-36bc-46b3-9b79-a076b154b3ff",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -105.5999984741211
-                            },
-                            {
-                                "key": "posY",
-                                "value": 1.0696508884429932
-                            },
-                            {
-                                "key": "posZ",
-                                "value": -14.15999984741211
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "54ae800c-f267-418a-9022-e85035e64708",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -25.280420303344728
-                            },
-                            {
-                                "key": "posY",
-                                "value": 1.4997069835662842
-                            },
-                            {
-                                "key": "posZ",
-                                "value": -1.353760838508606
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 83.14741516113281
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
                     }
                 }
             },
@@ -1121,11 +1008,696 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "4cec5935-21a2-480a-95de-a8a9cfff0f0f",
+                "value": {
+                    "m_integers": {
                         "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 100.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -93.09292602539063
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.8029844164848328
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 13.8147611618042
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 3.6169838905334474
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":150.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "6be524b8-cf07-48fd-a51d-ec575ac7017a",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -69.89600372314453
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.0161066055297852
+                            },
+                            {
+                                "key": "posZ",
+                                "value": -59.207000732421878
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 72.28305053710938
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "813eebcf-f32a-496c-8872-725519401123",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 100.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -92.21540832519531
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.9029844403266907
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 30.9024600982666
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 232.23854064941407
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":0.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "2784430f-f4c6-4447-9058-cd7e27cfa645",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 100.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -90.53482055664063
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.6029844284057617
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 32.07585144042969
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 174.58856201171876
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":0.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "d4a56e2d-8490-451c-a486-2f5335ec3c75",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": 7.484000205993652
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.3029839992523194
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 29.93600082397461
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 220.2818603515625
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "fbecdf4a-1090-4a48-ac3e-625d7bd99ca3",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 100.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -93.07711791992188
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.6085891127586365
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 31.518983840942384
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 79.56396484375
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": true
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":0.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "387795b1-8a1c-4385-abab-94bf81b9f5b7",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -35.790000915527347
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.1029841899871827
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 34.59000015258789
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 284.10589599609377
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "885c1cad-eb33-4e67-8729-342629876d6e",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -31.469999313354493
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.4029839038848878
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 34.2599983215332
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 274.32318115234377
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":150.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "54ae800c-f267-418a-9022-e85035e64708",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -25.540000915527345
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.6451046466827393
+                            },
+                            {
+                                "key": "posZ",
+                                "value": -1.5700000524520875
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 83.14741516113281
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":150.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "dc1d7a25-36bc-46b3-9b79-a076b154b3ff",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -105.5999984741211
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.0696508884429932
+                            },
+                            {
+                                "key": "posZ",
+                                "value": -14.15999984741211
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 0.0
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":150.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "26c51497-6d15-4b6b-b755-e7735421caca",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -7.876999855041504
+                            },
+                            {
+                                "key": "posY",
+                                "value": 1.0029840469360352
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 21.437999725341798
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 267.9879150390625
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "1347119b-a5ae-4300-98f6-4c11ba1c90cb",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -6.380000114440918
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.9946202635765076
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 19.90999984741211
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 267.9879150390625
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "f99db89d-637a-44ae-b864-bfb027e25d21",
+                "value": {
+                    "m_integers": {
+                        "content": []
+                    },
+                    "m_floats": {
+                        "content": [
+                            {
+                                "key": "detection",
+                                "value": 0.0
+                            },
+                            {
+                                "key": "posX",
+                                "value": -36.68000030517578
+                            },
+                            {
+                                "key": "posY",
+                                "value": 0.9496385455131531
+                            },
+                            {
+                                "key": "posZ",
+                                "value": 36.869998931884769
+                            },
+                            {
+                                "key": "rotY",
+                                "value": 270.3455810546875
+                            }
+                        ]
+                    },
+                    "m_bools": {
+                        "content": [
+                            {
+                                "key": "enabled",
+                                "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
+                            }
+                        ]
+                    },
+                    "m_strings": {
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
                     }
                 }
             },
@@ -1151,7 +1723,7 @@
                             },
                             {
                                 "key": "posZ",
-                                "value": 2.5119998455047609
+                                "value": 2.51200008392334
                             },
                             {
                                 "key": "rotY",
@@ -1164,269 +1736,20 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "4ae0b9c7-bb03-4c05-8059-9f23719c8d10",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
                         "content": [
                             {
-                                "key": "detection",
-                                "value": 17.907594680786134
-                            },
-                            {
-                                "key": "posX",
-                                "value": -41.36644744873047
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.8817827701568604
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 36.229984283447269
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 263.8793029785156
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
                             }
                         ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "26c51497-6d15-4b6b-b755-e7735421caca",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -7.6456780433654789
-                            },
-                            {
-                                "key": "posY",
-                                "value": 1.0029840469360352
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 21.437999725341798
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 267.9879150390625
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "4cec5935-21a2-480a-95de-a8a9cfff0f0f",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -93.09292602539063
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.8029844164848328
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 13.8147611618042
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "1347119b-a5ae-4300-98f6-4c11ba1c90cb",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -6.379876136779785
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.994549036026001
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 19.911794662475587
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 267.9879150390625
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "d4a56e2d-8490-451c-a486-2f5335ec3c75",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": 7.484000205993652
-                            },
-                            {
-                                "key": "posY",
-                                "value": 1.2713741064071656
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 29.364700317382814
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 220.2818603515625
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "fbecdf4a-1090-4a48-ac3e-625d7bd99ca3",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -94.66000366210938
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.6029844284057617
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 19.719999313354493
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 0.0
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
                     }
                 }
             },
@@ -1440,11 +1763,11 @@
                         "content": [
                             {
                                 "key": "detection",
-                                "value": 0.0
+                                "value": 100.0
                             },
                             {
                                 "key": "posX",
-                                "value": -92.13099670410156
+                                "value": -92.33548736572266
                             },
                             {
                                 "key": "posY",
@@ -1452,11 +1775,11 @@
                             },
                             {
                                 "key": "posZ",
-                                "value": 16.110000610351564
+                                "value": 19.543594360351564
                             },
                             {
                                 "key": "rotY",
-                                "value": 0.0
+                                "value": 1.523196816444397
                             }
                         ]
                     },
@@ -1465,54 +1788,20 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "2e8e4a12-6264-4455-bbc5-db03bad4e771",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
                         "content": [
                             {
-                                "key": "detection",
-                                "value": 0.0
-                            },
-                            {
-                                "key": "posX",
-                                "value": -95.34001159667969
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.9712193012237549
-                            },
-                            {
-                                "key": "posZ",
-                                "value": -57.45000076293945
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 98.90828704833985
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
                             }
                         ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
                     }
                 }
             },
@@ -1551,59 +1840,25 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
+                            }
+                        ]
                     }
                 }
             },
             {
-                "key": "f99db89d-637a-44ae-b864-bfb027e25d21",
-                "value": {
-                    "m_integers": {
-                        "content": []
-                    },
-                    "m_floats": {
-                        "content": [
-                            {
-                                "key": "detection",
-                                "value": 51.94099426269531
-                            },
-                            {
-                                "key": "posX",
-                                "value": -51.73114776611328
-                            },
-                            {
-                                "key": "posY",
-                                "value": 0.7433016896247864
-                            },
-                            {
-                                "key": "posZ",
-                                "value": 35.389888763427737
-                            },
-                            {
-                                "key": "rotY",
-                                "value": 263.82769775390627
-                            }
-                        ]
-                    },
-                    "m_bools": {
-                        "content": [
-                            {
-                                "key": "enabled",
-                                "value": true
-                            }
-                        ]
-                    },
-                    "m_strings": {
-                        "content": []
-                    }
-                }
-            },
-            {
-                "key": "885c1cad-eb33-4e67-8729-342629876d6e",
+                "key": "fc206518-d6e8-4220-8d33-ab779250cc8f",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -1616,19 +1871,19 @@
                             },
                             {
                                 "key": "posX",
-                                "value": -31.470155715942384
+                                "value": -28.100000381469728
                             },
                             {
                                 "key": "posY",
-                                "value": 1.4029839038848878
+                                "value": 0.5713489055633545
                             },
                             {
                                 "key": "posZ",
-                                "value": 34.2599983215332
+                                "value": 0.12000226974487305
                             },
                             {
                                 "key": "rotY",
-                                "value": 274.32318115234377
+                                "value": 76.81212615966797
                             }
                         ]
                     },
@@ -1637,16 +1892,25 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":100.0,\"shield\":0.0,\"aliments\":[]}"
+                            }
+                        ]
                     }
                 }
             },
             {
-                "key": "813eebcf-f32a-496c-8872-725519401123",
+                "key": "a25969b7-1d92-4d01-9c97-d8b8a1f11f09",
                 "value": {
                     "m_integers": {
                         "content": []
@@ -1659,15 +1923,15 @@
                             },
                             {
                                 "key": "posX",
-                                "value": -93.30000305175781
+                                "value": -120.93900299072266
                             },
                             {
                                 "key": "posY",
-                                "value": 0.9029844403266907
+                                "value": 1.1029841899871827
                             },
                             {
                                 "key": "posZ",
-                                "value": 18.1200008392334
+                                "value": -17.29599952697754
                             },
                             {
                                 "key": "rotY",
@@ -1680,12 +1944,256 @@
                             {
                                 "key": "enabled",
                                 "value": true
+                            },
+                            {
+                                "key": "looted",
+                                "value": false
                             }
                         ]
                     },
                     "m_strings": {
-                        "content": []
+                        "content": [
+                            {
+                                "key": "HpComp",
+                                "value": "{\"hp\":120.0,\"shield\":20.0,\"aliments\":[]}"
+                            }
+                        ]
                     }
+                }
+            }
+        ]
+    },
+    "droppedItems": {
+        "content": [
+            {
+                "key": 1,
+                "value": {
+                    "saves": [
+                        {
+                            "position": {
+                                "x": -94.87493896484375,
+                                "y": 0.2500323951244354,
+                                "z": 30.951419830322267
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 49316
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": -94.87493133544922,
+                                "y": 0.2500324249267578,
+                                "z": 32.14973068237305
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 48934
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": -90.51971435546875,
+                                "y": 0.5490223169326782,
+                                "z": 32.07180404663086
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 49788
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": -90.51978302001953,
+                                "y": 0.5490227341651917,
+                                "z": 30.331777572631837
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 49176
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": -90.51970672607422,
+                                "y": 0.5490220785140991,
+                                "z": 32.73830795288086
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 48546
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": -93.52818298339844,
+                                "y": 0.25003403425216677,
+                                "z": 32.839447021484378
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 48430
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": -90.51980590820313,
+                                "y": 0.5490225553512573,
+                                "z": 30.37835693359375
+                            },
+                            "velocity": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "slot": {
+                                "item": {
+                                    "instanceID": 48552
+                                },
+                                "data": {
+                                    "m_integers": {
+                                        "content": []
+                                    },
+                                    "m_floats": {
+                                        "content": []
+                                    },
+                                    "m_bools": {
+                                        "content": []
+                                    },
+                                    "m_strings": {
+                                        "content": []
+                                    }
+                                },
+                                "count": 1
+                            }
+                        }
+                    ]
                 }
             }
         ]

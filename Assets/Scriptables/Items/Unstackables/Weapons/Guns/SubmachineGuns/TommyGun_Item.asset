@@ -19,7 +19,7 @@ MonoBehaviour:
     en: An iconic submachine gun from the Prohibition era and World War II.
     kr: "\uBBF8\uAD6D \uAE08\uC8FC \uC2DC\uB300\uC640 \uC81C2\uCC28 \uC138\uACC4
       \uB300\uC804\uC5D0\uC11C \uC0C1\uC9D5\uC801\uC778 \uAE30\uAD00\uB2E8\uCD1D\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 7004607955443964863, guid: 70e27e58299324349acf48dad9911937, type: 3}
   m_category: 11
   m_canDrop: 1
   m_prefab: {fileID: 3421825771076159304, guid: a9932bdd5cc3e4189bbe4f3e8af35f3b,
@@ -41,7 +41,8 @@ MonoBehaviour:
   m_baseReloadTime: 5
   m_baseReserve: 200
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 30
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50

@@ -159,7 +159,7 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver, ISavable
     }
     public void DropItem(Item item, int count)
     {
-        DroppedItem tmp = DroppedItem.Create(item, count);
+        DroppedItem tmp = DroppedItem.CreateDroppedItem(item, count);
         tmp.transform.position = transform.position;
         tmp.rb.AddForce(origin.movement.rotator.forward * itemDropForce, ForceMode.VelocityChange);
     }

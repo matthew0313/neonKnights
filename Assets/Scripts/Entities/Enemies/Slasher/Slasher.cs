@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator), typeof(NavMeshAgent), typeof(Slasher_HpComp))]
-public class Slasher : Enemy
+public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
 {
     [SerializeField] TriggerCallbacks swordHitbox;
     [SerializeField] float slashTriggerDistance;
@@ -17,14 +17,60 @@ public class Slasher : Enemy
     [Header("Debug")]
     [SerializeField] string FSMPath;
 
+    float m_speedMultiplier = 1.0f;
+    public float speedMultiplier
+    {
+        get
+        {
+            return m_speedMultiplier;
+        }
+        set
+        {
+            agent.speed = baseAgentSpeed * value;
+            m_speedMultiplier = value;
+        }
+    }
+    public float damageMultiplier { get; set; } = 1.0f;
+    bool m_stunned = false;
+    public bool stunned
+    {
+        get => m_stunned;
+        set
+        {
+            m_stunned = value;
+            if (value) topLayer.ChangeState("Stunned");
+        }
+    }
 
     Animator anim;
     NavMeshAgent agent;
     TopLayer topLayer;
+    Slasher_HpComp hp;
+    float baseAgentSpeed = 0.0f;
+    private void OnDisable()
+    {
+        agentCutsceneControl.enabled = true;
+    }
+    private void OnEnable()
+    {
+        agentCutsceneControl.enabled = false;
+    }
+
+    ControlMachine agentControlMachine;
+    ControlElement agentChaseControl;
+    ControlElement agentCutsceneControl;
     protected override void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        baseAgentSpeed = agent.speed;
+
+        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
+        agentChaseControl = new ControlElement(0, () => agent.isStopped = false, false);
+        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
+        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+
         anim = GetComponent<Animator>();
         foreach (var i in anim.GetBehaviours<MeleeSlashBehaviour>())
         {
@@ -68,14 +114,14 @@ public class Slasher : Enemy
         if(other.TryGetComponent(out IDamagable tmp))
         {
             AudioManager.Instance.PlaySound(hitSound).SetDist(() => transform.position, soundDistance);
-            tmp.GetDamage(slashDamage);
+            tmp.GetDamage(slashDamage * damageMultiplier);
         }
     }
     public override void Load(SaveData data)
     {
         agent.enabled = false;
         base.Load(data);
-        agent.enabled = true;
+        if(enabled) agent.enabled = true;
     }
     class EnemySlash
     {
@@ -93,6 +139,7 @@ public class Slasher : Enemy
             defaultState = new EnemyIdle<Slasher, SlasherFSMVals>(origin, this, "Detected");
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this, "Idle"));
+            AddState("Stunned", new FSM_Await<Slasher, SlasherFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
         }
         class Detected : EnemyDetected<Slasher, SlasherFSMVals>
         {
@@ -135,7 +182,7 @@ public class Slasher : Enemy
                 {
                     base.OnStateEnter();
                     origin.agent.SetDestination(origin.player.transform.position);
-                    origin.agent.isStopped = false;
+                    origin.agentChaseControl.enabled = true;
                     origin.anim.SetBool(movingID, true);
                 }
                 public override void OnStateUpdate()
@@ -146,7 +193,7 @@ public class Slasher : Enemy
                 public override void OnStateExit()
                 {
                     base.OnStateExit();
-                    origin.agent.isStopped = true;
+                    origin.agentChaseControl.enabled = false;
                     origin.anim.SetBool(movingID, false);
                 }
             }

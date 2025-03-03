@@ -43,7 +43,28 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         }
     }
     public float damageMultiplier { get; set; } = 1.0f;
-    public bool stunned { get; set; } = false;
+    bool m_stunned = false;
+    public bool stunned
+    {
+        get => m_stunned;
+        set
+        {
+            m_stunned = value;
+            if (value) topLayer.ChangeState("Stunned");
+        }
+    }
+    private void OnDisable()
+    {
+        agentCutsceneControl.enabled = true;
+    }
+    private void OnEnable()
+    {
+        agentCutsceneControl.enabled = false;
+    }
+
+    ControlMachine agentControlMachine;
+    ControlElement agentChaseControl;
+    ControlElement agentCutsceneControl;
 
     TopLayer topLayer;
     float baseAgentSpeed;
@@ -53,6 +74,12 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         baseAgentSpeed = agent.speed;
+
+        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
+        agentChaseControl = new ControlElement(0, () => agent.isStopped = false, false);
+        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
+        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+
         anim = GetComponent<Animator>();
         topLayer = new TopLayer(this, new ShielderFSMVals());
 #if UNITY_EDITOR
@@ -73,7 +100,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         agent.enabled = false;
         base.Load(data);
-        agent.enabled = true;
+        if(enabled) agent.enabled = true;
     }
     class ShielderFSMVals : FSMVals
     {
@@ -87,11 +114,6 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this));
             AddState("Stunned", new FSM_Await<Shielder, ShielderFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
-        }
-        public override void OnStateUpdate()
-        {
-            base.OnStateUpdate();
-            if (origin.stunned) ChangeState("Stunned");
         }
         class Detected : EnemyDetected<Shielder, ShielderFSMVals>
         {
@@ -124,7 +146,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateEnter();
                     origin.anim.SetBool(movingID, true);
-                    origin.agent.isStopped = false;
+                    origin.agentChaseControl.enabled = true;
                 }
                 public override void OnStateUpdate()
                 {
@@ -149,7 +171,7 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateExit();
                     origin.anim.SetBool(movingID, false);
-                    origin.agent.isStopped = true;
+                    origin.agentChaseControl.enabled = false;
                 }
             }
             class Bashing : Layer<Shielder, ShielderFSMVals>
@@ -211,7 +233,8 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                     {
                         base.OnStateUpdate();
                         Vector3 tmp = origin.transform.forward * origin.bashRunSpeed * origin.speedMultiplier;
-                        origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                        origin.agent.Move(tmp * Time.deltaTime);
+                        //origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
                         counter += Time.deltaTime * origin.bashRunSpeed * origin.speedMultiplier;
                         if (counter > origin.bashRunDistance)
                         {

@@ -15,3 +15,4 @@ MonoBehaviour:
   weapon: {fileID: 11400000, guid: 135efa88795ab9e44ba79bb5416958c1, type: 2}
   quirks:
   - {fileID: 11400000, guid: f23b01466e628414882b8bd0c7538c6c, type: 2}
+  - {fileID: 11400000, guid: 47e5b804c684d4c4b949102cf46d09e8, type: 2}

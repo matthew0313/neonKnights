@@ -232,8 +232,8 @@ Transform:
   m_GameObject: {fileID: 2428283516139681829}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.589, z: -0.323}
-  m_LocalScale: {x: 0.4, y: 0.8, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0.589, z: -0.42}
+  m_LocalScale: {x: 0.4, y: 0.8, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4047131487963501364}
@@ -415,7 +415,7 @@ Transform:
   m_GameObject: {fileID: 3816792124108666093}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -440,8 +440,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.35
-  m_Height: 2.5
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4079604422427976343
@@ -687,7 +687,7 @@ Transform:
   m_GameObject: {fileID: 5888572465850422003}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13357478, z: 0.4693937}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0.4693937}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -910,7 +910,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -939,6 +939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58910eb3424938044a725684af0f1bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id:
+    value: 
   detectRange: 30
   detectionRate: 10
   detectionLowerRate: 5
@@ -955,6 +957,10 @@ MonoBehaviour:
   bashRunDistance: 15
   bashCooldown: 2
   bashDamage: 10
+  bashHitSound:
+    clip: {fileID: 0}
+    volume: 0
+  soundDistance: 30
   FSMPath: 
 --- !u!114 &3853527120658459963
 MonoBehaviour:
@@ -970,10 +976,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baseHp: 100
   m_maxShield: 0
-  m_alimentEffectAnchor: {fileID: 0}
+  m_alimentEffectAnchor: {fileID: 3881960449030190289}
   invincible: 0
   hitDetection: 50
   loot: {fileID: 11400000, guid: eb93087d2b3b6b445a41330194297cb4, type: 2}
+  onEnemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &8842329122693154525
 Animator:
   serializedVersion: 7

@@ -199,6 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingUI: {fileID: 5293758592003433967}
   loadingBlack: {fileID: 6863395626016973811}
+  loadingBlackFadeoutVolumeHook: {fileID: 11400000, guid: ef041d18a83e7d54c87e8be210c592a0,
+    type: 2}
   loadingBar: {fileID: 1113564712122804656}
 --- !u!114 &5974077897674955878
 MonoBehaviour:

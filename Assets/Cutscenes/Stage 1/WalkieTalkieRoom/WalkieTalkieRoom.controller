@@ -258,7 +258,7 @@ MonoBehaviour:
       en: ???
       kr: ???
     m_text:
-      en: You can call me 'Assistant' for now.
+      en: You can call me <color=#FFFF00>'Assistant'</color> for now.
       kr: "\uC9C0\uAE08\uC740 \uC77C\uB2E8 <color=#FFFF00>\uC870\uB825\uC790</color>\uB77C\uACE0
         \uBD88\uB7EC\uB77C."
     m_talkSound:

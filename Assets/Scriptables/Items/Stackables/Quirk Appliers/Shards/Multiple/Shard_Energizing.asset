@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc3c4afb29300d48ae1cfe6a7013f6b, type: 3}
+  m_Name: Shard_Energizing
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Quirk Shard
+    kr: "\uCFFC\uD06C \uC870\uAC01"
+  m_description:
+    en: Using 3 of this, a quirk can be applied to an item.
+    kr: "\uC870\uAC01 3\uAC1C\uB97C \uC774\uC6A9\uD574 \uC544\uC774\uD15C\uC5D0 \uCFFC\uD06C\uB97C
+      \uBD99\uC77C \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  m_model: {fileID: -1710427300995771994, guid: 786beca1130a07a4688623d15dd902b0,
+    type: 3}
+  m_category: 64
+  m_canDrop: 1
+  m_maxStack: 64
+  m_unit: x
+  m_appliedQuirk: {fileID: 11400000, guid: 714e57761597724419a3f379e344e6b3, type: 2}
+  m_shardRequired: 3
+  m_applySound:
+    clip: {fileID: 8300000, guid: 739cad878fb98644797bde65f6273b4c, type: 3}
+    volume: 1

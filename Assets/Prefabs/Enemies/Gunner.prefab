@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1680580597291169713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51,8 +51,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 2.5
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2705700354465804689
@@ -150,7 +150,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -199,7 +199,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -229,6 +229,9 @@ MonoBehaviour:
   invincible: 0
   hitDetection: 50
   loot: {fileID: 11400000, guid: a617d02ddebde8d48af9c53809e92596, type: 2}
+  onEnemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2395274036931451199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333a649d72933bf449833d58a2d5a9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id:
+    value: 
   detectRange: 20
   detectionRate: 10
   detectionLowerRate: 5
@@ -254,12 +259,12 @@ MonoBehaviour:
   bulletSpeed: 10
   bulletRange: 20
   rotateSpeed: 4
-  maxDistance: 20
-  minDistance: 5
-  backstepSpeed: 2
+  maxDistance: 15
+  minDistance: 7
+  backstepSpeedMultiplier: 1
   shotCount: 1
   spread: 0
-  magSize: 0
+  magSize: 6
   reloadTime: 3
   fireSound:
     clip: {fileID: 8300000, guid: 1bb663f5d33443c48b8a16062503e3eb, type: 3}
@@ -267,7 +272,7 @@ MonoBehaviour:
   reloadSound:
     clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
     volume: 1
-  soundDistance: 50
+  soundDistance: 30
   FSMPath: 
 --- !u!1 &7381321589065056130
 GameObject:

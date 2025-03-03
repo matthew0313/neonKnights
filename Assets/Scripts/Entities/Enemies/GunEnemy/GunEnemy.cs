@@ -7,7 +7,7 @@ using MEC;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(GunEnemy_HpComp))]
 [RequireComponent(typeof(Animator))]
-public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable
+public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
 {
     [SerializeField] Transform firePoint;
     [SerializeField] EnemyBullet bullet;
@@ -15,7 +15,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     [SerializeField] float bulletDamage, bulletSpeed, bulletRange;
     [SerializeField] float rotateSpeed = 4.0f;
     [SerializeField] float maxDistance = 20.0f, minDistance = 5.0f;
-    [SerializeField] float backstepSpeed = 2.0f;
+    [SerializeField] float backstepSpeedMultiplier = 0.5f;
     [SerializeField] int shotCount = 1;
     [SerializeField] float spread = 0.0f;
     [SerializeField] int magSize;
@@ -42,14 +42,41 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         }
     }
     public float damageMultiplier { get; set; } = 1.0f;
+    bool m_stunned = false;
+    public bool stunned
+    {
+        get => m_stunned;
+        set
+        {
+            m_stunned = value;
+            if (value) topLayer.ChangeState("Stunned");
+        }
+    }
     int mag = 0;
+    private void OnDisable()
+    {
+        agentCutsceneControl.enabled = true;
+    }
+    private void OnEnable()
+    {
+        agentCutsceneControl.enabled = false;
+    }
+
+    ControlMachine agentControlMachine;
+    ControlElement agentMoveControl;
+    ControlElement agentCutsceneControl;
     protected override void Awake()
     {
         base.Awake();
         mag = magSize;
         agent = GetComponent<NavMeshAgent>();
-        agent.updateUpAxis = false;
+        agent.updateRotation = false;
         baseAgentSpeed = agent.speed;
+
+        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
+        agentMoveControl = new ControlElement(0, () => agent.isStopped = false, false);
+        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
+        agentControlMachine.AddControls(agentMoveControl, agentCutsceneControl);
 
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -84,8 +111,9 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     void Reload()
     {
         if (reloading) return;
-        AudioManager.Instance.PlaySound(reloadSound).SetDist(() => transform.position, soundDistance);
+        Debug.Log("Reload");
         reloading = true;
+        AudioManager.Instance.PlaySound(reloadSound).SetDist(() => transform.position, soundDistance);
         anim.SetTrigger(reloadID);
         reloadCoroutine = Timing.RunCoroutine(Reloading());
     }
@@ -111,7 +139,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         agent.enabled = false;
         base.Load(data);
-        agent.enabled = true;
+        if(enabled) agent.enabled = true;
     }
     class GunEnemyFSMVals : FSMVals
     {
@@ -124,6 +152,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             defaultState = new EnemyIdle<GunEnemy, GunEnemyFSMVals>(origin, this, "Detected");
             AddState("Idle", defaultState);
             AddState("Detected", new Detected(origin, this, "Idle"));
+            AddState("Stunned", new FSM_Await<GunEnemy, GunEnemyFSMVals>(origin, this, () => !origin.stunned, () => ChangeState("Idle")));
         }
         public override void OnStateUpdate()
         {
@@ -209,7 +238,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 {
                     base.OnStateEnter();
                     origin.agent.SetDestination(origin.player.transform.position);
-                    origin.agent.isStopped = false;
+                    origin.agentMoveControl.enabled = true;
                     origin.anim.SetBool(movingID, true);
                 }
                 public override void OnStateUpdate()
@@ -224,7 +253,7 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 public override void OnStateExit()
                 {
                     base.OnStateExit();
-                    origin.agent.isStopped = true;
+                    origin.agentMoveControl.enabled = false;
                     origin.anim.SetBool(movingID, false);
                 }
             }
@@ -238,13 +267,17 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 public override void OnStateEnter()
                 {
                     base.OnStateEnter();
+                    Vector3 dir = (origin.transform.position - origin.player.transform.position).normalized;
+                    origin.agent.SetDestination(origin.transform.position + dir * (origin.minDistance + 1.0f));
+                    origin.speedMultiplier *= origin.backstepSpeedMultiplier;
+                    origin.agentMoveControl.enabled = true;
                     origin.anim.SetBool(movingID, true);
                 }
                 public override void OnStateUpdate()
                 {
                     base.OnStateUpdate();
-                    Vector3 tmp = origin.transform.forward * -1.0f * origin.backstepSpeed;
-                    origin.rb.linearVelocity = new Vector3(tmp.x, origin.rb.linearVelocity.y, tmp.z);
+                    Vector3 dir = (origin.transform.position - origin.player.transform.position).normalized;
+                    origin.agent.SetDestination(origin.transform.position + dir * (origin.minDistance + 1.0f));
                     if(origin.GetPlayerDist() >= origin.minDistance)
                     {
                         parentLayer.ChangeState("Idle");
@@ -257,7 +290,8 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
                 public override void OnStateExit()
                 {
                     base.OnStateExit();
-                    origin.rb.linearVelocity = new Vector3(0.0f, origin.rb.linearVelocity.y, 0.0f);
+                    origin.speedMultiplier /= origin.backstepSpeedMultiplier;
+                    origin.agentMoveControl.enabled = false;
                     origin.anim.SetBool(movingID, false);
                 }
             }

@@ -19,7 +19,7 @@ MonoBehaviour:
     en: A futuristic personal defense weapon known for its 50-round magazine.
     kr: "\uBBF8\uB798\uC801\uC778 \uB514\uC790\uC778\uACFC 50\uBC1C \uD0C4\uCC3D\uC73C\uB85C
       \uC720\uBA85\uD55C PDW\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 2613379291067788873, guid: 99ab65ea1392f40de9b4abb10b53e4e1, type: 3}
   m_category: 11
   m_canDrop: 1
   m_prefab: {fileID: 5808800621595574030, guid: 690c2e2a31fe449bda53fdd456e406d6,
@@ -41,7 +41,8 @@ MonoBehaviour:
   m_baseReloadTime: 5
   m_baseReserve: 200
   m_baseShotCount: 1
-  m_defaultBullet: {fileID: 0}
+  m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
+    type: 3}
   m_baseBulletSpeed: 12
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
