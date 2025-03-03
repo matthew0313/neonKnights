@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Animator), typeof(NavMeshAgent), typeof(Slasher_HpComp))]
 public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjustable, IStunable
