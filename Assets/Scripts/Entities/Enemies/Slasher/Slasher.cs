@@ -169,6 +169,7 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
                 if (Vector3.Distance(origin.transform.position, origin.player.transform.position) <= origin.slashTriggerDistance && slashCounter <= 0.0f)
                 {
                     origin.anim.SetTrigger(slashID);
+                    slashCounter = origin.slashInterval;
                 }
             }
             public override void OnStateExit()
