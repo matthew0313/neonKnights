@@ -9,6 +9,10 @@ public abstract class Interaction : MonoBehaviour
 
     bool isAdded;
     protected Player player { get; private set; }
+    protected virtual void Start()
+    {
+
+    }
     private void OnEnable()
     {
         if(player == null) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

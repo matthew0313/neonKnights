@@ -20,6 +20,7 @@ public class CutsceneManager : MonoBehaviour
     public CutsceneManager() => Instance = this;
     CutsceneManager_UI UIs;
 
+    [SerializeField] BoolHook isFastPlaying;
     [SerializeField] PlayableDirector director;
 
     [Header("Talk")]
@@ -35,6 +36,7 @@ public class CutsceneManager : MonoBehaviour
     public void StartCutscene(Cutscene cutscene)
     {
         if (playing != null) return;
+        isFastPlaying.SetValue(false);
         playing = cutscene;
         foreach(var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
         {
@@ -73,12 +75,17 @@ public class CutsceneManager : MonoBehaviour
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)
     {
         director.Play(timeline);
+        director.playableGraph.GetRootPlayable(0).SetSpeed(isFastPlaying.value ? 10.0f : 1.0f);
+        Action toggleFastPlay = () => director.playableGraph.GetRootPlayable(0).SetSpeed(isFastPlaying.value ? 10.0f : 1.0f);
+        isFastPlaying.AssignCallback(toggleFastPlay);
+
         bool finished = false;
         Action<PlayableDirector> tmp = (PlayableDirector director) => finished = true;
 
         director.stopped += tmp;
         while (!finished) yield return Timing.WaitForOneFrame;
         director.stopped -= tmp;
+        isFastPlaying.RemoveCallback(toggleFastPlay);
 
         onFinish?.Invoke();
         /*director.timeUpdateMode = DirectorUpdateMode.Manual;
@@ -116,7 +123,7 @@ public class CutsceneManager : MonoBehaviour
         while (typing)
         {
             yield return Timing.WaitForOneFrame;
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || isFastPlaying.value)
             {
                 yield return Timing.WaitForOneFrame;
                 UIs.SetTalkContentText(segment.text.text);
@@ -124,7 +131,8 @@ public class CutsceneManager : MonoBehaviour
             }
         }
         Timing.KillCoroutines(conversationTyping);
-        if(!autoPass) while(!Input.GetMouseButtonDown(0)) yield return Timing.WaitForOneFrame;
+        yield return Timing.WaitForOneFrame;
+        if(!autoPass) while(!Input.GetMouseButtonDown(0) && !isFastPlaying.value) yield return Timing.WaitForOneFrame;
         onProgress?.Invoke();
     }
     int SearchStringIndex(int start, string text, char search)

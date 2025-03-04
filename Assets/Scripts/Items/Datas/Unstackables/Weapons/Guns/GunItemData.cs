@@ -204,7 +204,10 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                     }
                     else
                     {
-
+                        wielder.animation.TriggerReload();
+                        reloadCounter = 0.0f;
+                        reloading = true;
+                        reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound);
                     }
                 }
             }
@@ -221,7 +224,6 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         }
         wielder.movement.moveSpeed += weight;
     }
-    readonly int fireID = Animator.StringToHash("Fire");
     public void Fire(GunFireInfo fireInfo)
     {
         wielder.animation.TriggerFire();

@@ -9,7 +9,7 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
 {
     [SerializeField] TriggerCallbacks swordHitbox;
     [SerializeField] float slashTriggerDistance;
-    [SerializeField] float slashDamage;
+    [SerializeField] float slashDamage, slashInterval;
     [SerializeField] float rotateSpeed = 3.0f;
     [SerializeField] Sound slashSound, hitSound;
     [SerializeField] float soundDistance = 20.0f;
@@ -154,16 +154,22 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
             {
                 base.OnStateEnter();
                 origin.anim.SetBool(detectedID, true);
+                slashCounter = origin.slashInterval;
             }
+            float slashCounter = 0.0f;
             public override void OnStateUpdate()
             {
                 base.OnStateUpdate();
                 Vector3 tmp = origin.player.transform.position - origin.transform.position;
                 float deg = Mathf.Atan2(tmp.x, tmp.z) * Mathf.Rad2Deg;
                 origin.transform.rotation = Quaternion.Slerp(origin.transform.rotation, Quaternion.Euler(0, deg, 0), origin.rotateSpeed * Time.deltaTime);
-                if (Vector3.Distance(origin.transform.position, origin.player.transform.position) <= origin.slashTriggerDistance)
+
+                if(slashCounter > 0.0f) slashCounter -= Time.deltaTime;
+
+                if (Vector3.Distance(origin.transform.position, origin.player.transform.position) <= origin.slashTriggerDistance && slashCounter <= 0.0f)
                 {
                     origin.anim.SetTrigger(slashID);
+                    slashCounter = origin.slashInterval;
                 }
             }
             public override void OnStateExit()

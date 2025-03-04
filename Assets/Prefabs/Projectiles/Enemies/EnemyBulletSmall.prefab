@@ -50,6 +50,9 @@ MonoBehaviour:
   rend: {fileID: 3362761127404804891}
   material: {fileID: 2100000, guid: 83c395ee5763d8d4eaa910979b0591c2, type: 2}
   reflectedMaterial: {fileID: 2100000, guid: 33b7ad6c2773c884abca90f75426aff5, type: 2}
+  damage: 0
+  speed: 0
+  range: 0
 --- !u!54 &6035921072900444122
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,7 +99,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.1
   m_Height: 0.4
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -128,7 +131,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.2, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1238597823456650208}

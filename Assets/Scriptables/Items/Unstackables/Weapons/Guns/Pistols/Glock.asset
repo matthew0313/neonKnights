@@ -35,7 +35,7 @@ MonoBehaviour:
   m_auto: 0
   m_baseDamage: 10
   m_baseFireRate: 0.2
-  m_baseRange: 15
+  m_baseRange: 25
   m_baseSpread: 2
   m_baseMagSize: 12
   m_baseReloadTime: 3
