@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class InventoryTab : Tab
+public class InventoryTab : AnchorPosTweenTab
 {
-    [SerializeField] RectTransform rectTransform;
-
     [Header("Slots")]
     [SerializeField] Transform slotAnchor;
     [SerializeField] InventorySlotUI slotPrefab;
@@ -41,26 +39,5 @@ public class InventoryTab : Tab
         {
             slots[i].gameObject.SetActive(false);
         }
-    }
-    Tween tween;
-    public override void OpenTab()
-    {
-        base.OpenTab();
-        if (tween != null) tween.Kill();
-        tween = rectTransform.DOPivot(new Vector2(0.5f, 1.1f), 0.25f).OnUpdate(() =>
-        {
-            rectTransform.anchoredPosition = new Vector2(0.0f, 0.0f);
-        });
-    }
-    public override void CloseTab()
-    {
-        if (tween != null) tween.Kill();
-        tween = rectTransform.DOPivot(new Vector2(0.5f, 0.0f), 0.25f).OnUpdate(() =>
-        {
-            rectTransform.anchoredPosition = new Vector2(0.0f, 0.0f);
-        }).OnComplete(() =>
-        {
-            base.CloseTab();
-        });
     }
 }

@@ -9,7 +9,7 @@ public class CutsceneManager_UI : MonoBehaviour
 {
     [Header("UIs")]
     [SerializeField] float edgeMoveTime = 0.5f;
-    [SerializeField] RectTransform upEdge, downEdge;
+    [SerializeField] RectTransform upEdge, downEdge, fastPlayToggle;
 
     [SerializeField] float conversationUIAppearTime = 0.25f;
     [SerializeField] float conversationUIAppearPivot = -0.35f;
@@ -30,6 +30,9 @@ public class CutsceneManager_UI : MonoBehaviour
             {
                 upEdge.pivot = new Vector2(0.5f, edgeUIAppear);
                 upEdge.anchoredPosition = Vector2.zero;
+
+                fastPlayToggle.pivot = new Vector2(fastPlayToggle.pivot.x, edgeUIAppear);
+                fastPlayToggle.anchoredPosition = Vector2.zero;
 
                 downEdge.pivot = new Vector2(0.5f, 1.0f - edgeUIAppear);
                 downEdge.anchoredPosition = Vector2.zero;

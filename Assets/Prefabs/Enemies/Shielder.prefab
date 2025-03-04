@@ -956,7 +956,7 @@ MonoBehaviour:
   bashRunSpeed: 20
   bashRunDistance: 15
   bashCooldown: 2
-  bashDamage: 10
+  bashDamage: 5
   bashHitSound:
     clip: {fileID: 0}
     volume: 0

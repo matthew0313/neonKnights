@@ -225,7 +225,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         {
             Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
             Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
-            values.moveInput = camFront * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
+            values.moveInput = camFront * Input.GetAxisRaw("Vertical") + camRight * Input.GetAxisRaw("Horizontal");
             values.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
             base.OnStateUpdate();
         }
