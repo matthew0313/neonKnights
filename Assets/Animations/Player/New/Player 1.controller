@@ -2229,33 +2229,33 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -8619486223793798141}
-    second:
-    - {fileID: -7761082500977757188}
   - first: {fileID: -8129614706211582998}
     second:
     - {fileID: 4948114897362264198}
+  - first: {fileID: 2231432521108690585}
+    second:
+    - {fileID: -9054204264237500993}
   - first: {fileID: -6030393966373481665}
     second:
     - {fileID: 927836845855443634}
   - first: {fileID: -5417325202242419322}
     second:
     - {fileID: -3343017437506967740}
-  - first: {fileID: -2954466970898554292}
-    second:
-    - {fileID: -2886846288280624626}
   - first: {fileID: -2213104658801020539}
     second:
     - {fileID: 1684390016656957819}
-  - first: {fileID: 1255742318626794647}
+  - first: {fileID: -2954466970898554292}
     second:
-    - {fileID: -543179449032978780}
-  - first: {fileID: 2231432521108690585}
-    second:
-    - {fileID: -9054204264237500993}
+    - {fileID: -2886846288280624626}
   - first: {fileID: 8873745827144228250}
     second:
     - {fileID: 4778347159830341842}
+  - first: {fileID: -8619486223793798141}
+    second:
+    - {fileID: -7761082500977757188}
+  - first: {fileID: 1255742318626794647}
+    second:
+    - {fileID: -543179449032978780}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -3734,7 +3734,7 @@ BlendTree:
     m_DirectBlendParameter: MoveX
     m_Mirror: 0
   m_BlendParameter: MoveX
-  m_BlendParameterY: MoveX
+  m_BlendParameterY: MoveY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
