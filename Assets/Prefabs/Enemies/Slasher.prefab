@@ -256,6 +256,7 @@ MonoBehaviour:
   swordHitbox: {fileID: 444726151569261283}
   slashTriggerDistance: 3
   slashDamage: 10
+  slashInterval: 4
   rotateSpeed: 3
   slashSound:
     clip: {fileID: 8300000, guid: 621437b2fb8e7ef4fbecb600728f63e8, type: 3}

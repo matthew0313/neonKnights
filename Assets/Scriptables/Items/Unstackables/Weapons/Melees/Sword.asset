@@ -22,11 +22,12 @@ MonoBehaviour:
   m_model: {fileID: -4183936147782657570, guid: 1832ff8ff8fc95846b4b9a78b35528fc,
     type: 3}
   m_category: 4097
+  m_canDrop: 1
   m_prefab: {fileID: -8486058908459522370, guid: 274f66be82776484fb3399cee8a19a40,
     type: 3}
   m_baseDamage: 30
   m_baseMaxHits: 2
-  m_baseWeight: 3.5
+  m_baseWeight: 3
   m_slashSound:
     clip: {fileID: 8300000, guid: 621437b2fb8e7ef4fbecb600728f63e8, type: 3}
     volume: 1
