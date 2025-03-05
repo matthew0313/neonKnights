@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105cb805e976b5542b55ce0a53dd5f56, type: 3}
+  m_Name: Hobin Potion
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Hobin Potion
+    kr: "\uD638\uBE48 \uD3EC\uC158"
+  m_description:
+    en: A potion made by Hobin Jwa, a legendary creature said to have existed 10000
+      years ago.
+    kr: "\uB9CC \uB144 \uC804\uC5D0 \uC874\uC7AC\uD588\uB2E4\uACE0 \uC54C\uB824\uC9C4
+      \uC804\uC124\uC758 \uC0DD\uBB3C \uC88C\uD638\uBE48\uC5D0 \uC758\uD574 \uB9CC\uB4E4\uC5B4\uC9C4
+      \uD3EC\uC158\uC785\uB2C8\uB2E4."
+  m_model: {fileID: 250608228334481033, guid: c44f014eea1ed8e4782d08e778ff78f8, type: 3}
+  m_category: 64
+  m_canDrop: 1
+  m_maxStack: 64
+  m_unit: x
+  m_drinkingSound:
+    clip: {fileID: 8300000, guid: 03f4138683236cb42afd1f8d1bc2ce9a, type: 3}
+    volume: 1
+  m_drinkSound:
+    clip: {fileID: 8300000, guid: 552cd149a48478b469a172f247913849, type: 3}
+    volume: 1
+  m_prefab: {fileID: 494905712687354735, guid: 8bce7476daf276042a7d6373b86ee1e9, type: 3}
+  m_drinkTime: 0.5
+  m_cooldown: 1
+  m_cooldownSource: {fileID: 11400000, guid: df55e7332e5d96a49940ba16973322f8, type: 2}
+  m_cooldownBarColor: {r: 1, g: 0.5615011, b: 0, a: 1}
+  m_healAmount: 99999

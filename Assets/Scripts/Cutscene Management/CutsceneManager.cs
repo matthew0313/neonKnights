@@ -133,7 +133,7 @@ public class CutsceneManager : MonoBehaviour
         while (typing)
         {
             yield return Timing.WaitForOneFrame;
-            if (Input.GetMouseButtonDown(0) || isFastPlaying.value)
+            if ((Input.GetMouseButtonDown(0) || isFastPlaying.value) && segment.skippable)
             {
                 yield return Timing.WaitForOneFrame;
                 UIs.SetTalkContentText(segment.text.text);
