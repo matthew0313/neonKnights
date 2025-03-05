@@ -47,12 +47,14 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
     TopLayer topLayer;
     Slasher_HpComp hp;
     float baseAgentSpeed = 0.0f;
-    private void OnDisable()
+    public override void OnCutsceneStart()
     {
+        base.OnCutsceneStart();
         agentCutsceneControl.enabled = true;
     }
-    private void OnEnable()
+    public override void OnCutsceneEnd()
     {
+        base.OnCutsceneEnd();
         agentCutsceneControl.enabled = false;
     }
 
@@ -66,10 +68,9 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
         agent.updateRotation = false;
         baseAgentSpeed = agent.speed;
 
-        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
-        agentChaseControl = new ControlElement(0, () => agent.isStopped = false, false);
-        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
-        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+        agentControlMachine = new ControlMachine(() => { if (agent.isOnNavMesh) agent.isStopped = true; });
+        agentChaseControl = new ControlElement(0, () => { if (agent.isOnNavMesh) agent.isStopped = false; }, false);
+        agentCutsceneControl = new ControlElement(99, () => { if (agent.isOnNavMesh) agent.isStopped = true; }, false);
 
         anim = GetComponent<Animator>();
         foreach (var i in anim.GetBehaviours<MeleeSlashBehaviour>())
@@ -84,9 +85,14 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
 #endif
         topLayer.OnStateEnter();
     }
+    void Start()
+    {
+        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+    }
     protected override void Update()
     {
         base.Update();
+        if (inCutscene) return;
         topLayer.OnStateUpdate();
     }
     EnemySlash currentSlash;

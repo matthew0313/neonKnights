@@ -30,7 +30,7 @@ public class PooledPrefab<T> : MonoBehaviour where T : PooledPrefab<T>
     }
     protected virtual T Create()
     {
-        return Instantiate((this as T));
+        return MonoBehaviour.Instantiate((this as T));
     }
     protected virtual void OnCreate() { }
     protected virtual void OnRelease() { }

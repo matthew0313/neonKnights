@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ICutsceneCallbackReceiver
 {
+    public int executionOrder => 0;
     public void OnCutsceneStart();
     public void OnCutsceneEnd();
 }
