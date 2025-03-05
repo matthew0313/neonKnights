@@ -107,7 +107,7 @@ public class Player_Animation : MonoBehaviour
     {
         animation.PlayOneShot(itemPickClip);
     }
-    readonly int aimingID = Animator.StringToHash("Aiming");
+    readonly int aimingID = Animator.StringToHash("IsAiming");
     public void SetAiming(bool aiming)
     {
         anim.SetBool(aimingID, aiming);
