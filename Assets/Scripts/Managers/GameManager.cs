@@ -48,7 +48,9 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     public void GameOver()
     {
         isGameOver = true;
+        GameOverUI.saveData = Save();
         GlobalManager.Instance.LoadScene("GameOver");
+        
     }
     public bool isGameOver { get; private set; } = false;
     public Action onStageClear;

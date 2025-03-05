@@ -1,11 +1,19 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
-    public void ToTitle()
+    public static SaveData saveData;
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void init()
     {
-        GlobalManager.Instance.LoadScene("Title");
+        saveData = null;
+    }
+
+    private void Start()
+    {
+        if (saveData == null) return;
     }
 }
