@@ -27,7 +27,6 @@ public class ItemGiverInteraction : Interaction, ISavable
             enabled = false;
         } 
     }
-
     public void Save(SaveData data)
     {
         data.mapElements[id.value] = new();
@@ -37,7 +36,7 @@ public class ItemGiverInteraction : Interaction, ISavable
     {
         if(data.mapElements.TryGetValue(id.value, out DataUnit tmp))
         {
-            if(tmp.bools.TryGetValue("Given", out bool val))
+            if (tmp.bools.TryGetValue("Given", out bool val))
             {
                 model.SetActive(!val);
                 enabled = !val;

@@ -48,6 +48,10 @@ public class Cutscene : MonoBehaviour
     }
     public void Play()
     {
+        CutsceneManager.Instance.StartCutscene(this);
+    }
+    public void OnPlay()
+    {
         onCutsceneStart?.Invoke();
         anim.SetTrigger(playID);
     }

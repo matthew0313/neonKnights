@@ -33,11 +33,11 @@ MonoBehaviour:
   m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
     type: 3}
   m_auto: 0
-  m_baseDamage: 15
+  m_baseDamage: 12
   m_baseFireRate: 0.2
   m_baseRange: 30
   m_baseSpread: 2
-  m_baseMagSize: 12
+  m_baseMagSize: 10
   m_baseReloadTime: 3
   m_baseReserve: 300
   m_baseShotCount: 1
@@ -46,4 +46,5 @@ MonoBehaviour:
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 60
+  m_baseRecoil: 1.5
   m_baseWeight: 1.5

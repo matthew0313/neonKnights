@@ -218,6 +218,9 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver, ISavable
     public void Save(SaveData data)
     {
         data.playerData.strings["inventory"] = JsonUtility.ToJson(Save());
+        data.playerData.strings["chestplateSlot"] = JsonUtility.ToJson(chestplateSlot.Save());
+        data.playerData.strings["accessorySlot1"] = JsonUtility.ToJson(accessorySlot1.Save());
+        data.playerData.strings["accessorySlot2"] = JsonUtility.ToJson(accessorySlot2.Save());
     }
 
     public void Load(SaveData data)
@@ -225,6 +228,18 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver, ISavable
         if(data.playerData.strings.TryGetValue("inventory", out string tmp))
         {
             Load(JsonUtility.FromJson<InventorySaveData>(tmp));
+        }
+        if(data.playerData.strings.TryGetValue("chestplateSlot", out string tmp2))
+        {
+            chestplateSlot.Load(JsonUtility.FromJson<InventorySlotSaveData>(tmp2));
+        }
+        if (data.playerData.strings.TryGetValue("accessorySlot1", out string tmp3))
+        {
+            accessorySlot1.Load(JsonUtility.FromJson<InventorySlotSaveData>(tmp3));
+        }
+        if (data.playerData.strings.TryGetValue("accessorySlot2", out string tmp4))
+        {
+            accessorySlot2.Load(JsonUtility.FromJson<InventorySlotSaveData>(tmp4));
         }
     }
 }

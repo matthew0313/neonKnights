@@ -16,7 +16,7 @@ public class Player_Interaction : MonoBehaviour, ICutsceneCallbackReceiver
     public Interaction selectedInteraction { get; private set; } = null;
     public void OnUpdate()
     {
-        if(interactions.Count > 0) interactions.RemoveAll(interaction => interaction.enabled == false);
+        interactions.RemoveAll(interaction => interaction.enabled == false);
         if (interactions.Count > 0)
         {
             if (cutscenePaused) return;

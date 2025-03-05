@@ -8,7 +8,7 @@ using UnityEngine.Timeline;
 public class SetPositionClip : PlayableAsset, ITimelineClipAsset
 {
     [SerializeField] SetPositionBehaviour template;
-    public ClipCaps clipCaps => ClipCaps.None;
+    public ClipCaps clipCaps => ClipCaps.Blending;
 
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {

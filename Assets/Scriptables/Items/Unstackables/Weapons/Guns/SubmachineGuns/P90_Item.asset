@@ -34,7 +34,7 @@ MonoBehaviour:
     type: 3}
   m_auto: 1
   m_baseDamage: 7
-  m_baseFireRate: 0.1
+  m_baseFireRate: 0.15
   m_baseRange: 32
   m_baseSpread: 4
   m_baseMagSize: 100
@@ -46,4 +46,5 @@ MonoBehaviour:
   m_baseBulletSpeed: 12
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
+  m_baseRecoil: 1
   m_baseWeight: 2

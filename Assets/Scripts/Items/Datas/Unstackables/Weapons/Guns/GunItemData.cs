@@ -20,11 +20,14 @@ public abstract class GunItemData : WeaponItemData
     [SerializeField] bool m_auto;
     [SerializeField] float m_baseDamage;
     [SerializeField] float m_baseFireRate, m_baseRange, m_baseSpread;
-    [SerializeField] int m_baseMagSize, m_baseReloadTime, m_baseReserve, m_baseShotCount = 1;
+    [SerializeField] int m_baseMagSize;
+    [SerializeField] float m_baseReloadTime;
+    [SerializeField] int m_baseReserve, m_baseShotCount = 1;
     [SerializeField] Bullet m_defaultBullet;
     [SerializeField] float m_baseBulletSpeed;
     [SerializeField] int m_defaultPierce = 0;
     [SerializeField] float m_defaultBulletDropoffPercentage = 50.0f;
+    [SerializeField] float m_baseRecoil = 0;
     [SerializeField] float m_baseWeight = 0;
     public bool auto => m_auto;
     public float baseDamage => m_baseDamage;
@@ -39,6 +42,7 @@ public abstract class GunItemData : WeaponItemData
     public float baseBulletSpeed => m_baseBulletSpeed;
     public int defaultPierce => m_defaultPierce;
     public float defaultBulletDropoffPercentage => m_defaultBulletDropoffPercentage;
+    public float baseRecoil => m_baseRecoil;
     public float baseWeight => m_baseWeight;
 
 }
@@ -64,6 +68,7 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         pierce = data.defaultPierce;
         shotCount = data.baseShotCount;
         bulletDropoffPercentage = data.defaultBulletDropoffPercentage;
+        recoil = data.baseRecoil;
         weight = data.baseWeight;
         hitEffect = data.defaultHitEffect;
     }
@@ -80,7 +85,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public float bulletSpeed;
     public int pierce = 0;
     public int shotCount = 1;
-    public float bulletDropoffPercentage;
+    public float bulletDropoffPercentage = 50.0f;
+    public float recoil = 0;
     public float weight = 0;
     public HitEffect hitEffect;
 
@@ -125,6 +131,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
     public bool reloading { get; private set; } = false;
     public float reloadProgress => reloadCounter / reloadTime;
     float reloadCounter = 0.0f;
+
+    bool aiming = false;
     public override void OnWield(Player wielder)
     {
         base.OnWield(wielder);
@@ -154,14 +162,10 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         }
         else
         {
-            if (InputManager.GetReloadInput() && mag < magSize && reserveLeft > 0)
-            {
-                wielder.animation.TriggerReload();
-                reloadCounter = 0.0f;
-                reloading = true;
-                reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound);
-            }
-            else if(counter <= 0.0f)
+            SetAimState(Input.GetMouseButton(1), wielder);
+
+            if (InputManager.GetReloadInput()) StartReload();
+            else if (counter <= 0.0f)
             {
                 if ((auto && Input.GetMouseButton(0) || !auto && Input.GetMouseButtonDown(0)) && UIScanner.ScanUI().Count <= 0)
                 {
@@ -172,12 +176,13 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
                             damage = damage * wielder.statistics.damageMultiplier,
                             fireRate = fireRate,
                             range = range,
-                            spread = spread,
+                            spread = spread * (aiming ? aimSpreadReduction : 1.0f),
                             bullet = bullet,
                             bulletSpeed = bulletSpeed,
                             pierce = pierce,
                             shotCount = shotCount,
                             bulletDropoffPercentage = bulletDropoffPercentage,
+                            recoil = recoil,
                             startPos = weapon.firePoint.position,
                             source = GunFireSource.GunFire,
                             whatToHit = whatToHit,
@@ -201,17 +206,41 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
 
                         AudioManager.Instance.PlaySound(data.fireSound);
                         Fire(fireInfo);
+                        wielder.camera.ApplyRecoil(fireInfo.recoil);
+
+                        if (mag <= 0 && Settings.autoReload) StartReload();
                     }
-                    else
-                    {
-                        wielder.animation.TriggerReload();
-                        reloadCounter = 0.0f;
-                        reloading = true;
-                        reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound);
-                    }
+                    else if (Settings.autoReload) StartReload();
                 }
             }
         }
+    }
+    void StartReload()
+    {
+        if (reloading || reserveLeft <= 0 || mag >= magSize) return;
+        reloading = true;
+
+        SetAimState(false, wielder);
+
+        reloadCounter = 0.0f;
+        wielder.animation.TriggerReload();
+        reloadAudio = AudioManager.Instance.PlaySound(data.reloadSound);
+    }
+    const float aimSlowdown = 0.8f, aimSpreadReduction = 0.75f;
+    void SetAimState(bool aiming, Player wielder)
+    {
+        if (this.aiming == aiming) return;
+        if (this.aiming)
+        {
+            wielder.statistics.speedMultiplier /= aimSlowdown;
+        }
+        else
+        {
+            wielder.statistics.speedMultiplier *= aimSlowdown;
+        }
+        this.aiming = aiming;
+        wielder.camera.zooming = aiming;
+        wielder.animation.SetAiming(aiming);
     }
     public override void OnUnwield(Player wielder)
     {
@@ -222,6 +251,8 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
             reloading = false;
             reloadAudio?.Stop();
         }
+        SetAimState(false, wielder);
+
         wielder.movement.moveSpeed += weight;
     }
     public void Fire(GunFireInfo fireInfo)
@@ -388,6 +419,11 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
         };
         yield return new()
         {
+            en = $"Recoil: {recoil}",
+            kr = $"반동: {recoil}"
+        };
+        yield return new()
+        {
             en = $"Weight: {weight}",
             kr = $"무게: {weight}"
         };
@@ -406,6 +442,7 @@ public class GunFireInfo
     public float bulletSpeed;
     public int pierce, shotCount;
     public float bulletDropoffPercentage;
+    public float recoil;
     public Vector3 startPos, dir;
     public GunFireSource source;
     public LayerMask whatToHit;

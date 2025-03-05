@@ -28,9 +28,12 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] float talkLongInterval;
 
     Cutscene playing;
+    List<ICutsceneCallbackReceiver> callbackReceivers;
     private void Awake()
     {
         UIs = GetComponent<CutsceneManager_UI>();
+        callbackReceivers = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>().ToList();
+        callbackReceivers.Sort((a, b) => a.executionOrder.CompareTo(b.executionOrder));
     }
 
     public void StartCutscene(Cutscene cutscene)
@@ -38,13 +41,13 @@ public class CutsceneManager : MonoBehaviour
         if (playing != null) return;
         isFastPlaying.SetValue(false);
         playing = cutscene;
-        foreach(var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
+        foreach(var i in callbackReceivers)
         {
             i.OnCutsceneStart();
         }
 
         UIs.ShowEdgeUI();
-        playing.Play();
+        playing.OnPlay();
     }
     public void FinishCutscene()
     {
@@ -56,7 +59,7 @@ public class CutsceneManager : MonoBehaviour
         Timing.KillCoroutines(playingTimeline);
         director.Stop();
 
-        foreach (var i in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ICutsceneCallbackReceiver>())
+        foreach (var i in callbackReceivers)
         {
             i.OnCutsceneEnd();
         }
@@ -65,27 +68,34 @@ public class CutsceneManager : MonoBehaviour
         UIs.HideEdgeUI();
     }
     CoroutineHandle playingTimeline;
-    public void PlayTimeline(TimelineAsset timeline, Action onFinish = null)
+    public void PlayTimeline(TimelineAsset timeline, DirectorWrapMode wrapMode, Action onFinish = null)
     {
         Timing.KillCoroutines(playingTimeline);
         director.Stop();
+        director.extrapolationMode = wrapMode;
 
         playingTimeline = Timing.RunCoroutine(PlayingTimeline(timeline, onFinish));
+    }
+    bool assigned = false;
+    void ToggleFastPlay()
+    {
+        director.playableGraph.GetRootPlayable(0).SetSpeed(isFastPlaying.value ? 10.0f : 1.0f);
     }
     IEnumerator<float> PlayingTimeline(TimelineAsset timeline, Action onFinish)
     {
         director.Play(timeline);
         director.playableGraph.GetRootPlayable(0).SetSpeed(isFastPlaying.value ? 10.0f : 1.0f);
-        Action toggleFastPlay = () => director.playableGraph.GetRootPlayable(0).SetSpeed(isFastPlaying.value ? 10.0f : 1.0f);
-        isFastPlaying.AssignCallback(toggleFastPlay);
+        isFastPlaying.AssignCallback(ToggleFastPlay);
+        assigned = true;
+        //bool finished = false;
+        //Action<PlayableDirector> tmp = (PlayableDirector director) => finished = true;
 
-        bool finished = false;
-        Action<PlayableDirector> tmp = (PlayableDirector director) => finished = true;
-
-        director.stopped += tmp;
-        while (!finished) yield return Timing.WaitForOneFrame;
-        director.stopped -= tmp;
-        isFastPlaying.RemoveCallback(toggleFastPlay);
+        //director.stopped += tmp;
+        //while (!stopped) yield return Timing.WaitForOneFrame;
+        //director.stopped -= tmp;
+        while(director.time < director.playableAsset.duration - 0.1f) yield return Timing.WaitForOneFrame;
+        isFastPlaying.RemoveCallback(ToggleFastPlay);
+        assigned = false;
 
         onFinish?.Invoke();
         /*director.timeUpdateMode = DirectorUpdateMode.Manual;
@@ -134,6 +144,22 @@ public class CutsceneManager : MonoBehaviour
         yield return Timing.WaitForOneFrame;
         if(!autoPass) while(!Input.GetMouseButtonDown(0) && !isFastPlaying.value) yield return Timing.WaitForOneFrame;
         onProgress?.Invoke();
+    }
+    CoroutineHandle delaying;
+    public void Delay(float delay, Action onFinish)
+    {
+        Timing.KillCoroutines(delaying);
+        delaying = Timing.RunCoroutine(Delaying(delay, onFinish));
+    }
+    IEnumerator<float> Delaying(float delay, Action onFinish)
+    {
+        float counter = 0.0f;
+        while(counter < delay)
+        {
+            yield return Timing.WaitForOneFrame;
+            counter += Time.deltaTime * (isFastPlaying.value ? 10.0f : 1.0f);
+        }
+        onFinish?.Invoke();
     }
     int SearchStringIndex(int start, string text, char search)
     {
@@ -191,6 +217,7 @@ public class CutsceneManager : MonoBehaviour
         Timing.KillCoroutines(playingTimeline);
         Timing.KillCoroutines(conversationTyping);
         Timing.KillCoroutines(playingTimeline);
+        if (assigned) isFastPlaying.RemoveCallback(ToggleFastPlay);
     }
 }
 #if UNITY_EDITOR

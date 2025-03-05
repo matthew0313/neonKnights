@@ -8,7 +8,7 @@ using UnityEngine.Timeline;
 public class RotateClip : PlayableAsset, ITimelineClipAsset
 {
     [SerializeField] RotateBehaviour template;
-    public ClipCaps clipCaps => ClipCaps.None;
+    public ClipCaps clipCaps => ClipCaps.Blending;
 
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {

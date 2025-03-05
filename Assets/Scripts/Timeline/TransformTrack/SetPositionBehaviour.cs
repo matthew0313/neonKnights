@@ -10,6 +10,10 @@ using UnityEngine.UI;
 public class SetPositionBehaviour : PlayableBehaviour
 {
     [SerializeField] Vector3 targetPos;
+
+    [Header("Debug")]
+    [SerializeField] bool retainPosition = true;
+
     bool firstFramePlayed = false;
     Transform target;
     Vector3 startPos;
@@ -33,7 +37,7 @@ public class SetPositionBehaviour : PlayableBehaviour
         if (firstFramePlayed)
         {
             firstFramePlayed = false;
-            if(!Application.isPlaying) target.position = startPos;
+            if(!Application.isPlaying && retainPosition) target.position = startPos;
         }
     }
 }

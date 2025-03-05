@@ -34,16 +34,17 @@ MonoBehaviour:
     type: 3}
   m_auto: 0
   m_baseDamage: 3
-  m_baseFireRate: 0.2
+  m_baseFireRate: 0.4
   m_baseRange: 40
   m_baseSpread: 7
   m_baseMagSize: 12
   m_baseReloadTime: 4
   m_baseReserve: 100
-  m_baseShotCount: 15
+  m_baseShotCount: 18
   m_defaultBullet: {fileID: 3387496727656365823, guid: 40ed366bf4a1aeb41a49797c0e0f8c94,
     type: 3}
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 80
+  m_baseRecoil: 4
   m_baseWeight: 1.2
