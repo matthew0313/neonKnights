@@ -17,3 +17,5 @@ MonoBehaviour:
     chance: 50
   - lootGen: {fileID: 11400000, guid: ec6e496f7d4db0c49aba5a62d714095d, type: 2}
     chance: 100
+  - lootGen: {fileID: 11400000, guid: 2e45317bc9c799841b59ed8113e03134, type: 2}
+    chance: 20
