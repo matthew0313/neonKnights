@@ -17,15 +17,16 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, 
     [SerializeField] protected float detection = 0.0f;
 
     protected Player player;
+    protected bool inCutscene { get; private set; } = false;
 
     public virtual void OnCutsceneEnd()
     {
-        enabled = true;
+        inCutscene = false;
     }
 
     public virtual void OnCutsceneStart()
     {
-        enabled = false;
+        inCutscene = true;
     }
 
     protected virtual void Awake()
@@ -34,6 +35,7 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, 
     }
     protected virtual void Update()
     {
+        if (inCutscene) return;
         if(Vector3.Distance(transform.position, player.transform.position) <= detectRange && !Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, Vector3.Distance(player.transform.position, transform.position), LayerMask.GetMask("Map")))
         {
             detection = Mathf.Min(detection + detectionRate * Time.deltaTime, maxDetection);

@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockedDoorInteraction : DoorInteraction
+public class LockedDoorInteraction : DoorInteraction, ISavable
 {
     [Header("Locked Door")]
     [SerializeField] ItemData requiredItem;
     [SerializeField] bool consumeOnUnlock = true;
     [SerializeField] Sound unlockSound;
+    [SerializeField] SaveID id;
 
     bool unlocked = false;
     public override LangText interactionName => unlocked ? base.interactionName : player.inventory.equipped != null && player.inventory.equipped.data == requiredItem ? new LangText()
@@ -33,17 +34,16 @@ public class LockedDoorInteraction : DoorInteraction
             }
         }
     }
-    public override void Save(SaveData data)
+    public void Save(SaveData data)
     {
-        base.Save(data);
-        data.mapElements[id.value].bools["Unlocked"] = unlocked;
+        data.mapElements[id.value] = new();
+        data.mapElements[id.value].bools["unlocked"] = unlocked;
     }
-    public override void Load(SaveData data)
+    public void Load(SaveData data)
     {
-        base.Load(data);
         if(data.mapElements.TryGetValue(id.value, out DataUnit tmp))
         {
-            if(tmp.bools.TryGetValue("Unlocked", out bool val))
+            if (tmp.bools.TryGetValue("unlocked", out bool val))
             {
                 unlocked = val;
             }

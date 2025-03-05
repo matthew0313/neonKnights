@@ -53,12 +53,14 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
             if (value) topLayer.ChangeState("Stunned");
         }
     }
-    private void OnDisable()
+    public override void OnCutsceneStart()
     {
+        base.OnCutsceneStart();
         agentCutsceneControl.enabled = true;
     }
-    private void OnEnable()
+    public override void OnCutsceneEnd()
     {
+        base.OnCutsceneEnd();
         agentCutsceneControl.enabled = false;
     }
 
@@ -75,10 +77,9 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         agent = GetComponent<NavMeshAgent>();
         baseAgentSpeed = agent.speed;
 
-        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
-        agentChaseControl = new ControlElement(0, () => agent.isStopped = false, false);
-        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
-        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+        agentControlMachine = new ControlMachine(() => { if (agent.isOnNavMesh) agent.isStopped = true; });
+        agentChaseControl = new ControlElement(0, () => { if (agent.isOnNavMesh) agent.isStopped = false; }, false);
+        agentCutsceneControl = new ControlElement(99, () => { if (agent.isOnNavMesh) agent.isStopped = true; }, false);
 
         anim = GetComponent<Animator>();
         topLayer = new TopLayer(this, new ShielderFSMVals());
@@ -87,14 +88,15 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
 #endif
         topLayer.OnStateEnter();
     }
+    void Start()
+    {
+        agentControlMachine.AddControls(agentChaseControl, agentCutsceneControl);
+    }
     protected override void Update()
     {
         base.Update();
+        if (inCutscene) return;
         topLayer.OnStateUpdate();
-    }
-    private void FixedUpdate()
-    {
-        topLayer.OnStateFixedUpdate();
     }
     public override void Load(SaveData data)
     {

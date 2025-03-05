@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
             GlobalManager.Instance.SaveGame(0, Save());
         }
     }
-    const int stageCount = 1;
+    const int stageCount = 2;
     [SerializeField] int m_stageIndex = 1;
     [SerializeField] float timesPlayed = 0.0f;
 
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
         Time.timeScale = 1.0f;
         GlobalManager.Instance.onSceneWillLoad -= OnSceneWillLoad;
     }
-
+    public int executionOrder => 99999;
     public void OnCutsceneStart()
     {
         canSave = false;

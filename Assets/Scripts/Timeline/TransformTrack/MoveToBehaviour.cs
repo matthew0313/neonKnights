@@ -12,6 +12,10 @@ public class MoveToBehaviour : PlayableBehaviour
     [SerializeField] Vector3 targetPos;
     [SerializeField] AnimationCurve moveCurve;
     [SerializeField] bool local = false;
+
+    [Header("Debug")]
+    [SerializeField] bool retainPosition = true;
+
     Transform target;
     Vector3 startPos;
     bool firstFramePlayed = false;
@@ -42,7 +46,7 @@ public class MoveToBehaviour : PlayableBehaviour
         if (firstFramePlayed)
         {
             firstFramePlayed = false;
-            if (!Application.isPlaying)
+            if (!Application.isPlaying && retainPosition)
             {
                 if (!local) target.position = startPos;
                 else target.localPosition = startPos;

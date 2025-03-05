@@ -792,11 +792,15 @@ MonoBehaviour:
   maxSpringLength: 5
   minRotX: -60
   maxRotX: 60
-  YReverse: 1
   blockingMask:
     serializedVersion: 2
     m_Bits: 64
+  recoilMultiplier: 1
+  recoilReductionSpeed: 5
+  zoomLength: 0.25
+  zoomTime: 0.1
   controlled: 1
+  zooming: 0
 --- !u!114 &4088292724083826717
 MonoBehaviour:
   m_ObjectHideFlags: 0

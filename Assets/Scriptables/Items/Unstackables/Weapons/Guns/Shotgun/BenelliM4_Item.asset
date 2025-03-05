@@ -38,7 +38,7 @@ MonoBehaviour:
   m_baseFireRate: 0.2
   m_baseRange: 30
   m_baseSpread: 8
-  m_baseMagSize: 12
+  m_baseMagSize: 15
   m_baseReloadTime: 2
   m_baseReserve: 200
   m_baseShotCount: 8
@@ -47,4 +47,5 @@ MonoBehaviour:
   m_baseBulletSpeed: 2
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 79
+  m_baseRecoil: 1.5
   m_baseWeight: 3

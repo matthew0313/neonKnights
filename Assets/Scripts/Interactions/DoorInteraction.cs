@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class DoorInteraction : Interaction, ISavable
+public class DoorInteraction : Interaction
 {
-    [SerializeField] Animator anim;
-    [SerializeField] NavMeshLink link;
-    [SerializeField] protected SaveID id;
-    [SerializeField] Sound openSound, closeSound;
-    readonly int openID = Animator.StringToHash("Open");
-    public override LangText interactionName => anim.GetBool(openID) ? new LangText()
+    [SerializeField] Door door;
+    [SerializeField] bool canClose = true;
+    public override LangText interactionName => door.open ? new LangText()
     {
         en = "Close Door",
         kr = "문 닫기"
@@ -22,40 +19,18 @@ public class DoorInteraction : Interaction, ISavable
     };
     protected override void Start()
     {
-        base.Start();
-        if(link != null) link.enabled = anim.GetBool(openID);
+        if (door.open && !canClose) enabled = false;
     }
-
     public override void OnInteract()
     {
-        bool tmp = anim.GetBool(openID);
-        if (tmp)
+        if (door.open)
         {
-            AudioManager.Instance.PlaySound(closeSound);
+            if(canClose) door.Close();
         }
         else
         {
-            AudioManager.Instance.PlaySound(openSound);
-        }
-        anim.SetBool(openID, !tmp);
-        if(link != null) link.enabled = !tmp;
-    }
-
-    public virtual void Save(SaveData data)
-    {
-        data.mapElements[id.value] = new();
-        data.mapElements[id.value].bools["Open"] = anim.GetBool(openID);
-    }
-
-    public virtual void Load(SaveData data)
-    {
-        if(data.mapElements.TryGetValue(id.value, out DataUnit tmp))
-        {
-            if(tmp.bools.TryGetValue("Open", out bool val))
-            {
-                anim.SetBool(openID, val);
-                if(link != null) link.enabled = val;
-            }
+            door.Open();
+            if (!canClose) enabled = false;
         }
     }
 }

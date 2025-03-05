@@ -43,7 +43,7 @@ public static class Settings
     }
     public static Action onAmbienceVolumeChange;
     #endregion
-
+    #region camera
     static float m_cameraSensitivity;
     public static float cameraSensitivity
     {
@@ -67,6 +67,20 @@ public static class Settings
         }
     }
     public static Action onCameraYReverseChange;
+    #endregion
+    #region control
+    static bool m_autoReload;
+    public static bool autoReload
+    {
+        get => m_autoReload;
+        set
+        {
+            m_autoReload = value;
+            onAutoReloadChange?.Invoke();
+        }
+    }
+    public static Action onAutoReloadChange;
+    #endregion
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     static void ResetToDefaults()
@@ -75,6 +89,7 @@ public static class Settings
         volume = 1.0f;
         cameraSensitivity = 1.0f;
         cameraYReverse = true;
+        autoReload = true;
     }
     public static void Load(SettingsSave save)
     {
@@ -83,6 +98,7 @@ public static class Settings
         volume = save.volume;
         cameraSensitivity = save.cameraSensitivity;
         cameraYReverse = save.cameraYReverse;
+        autoReload = save.autoReload;
     }
     public static SettingsSave Save()
     {
@@ -91,6 +107,7 @@ public static class Settings
         save.volume = volume;
         save.cameraSensitivity = cameraSensitivity;
         save.cameraYReverse = cameraYReverse;
+        save.autoReload = autoReload;
         return save;
     }
 }
@@ -99,5 +116,5 @@ public class SettingsSave
 {
     public Language language;
     public float volume, cameraSensitivity;
-    public bool cameraYReverse;
+    public bool cameraYReverse, autoReload;
 }

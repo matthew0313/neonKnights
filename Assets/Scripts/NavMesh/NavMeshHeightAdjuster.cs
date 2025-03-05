@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class NavMeshHeightAdjuster : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Transform adjusted;
 
     [Header("Detection")]
     [SerializeField] LayerMask detectedMask;
@@ -15,28 +16,27 @@ public class NavMeshHeightAdjuster : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] float heightAdjustSpeed = 1.0f;
+    [SerializeField] float allowedRange = 0.5f;
     private void Update()
     {
-        RaycastHit hit;
-
-        Vector3 detectPos = transform.position + agent.velocity * detectionOffset;
-        float desiredHeight = transform.position.y;
-        if (Physics.Raycast(detectPos, Vector3.up, out hit, ceilingDistance, detectedMask))
+        Vector3 detectPos = agent.transform.position + agent.velocity * detectionOffset;
+        float desiredHeight = adjusted.position.y;
+        if (Physics.Raycast(detectPos, Vector3.down, out RaycastHit hit2, Mathf.Infinity, detectedMask))
         {
-            desiredHeight = hit.point.y - ceilingDistance;
+            desiredHeight = Mathf.Max(desiredHeight, hit2.point.y + floorDistance);
         }
-        else if (Physics.Raycast(detectPos, Vector3.down, out hit, Mathf.Infinity, detectedMask))
+        if (Physics.Raycast(detectPos, Vector3.up, out RaycastHit hit1, Mathf.Infinity, detectedMask))
         {
-            desiredHeight = hit.point.y + floorDistance;
+            desiredHeight = Mathf.Min(desiredHeight, hit1.point.y - ceilingDistance);
         }
 
-        if(transform.position.y < desiredHeight)
+        if (adjusted.position.y < desiredHeight - allowedRange)
         {
-            transform.position += Vector3.up * heightAdjustSpeed * Time.deltaTime;
+            adjusted.position += Vector3.up * heightAdjustSpeed * Time.deltaTime;
         }
-        else if(transform.position.y > desiredHeight)
+        else if(adjusted.position.y > desiredHeight + allowedRange)
         {
-            transform.position -= Vector3.up * heightAdjustSpeed * Time.deltaTime;
+            adjusted.position -= Vector3.up * heightAdjustSpeed * Time.deltaTime;
         }
     }
 }

@@ -71,13 +71,15 @@ public class UIManager : MonoBehaviour, ICutsceneCallbackReceiver
     {
         ToggleTab(null);
     }
+    bool canControl = true;
     private void Update()
     {
+        if (!canControl) return;
         if (InputManager.GetInventoryTabInput()) ToggleTab(inventoryTab);
     }
     public void OnCutsceneStart()
     {
-        enabled = false;
+        canControl = false;
         defaultUI.SetActive(false);
         CloseTab();
         cutsceneCursorControl.enabled = true;
@@ -85,7 +87,7 @@ public class UIManager : MonoBehaviour, ICutsceneCallbackReceiver
 
     public void OnCutsceneEnd()
     {
-        enabled = true;
+        canControl = true;
         defaultUI.SetActive(true);
         cutsceneCursorControl.enabled = false;
     }

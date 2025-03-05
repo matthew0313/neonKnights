@@ -10,6 +10,7 @@ using UnityEngine.UI;
 [TrackClipType(typeof(MoveToClip))]
 [TrackClipType(typeof(SetPositionClip))]
 [TrackClipType(typeof(RotateClip))]
+[TrackClipType(typeof(SetRotationClip))]
 public class TransformTrack : TrackAsset
 {
 

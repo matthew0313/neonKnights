@@ -72,7 +72,7 @@ public abstract class EquipmentItem : UnstackableItem, IStatDisplayed, IQuirkabl
         EquipmentItem tmp = base.Copy() as EquipmentItem;
         foreach(var i in quirks)
         {
-            (i as IQuirkable).AddQuirk(i.Copy());
+            (tmp as IQuirkable).AddQuirk(i.Copy());
         }
         return tmp;
     }

@@ -53,12 +53,14 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         }
     }
     int mag = 0;
-    private void OnDisable()
+    public override void OnCutsceneStart()
     {
+        base.OnCutsceneStart();
         agentCutsceneControl.enabled = true;
     }
-    private void OnEnable()
+    public override void OnCutsceneEnd()
     {
+        base.OnCutsceneEnd();
         agentCutsceneControl.enabled = false;
     }
 
@@ -73,10 +75,9 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         agent.updateRotation = false;
         baseAgentSpeed = agent.speed;
 
-        agentControlMachine = new ControlMachine(() => agent.isStopped = true);
-        agentMoveControl = new ControlElement(0, () => agent.isStopped = false, false);
-        agentCutsceneControl = new ControlElement(99, () => agent.isStopped = true, false);
-        agentControlMachine.AddControls(agentMoveControl, agentCutsceneControl);
+        agentControlMachine = new ControlMachine(() => { if (agent.isOnNavMesh) agent.isStopped = true; });
+        agentMoveControl = new ControlElement(0, () => { if (agent.isOnNavMesh) agent.isStopped = false; }, false);
+        agentCutsceneControl = new ControlElement(99, () => { if (agent.isOnNavMesh) agent.isStopped = true; }, false);
 
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -87,9 +88,14 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
 #endif
         topLayer.OnStateEnter();
     }
+    void Start()
+    {
+        agentControlMachine.AddControls(agentMoveControl, agentCutsceneControl);
+    }
     protected override void Update()
     {
         base.Update();
+        if (inCutscene) return;
         topLayer.OnStateUpdate();
     }
     readonly int attackID = Animator.StringToHash("Attack");

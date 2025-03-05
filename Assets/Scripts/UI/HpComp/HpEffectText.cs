@@ -11,8 +11,18 @@ public class HpEffectText : PooledPrefab<HpEffectText>
 {
     [SerializeField] Color normalColor, resistColor, nullifiedColor;
     [SerializeField] float disappearTime = 0.5f, moveRange = 100.0f;
+    static HpEffectText prefab;
     TMP_Text text;
     RainbowText rainbow;
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Initialize()
+    {
+        prefab = Resources.Load<HpEffectText>("HpEffectText");
+    }
+    public static HpEffectText CreateNew()
+    {
+        return prefab.Instantiate();
+    }
     protected override void OnCreate()
     {
         base.OnCreate();

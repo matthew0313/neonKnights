@@ -72,7 +72,7 @@ public class Pooler<T> where T : Component
     }
     T Get()
     {
-        pool.RemoveAll((T obj) => obj == null);
+        pool.RemoveAll((T obj) => obj == null || !obj.gameObject.scene.IsValid());
         if(pool.Count == 0) Release(creator.Invoke());
         T result = pool[0];
         pool.RemoveAt(0);

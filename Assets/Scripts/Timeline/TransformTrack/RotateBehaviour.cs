@@ -12,6 +12,10 @@ public class RotateBehaviour : PlayableBehaviour
     [SerializeField] Vector3 targetEulers;
     [SerializeField] AnimationCurve rotateCurve;
     [SerializeField] bool local = false;
+
+    [Header("Debug")]
+    [SerializeField] bool retainPosition = true;
+
     Transform target;
     Vector3 startEulers;
     bool firstFramePlayed = false;
@@ -42,7 +46,7 @@ public class RotateBehaviour : PlayableBehaviour
         if (firstFramePlayed)
         {
             firstFramePlayed = false;
-            if (!Application.isPlaying)
+            if (!Application.isPlaying && retainPosition)
             {
                 if (!local) target.rotation = Quaternion.Euler(startEulers);
                 else target.localRotation = Quaternion.Euler(startEulers);

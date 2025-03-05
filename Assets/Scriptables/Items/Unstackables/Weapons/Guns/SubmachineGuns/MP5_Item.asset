@@ -46,4 +46,5 @@ MonoBehaviour:
   m_baseBulletSpeed: 15
   m_defaultPierce: 0
   m_defaultBulletDropoffPercentage: 50
-  m_baseWeight: 3
+  m_baseRecoil: 0.5
+  m_baseWeight: 2.5
