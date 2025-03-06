@@ -71,6 +71,8 @@ public class CutsceneManager : MonoBehaviour
     public void PlayTimeline(TimelineAsset timeline, DirectorWrapMode wrapMode, Action onFinish = null)
     {
         Timing.KillCoroutines(playingTimeline);
+        if (assigned) isFastPlaying.RemoveCallback(ToggleFastPlay);
+
         director.Stop();
         director.extrapolationMode = wrapMode;
 

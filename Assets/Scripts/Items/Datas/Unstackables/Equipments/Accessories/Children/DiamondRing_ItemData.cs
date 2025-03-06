@@ -61,7 +61,7 @@ public class DiamondRing_Item : AccessoryItem, ICurseable
     public LangText curseEffectDesc => new LangText()
     {
         en = $"+{data.curseAttackBoostPercentage}% Damage, -{data.curseHPDrain} HP every second",
-        kr = $"대미지 +{data.curseAttackBoostPercentage}, 초마다 -{data.curseHPDrain} HP"
+        kr = $"대미지 +{data.curseAttackBoostPercentage}%, 초마다 -{data.curseHPDrain} HP"
     };
     public override void OnEquip(Player equipper)
     {
