@@ -212,15 +212,15 @@ AnimatorStateMachine:
   - {fileID: -1618246381598942451}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -7768814658338247872}
-    second:
-    - {fileID: 773951293738494984}
-  - first: {fileID: 782799532956708381}
-    second:
-    - {fileID: 1081397315102608292}
   - first: {fileID: 7980466914320869258}
     second:
     - {fileID: 6580174430209220381}
+  - first: {fileID: 782799532956708381}
+    second:
+    - {fileID: 1081397315102608292}
+  - first: {fileID: -7768814658338247872}
+    second:
+    - {fileID: 773951293738494984}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: c12c34ecb6845a14faa0bfea15bd5080, type: 2}
+  wrapMode: 2
   progressOnFinish: 0
 --- !u!1102 &-6298276330226986453
 AnimatorState:
@@ -322,6 +323,7 @@ AnimatorState:
   - {fileID: 7713307187007300880}
   - {fileID: -3491543770843169121}
   - {fileID: 5507328313498149136}
+  - {fileID: -3773046093538126250}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -579,6 +581,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-3773046093538126250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e758d23365b56498cb7987f9cd980c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  played:
+    clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
+    volume: 1
+  loop: 0
+  soundID: 
+  volumeHooks: []
+  fadeIn: 0
+  fadeInDuration: 1
 --- !u!114 &-3491543770843169121
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -592,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: ba90fe755d97d214e8d55e56bf9d6efd, type: 2}
+  wrapMode: 2
   progressOnFinish: 0
 --- !u!114 &-3311122873100829909
 MonoBehaviour:

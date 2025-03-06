@@ -46,7 +46,7 @@ MonoBehaviour:
       en: Eliath
       kr: "\uC5D8\uB9AC\uC544\uC2A4"
     m_text:
-      en: Shit...
+      en: Damn it...
       kr: "\uC774\uB7F0 \uC820\uC7A5..."
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: 217865a52c469dd43becd0b52c28b825, type: 2}
+  wrapMode: 2
   progressOnFinish: 1
 --- !u!1107 &-2294918557279760022
 AnimatorStateMachine:
@@ -139,7 +140,6 @@ AnimatorState:
   - {fileID: 1485942438835557450}
   m_StateMachineBehaviours:
   - {fileID: 5891261034019250861}
-  - {fileID: 6716933365414655101}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

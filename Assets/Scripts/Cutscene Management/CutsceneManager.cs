@@ -128,7 +128,15 @@ public class CutsceneManager : MonoBehaviour
         UIs.SetTalkContentText(string.Empty);
 
         bool typing = true;
-        conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text.text, segment.talkSound, () => typing = false));
+        //conversationTyping = Timing.RunCoroutine(ConversationTyping(segment.text.text, segment.talkSound, () => typing = false));
+        conversationTyping = Timing.RunCoroutine(CoroutineLibrary.Typewrite(segment.text.text,
+            talkInterval, talkLongInterval,
+            (content) =>
+            {
+                UIs.SetTalkContentText(content);
+                AudioManager.Instance.PlaySound(segment.talkSound);
+            },
+            () => typing = false));
 
         while (typing)
         {
@@ -161,7 +169,7 @@ public class CutsceneManager : MonoBehaviour
         }
         onFinish?.Invoke();
     }
-    int SearchStringIndex(int start, string text, char search)
+    /*int SearchStringIndex(int start, string text, char search)
     {
         for(int i = start; i < text.Length; i++)
         {
@@ -195,7 +203,7 @@ public class CutsceneManager : MonoBehaviour
             i++;
         }
         onFinish?.Invoke();
-    }
+    }*/
     public void CloseConversation()
     {
         if (!conversationOpen) return;

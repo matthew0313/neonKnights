@@ -143,6 +143,7 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver, ISavable
     }
     void OnEquippedSlotUpdate()
     {
+        if (inCutscene) return;
         ChangeEquippedItem(equippedSlot.item);
     }
     void ChangeEquippedItem(Item item)
@@ -201,11 +202,18 @@ public class Player_Inventory : Inventory, ICutsceneCallbackReceiver, ISavable
     public void OnCutsceneStart()
     {
         inCutscene = true;
+        if(equipped != null)
+        {
+            equipped.OnUnwield(origin);
+            equipped = null;
+            onEquippedItemChange?.Invoke(equipped);
+        }
     }
 
     public void OnCutsceneEnd()
     {
         inCutscene = false;
+        OnEquippedSlotUpdate();
     }
     protected override void OnDestroy()
     {

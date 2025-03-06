@@ -13,11 +13,11 @@ public class DiamondRing_ItemData : AccessoryItemData
     [SerializeField] float m_speedBoost;
 
     [Header("Curse")]
-    [SerializeField] float m_curseSpeedBoostPercentage;
+    [SerializeField] float m_curseAttackBoostPercentage;
     [SerializeField] float m_curseHPDrain;
     public float shieldBoost => m_shieldBoost;
     public float speedBoost => m_speedBoost;
-    public float curseSpeedBoostPercentage => m_curseSpeedBoostPercentage;
+    public float curseAttackBoostPercentage => m_curseAttackBoostPercentage;
     public float curseHPDrain => m_curseHPDrain;
     public override Item Create()
     {
@@ -60,8 +60,8 @@ public class DiamondRing_Item : AccessoryItem, ICurseable
     }
     public LangText curseEffectDesc => new LangText()
     {
-        en = $"+{data.curseSpeedBoostPercentage}% Speed, -{data.curseHPDrain} HP every second",
-        kr = $"속도 +{data.curseSpeedBoostPercentage}, 초마다 -{data.curseHPDrain} HP"
+        en = $"+{data.curseAttackBoostPercentage}% Damage, -{data.curseHPDrain} HP every second",
+        kr = $"대미지 +{data.curseAttackBoostPercentage}, 초마다 -{data.curseHPDrain} HP"
     };
     public override void OnEquip(Player equipper)
     {
@@ -77,7 +77,7 @@ public class DiamondRing_Item : AccessoryItem, ICurseable
     }
     void Curse_OnEquip(Player equipper)
     {
-        equipper.statistics.speedMultiplier *= (1.0f + data.curseSpeedBoostPercentage / 100.0f);
+        equipper.statistics.damageMultiplier *= (1.0f + data.curseAttackBoostPercentage / 100.0f);
     }
     float counter = 0.0f;
     void Curse_OnEquipUpdate()
@@ -91,7 +91,7 @@ public class DiamondRing_Item : AccessoryItem, ICurseable
     }
     void Curse_OnUnequip(Player equipper)
     {
-        equipper.statistics.speedMultiplier /= (1.0f + data.curseSpeedBoostPercentage / 100.0f);
+        equipper.statistics.damageMultiplier /= (1.0f + data.curseAttackBoostPercentage / 100.0f);
     }
     public override ItemModel GetModel()
     {

@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: 4c2ecb8ba062e294bb63822f18131e8f, type: 2}
+  wrapMode: 2
   progressOnFinish: 1
 --- !u!1101 &-4927398480259574892
 AnimatorStateTransition:
@@ -329,6 +330,26 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &1915046925699649144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e758d23365b56498cb7987f9cd980c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  played:
+    clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
+    volume: 1
+  loop: 0
+  soundID: 
+  volumeHooks: []
+  fadeIn: 0
+  fadeInDuration: 1
 --- !u!114 &3487022756120509501
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -386,7 +407,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 1409797692984301899}
   - {fileID: -6396911843111771882}
-  - {fileID: 8378999522684428979}
+  - {fileID: 1915046925699649144}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -510,4 +531,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: 4c2ecb8ba062e294bb63822f18131e8f, type: 2}
+  wrapMode: 2
   progressOnFinish: 1

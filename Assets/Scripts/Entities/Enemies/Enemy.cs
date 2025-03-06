@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, ISavable
 {
@@ -70,7 +71,14 @@ public abstract class Enemy : Entity, IDamageSource, ICutsceneCallbackReceiver, 
         {
             enabled = tmp.bools["enabled"];
             detection = tmp.floats["detection"];
-            transform.position = new Vector3(tmp.floats["posX"], tmp.floats["posY"], tmp.floats["posZ"]);
+            if(gameObject.TryGetComponent(out NavMeshAgent agent))
+            {
+                agent.Warp(new Vector3(tmp.floats["posX"], tmp.floats["posY"], tmp.floats["posZ"]));
+            }
+            else
+            {
+                transform.position = new Vector3(tmp.floats["posX"], tmp.floats["posY"], tmp.floats["posZ"]);
+            }
             transform.rotation = Quaternion.Euler(0.0f, tmp.floats["rotY"], 0.0f);
             if (TryGetComponent(out Enemy_HpComp hp))
             {

@@ -123,12 +123,6 @@ public class Slasher : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdjus
             tmp.GetDamage(slashDamage * damageMultiplier);
         }
     }
-    public override void Load(SaveData data)
-    {
-        agent.enabled = false;
-        base.Load(data);
-        if(enabled) agent.enabled = true;
-    }
     class EnemySlash
     {
         public int comboIndex;

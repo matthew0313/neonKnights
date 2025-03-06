@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ef72b31abb371d4c96d6189ef1bf07e, type: 3}
-  m_Name: Hook_MusicVolume
+  m_Name: Hook_MusicAmbientVolume
   m_EditorClassIdentifier: 
   mode: 2
   hooks:
-  - {fileID: 11400000, guid: 5f9260a88c0440c439599f0b3a2e4a2e, type: 2}
   - {fileID: 11400000, guid: ece4272ca752a1241a52226b947a3641, type: 2}
   - {fileID: 11400000, guid: ef041d18a83e7d54c87e8be210c592a0, type: 2}
   clamp01: 1

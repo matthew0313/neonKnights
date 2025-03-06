@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     public bool paused = false;
     public Action<bool> onPauseToggle;
 
-    const float autoSaveInterval = 120.0f;
+    const float autoSaveInterval = 60.0f;
     float autoSaveCounter = 0.0f;
     private void Update()
     {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
         if(autoSaveCounter >= autoSaveInterval)
         {
             autoSaveCounter = 0.0f;
-            GlobalManager.Instance.SaveGame(0, Save());
+            AutoSave();
         }
     }
     const int stageCount = 2;
@@ -36,10 +36,14 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     [SerializeField] float timesPlayed = 0.0f;
 
     public int stageIndex => m_stageIndex;
+
+    List<ISavable> savables = new();
     void Awake()
     {
         Time.timeScale = 1.0f;
         GlobalManager.Instance.onSceneWillLoad += OnSceneWillLoad;
+        savables = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).OfType<ISavable>().ToList();
+        savables.Sort((a, b) => a.executionOrder.CompareTo(b.executionOrder));
     }
     void OnSceneWillLoad()
     {
@@ -73,21 +77,17 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
     public void Load(SaveData data)
     {
         timesPlayed = data.timesPlayed;
-        foreach (var i in GetSavables()) i.Load(data);
+        foreach (var i in savables) i.Load(data);
     }
-    public bool canSave { get; private set; } = true;
+    public bool canSave => !isGameOver && !inCutscene;
     public SaveData Save()
     {
         SaveData data = new();
-        foreach(var i in GetSavables()) i.Save(data);
+        foreach(var i in savables) i.Save(data);
         data.stageIndex = stageIndex;
         data.timesPlayed = timesPlayed;
         Debug.Log("Saved");
         return data;
-    }
-    IEnumerable<ISavable> GetSavables()
-    {
-        return FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).OfType<ISavable>();
     }
     private void OnDestroy()
     {
@@ -95,14 +95,21 @@ public class GameManager : MonoBehaviour, ICutsceneCallbackReceiver
         GlobalManager.Instance.onSceneWillLoad -= OnSceneWillLoad;
     }
     public int executionOrder => 99999;
+    bool inCutscene = false;
     public void OnCutsceneStart()
     {
-        canSave = false;
+        inCutscene = true;
     }
 
     public void OnCutsceneEnd()
     {
-        canSave = true;
-        if(!isGameOver) GlobalManager.Instance.SaveGame(0, Save());
+        inCutscene = false;
+        AutoSave();
+    }
+    void AutoSave()
+    {
+        if (!canSave) return;
+        autoSaveCounter = 0.0f;
+        GlobalManager.Instance.SaveGame(0, Save());
     }
 }

@@ -1,10 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance { get; private set; }
-    public AudioManager() => Instance = this;
+    static AudioManager instance;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = new GameObject("AudioManager").AddComponent<AudioManager>();
+                DontDestroyOnLoad(instance);
+            }
+            return instance;
+        }
+    }
 
     Pooler<AudioSource> audioSourcePool = new(() =>
     {
@@ -44,10 +56,10 @@ public class AudioManager : MonoBehaviour
     {
         removeQueue.Add(audio);
     }
-    public void StopAudio(string id)
+    public PlayingAudio GetPlayingAudio(string id)
     {
-        if (id == string.Empty) return;
-        playing.Find(audio => audio.id == id)?.Stop();
+        if (id == string.Empty) return null;
+        return playing.Find(audio => audio.id == id);
     }
 }
 public static class PlayingAudioManagement
@@ -71,6 +83,13 @@ public static class PlayingAudioManagement
     {
         if (audio == null) return null;
         audio.volume = volume;
+        return audio;
+    }
+    public static PlayingAudio HookVolume(this PlayingAudio audio, FloatHook hook)
+    {
+        if (audio == null) return null;
+        if (audio.volumeHooks == null) audio.volumeHooks = new();
+        audio.volumeHooks.Add(hook);
         return audio;
     }
     public static PlayingAudio SetID(this PlayingAudio audio, string id)
@@ -101,14 +120,20 @@ public class PlayingAudio
     public float maxDistance = 30;
 
     public string id = string.Empty;
+
+    public List<FloatHook> volumeHooks;
     public void Update()
     {
-        if (!source.isPlaying)
+        if (source == null || !source.gameObject.scene.IsValid() || !source.isPlaying)
         {
             Stop();
             return;
         }
-        source.volume = Settings.volume * sound.volume * volume;
+        float volume = Settings.volume * sound.volume * this.volume;
+        if(volumeHooks != null)
+        {
+            foreach (var i in volumeHooks) volume *= i.value;
+        }
         if (distanceControl)
         {
             Vector3 pos;
@@ -120,9 +145,10 @@ public class PlayingAudio
             {
                 pos = lastLocation;
             }
-            source.volume *= Mathf.Max(0.0f, (1.0f - Vector3.Distance(pos, Camera.main.transform.position) / maxDistance));
+            volume *= Mathf.Max(0.0f, (1.0f - Vector3.Distance(pos, Camera.main.transform.position) / maxDistance));
             lastLocation = pos;
         }
+        source.volume = volume;
     }
     bool removed = false;
     public void Stop()

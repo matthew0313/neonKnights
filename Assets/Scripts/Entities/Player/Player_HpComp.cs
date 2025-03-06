@@ -23,7 +23,8 @@ public class Player_HpComp : HpComp, ICutsceneCallbackReceiver, ISavable
 
         if(dead)
         {
-            CutsceneManager.Instance.StartCutscene(gameOverCutscene);
+            if (gameOverCutscene != null) gameOverCutscene.Play();
+            else GameManager.Instance.GameOver();
         }
 
         return info;

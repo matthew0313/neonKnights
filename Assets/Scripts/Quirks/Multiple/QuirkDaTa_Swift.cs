@@ -15,7 +15,7 @@ public class QuirkData_Swift : QuirkData
     
     public override bool IsAddable(IQuirkable target)
     {
-        return base.IsAddable(target);
+        return base.IsAddable(target) && target is WeaponItem;
     }
     public override Quirk Create()
     {

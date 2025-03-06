@@ -222,6 +222,8 @@ GameObject:
   - component: {fileID: 44001841}
   - component: {fileID: 44001840}
   - component: {fileID: 44001843}
+  - component: {fileID: 44001845}
+  - component: {fileID: 44001844}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -241,13 +243,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 683241975}
+  m_Father: {fileID: 843821802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000027285889}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1300, y: 0}
+  m_SizeDelta: {x: 1300, y: 0}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &44001840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,17 +283,30 @@ MonoBehaviour:
     \uD574\uB3C4. \uADF8\uAC8C \uB0B4\uAC00 \uB808\uC9C0\uC2A4\uD0D5\uC2A4\uC758
     \uBA64\uBC84\uC778 \uB108\uB97C \uAEBC\uB0B4\uC900 \uC774\uC720\uB2E4.\"\n\n\uC5D8\uB9AC\uC544\uC2A4:
     \"\uC815\uB9D0\uB85C \uC6B0\uB9AC\uAC00 \uACF5\uC874\uD560 \uC218 \uC788\uC744
-    \uAC70\uB77C\uACE0 \uC0DD\uAC01\uD574?\"\n\n\n\uC870\uB825\uC790: \"\uAE00\uC384,
+    \uAC70\uB77C\uACE0 \uC0DD\uAC01\uD574?\"\n\n\uC870\uB825\uC790: \"\uAE00\uC384,
     \uD655\uC2E4\uD558\uAC8C \uB2F5\uD558\uC9C4 \uBABB\uD558\uACA0\uB2E4. \uADF8\uB7EC\uB098
     \uC2DC\uAC04\uC744 \uC8FC\uBA74 \uC6B0\uB9B0 \uBC14\uB014 \uAC83\uC774\uB2E4.
     \uB0B4\uAC00 \uADF8\uB807\uAC8C \uB9CC\uB4E4 \uAC70\uB2E4.\"\n\n\uC5D8\uB9AC\uC544\uC2A4:
     \"\uC54C\uC558\uC5B4. \uD589\uC6B4\uC744 \uBE4C\uC5B4.\"\n\n*\uC870\uB825\uC790\uAC00
     \uB5A0\uB09C\uB2E4*\n\n\uC5D8\uB9AC\uC544\uC2A4: \"\uACF5\uC874\uC774\uB77C...\"\n\n*\uC5D8\uB9AC\uC544\uC2A4\uB294
     \uAE4A\uC740 \uC0DD\uAC01\uC5D0 \uC7A0\uAE30\uBA70 \uB808\uC9C0\uC2A4\uD0D5\uC2A4
-    \uBCF8\uBD80\uB85C \uB3CC\uC544\uAC04\uB2E4*"
-  english: '<b><size=130><color=#EEEE00>RBT2024</color></size></b>
-
-'
+    \uBCF8\uBD80\uB85C \uB3CC\uC544\uAC04\uB2E4*\n\n\n\n\n<b><color=#FFFF00><size=200>End</size></color></b>"
+  english: "<b><size=130><color=#EEEE00>RBT2024</color></size></b>\n\n\n\nDirector/Lead
+    Programmer/All sorts of stuff: \uC7A5\uD604\uC6D0\n\nDesigner: \uD53C\uC740\uC11C\n\nProgrammer:
+    \uC88C\uD638\uBE48, \uD669\uC0C1\uD604\n\n\n\n\n\n*A masked man approaches*\n\nEliath:
+    \"Who's there?\"\n\n???: \"Before we say farewell, figured i had to tell you
+    something.\"\n\nEliath: \"That voice...\"\n\nAssistant: \"Yep, It's me.\"\n\n*Assistant
+    takes off their mask*\n\nEliath: \"You... You were a robot this whole time?\"\n\nAssistant:
+    \"Yes.\"\n\nEliath: \"The Company must be your parent-like figure then... Why
+    did you do this?\"\n\nAssistant: \"The Company's way of solving things is simply
+    wrong. Controlling the humanity with robots won't bring anything but chaos.\"\n\nAssistant:
+    \"I envision a future where both robots and humans live in harmony, Even if it
+    means destroying The Company. That's why i brought you, a member of the resistance,
+    out of that cell.\"\n\nEliath: \"Do you really think we can co-exist?\"\n\nAssistant:
+    \"Well... I can't say for sure. But given some time, we'll change. I'll make
+    sure it happens.\"\n\nEliath: \"Alright. Good luck.\"\n\n*Assistant leaves*\n\nEliath:
+    \"Co-existing, huh...\"\n\n*Eliath returns to the resistance's base, deep in
+    thought.*\n\n\n\n\n<b><color=#FFFF00><size=200>End</size></color></b>"
 --- !u!114 &44001841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,23 +328,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "<b><size=130><color=#EEEE00>RBT2024</color></size></b>\n\n\n\nDirector/Lead
-    Programmer/All sorts of stuff: Hyunwon Chang (Matt)\n\nDesigner: Eunseoh Pi\n\nProgrammer:
-    Hobin Jwa, Sanghyun Hwang\n\n\n\n\n\n*A masked man approaches*\n\nEliath: \"Who's
-    there?\"\n\n???: \"Before we say farewell, figured i had to tell you something.\"\n\nEliath:
-    \"That voice...\"\n\nAssistant: \"Yep, It's me.\"\n\n*Assistant takes off their
-    mask*\n\nEliath: \"You... You were a robot this whole time?\"\n\nAssistant: \"Yes.\"\n\nEliath:
-    \"The Company must be your parent-like figure then... Why did you do this?\"\n\nAssistant:
-    \"The Company's way of solving things is simply wrong. Controlling the humanity
-    with robots won't bring anything but chaos.\"\n\nAssistant: \"I envision a future\"\n\n\uC5D8\uB9AC\uC544\uC2A4:
-    \"\uC815\uB9D0\uB85C \uC6B0\uB9AC\uAC00 \uACF5\uC874\uD560 \uC218 \uC788\uC744
-    \uAC70\uB77C\uACE0 \uC0DD\uAC01\uD574?\"\n\n\n\uC870\uB825\uC790: \"\uAE00\uC384,
-    \uD655\uC2E4\uD558\uAC8C \uB2F5\uD558\uC9C4 \uBABB\uD558\uACA0\uB2E4. \uADF8\uB7EC\uB098
-    \uC2DC\uAC04\uC744 \uC8FC\uBA74 \uC6B0\uB9B0 \uBC14\uB014 \uAC83\uC774\uB2E4.
-    \uB0B4\uAC00 \uADF8\uB807\uAC8C \uB9CC\uB4E4 \uAC70\uB2E4.\"\n\n\uC5D8\uB9AC\uC544\uC2A4:
-    \"\uC54C\uC558\uC5B4. \uD589\uC6B4\uC744 \uBE4C\uC5B4.\"\n\n*\uC870\uB825\uC790\uAC00
-    \uB5A0\uB09C\uB2E4*\n\n\uC5D8\uB9AC\uC544\uC2A4: \"\uACF5\uC874\uC774\uB77C...\"\n\n*\uC5D8\uB9AC\uC544\uC2A4\uB294
-    \uAE4A\uC740 \uC0DD\uAC01\uC5D0 \uC7A0\uAE30\uBA70 \uB808\uC9C0\uC2A4\uD0D5\uC2A4
-    \uBCF8\uBD80\uB85C \uB3CC\uC544\uAC04\uB2E4*"
+    Programmer/All sorts of stuff: \uC7A5\uD604\uC6D0\n\nDesigner: \uD53C\uC740\uC11C\n\nProgrammer:
+    \uC88C\uD638\uBE48, \uD669\uC0C1\uD604\n\n\n\n\n\n*A masked man approaches*\n\nEliath:
+    \"Who's there?\"\n\n???: \"Before we say farewell, figured i had to tell you
+    something.\"\n\nEliath: \"That voice...\"\n\nAssistant: \"Yep, It's me.\"\n\n*Assistant
+    takes off their mask*\n\nEliath: \"You... You were a robot this whole time?\"\n\nAssistant:
+    \"Yes.\"\n\nEliath: \"The Company must be your parent-like figure then... Why
+    did you do this?\"\n\nAssistant: \"The Company's way of solving things is simply
+    wrong. Controlling the humanity with robots won't bring anything but chaos.\"\n\nAssistant:
+    \"I envision a future where both robots and humans live in harmony, Even if it
+    means destroying The Company. That's why i brought you, a member of the resistance,
+    out of that cell.\"\n\nEliath: \"Do you really think we can co-exist?\"\n\nAssistant:
+    \"Well... I can't say for sure. But given some time, we'll change. I'll make
+    sure it happens.\"\n\nEliath: \"Alright. Good luck.\"\n\n*Assistant leaves*\n\nEliath:
+    \"Co-existing, huh...\"\n\n*Eliath returns to the resistance's base, deep in
+    thought.*\n\n\n\n\n<b><color=#FFFF00><size=200>End</size></color></b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf282596eff8e9d4e922d826b20127e5, type: 2}
   m_sharedMaterial: {fileID: 6418408542199132269, guid: cf282596eff8e9d4e922d826b20127e5,
@@ -423,6 +436,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &44001844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44001838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc85b9c31c421547bd21431bfce47a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rolled: {fileID: 44001839}
+  startDelay: 6
+  rollSpeed: 50
+--- !u!114 &44001845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44001838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8c9655b95ce01449f6f0521813aa65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweened: {fileID: 44001839}
+  targetPos: {x: 0, y: 0}
+  duration: 3
+  delay: 3
+  easeType: 21
 --- !u!1 &263310727
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,14 +534,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 44001839}
+  m_Children: []
   m_Father: {fileID: 702893204}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &683241976
 MonoBehaviour:
@@ -524,7 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -581,8 +625,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 263310728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.7734087}
+  m_AnchorMax: {x: 1, y: 0.99999094}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -643,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &702893204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -724,7 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -847,8 +891,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1760088967}
+  - {fileID: 1414767356}
+  - {fileID: 44001839}
   - {fileID: 1415512559}
   - {fileID: 702893204}
+  - {fileID: 1816872391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -881,8 +928,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c25c2da632c152f41b9ff19e53907054, type: 3}
-  m_Resource: {fileID: 8300000, guid: c25c2da632c152f41b9ff19e53907054, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2f7722765f69dda4a88ed599e43ac81f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2f7722765f69dda4a88ed599e43ac81f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1081,8 +1128,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1254,6 +1301,99 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1414767355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414767356}
+  - component: {fileID: 1414767359}
+  - component: {fileID: 1414767358}
+  - component: {fileID: 1414767357}
+  m_Layer: 5
+  m_Name: ContentBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1414767356
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414767355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 843821802}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 1300, y: 0}
+  m_SizeDelta: {x: 1300, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1414767357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414767355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8c9655b95ce01449f6f0521813aa65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweened: {fileID: 1414767356}
+  targetPos: {x: 0, y: 0}
+  duration: 3
+  delay: 0
+  easeType: 21
+--- !u!114 &1414767358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414767355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1414767359
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414767355}
+  m_CullTransparentMesh: 1
 --- !u!1 &1415512558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,11 +1429,11 @@ RectTransform:
   - {fileID: 867214709}
   m_Father: {fileID: 843821802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -723, y: -425}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 50}
   m_SizeDelta: {x: 350, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1415512560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,7 +1491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1628,7 +1768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1816872391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1638,15 +1778,15 @@ RectTransform:
   m_GameObject: {fileID: 1816872390}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7234375, y: 0.7234375, z: 0.7234375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 843821802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 602, y: 391}
-  m_SizeDelta: {x: 2072.253, y: 1079.9136}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1816872392
 MonoBehaviour:
@@ -1782,8 +1922,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 691038094}
   m_HandleRect: {fileID: 691038093}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.23727599
+  m_Value: 0.9999883
+  m_Size: 0.22658224
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1833,5 +1973,4 @@ SceneRoots:
   - {fileID: 1436454457}
   - {fileID: 1285784737}
   - {fileID: 843821802}
-  - {fileID: 1816872391}
   - {fileID: 26297790}

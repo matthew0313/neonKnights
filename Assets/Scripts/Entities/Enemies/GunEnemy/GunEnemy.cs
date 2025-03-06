@@ -141,12 +141,6 @@ public class GunEnemy : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
     {
         Timing.KillCoroutines(reloadCoroutine);
     }
-    public override void Load(SaveData data)
-    {
-        agent.enabled = false;
-        base.Load(data);
-        if(enabled) agent.enabled = true;
-    }
     class GunEnemyFSMVals : FSMVals
     {
         public float attackCounter = 0.0f;

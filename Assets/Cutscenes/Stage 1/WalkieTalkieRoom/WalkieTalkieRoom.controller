@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: 79549d7037a45d14dbb2c60ab2fed50b, type: 2}
+  wrapMode: 2
   progressOnFinish: 0
 --- !u!114 &-7923008714387879095
 MonoBehaviour:
@@ -145,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: b6a1b27cedbdf934b898d3602008a50d, type: 2}
+  wrapMode: 2
   progressOnFinish: 1
 --- !u!1102 &-7044688437763624329
 AnimatorState:
@@ -488,6 +490,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-832781483621234463
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e758d23365b56498cb7987f9cd980c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  played:
+    clip: {fileID: 8300000, guid: 6438c5a12fd576b43b73651ee8a17b0d, type: 3}
+    volume: 1
+  loop: 0
+  soundID: 
+  volumeHooks: []
+  fadeIn: 0
+  fadeInDuration: 1
 --- !u!1102 &-807147698101693436
 AnimatorState:
   serializedVersion: 6
@@ -502,7 +524,7 @@ AnimatorState:
   - {fileID: 5218883757136597323}
   m_StateMachineBehaviours:
   - {fileID: -260055416809255675}
-  - {fileID: 6307889328105825777}
+  - {fileID: -832781483621234463}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

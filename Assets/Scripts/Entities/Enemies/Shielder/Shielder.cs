@@ -98,12 +98,6 @@ public class Shielder : Enemy, ISpeedMultiplierAdjustable, IDamageMultiplierAdju
         if (inCutscene) return;
         topLayer.OnStateUpdate();
     }
-    public override void Load(SaveData data)
-    {
-        agent.enabled = false;
-        base.Load(data);
-        if(enabled) agent.enabled = true;
-    }
     class ShielderFSMVals : FSMVals
     {
 

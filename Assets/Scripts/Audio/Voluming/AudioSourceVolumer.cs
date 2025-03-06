@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioSourceVolumer : MonoBehaviour
@@ -14,47 +15,28 @@ public class AudioSourceVolumer : MonoBehaviour
     {
         if(source == null) source = GetComponent<AudioSource>();
 
-        if(volumeHook.Length == 0)
+        Settings.onVolumeChange += OnVolumeChange;
+        foreach (var i in volumeHook)
         {
-            Settings.onVolumeChange += OnVolumeChange;
-        }
-        else
-        {
-            foreach(var i in volumeHook)
-            {
-                i.AssignCallback(OnVolumeChange);
-            }
+            i.AssignCallback(OnVolumeChange);
         }
         OnVolumeChange();
     }
     private void OnDisable()
     {
-        if(volumeHook.Length == 0)
+        Settings.onVolumeChange -= OnVolumeChange;
+        foreach (var i in volumeHook)
         {
-            Settings.onVolumeChange -= OnVolumeChange;
-        }
-        else
-        {
-            foreach(var i in volumeHook)
-            {
-                i.RemoveCallback(OnVolumeChange);
-            }
+            i.RemoveCallback(OnVolumeChange);
         }
     }
     void OnVolumeChange()
     {
-        if (volumeHook.Length == 0)
+        float tmp = Settings.volume * multiplier;
+        foreach (var i in volumeHook)
         {
-            source.volume = Mathf.Clamp01(Settings.volume * multiplier);
+            tmp *= i.value;
         }
-        else
-        {
-            float volume = 1.0f;
-            foreach(var i in volumeHook)
-            {
-                volume *= i.value;
-            }
-            source.volume = Mathf.Clamp01(volume * multiplier);
-        }
+        source.volume = Mathf.Clamp01(tmp);
     }
 }

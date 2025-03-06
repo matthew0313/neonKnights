@@ -22,7 +22,7 @@ public abstract class GrenadeItem : ProjectileThrowerItem
         {
             if (hit.TryGetComponent(out IDamagable tmp)) tmp.GetDamage(new()
             {
-                amount = data.damage,
+                amount = data.damage * wielder.statistics.damageMultiplier,
                 source = wielder
             });
         };
