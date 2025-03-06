@@ -80,6 +80,7 @@ public class Pooler<T> where T : Component
     }
     void Release(T obj)
     {
+        if (obj == null || !obj.gameObject.scene.IsValid()) return;
         if(pool.Count >= maxSize)
         {
             MonoBehaviour.Destroy(pool[0].gameObject);
