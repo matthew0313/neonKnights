@@ -81,7 +81,7 @@ MonoBehaviour:
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
       volume: 1
-    m_skippable: 0
+    m_skippable: 1
   progress: 0
 --- !u!1101 &-4980238558592068117
 AnimatorStateTransition:
@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: cbed406be037967448815bd92b0eda8b, type: 2}
+  wrapMode: 2
   progressOnFinish: 1
 --- !u!91 &9100000
 AnimatorController:
@@ -234,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: c20b4ab751498e5488abf0ea696a37eb, type: 2}
+  wrapMode: 2
   progressOnFinish: 1
 --- !u!114 &3828048397152083359
 MonoBehaviour:
@@ -370,5 +372,5 @@ MonoBehaviour:
     m_talkSound:
       clip: {fileID: 8300000, guid: 3c11074dc65102442a30f09289ccc368, type: 3}
       volume: 1
-    m_skippable: 0
+    m_skippable: 1
   progress: 0

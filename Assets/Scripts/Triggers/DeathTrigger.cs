@@ -12,6 +12,10 @@ public class DeathTrigger : MonoBehaviour
     {
         foreach (var i in targets) i.onDeath += OnTargetDeath;
     }
+    public void Check()
+    {
+        OnTargetDeath();
+    }
     void OnTargetDeath()
     {
         if (!enabled) return;

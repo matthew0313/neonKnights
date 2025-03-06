@@ -96,6 +96,7 @@ public static class Settings
         Debug.Log(save.language);
         language = save.language;
         volume = save.volume;
+        ambienceVolume = save.ambienceVolume;
         cameraSensitivity = save.cameraSensitivity;
         cameraYReverse = save.cameraYReverse;
         autoReload = save.autoReload;
@@ -105,6 +106,7 @@ public static class Settings
         SettingsSave save = new();
         save.language = language;
         save.volume = volume;
+        save.ambienceVolume = ambienceVolume;
         save.cameraSensitivity = cameraSensitivity;
         save.cameraYReverse = cameraYReverse;
         save.autoReload = autoReload;
@@ -115,6 +117,6 @@ public static class Settings
 public class SettingsSave
 {
     public Language language;
-    public float volume, cameraSensitivity;
+    public float volume, ambienceVolume, cameraSensitivity;
     public bool cameraYReverse, autoReload;
 }

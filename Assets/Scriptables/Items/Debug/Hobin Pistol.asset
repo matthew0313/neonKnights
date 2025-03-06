@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9edfeed8d0944440aa96c2297ce56b1, type: 3}
+  m_Name: Hobin Pistol
+  m_EditorClassIdentifier: 
+  m_itemName:
+    en: Hobin Pistol
+    kr: "\uD638\uBE48 \uAD8C\uCD1D"
+  m_description:
+    en: A pistol made out of hobinium.
+    kr: "\uD638\uBE44\uB284\uC73C\uB85C \uB9CC\uB4E0 \uAD8C\uCD1D\uC785\uB2C8\uB2E4."
+  m_model: {fileID: 1512641532065717270, guid: a991c7b29b4b27441bd98a9d93b465d8, type: 3}
+  m_category: 7
+  m_canDrop: 1
+  m_prefab: {fileID: 2286668309897709226, guid: 7afaf7ad201a9ab41aa1ecb10f29931d,
+    type: 3}
+  m_fireSound:
+    clip: {fileID: 8300000, guid: 1bb663f5d33443c48b8a16062503e3eb, type: 3}
+    volume: 1
+  m_reloadSound:
+    clip: {fileID: 8300000, guid: 8703f0b6f04bc804ea8152517654d547, type: 3}
+    volume: 1
+  m_defaultHitEffect: {fileID: 6509953710676017226, guid: 988e1b3f609f6814897c95ac4b1f507b,
+    type: 3}
+  m_auto: 1
+  m_baseDamage: 999999
+  m_baseFireRate: 0.2
+  m_baseRange: 999
+  m_baseSpread: 2
+  m_baseMagSize: 100
+  m_baseReloadTime: 0.5
+  m_baseReserve: 1000
+  m_baseShotCount: 20
+  m_defaultBullet: {fileID: 5832811861654171486, guid: 2c06104e19f1c3440810962b4e457acd,
+    type: 3}
+  m_baseBulletSpeed: 2
+  m_defaultPierce: 0
+  m_defaultBulletDropoffPercentage: 50
+  m_baseRecoil: 1
+  m_baseWeight: 0
+  m_scopeSpreadReduction: 50
+  m_scopeCost: 1000

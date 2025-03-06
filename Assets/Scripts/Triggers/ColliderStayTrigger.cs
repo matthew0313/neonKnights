@@ -10,6 +10,7 @@ public class ColliderStayTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log(name);
         if (!enabled) return;
         foreach(var i in targetTags)
         {

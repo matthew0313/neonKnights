@@ -67,6 +67,7 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
             QuirkSaveList quirkSaves = JsonUtility.FromJson<QuirkSaveList>(tmp);
             foreach(var i in quirkSaves.list)
             {
+                if (i.data == null) continue;
                 Quirk quirk = i.data.Create();
                 quirk.Load(i.save);
                 (this as IQuirkable).AddQuirk(quirk);
