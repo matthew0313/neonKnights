@@ -57,6 +57,7 @@ public class CutsceneManager : MonoBehaviour
         playing = null;
 
         Timing.KillCoroutines(playingTimeline);
+        if (assigned) isFastPlaying.RemoveCallback(ToggleFastPlay);
         director.Stop();
 
         foreach (var i in callbackReceivers)
