@@ -56,6 +56,16 @@ public class Quirk_OneMag : Quirk
             kr = $"{convertPercentage}% 탄환 저장량 => 탄창 크기"
         };
     }
+    public override void Save(DataUnit data)
+    {
+        base.Save(data);
+        data.floats["convertPercentage"] = convertPercentage;
+    }
+    public override void Load(DataUnit data)
+    {
+        base.Load(data);
+        data.floats.TryGetValue("convertPercentage", out convertPercentage);
+    }
     public override Quirk Copy()
     {
         Quirk_OneMag tmp = base.Copy() as Quirk_OneMag;

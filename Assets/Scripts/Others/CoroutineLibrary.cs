@@ -16,7 +16,7 @@ public class CoroutineLibrary
             {
                 int tagStart = i;
                 int tagEnd = text.Length;
-                for (int k = tagStart; k < text.Length; k++)
+                for (int k = tagStart + 1; k < text.Length; k++)
                 {
                     if (text[k] == '>')
                     {
