@@ -89,6 +89,8 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
 
     TopLayer topLayer;
 
+    private Player_Animation animatorController;
+
     public ControlMachine canMoveControl { get; private set; }
     public void OnAwake()
     {
@@ -115,12 +117,34 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
     public void OnStart()
     {
         controller.enabled = true;
+        
+        animatorController = GetComponent<Player_Animation>();
+        
+        if (animatorController == null)
+        {
+            Debug.LogError("CharacterAnimatorController missing");
+        }
     }
     public void OnUpdate()
     {
         if (cutscenePaused) return;
         topLayer.OnStateUpdate();
         Rotate();
+        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
+
+        if (animatorController != null)
+        {
+            animatorController.SetMovementInput(inputVector.x, inputVector.y);
+            animatorController.UpdateInputMagniude(inputVector);
+            
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
+                Debug.Log($"PlayerMovements: 입력 값 X={horizontalInput}, Y={verticalInput}");
+            }
+        }
     }
     public void OnFixedUpdate()
     {
@@ -138,13 +162,13 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
             Vector2 pos1 = new Vector2(transform.position.x, transform.position.z);
             Vector2 pos2 = new Vector2(end.x, end.z);
             rot = pos2 - pos1;*/
-            rot = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
-            lastLookedDir = new Vector3(rot.x, 0.0f, rot.y);
         }
-        else if (rotateMode == RotateMode.Free)
-        {
-            rot = new Vector2(lastLookedDir.x, lastLookedDir.z);
-        }
+        //else if (rotateMode == RotateMode.Free)
+        //{
+           // rot = new Vector2(lastLookedDir.x, lastLookedDir.z);
+        //}
+        rot = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
+        lastLookedDir = new Vector3(rot.x, 0.0f, rot.y);
         rotator.rotation = Quaternion.Slerp(rotator.rotation, Quaternion.Euler(0, -Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg + 90.0f, 0), rotateSpeed * Time.deltaTime);
     }
     CoroutineHandle dashCoroutine;
@@ -170,6 +194,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         yield return Timing.WaitForSeconds(endLag);
         onFinish?.Invoke();
     }
+
     void OnDestroy()
     {
         Timing.KillCoroutines(dashCoroutine);
