@@ -40,8 +40,8 @@ public class Player_Animation : MonoBehaviour
     }
     void OnEquippedItemChange(Item item)
     {
-        if (item == null) anim.SetFloat(animationTypeID, (int)AnimationType.None);
-        else anim.SetFloat(animationTypeID, (int)item.heldAnimation);
+        if (item == null) anim.SetInteger(animationTypeID, (int)AnimationType.None);
+        else anim.SetInteger(animationTypeID, (int)item.heldAnimation);
     }
     void OnDamage(DamageReceivedInfo info)
     {

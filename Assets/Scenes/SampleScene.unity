@@ -3150,7 +3150,7 @@ MonoBehaviour:
   applyStartLanguage: 0
   startLanguage: 1
   addingQuirk: {fileID: 0}
-  givingItem: {fileID: 0}
+  givingItem: {fileID: 11400000, guid: a78b81e055be3804e953f436035a70f4, type: 2}
   givingCount: 1
 --- !u!4 &1228967348
 Transform:
