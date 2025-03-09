@@ -283392,7 +283392,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1313433126}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
+  m_PlayableAsset: {fileID: 11400000, guid: 4c2ecb8ba062e294bb63822f18131e8f, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -283459,7 +283459,7 @@ PlayableDirector:
   - key: {fileID: 4170363845923234972, guid: 4c2ecb8ba062e294bb63822f18131e8f, type: 2}
     value: {fileID: 464329913}
   - key: {fileID: 4840457140047172589, guid: 4c2ecb8ba062e294bb63822f18131e8f, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1375562453383235642}
   - key: {fileID: -5572586596041104157, guid: 4c2ecb8ba062e294bb63822f18131e8f, type: 2}
     value: {fileID: 1268813854}
   - key: {fileID: -3316940309380212460, guid: 87e8dbe640620e84ea72aafc52aa571a, type: 2}
@@ -458443,11 +458443,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1388664225763376646, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2162403036978680429, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: interactionText
@@ -458503,56 +458498,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3123537163433718059, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4832115480588861452, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4868292953859539206, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 9100000, guid: fe753c12e69377c4aa4e194ddd3486d3, type: 2}
-    - target: {fileID: 5414842566214700065, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: b8a7488d12adc39498433d60811eab1a, type: 3}
-    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.72077185
-      objectReference: {fileID: 0}
-    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.6931724
-      objectReference: {fileID: 0}
-    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146829436286669587, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: gameOverCutscene
       value: 
       objectReference: {fileID: 1985591973}
-    - target: {fileID: 8084621336247997178, guid: 32a5ee7328d754949847830285189e1e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

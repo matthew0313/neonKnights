@@ -21,11 +21,13 @@ public class Player_Animation : MonoBehaviour
     new ControllerClipBlendSystem animation;
 
     ControlElement canMoveAnimationControl;
+
+    ControlMachine<Animator, int> onlyArmsLayerControl;
+    ControlElement<Animator, int> unheldOnlyArmsLayerControl;
     public void OnAwake()
     {
         //anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
-        origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         origin.hpComp.onDamage += OnDamage;
 
         canMoveAnimationControl = new ControlElement(1, () => origin.movement.canMove = false, false);
@@ -36,12 +38,23 @@ public class Player_Animation : MonoBehaviour
         animation = new ControllerClipBlendSystem(anim, controller);
         anim.Rebind();
         AssignMeleeCallbacks();
+        InitOnlyArmsLayerControl();
+
+        origin.inventory.onEquippedItemChange += OnEquippedItemChange;
         OnEquippedItemChange(origin.inventory.equipped);
     }
     void OnEquippedItemChange(Item item)
     {
-        if (item == null) anim.SetFloat(animationTypeID, (int)AnimationType.None);
-        else anim.SetFloat(animationTypeID, (int)item.heldAnimation);
+        if (item == null)
+        {
+            anim.SetFloat(animationTypeID, (int)AnimationType.None);
+            unheldOnlyArmsLayerControl.enabled = true;
+        }
+        else
+        {
+            anim.SetFloat(animationTypeID, (int)item.heldAnimation);
+            unheldOnlyArmsLayerControl.enabled = item.heldAnimation == AnimationType.None;
+        }
     }
     void OnDamage(DamageReceivedInfo info)
     {
@@ -134,6 +147,18 @@ public class Player_Animation : MonoBehaviour
     public void SetAiming(bool aiming)
     {
         anim.SetBool(aimingID, aiming);
+    }
+    void InitOnlyArmsLayerControl()
+    {
+        onlyArmsLayerControl = new ControlMachine<Animator, int>(anim, 4, (anim, layer) => anim.SetLayerWeight(layer, 1.0f));
+        Debug.Log("ADDedeeee");
+        foreach (var i in anim.GetBehaviours<LayerWeightControlBehaviour>())
+        {
+            Debug.Log("ADDed");
+            onlyArmsLayerControl.AddControls(i.GetControl());
+        }
+        unheldOnlyArmsLayerControl = new ControlElement<Animator, int>(1, (anim, layer) => anim.SetLayerWeight(layer, 0.0f));
+        onlyArmsLayerControl.AddControls(unheldOnlyArmsLayerControl);
     }
     private void OnDestroy()
     {
