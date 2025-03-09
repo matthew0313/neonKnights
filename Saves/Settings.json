@@ -1,7 +1,7 @@
 {
     "language": 0,
-    "volume": 0.3591017723083496,
-    "ambienceVolume": 0.07114472985267639,
+    "volume": 1.0,
+    "ambienceVolume": 1.0,
     "cameraSensitivity": 1.0,
     "cameraYReverse": true,
     "autoReload": true
