@@ -458506,13 +458506,23 @@ PrefabInstance:
     - target: {fileID: 3123537163433718059, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4832115480588861452, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4868292953859539206, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fe753c12e69377c4aa4e194ddd3486d3, type: 2}
+    - target: {fileID: 5414842566214700065, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: b8a7488d12adc39498433d60811eab1a, type: 3}
     - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -458538,6 +458548,11 @@ PrefabInstance:
       propertyPath: gameOverCutscene
       value: 
       objectReference: {fileID: 1985591973}
+    - target: {fileID: 8084621336247997178, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

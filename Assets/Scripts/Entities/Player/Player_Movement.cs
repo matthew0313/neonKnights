@@ -118,12 +118,12 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
     {
         controller.enabled = true;
         
-        animatorController = GetComponent<Player_Animation>();
+        /*animatorController = GetComponent<Player_Animation>();
         
         if (animatorController == null)
         {
             Debug.LogError("CharacterAnimatorController missing");
-        }
+        }*/
     }
     public void OnUpdate()
     {
@@ -131,7 +131,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         topLayer.OnStateUpdate();
         Rotate();
         
-        float horizontalInput = Input.GetAxis("Horizontal");
+        /*float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
 
@@ -144,7 +144,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
             {
                 Debug.Log($"PlayerMovements: 입력 값 X={horizontalInput}, Y={verticalInput}");
             }
-        }
+        }*/
     }
     public void OnFixedUpdate()
     {
@@ -265,7 +265,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
             {
                 Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
                 Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
-                values.moveInput = camFront * Input.GetAxisRaw("Vertical") + camRight * Input.GetAxisRaw("Horizontal");
+                values.moveInput = camFront * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
                 values.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
                 base.OnStateUpdate();
             }

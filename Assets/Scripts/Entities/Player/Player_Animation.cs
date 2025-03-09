@@ -40,8 +40,8 @@ public class Player_Animation : MonoBehaviour
     }
     void OnEquippedItemChange(Item item)
     {
-        if (item == null) anim.SetInteger(animationTypeID, (int)AnimationType.None);
-        else anim.SetInteger(animationTypeID, (int)item.heldAnimation);
+        if (item == null) anim.SetFloat(animationTypeID, (int)AnimationType.None);
+        else anim.SetFloat(animationTypeID, (int)item.heldAnimation);
     }
     void OnDamage(DamageReceivedInfo info)
     {
@@ -52,10 +52,10 @@ public class Player_Animation : MonoBehaviour
     readonly int runningID = Animator.StringToHash("Running");
     readonly int dashingID = Animator.StringToHash("Dashing");
     readonly int slidingID = Animator.StringToHash("Sliding");
-    readonly int moveXID = Animator.StringToHash("MoveX");
-    readonly int moveYID = Animator.StringToHash("MoveY");
+    readonly int moveXID = Animator.StringToHash("moveX");
+    readonly int moveYID = Animator.StringToHash("moveY");
     readonly int canMoveID = Animator.StringToHash("CanMove");
-    readonly int moveMagnitudeID = Animator.StringToHash("moveMagnitude");
+    readonly int moveMagnitudeID = Animator.StringToHash("InputMagnitude");
     float magValue = 0.0f;
     public void OnUpdate()
     {
