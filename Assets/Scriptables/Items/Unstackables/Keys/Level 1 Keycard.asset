@@ -19,6 +19,6 @@ MonoBehaviour:
     en: A keycard that can access level 1 security.
     kr: "\uBCF4\uC548 \uB808\uBCA8 1\uC5D0 \uC811\uADFC\uD560 \uC218 \uC788\uB294
       \uD0A4\uCE74\uB4DC\uC785\uB2C8\uB2E4."
-  m_model: {fileID: 0}
+  m_model: {fileID: 3926285678070950256, guid: 016377e05756ea541bbfcfa4652fedfc, type: 3}
   m_category: 8192
   m_canDrop: 1

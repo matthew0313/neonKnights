@@ -10,6 +10,9 @@ public class Player_Animation : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] RuntimeAnimatorController controller;
 
+    [SerializeField] float walkMoveMag = 0.7f, runMoveMag = 1.0f;
+    [SerializeField] float magnitudeControlSpeed = 5.0f;
+
     [Header("Clips")]
     [SerializeField] AnimationClip itemPickClip;
     [SerializeField] AnimationClip hurtClip;
@@ -37,8 +40,8 @@ public class Player_Animation : MonoBehaviour
     }
     void OnEquippedItemChange(Item item)
     {
-        if (item == null) anim.SetInteger(animationTypeID, (int)AnimationType.None);
-        else anim.SetInteger(animationTypeID, (int)item.heldAnimation);
+        if (item == null) anim.SetFloat(animationTypeID, (int)AnimationType.None);
+        else anim.SetFloat(animationTypeID, (int)item.heldAnimation);
     }
     void OnDamage(DamageReceivedInfo info)
     {
@@ -52,6 +55,8 @@ public class Player_Animation : MonoBehaviour
     readonly int moveXID = Animator.StringToHash("MoveX");
     readonly int moveYID = Animator.StringToHash("MoveY");
     readonly int canMoveID = Animator.StringToHash("CanMove");
+    readonly int moveMagnitudeID = Animator.StringToHash("moveMagnitude");
+    float magValue = 0.0f;
     public void OnUpdate()
     {
         canMoveAnimationControl.enabled = !anim.GetBool(canMoveID);
@@ -62,6 +67,24 @@ public class Player_Animation : MonoBehaviour
         anim.SetBool(slidingID, origin.movement.sliding);
         anim.SetFloat(moveXID, origin.movement.relativeMoveInput.x);
         anim.SetFloat(moveYID, origin.movement.relativeMoveInput.z);
+
+        if (origin.movement.moving)
+        {
+            if (origin.movement.running)
+            {
+                magValue = Mathf.Min(magValue + Time.deltaTime * magnitudeControlSpeed, runMoveMag);
+            }
+            else
+            {
+                if (magValue > walkMoveMag) magValue = Mathf.Max(magValue - Time.deltaTime * magnitudeControlSpeed, walkMoveMag);
+                else magValue = Mathf.Min(magValue + Time.deltaTime * magnitudeControlSpeed, walkMoveMag);
+            }
+        }
+        else
+        {
+            magValue = Mathf.Max(magValue - Time.deltaTime * magnitudeControlSpeed, 0.0f);
+        }
+        anim.SetFloat(moveMagnitudeID, magValue);
     }
 
     readonly int fireID = Animator.StringToHash("Fire");

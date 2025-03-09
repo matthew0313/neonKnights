@@ -19300,7 +19300,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.25
   m_Height: 10
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
@@ -44797,7 +44797,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.25
   m_Height: 10
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
@@ -45729,7 +45729,7 @@ MonoBehaviour:
     m_waitTime: 1
   - m_wayPoint: {fileID: 1665584467}
     m_waitTime: 1
-  moveSpeed: 4
+  moveSpeed: 3
   id:
     value: fa844687-850a-4584-a2f4-d57401ed5376
 --- !u!1 &218064859
@@ -77678,7 +77678,7 @@ MonoBehaviour:
     m_waitTime: 0.5
   - m_wayPoint: {fileID: 1852240725}
     m_waitTime: 0.5
-  moveSpeed: 5
+  moveSpeed: 3
   id:
     value: 50f7edd1-d296-437e-ab49-d39902707ce7
 --- !u!1001 &357164341
@@ -220159,7 +220159,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.25
   m_Height: 10
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
@@ -231218,7 +231218,7 @@ MonoBehaviour:
     m_waitTime: 2
   - m_wayPoint: {fileID: 337821919}
     m_waitTime: 2
-  moveSpeed: 4
+  moveSpeed: 3
   id:
     value: 4806527a-ba04-4ae7-ae95-2b5619c2c5f3
 --- !u!1001 &1061308814
@@ -245959,7 +245959,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.25
   m_Height: 10
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
@@ -282238,7 +282238,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.25
   m_Height: 10
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
@@ -313394,7 +313394,7 @@ MonoBehaviour:
     m_waitTime: 1
   - m_wayPoint: {fileID: 84809918}
     m_waitTime: 1
-  moveSpeed: 4
+  moveSpeed: 3
   id:
     value: 419b915e-5979-4c19-91eb-4e0e67f61ae7
 --- !u!1001 &1459683285

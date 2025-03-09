@@ -7,6 +7,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_Saw", menuName = "Scriptables/Quirks/Guns/Saw", order = 0)]
 public class QuirkData_Saw : QuirkData
 {
+    [Header("Saw")]
+    [SerializeField] float m_maxRange = 7;
+    public float maxRange => m_maxRange;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
@@ -26,7 +29,7 @@ public class Quirk_Saw : Quirk
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        (target as GunItem).range = Mathf.Min(3, (target as GunItem).range);
+        (target as GunItem).range = Mathf.Min(data.maxRange, (target as GunItem).range);
         (target as GunItem).onFireStart += OnFireStart;
         (target as GunItem).onShotHit += OnShotHit;
         (target as GunItem).onFireEnd += OnFireEnd;
