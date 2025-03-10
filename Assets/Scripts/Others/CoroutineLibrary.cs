@@ -21,6 +21,7 @@ public class CoroutineLibrary
                     if (text[k] == '>')
                     {
                         tagEnd = k;
+                        break;
                     }
                 }
                 if (tagEnd < text.Length)

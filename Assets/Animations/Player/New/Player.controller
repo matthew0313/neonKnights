@@ -295,7 +295,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WeakAttack_SwordB
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8587965960248798495}
@@ -1661,7 +1661,7 @@ MonoBehaviour:
   slashEndTime: 0.75
   effect: {fileID: 3902135265232634539, guid: 7eefe5ab3cdfc694e9b1150942053dc9, type: 3}
   effectStartInterval: 0.5
-  pos: {x: -0.132, y: 0.524, z: 2.081}
+  pos: {x: -0.132, y: 0.524, z: 1.5}
   rot: {x: 0.6043469, y: 327.8939, z: 2.0999942}
 --- !u!1101 &-3246486874423028459
 AnimatorStateTransition:
@@ -1757,11 +1757,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 1
-  slashStartTime: 0.5
-  slashEndTime: 0.75
+  slashStartTime: 0.3
+  slashEndTime: 0.6
   effect: {fileID: 7916895230301998553, guid: c6ea06c38d23d4c4daaeb31cf2bcc642, type: 3}
-  effectStartInterval: 0.5
-  pos: {x: -0.132, y: 0.524, z: 2.081}
+  effectStartInterval: 0.3
+  pos: {x: -0.095, y: 0.019, z: 2.089}
   rot: {x: 0.6043469, y: 327.8939, z: 2.0999942}
 --- !u!206 &-2013416478312437452
 BlendTree:
@@ -1925,12 +1925,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 0
-  slashStartTime: 0.33
+  slashStartTime: 0.37
   slashEndTime: 0.65
   effect: {fileID: 3902135265232634539, guid: 7eefe5ab3cdfc694e9b1150942053dc9, type: 3}
-  effectStartInterval: 0.33
-  pos: {x: 0.71, y: 0.38, z: 0.2}
-  rot: {x: 358.51257, y: 292.78897, z: 332.95374}
+  effectStartInterval: 0.37
+  pos: {x: -0.12, y: 0.37, z: 0}
+  rot: {x: -0.00000093832733, y: -0.000013866716, z: 193.49698}
 --- !u!1102 &-1115152159474005377
 AnimatorState:
   serializedVersion: 6
@@ -3193,12 +3193,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboIndex: 0
-  slashStartTime: 0.33
-  slashEndTime: 0.65
+  slashStartTime: 0.2
+  slashEndTime: 0.5
   effect: {fileID: 7916895230301998553, guid: c6ea06c38d23d4c4daaeb31cf2bcc642, type: 3}
-  effectStartInterval: 0.33
-  pos: {x: 0.71, y: 0.38, z: 0.2}
-  rot: {x: 358.51257, y: 292.78897, z: 332.95374}
+  effectStartInterval: 0.2
+  pos: {x: -0.393, y: 0.38, z: 1.18}
+  rot: {x: 332.91916, y: 96.90436, z: 210.69902}
 --- !u!114 &3300154724944588900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3488,7 +3488,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WeakAttack_SwordA
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2249671234290451764}
