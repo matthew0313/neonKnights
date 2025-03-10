@@ -774,8 +774,8 @@ MonoBehaviour:
   walkMoveMag: 0.7
   runMoveMag: 1
   magnitudeControlSpeed: 5
-  itemPickClip: {fileID: 7400000, guid: 6a75aafc4c4b15345ae0e951b29532c0, type: 2}
-  hurtClip: {fileID: 7400000, guid: 208fe917d9b9c3647be92e3a2408726b, type: 2}
+  itemPickClip: {fileID: 7400016, guid: 5eaab4c94e2c4224dbde8bf202505a4f, type: 3}
+  hurtClip: {fileID: 7400022, guid: 32c8b6c6da4079949b1dbd962e3327a2, type: 3}
 --- !u!114 &5987833379606400031
 MonoBehaviour:
   m_ObjectHideFlags: 0
