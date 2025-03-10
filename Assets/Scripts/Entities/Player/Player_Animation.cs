@@ -58,7 +58,7 @@ public class Player_Animation : MonoBehaviour
     }
     void OnDamage(DamageReceivedInfo info)
     {
-        if (!info.dontPlayMotion) animation.PlayOneShot(hurtClip);
+        if (!info.dontPlayMotion) animation.PlayOneShot(hurtClip, 0.0f, 0.1f);
     }
     readonly int animationTypeID = Animator.StringToHash("AnimationType");
     readonly int movingID = Animator.StringToHash("Moving");
