@@ -10,9 +10,11 @@ public class QuirkData_Slowing : QuirkData
     [Header("Strong")]
     [SerializeField] float m_minSlowChance;
     [SerializeField] float m_maxSlowChance;
+    [SerializeField] float m_upgradeSlowChanceIncrease;
     [SerializeField] float m_minSlowPercentage, m_maxSlowPercentage;
     public float minSlowChance => m_minSlowChance;
     public float maxSlowChance => m_maxSlowChance;
+    public float upgradeSlowChanceIncrease => m_upgradeSlowChanceIncrease;
     public float minSlowPercentage => m_minSlowPercentage;
     public float maxSlowPercentage => m_maxSlowPercentage;
     public override bool IsAddable(IQuirkable target)
@@ -85,5 +87,14 @@ public class Quirk_Slowing : Quirk
         Quirk_Slowing tmp = base.Copy() as Quirk_Slowing;
         tmp.slowChance = slowChance;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return slowChance < data.maxSlowChance;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        slowChance = Mathf.Min(slowChance + data.upgradeSlowChanceIncrease, data.maxSlowChance);
     }
 }

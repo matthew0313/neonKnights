@@ -49,4 +49,6 @@ public abstract class Quirk
     {
         return data.Create();
     }
+    public virtual bool IsUpgradable() => false;
+    public virtual void Upgrade() { }
 }

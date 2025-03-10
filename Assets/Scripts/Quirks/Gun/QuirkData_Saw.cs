@@ -58,8 +58,8 @@ public class Quirk_Saw : Quirk
     {
         return new LangText()
         {
-            en = $"3 max range, no ammo consumed on hit",
-            kr = $"최대 범위 3, 탄환이 맞으면 총알 소비 X"
+            en = $"{data.maxRange} max range, no ammo consumed on hit",
+            kr = $"최대 범위 {data.maxRange}, 탄환이 맞으면 총알 소비 X"
         };
     }
 }

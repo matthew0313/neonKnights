@@ -74,6 +74,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         }
     }
     public Action onStaminaChange;
+    public Action<Vector3> onDash, onSlide;
 
     internal bool canMove = true;
 
@@ -221,7 +222,6 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
         data.playerData.floats["posY"] = transform.position.y;
         data.playerData.floats["posZ"] = transform.position.z;
         data.playerData.floats["rotY"] = rotator.eulerAngles.y;
-        Debug.Log("MoveSave");
     }
 
     public void Load(SaveData data)
@@ -266,6 +266,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
                 Vector3 camFront = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;
                 Vector3 camRight = new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized;
                 values.moveInput = camFront * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
+                values.moveInput = Vector3.ClampMagnitude(values.moveInput, 1.0f);
                 values.relativeMoveInput = origin.rotator.transform.InverseTransformDirection(values.moveInput);
                 base.OnStateUpdate();
             }
@@ -431,6 +432,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
                     if (move.magnitude == 0) move = camFront;
                     origin.Dash(move, origin.dashDistance, origin.dashSpeed, origin.dashEndlag, () => parentLayer.ChangeState("Idle"));
                     origin.dashTrail.emitting = true;
+                    origin.onDash?.Invoke(move);
                 }
                 public override void OnStateExit()
                 {
@@ -458,6 +460,7 @@ public class Player_Movement : MonoBehaviour, ICutsceneCallbackReceiver, ISavabl
                     origin.Dash(move, origin.slideDistance, origin.slideSpeed, origin.slideEndlag, () => parentLayer.ChangeState("Idle"));
                     origin.slideTrail.emitting = true;
                     origin.sliding = true;
+                    origin.onSlide?.Invoke(move);
                 }
                 public override void OnStateExit()
                 {

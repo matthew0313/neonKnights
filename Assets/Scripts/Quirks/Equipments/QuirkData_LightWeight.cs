@@ -10,8 +10,10 @@ public class QuirkData_Lightweight : QuirkData
     [Header("Lightweight")]
     [SerializeField] float m_minSpeedBoost;
     [SerializeField] float m_maxSpeedBoost;
+    [SerializeField] float m_upgradeSpeedBoostIncrease = 0.5f;
     public float minSpeedBoost => m_minSpeedBoost;
     public float maxSpeedBoost => m_maxSpeedBoost;
+    public float upgradeSpeedBoostIncrease => m_upgradeSpeedBoostIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is EquipmentItem;
@@ -77,5 +79,14 @@ public class Quirk_Lightweight : Quirk
         Quirk_Lightweight tmp = base.Copy() as Quirk_Lightweight;
         tmp.speedBoost = speedBoost;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return speedBoost < data.maxSpeedBoost;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        speedBoost = Mathf.Min(speedBoost + data.upgradeSpeedBoostIncrease, data.maxSpeedBoost);
     }
 }

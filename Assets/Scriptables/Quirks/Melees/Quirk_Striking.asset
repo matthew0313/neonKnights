@@ -24,3 +24,4 @@ MonoBehaviour:
   incompatible: []
   m_minStunChance: 10
   m_maxStunChance: 20
+  m_upgradeStunChanceIncrease: 1

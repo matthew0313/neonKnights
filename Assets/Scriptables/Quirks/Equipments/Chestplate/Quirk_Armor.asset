@@ -24,6 +24,7 @@ MonoBehaviour:
   incompatible: []
   m_minCooldown: 20
   m_maxCooldown: 40
+  m_upgradeCooldownReduction: 2
   m_armorReplenishText:
     en: Armor Recharged
     kr: "\uAC11\uC637 \uCDA9\uC804 \uC644\uB8CC"

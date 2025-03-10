@@ -5,11 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_DoubleShot", menuName = "Scriptables/Quirks/Guns/DoubleShot", order = 1)]
 public class QuirkData_DoubleShot : QuirkData
 {
+    [Header("DoubleShot")]
     [SerializeField] float m_minExtraShotChance = 25.0f;
     [SerializeField] float m_maxExtraShotChance = 25.0f;
+    [SerializeField] float m_upgradeMaxExtraShotChanceIncrease = 5.0f;
     
     public float minExtraShotChance => m_minExtraShotChance;
     public float maxExtraShotChance => m_maxExtraShotChance;
+    public float upgradeMaxExtraShotChanceIncrease => m_upgradeMaxExtraShotChanceIncrease;
     
     //Double Shot은 총기류에만 추가할 수 있는 쿼크. IsAddable은 이 '쿼크 추가' 기능이 있는 아이템에 쿼크를 추가할 수 있는지
     //참 거짓을 반환하는 역할을 한다. target이 GunItem일 경우에만 참을 반환해야 한다.
@@ -117,5 +120,14 @@ public class Quirk_DoubleShot : Quirk
         Quirk_DoubleShot tmp = base.Copy() as Quirk_DoubleShot;
         tmp.extraShotChance = extraShotChance;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return extraShotChance < data.maxExtraShotChance;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        extraShotChance = Mathf.Min(extraShotChance + data.upgradeMaxExtraShotChanceIncrease, data.maxExtraShotChance);
     }
 }

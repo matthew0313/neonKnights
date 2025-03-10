@@ -24,3 +24,4 @@ MonoBehaviour:
   incompatible: []
   m_minSpeedBoost: 1
   m_maxSpeedBoost: 2
+  m_upgradeSpeedBoostIncrease: 0.1

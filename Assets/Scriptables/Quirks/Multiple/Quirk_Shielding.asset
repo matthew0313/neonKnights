@@ -23,3 +23,4 @@ MonoBehaviour:
   incompatible: []
   m_minShieldBonus: 15
   m_maxShieldBonus: 30
+  m_upgradeShieldBonusIncrease: 1.5

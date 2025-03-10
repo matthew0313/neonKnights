@@ -11,10 +11,12 @@ public class QuirkData_Armor : QuirkData
     [Header("Armor")]
     [SerializeField] float m_minCooldown;
     [SerializeField] float m_maxCooldown;
+    [SerializeField] float m_upgradeCooldownReduction = 2.0f;
     [SerializeField] LangText m_armorReplenishText, m_armorUseText;
     [SerializeField] Color m_indicateColor;
     public float minCooldown => m_minCooldown;
     public float maxCooldown => m_maxCooldown;
+    public float upgradeCooldownReduction => m_upgradeCooldownReduction;
     public LangText armorReplenishText => m_armorReplenishText;
     public LangText armorUseText => m_armorUseText;
     public Color indicateColor => m_indicateColor;
@@ -108,5 +110,14 @@ public class Quirk_Armor : Quirk
         Quirk_Armor tmp =  base.Copy() as Quirk_Armor;
         tmp.cooldown = cooldown;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return cooldown > data.minCooldown;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        cooldown = Mathf.Max(cooldown - data.upgradeCooldownReduction, data.minCooldown);
     }
 }

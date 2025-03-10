@@ -9,9 +9,11 @@ public class QuirkData_Swift : QuirkData
     [Header("Speed Boost")]
     [SerializeField] float m_minSpeedIncrease = 40.0f;
     [SerializeField] float m_maxSpeedIncrease = 40.0f;
+    [SerializeField] float m_upgradeSpeedIncreaseIncrease;
     
     public float minSpeedIncrease => m_minSpeedIncrease;
     public float maxSpeedIncrease => m_maxSpeedIncrease;
+    public float upgradeSpeedIncreaseIncrease => m_upgradeSpeedIncreaseIncrease;
     
     public override bool IsAddable(IQuirkable target)
     {
@@ -121,5 +123,14 @@ public class Quirk_Swift : Quirk
         Quirk_Swift tmp = base.Copy() as Quirk_Swift;
         tmp.speedIncrease = speedIncrease;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return speedIncrease < data.maxSpeedIncrease;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        speedIncrease = Mathf.Min(speedIncrease + data.upgradeSpeedIncreaseIncrease, data.maxSpeedIncrease);
     }
 }

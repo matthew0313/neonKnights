@@ -10,10 +10,12 @@ public class QuirkData_Hungry : QuirkData
     [Header("Hungry")]
     [SerializeField] float m_minDamageBonus;
     [SerializeField] float m_maxDamageBonus;
+    [SerializeField] float m_upgradeDamageBonusIncrease = 5.0f;
     [SerializeField] float m_bulletConsumeChance;
     [SerializeField] int m_maxBulletConsumed;
     public float minDamageBonus => m_minDamageBonus;
     public float maxDamageBonus => m_maxDamageBonus;
+    public float upgradeDamageBonusIncrease => m_upgradeDamageBonusIncrease;
     public float bulletConsumeChance => m_bulletConsumeChance;
     public int maxBulletConsumed => m_maxBulletConsumed;
     public override bool IsAddable(IQuirkable target)
@@ -58,5 +60,14 @@ public class Quirk_Hungry : Quirk
             en = $"+{damageBonus}% damage per bullet consumed",
             kr = $"소비한 탄환 개수만큼 +{damageBonus}% 대미지"
         };
+    }
+    public override bool IsUpgradable()
+    {
+        return damageBonus < data.maxDamageBonus;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        damageBonus = Mathf.Min(damageBonus + data.upgradeDamageBonusIncrease, data.maxDamageBonus);
     }
 }

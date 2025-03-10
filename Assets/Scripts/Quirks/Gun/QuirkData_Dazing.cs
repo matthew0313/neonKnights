@@ -11,8 +11,10 @@ public class QuirkData_Dazing : QuirkData
     [Header("Dazing")]
     [SerializeField] float m_minStunChance;
     [SerializeField] float m_maxStunChance;
+    [SerializeField] float m_upgradeStunChanceIncrease = 5.0f;
     public float minStunChance => m_minStunChance;
     public float maxStunChance => m_maxStunChance;
+    public float upgradeStunChanceIncrease => m_upgradeStunChanceIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
@@ -63,5 +65,14 @@ public class Quirk_Dazing : Quirk
         Quirk_Dazing tmp = base.Copy() as Quirk_Dazing;
         tmp.stunChance = stunChance;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return stunChance < data.maxStunChance;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        stunChance = Mathf.Min(stunChance + data.upgradeStunChanceIncrease, data.maxStunChance);
     }
 }

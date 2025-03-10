@@ -10,8 +10,10 @@ public class QuirkData_OneMag : QuirkData
     [Header("OneMag")]
     [SerializeField] float m_minConvertPercentage;
     [SerializeField] float m_maxConvertPercentage;
+    [SerializeField] float m_upgradeConvertPercentageIncrease;
     public float minConvertPercentage => m_minConvertPercentage;
     public float maxConvertPercentage => m_maxConvertPercentage;
+    public float upgradeConvertPercentageIncrease => m_upgradeConvertPercentageIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
@@ -28,6 +30,7 @@ public class Quirk_OneMag : Quirk
     {
         this.data = data;
     }
+    int currentBonus = 0;
     float convertPercentage = 50.0f;
     public override void OnQuirkAdd(IQuirkable target)
     {
@@ -38,6 +41,7 @@ public class Quirk_OneMag : Quirk
         (target as GunItem).mag += bonus;
         (target as GunItem).reserveLeft = 0;
         (target as GunItem).onAmmoRefill += OnAmmoRefill;
+        currentBonus = bonus;
     }
     void OnAmmoRefill(GunAmmoRefillInfo info)
     {
@@ -71,5 +75,18 @@ public class Quirk_OneMag : Quirk
         Quirk_OneMag tmp = base.Copy() as Quirk_OneMag;
         tmp.convertPercentage = convertPercentage;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return convertPercentage < data.maxConvertPercentage;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        convertPercentage = Mathf.Min(convertPercentage + data.upgradeConvertPercentageIncrease, data.maxConvertPercentage);
+        (target as GunItem).magSize -= currentBonus;
+        int bonus = Mathf.RoundToInt((target as GunItem).reserve * convertPercentage / 100.0f);
+        (target as GunItem).magSize += bonus;
+        currentBonus = bonus;
     }
 }

@@ -10,8 +10,10 @@ public class QuirkData_Strong : QuirkData
     [Header("Strong")]
     [SerializeField] float m_minDamageBonusPercentage;
     [SerializeField] float m_maxDamageBonusPercentage;
+    [SerializeField] float m_upgradeDamageBonusPercentageIncrease;
     public float minDamageBonusPercentage => m_minDamageBonusPercentage;
     public float maxDamageBonusPercentage => m_maxDamageBonusPercentage;
+    public float upgradeDamageBonusPercentageIncrease => m_upgradeDamageBonusPercentageIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is IDamageModifyable;
@@ -61,5 +63,16 @@ public class Quirk_Strong : Quirk
         Quirk_Strong tmp = base.Copy() as Quirk_Strong;
         tmp.damageBonusPercentage = damageBonusPercentage;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return damageBonusPercentage < data.maxDamageBonusPercentage;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        (target as IDamageModifyable).damage /= (100.0f + damageBonusPercentage) / 100.0f;
+        damageBonusPercentage = Mathf.Min(damageBonusPercentage + data.upgradeDamageBonusPercentageIncrease, data.maxDamageBonusPercentage);
+        (target as IDamageModifyable).damage *= (100.0f + damageBonusPercentage) / 100.0f;
     }
 }

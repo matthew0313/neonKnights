@@ -29,6 +29,8 @@ public class Player_Animation : MonoBehaviour
         //anim = GetComponent<Animator>();
         origin = GetComponent<Player>();
         origin.hpComp.onDamage += OnDamage;
+        origin.movement.onDash += OnDash;
+        origin.movement.onSlide += OnSlide;
 
         canMoveAnimationControl = new ControlElement(1, () => origin.movement.canMove = false, false);
         origin.movement.canMoveControl.AddControls(canMoveAnimationControl);
@@ -98,6 +100,15 @@ public class Player_Animation : MonoBehaviour
             magValue = Mathf.Max(magValue - Time.deltaTime * magnitudeControlSpeed, 0.0f);
         }
         anim.SetFloat(moveMagnitudeID, magValue);
+    }
+    readonly int dashID = Animator.StringToHash("Dash"), slideID = Animator.StringToHash("Slide");
+    void OnDash(Vector3 dir)
+    {
+        anim.SetTrigger(dashID);
+    }
+    void OnSlide(Vector3 dir)
+    {
+        anim.SetTrigger(slideID);
     }
 
     readonly int fireID = Animator.StringToHash("Fire");

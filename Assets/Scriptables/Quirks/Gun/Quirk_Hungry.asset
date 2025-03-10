@@ -24,5 +24,6 @@ MonoBehaviour:
   incompatible: []
   m_minDamageBonus: 100
   m_maxDamageBonus: 120
+  m_upgradeDamageBonusIncrease: 2
   m_bulletConsumeChance: 60
-  m_maxBulletConsumed: 3
+  m_maxBulletConsumed: 4

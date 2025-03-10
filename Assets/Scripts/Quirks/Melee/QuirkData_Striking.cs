@@ -11,8 +11,10 @@ public class QuirkData_Striking : QuirkData
     [Header("Striking")]
     [SerializeField] float m_minStunChance;
     [SerializeField] float m_maxStunChance;
+    [SerializeField] float m_upgradeStunChanceIncrease;
     public float minStunChance => m_minStunChance;
     public float maxStunChance => m_maxStunChance;
+    public float upgradeStunChanceIncrease => m_upgradeStunChanceIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is MeleeItem;
@@ -60,5 +62,14 @@ public class Quirk_Striking : Quirk
         Quirk_Striking tmp = base.Copy() as Quirk_Striking;
         tmp.stunChance = stunChance;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return stunChance < data.maxStunChance;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        stunChance = Mathf.Min(stunChance + data.upgradeStunChanceIncrease, data.maxStunChance);
     }
 }

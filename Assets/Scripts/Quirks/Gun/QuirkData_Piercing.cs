@@ -10,8 +10,10 @@ public class QuirkData_Piercing : QuirkData
     [Header("Piercing")]
     [SerializeField] float m_minPierceChance;
     [SerializeField] float m_maxPierceChance;
+    [SerializeField] float m_upgradePierceChanceIncrease;
     public float minPierceChance => m_minPierceChance;
     public float maxPierceChance => m_maxPierceChance;
+    public float upgradePierceChanceIncrease => m_upgradePierceChanceIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && target is GunItem;
@@ -64,5 +66,14 @@ public class Quirk_Piercing : Quirk
         Quirk_Piercing tmp = base.Copy() as Quirk_Piercing;
         tmp.pierceChance = pierceChance;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return pierceChance < data.maxPierceChance;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        pierceChance = Mathf.Min(pierceChance + data.upgradePierceChanceIncrease, data.maxPierceChance);
     }
 }

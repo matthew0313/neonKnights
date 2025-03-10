@@ -7,11 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quirk_Energizing", menuName = "Scriptables/Quirks/Multiple/Energizing", order = 0)]
 public class QuirkData_Energizing : QuirkData
 {
-    [Header("Energizing")]
-    [SerializeField] float m_minStaminaBonus;
-    [SerializeField] float m_maxStaminaBonus;
-    public float minStaminaBonus => m_minStaminaBonus;
-    public float maxStaminaBonus => m_maxStaminaBonus;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && (target is WeaponItem || target is EquipmentItem);
@@ -28,7 +23,7 @@ public class Quirk_Energizing : Quirk
     {
         this.data = data;
     }
-    float staminaBonus = 0.0f;
+    const int staminaBonus = 1;
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
@@ -53,10 +48,6 @@ public class Quirk_Energizing : Quirk
     {
         player.movement.maxStamina -= staminaBonus;
     }
-    public override void SetRandom()
-    {
-        staminaBonus = Mathf.Round(UnityEngine.Random.Range(data.minStaminaBonus, data.maxStaminaBonus));
-    }
     public override LangText Describe()
     {
         return new LangText()
@@ -64,21 +55,5 @@ public class Quirk_Energizing : Quirk
             en = $"+{staminaBonus} Stamina",
             kr = $"+{staminaBonus} 스태미나"
         };
-    }
-    public override void Save(DataUnit data)
-    {
-        base.Save(data);
-        data.floats["staminaBonusPercentage"] = staminaBonus;
-    }
-    public override void Load(DataUnit data)
-    {
-        base.Load(data);
-        data.floats.TryGetValue("staminaBonusPercentage", out staminaBonus);
-    }
-    public override Quirk Copy()
-    {
-        Quirk_Energizing tmp = base.Copy() as Quirk_Energizing;
-        tmp.staminaBonus = staminaBonus;
-        return tmp;
     }
 }

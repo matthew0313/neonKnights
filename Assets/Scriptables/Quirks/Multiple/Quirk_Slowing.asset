@@ -24,5 +24,6 @@ MonoBehaviour:
   incompatible: []
   m_minSlowChance: 15
   m_maxSlowChance: 30
+  m_upgradeSlowChanceIncrease: 1.5
   m_minSlowPercentage: 40
   m_maxSlowPercentage: 60

@@ -23,3 +23,4 @@ MonoBehaviour:
   incompatible: []
   m_minDamageBonusPercentage: 50
   m_maxDamageBonusPercentage: 100
+  m_upgradeDamageBonusPercentageIncrease: 5

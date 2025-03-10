@@ -10,8 +10,10 @@ public class QuirkData_Shielding : QuirkData
     [Header("Shielding")]
     [SerializeField] float m_minShieldBonus;
     [SerializeField] float m_maxShieldBonus;
+    [SerializeField] float m_upgradeShieldBonusIncrease;
     public float minShieldBonus => m_minShieldBonus;
     public float maxShieldBonus => m_maxShieldBonus;
+    public float upgradeShieldBonusIncrease => m_upgradeShieldBonusIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && (target is WeaponItem || target is EquipmentItem);
@@ -85,5 +87,14 @@ public class Quirk_Shielding : Quirk
         Quirk_Shielding tmp = base.Copy() as Quirk_Shielding;
         tmp.shieldBonus = shieldBonus;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return shieldBonus < data.maxShieldBonus;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        shieldBonus = Mathf.Min(shieldBonus + data.upgradeShieldBonusIncrease, data.maxShieldBonus);
     }
 }

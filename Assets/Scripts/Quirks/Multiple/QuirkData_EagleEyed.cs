@@ -11,8 +11,10 @@ public class QuirkData_EagleEyed : QuirkData
     [Header("EagleEyed")]
     [SerializeField] float m_minDamageBonusPercentage;
     [SerializeField] float m_maxDamageBonusPercentage;
+    [SerializeField] float m_upgradeDamageBonusPercentageIncrease;
     public float minDamageBonusPercentage => m_minDamageBonusPercentage;
     public float maxDamageBonusPercentage => m_maxDamageBonusPercentage;
+    public float upgradeDamageBonusPercentageIncrease => m_upgradeDamageBonusPercentageIncrease;
     public override bool IsAddable(IQuirkable target)
     {
         return base.IsAddable(target) && (target is GunItem || target is MeleeItem);
@@ -71,5 +73,14 @@ public class Quirk_EagleEyed : Quirk
         Quirk_EagleEyed tmp = base.Copy() as Quirk_EagleEyed;
         tmp.damageBonusPercentage = damageBonusPercentage;
         return tmp;
+    }
+    public override bool IsUpgradable()
+    {
+        return damageBonusPercentage < data.maxDamageBonusPercentage;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        damageBonusPercentage = Mathf.Min(damageBonusPercentage + data.upgradeDamageBonusPercentageIncrease, data.maxDamageBonusPercentage);
     }
 }
