@@ -1240,11 +1240,11 @@ AnimatorStateMachine:
   - first: {fileID: -7780305386160577037}
     second:
     - {fileID: -5891167285065415563}
+  - first: {fileID: 8299706344888261312}
+    second: []
   - first: {fileID: 3484670098818287974}
     second:
     - {fileID: -4709134142260509025}
-  - first: {fileID: 8299706344888261312}
-    second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 70, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -1296,7 +1296,7 @@ BlendTree:
     m_DirectBlendParameter: moveX
     m_Mirror: 0
   m_BlendParameter: moveX
-  m_BlendParameterY: moveX
+  m_BlendParameterY: moveY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -1399,7 +1399,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: 50, y: 80, z: 0}
   m_ExitPosition: {x: 890, y: 110, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 2024176499256244101}
@@ -3887,7 +3887,7 @@ BlendTree:
     m_DirectBlendParameter: moveX
     m_Mirror: 0
   m_BlendParameter: moveX
-  m_BlendParameterY: moveX
+  m_BlendParameterY: moveY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
