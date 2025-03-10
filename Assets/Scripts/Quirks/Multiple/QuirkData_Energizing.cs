@@ -62,7 +62,7 @@ public class Quirk_Energizing : Quirk
         return new LangText()
         {
             en = $"+{staminaBonus} Stamina",
-            kr = $"+{staminaBonus}% 대미지"
+            kr = $"+{staminaBonus} 스태미나"
         };
     }
     public override void Save(DataUnit data)
