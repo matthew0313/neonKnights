@@ -224,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa83650c84678c4c92edd69192f5010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseHp: 120
-  m_maxShield: 20
+  m_baseHp: 125
+  m_maxShield: 25
   m_alimentEffectAnchor: {fileID: 3881960449030190289}
   invincible: 0
   hitDetection: 50

@@ -118,6 +118,7 @@ public class InventorySlot
     {
         if(data.item != null)
         {
+            Item item = data.item.Create();
             ForcedSetItem(data.item.Create());
             item.Load(data.data);
         }
