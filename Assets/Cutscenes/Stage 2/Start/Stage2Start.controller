@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: 0cbe1b15e0a5ef04c8363f891cef8df3, type: 2}
-  wrapMode: 2
+  wrapMode: 0
   progressOnFinish: 1
 --- !u!1101 &4962956449951372808
 AnimatorStateTransition:
