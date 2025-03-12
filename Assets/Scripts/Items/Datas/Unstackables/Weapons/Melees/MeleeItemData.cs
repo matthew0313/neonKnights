@@ -49,7 +49,7 @@ public abstract class MeleeItem : WeaponItem, IDamageModifyable, IStatDisplayed
     public override void OnWieldUpdate()
     {
         base.OnWieldUpdate();
-        if(!wielder.movement.dashing && Input.GetMouseButtonDown(0) && UIScanner.ScanUI().Count <= 0)
+        if(Input.GetMouseButtonDown(0) && UIScanner.ScanUI().Count <= 0)
         {
             wielder.animation.TriggerSlash();
         }

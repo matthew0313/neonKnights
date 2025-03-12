@@ -65,15 +65,12 @@ public abstract class WeaponItem : UnstackableItem, IQuirkable, IQuirkDisplayed
         if(data.strings.TryGetValue("quirks", out string tmp))
         {
             QuirkSaveList quirkSaves = JsonUtility.FromJson<QuirkSaveList>(tmp);
-            if(quirkSaves != null)
+            foreach(var i in quirkSaves.list)
             {
-                foreach (var i in quirkSaves.list)
-                {
-                    if (i.data == null) continue;
-                    Quirk quirk = i.data.Create();
-                    quirk.Load(i.save);
-                    (this as IQuirkable).AddQuirk(quirk);
-                }
+                if (i.data == null) continue;
+                Quirk quirk = i.data.Create();
+                quirk.Load(i.save);
+                (this as IQuirkable).AddQuirk(quirk);
             }
         }
     }

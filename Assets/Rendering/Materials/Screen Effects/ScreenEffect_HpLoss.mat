@@ -24,20 +24,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseEmissionTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: de2bc30008a12b14f990fc25c86a8d5a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ScanlineTexture:
-        m_Texture: {fileID: 2800000, guid: 7c16822fb62a9794c938db2f6814c234, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
@@ -58,11 +46,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClipThreshold: 0
-    - _AmbientOcclusion: 1
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
-    - _Fresnel_Power: 1
     - _Fullscreen_AlphaBlendOperation: 0
     - _Fullscreen_BlendMode: 1
     - _Fullscreen_ColorBlendOperation: 0
@@ -71,24 +54,10 @@ Material:
     - _Fullscreen_DstColorBlend: 10
     - _Fullscreen_SrcAlphaBlend: 1
     - _Fullscreen_SrcColorBlend: 5
-    - _Intersection_Power: 20
-    - _Metallic: 0
-    - _NormalStrength: 1
-    - _QueueControl: -1
-    - _QueueOffset: 0
-    - _SCANLINE_MODE: 0
-    - _ScanlineRotation: 0
-    - _Smoothness: 0
-    - _USE_SCENE_INTERSECTIONS: 1
     - _VignetteIntensity: 0
     - _VignettePower: 5
     m_Colors:
-    - _BaseEmissionColor: {r: 0, g: 0.1647059, b: 1.498039, a: 0.1568628}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0, g: 3.513726, b: 32, a: 1}
-    - _ScanlineDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _ScanlineMinMaxAlpha: {r: 0, g: 1, b: 0, a: 0}
-    - _ScanlineVelocity: {r: 0, g: 0.1, b: 0, a: 0}
     - _Tiling_Multiplier: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

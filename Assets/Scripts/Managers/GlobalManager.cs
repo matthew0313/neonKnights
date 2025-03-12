@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GlobalManager_UI))]
@@ -65,8 +64,7 @@ public class GlobalManager : MonoBehaviour
     {
         UIs.ShowLoadingUI();
         AsyncOperation tmp = SceneManager.LoadSceneAsync(sceneName);
-        UnityAction<Scene, LoadSceneMode> loaded = (scene, mode) => { onLoad?.Invoke(); };
-        SceneManager.sceneLoaded += loaded;
+        tmp.completed += (op) => onLoad?.Invoke();
         UIs.SetLoadingProgress(0.0f);
         while (!tmp.isDone)
         {
@@ -76,10 +74,7 @@ public class GlobalManager : MonoBehaviour
         UIs.HideLoadingUI();
         UIs.LoadingBlackHide();
         sceneLoading = false;
-        SceneManager.sceneLoaded -= loaded;
     }
-
-
     public void LoadGame(SaveData data)
     {
         if(data.stageIndex != -1)

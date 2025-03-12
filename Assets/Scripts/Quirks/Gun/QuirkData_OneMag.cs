@@ -30,14 +30,12 @@ public class Quirk_OneMag : Quirk
     {
         this.data = data;
     }
-    int originalReserve = 0;
     int currentBonus = 0;
     float convertPercentage = 50.0f;
     public override void OnQuirkAdd(IQuirkable target)
     {
         base.OnQuirkAdd(target);
-        originalReserve = (target as GunItem).reserve;
-        int bonus = Mathf.RoundToInt(originalReserve * convertPercentage / 100.0f);
+        int bonus = Mathf.RoundToInt((target as GunItem).reserve * convertPercentage / 100.0f);
         (target as GunItem).magSize += bonus;
         (target as GunItem).reserve = 0;
         (target as GunItem).mag += bonus;
@@ -87,7 +85,7 @@ public class Quirk_OneMag : Quirk
         base.Upgrade();
         convertPercentage = Mathf.Min(convertPercentage + data.upgradeConvertPercentageIncrease, data.maxConvertPercentage);
         (target as GunItem).magSize -= currentBonus;
-        int bonus = Mathf.RoundToInt(originalReserve * convertPercentage / 100.0f);
+        int bonus = Mathf.RoundToInt((target as GunItem).reserve * convertPercentage / 100.0f);
         (target as GunItem).magSize += bonus;
         currentBonus = bonus;
     }
