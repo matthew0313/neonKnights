@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a306db9971db14ca13efe86742aff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseHp: 100
+  m_baseHp: 75
   m_maxShield: 0
   m_alimentEffectAnchor: {fileID: 2378390417670483061}
   invincible: 0

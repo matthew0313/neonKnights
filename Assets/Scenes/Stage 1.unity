@@ -283605,7 +283605,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1313433126}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 87e8dbe640620e84ea72aafc52aa571a, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: ffb2627a5e0c53546b9467415e75aa17, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -459046,6 +459046,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7022008714456051888, guid: 32a5ee7328d754949847830285189e1e,
         type: 3}
