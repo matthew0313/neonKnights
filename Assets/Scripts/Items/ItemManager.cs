@@ -23,7 +23,6 @@ public class ItemManager : MonoBehaviour
     public float itemRenderSpaceRotation = 0.0f;
     public void AddItem(Item item)
     {
-        Debug.Log(item.data.name);
         addQueue.Add(item);
     }
     public void RemoveItem(Item item)

@@ -428,6 +428,18 @@ public abstract class GunItem : WeaponItem, INumberDisplayed, IStatDisplayed, ID
             kr = $"무게: {weight}"
         };
     }
+    public override void Save(DataUnit data)
+    {
+        base.Save(data);
+        data.integers["mag"] = mag;
+        data.integers["reserveLeft"] = reserveLeft;
+    }
+    public override void Load(DataUnit data)
+    {
+        base.Load(data);
+        if (data.integers.TryGetValue("mag", out int tmp)) mag = tmp;
+        if (data.integers.TryGetValue("reserveLeft", out int tmp2)) reserveLeft = tmp2;
+    }
 }
 public enum GunFireSource
 {

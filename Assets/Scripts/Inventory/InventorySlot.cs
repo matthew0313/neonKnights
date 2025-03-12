@@ -116,12 +116,10 @@ public class InventorySlot
     }
     public void Load(InventorySlotSaveData data)
     {
-        if(data.item != null)
-        {
-            Item item = data.item.Create();
-            ForcedSetItem(data.item.Create());
-            item.Load(data.data);
-        }
+        if (data == null || data.item == null) return;
+        Item item = data.item.Create();
+        ForcedSetItem(item);
+        item.Load(data.data);
         count = data.count;
     }
 }
