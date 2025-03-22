@@ -1234,14 +1234,14 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: 8299706344888261312}
+    second: []
   - first: {fileID: -8703276117735661635}
     second:
     - {fileID: -39478120399961649}
   - first: {fileID: -7780305386160577037}
     second:
     - {fileID: -5891167285065415563}
-  - first: {fileID: 8299706344888261312}
-    second: []
   - first: {fileID: 3484670098818287974}
     second:
     - {fileID: -4709134142260509025}
